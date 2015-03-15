@@ -5,7 +5,7 @@
         <div class="panel-heading">
             {{#if anchor}}
                 <h3 class="panel-title"><a name="/definitions/{{title}}"></a>{{title}}:
-                    <span class="json-property-type">{{datatype .}}</span>
+                    <span class="json-property-type">{{>json-schema/datatype}}</span>
                 </h3>
             {{else}}
                 <h3 class="panel-title">{{title}}</h3>

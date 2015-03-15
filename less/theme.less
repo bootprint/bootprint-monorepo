@@ -5,16 +5,17 @@
 @definition-panel-header-text-color: contrast(@definition-panel-header-bg-color);
 @definition-panel-border-color: darken(@definition-panel-header-bg-color, 30%);
 @definition-panel-inner-border-color: @definition-panel-border-color;
+@named-section-text-color: @gray;
 
 .panel-definition {
   .panel-variant(@definition-panel-border-color, @definition-panel-header-text-color, @definition-panel-header-bg-color, @definition-panel-border-color);
 }
 
-// Method sections
+// Named sections
 .named-section(@title) {
   &:before {
     font-weight: bold;
-    color: @gray;
+    color: @named-section-text-color;
     text-transform: uppercase;
     content: @title;
     padding-bottom: 0.5em;
@@ -52,6 +53,22 @@
   }
 }
 
+.json-schema-anyof {
+  > dl {
+    border-left: 2px solid @definition-panel-inner-border-color;
+    padding-left: 1em;
+
+    dt:not(:first-child):before {
+      content:"or ";
+    }
+
+    dt:first-child:before {
+      content:"either ";
+    }
+
+  }
+}
+
 .json-inner-schema {
   .json-schema-properties, .json-schema-array-items, .json-schema-description {
     padding-left: 1em;
@@ -77,11 +94,6 @@
   .named-label(@msg-json-required)
 }
 
-.json-schema-ref {
-  &:before {
-    content: @msg-json-ref-prefix;
-  }
-}
 
 .json-property-type {
   font-style: italic;
@@ -91,7 +103,6 @@
 .json-property-format {
   font-size: smaller;
 }
-
 
 .json-property-enum {
   font-weight: lighter;

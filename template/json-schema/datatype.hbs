@@ -1,0 +1,20 @@
+<span class="json-property-type">
+    {{#if $ref}}
+        {{>json-schema/reference $ref}}
+    {{else}}
+        {{datatype .}}
+    {{/if}}
+
+</span>
+{{#if format}}
+    <span class="json-property-format">({{format}})</span>
+{{/if}}
+
+{{#if enum}}
+    <span class="json-property-enum" title="Possible values">&isin; {
+        {{#each enum}}
+            <span class="json-property-enum-item">{{.}}</span>{{#unless @last}},{{/unless}}
+        {{/each}}
+        }
+        </span>
+{{/if}}

@@ -1,13 +1,10 @@
 {{! renders a json-schema without the surrounding panel.}}
-{{#if $ref}}
-    <a class="json-schema-ref" href="{{$ref}}">{{$ref}}</a>
-{{/if}}
+{{>json-schema/reference $ref}}
 {{#if description}}
     <section class="json-schema-description">
         {{md description}}
     </section>
 {{/if}}
-
 {{#if properties}}
     {{>json-schema/properties}}
 {{/if}}
@@ -17,4 +14,6 @@
 {{#if allOf}}
     {{>json-schema/allOf allOf}}
 {{/if}}
-
+{{#if anyOf}}
+    {{>json-schema/anyOf anyOf}}
+{{/if}}

@@ -6,9 +6,11 @@
     </head>
     <body>
         <div class="container">
-          {{#with body}}
-              {{>swagger-to-html/htmlBody}}
-          {{/with}}
+            {{>json-schema/main-panel}}
+            {{#if definitions}}
+                <h2>Definitions</h2>
+                {{>json-schema/definitions}}
+            {{/if}}
         </div>
     </body>
 </html>

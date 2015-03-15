@@ -1,0 +1,5 @@
+{{#if definitions}}
+    {{#eachSorted definitions}}
+        {{>json-schema/main-panel value title=key anchor=true}}
+    {{/eachSorted}}
+{{/if}}

@@ -1,13 +1,9 @@
 {
-  "name": "swagger-to-html",
-  "version": "0.3.0",
-  "description": "Converts a swagger-definition into a static html page",
-  "main": "src/swagger-to-html.js",
-  "bin": {
-    "swagger-to-html": "bin/cli.js"
-  },
+  "name": "bootprint-json-schema",
+  "version": "0.1.0",
+  "description": "Converts a json-schema into a static html page",
+  "main": "bootprint-options.js",
   "scripts": {
-    "start": "bin/cli.js -d example/petstore.json target/",
     "test": "nodeunit tests/"
   },
   "preferGlobal": true,
@@ -22,25 +18,10 @@
   },
   "homepage": "https://github.com/nknapp/swagger-to-html",
   "dependencies": {
-    "bootstrap": "^3.3.2",
-    "cheerio": "^0.18.0",
-    "chokidar": "^1.0.0-rc4",
-    "commander": "^2.6.0",
-    "debug": "^2.1.2",
-    "handlebars": "^3.0.0",
-    "highlight.js": "^8.4.0",
-    "json-stable-stringify": "^1.0.0",
-    "less": "^2.4.0",
-    "live-server": "^0.7.0",
-    "lodash": "^3.3.1",
-    "marked": "^0.3.3",
-    "q": "^1.2.0",
-    "q-deep": "^1.0.0",
-    "q-io": "^1.11.6"
   },
   "devDependencies": {
-    "clarify": "^1.0.5",
-    "nodeunit": "^0.9.1",
-    "trace": "^1.1.0"
+  },
+  "peerDependencies": {
+    "bootprint": "<1.0.0"
   }
 }
