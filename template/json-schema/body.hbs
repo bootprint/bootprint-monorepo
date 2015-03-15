@@ -8,6 +8,10 @@
 {{#if properties}}
     {{>json-schema/properties}}
 {{/if}}
+{{#if additionalProperties}}
+    {{>json-schema/additionalProperties additionalProperties}}
+{{/if}}
+
 {{#if items}}
     {{>json-schema/array-items items}}
 {{/if}}

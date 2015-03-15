@@ -17,10 +17,6 @@
     "url": "https://github.com/nknapp/swagger-to-html/issues"
   },
   "homepage": "https://github.com/nknapp/swagger-to-html",
-  "dependencies": {
-  },
-  "devDependencies": {
-  },
   "peerDependencies": {
     "bootprint": "<1.0.0"
   }

@@ -8,7 +8,7 @@ var path = require("path");
  * @returns {*}
  */
 module.exports = function(builder) {
-  return builder.override({
+  return builder.merge({
     "template": require.resolve("./template/template.hbs"),
     "partials": path.join(__dirname,"template/"),
     "helpers": {},

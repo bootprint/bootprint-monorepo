@@ -53,7 +53,7 @@
   }
 }
 
-.json-schema-anyof {
+.json-schema-anyOf {
   > dl {
     border-left: 2px solid @definition-panel-inner-border-color;
     padding-left: 1em;
@@ -68,6 +68,11 @@
 
   }
 }
+
+.json-schema-additionalProperties {
+  .named-section(@msg-json-section-additionalProperties);
+}
+
 
 .json-inner-schema {
   .json-schema-properties, .json-schema-array-items, .json-schema-description {
