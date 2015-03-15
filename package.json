@@ -1,0 +1,26 @@
+{
+  "name": "bootprint-base",
+  "version": "0.1.0",
+  "description": "The base configuration used by other Bootprint modules",
+  "main": "bootprint-options.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nknapp/bootprint-base.git"
+  },
+  "author": "Nils Knappmeier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nknapp/bootprint-base/issues"
+  },
+  "homepage": "https://github.com/nknapp/bootprint-base",
+  "dependencies": {
+    "bootstrap": "^3.3.2",
+    "cheerio": "^0.18.0",
+    "handlebars": "^3.0.0",
+    "highlight.js": "^8.4.0",
+    "marked": "^0.3.3"
+  }
+}
