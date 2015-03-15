@@ -2,7 +2,7 @@
   "name": "bootprint-json-schema",
   "version": "0.1.1",
   "description": "Converts a json-schema into a static html page",
-  "main": "bootprint-options.js",
+  "main": "index.js",
   "scripts": {
     "test": "nodeunit tests/"
   },

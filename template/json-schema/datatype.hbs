@@ -2,9 +2,8 @@
     {{#if $ref}}
         {{>json-schema/reference $ref}}
     {{else}}
-        {{datatype .}}
+        {{json-schema--datatype .}}
     {{/if}}
-
 </span>
 {{#if format}}
     <span class="json-property-format">({{format}})</span>
