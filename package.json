@@ -19,5 +19,8 @@
   "homepage": "https://github.com/nknapp/swagger-to-html",
   "peerDependencies": {
     "bootprint": "<1.0.0"
+  },
+  "dependencies": {
+    "bootprint-base": "^0.1.0"
   }
 }
