@@ -9,14 +9,14 @@
   "preferGlobal": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/nknapp/swagger-to-html.git"
+    "url": "https://github.com/nknapp/bootprint-json-schema.git"
   },
   "author": "Nils Knappmeier",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nknapp/swagger-to-html/issues"
+    "url": "https://github.com/nknapp/bootprint-json-schema/issues"
   },
-  "homepage": "https://github.com/nknapp/swagger-to-html",
+  "homepage": "https://github.com/nknapp/bootprint-json-schema",
   "peerDependencies": {
     "bootprint": "<1.0.0"
   },
