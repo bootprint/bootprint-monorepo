@@ -1,6 +1,6 @@
 {
   "name": "bootprint-json-schema",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Converts a json-schema into a static html page",
   "main": "index.js",
   "scripts": {
@@ -20,6 +20,5 @@
   "peerDependencies": {
     "bootprint": "<1.0.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
