@@ -1,18 +1,14 @@
-{{! entry point for the whole template: Renders the whole HTML-page}}
+{{!@public}}{{! Default template for rendering the HTML-page.}}
 <!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-{{>before-body}}
+{{>base/header}}
 <div class="container">
-    {{>json-schema/main-panel}}
-    {{#if definitions}}
-        <h2>Definitions</h2>
-        {{>json-schema/definitions}}
-    {{/if}}
+    {{>base/body}}
 </div>
-{{>after-body}}
+{{>base/footer}}
 </body>
 </html>

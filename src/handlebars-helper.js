@@ -11,11 +11,11 @@ highlight.configure({
 });
 
 marked.setOptions({
-    highlight: function (code,name) {
+    highlight: function (code, name) {
 
         var highlighted;
         if (name) {
-            highlighted =  highlight.highlight(name,code).value;
+            highlighted = highlight.highlight(name, code).value;
         } else {
             highlighted = highlight.highlightAuto(code).value;
         }
@@ -31,12 +31,26 @@ module.exports = {
             return '';
         }
     },
-    'eachSorted': function(context, options) {
-        // https://gist.github.com/wiedi/fb09a0317e0db2caee6a
+    'eachSorted': function (context, options) {
         var ret = "";
-        Object.keys(context).sort().forEach(function(key) {
-            ret = ret + options.fn({key: key, value: context[key]})
-        }) ;
+        var data;
+        if (typeof context !== "object") {
+            return ret;
+        }
+        var keys = Object.keys(context);
+        keys.sort().forEach(function (key,index) {
+            console.log(index);
+            if (options.data) {
+                data = Handlebars.createFrame(options.data || {});
+                data.index = index;
+                data.key = key;
+                data.length = keys.length;
+                data.first = index === 0;
+                data.last = index === keys.length-1;
+
+            }
+            ret = ret + options.fn(context[key], { data: data})
+        });
         return ret
     },
     'methodClass': function (value) {
@@ -55,9 +69,9 @@ module.exports = {
         return new Handlebars.SafeString(strip ? $("p").html() : $.html());
     },
     // http://stackoverflow.com/questions/8853396/logical-operator-in-a-handlebars-js-if-conditional
-    "ifeq": function(v1,v2,options) {
+    "ifeq": function (v1, v2, options) {
 
-        if(v1 === v2) {
+        if (v1 === v2) {
             return options.fn(this);
         }
         return options.inverse(this);
@@ -70,16 +84,16 @@ module.exports = {
 
         var $ = cheerio.load(marked("```json\r\n" + schemaString + "\n```"));
         var definitions = $('span:not(:has(span)):contains("#/definitions/")');
-        definitions.each(function(index,item) {
+        definitions.each(function (index, item) {
             var ref = $(item).html();
             // TODO: This should be done in a template
-            $(item).html("<a href="+ref.replace(/&quot;/g,"")+">"+ref+"</a>");
+            $(item).html("<a href=" + ref.replace(/&quot;/g, "") + ">" + ref + "</a>");
         });
 
         return new Handlebars.SafeString($.html());
     },
-    "ifcontains": function(array, object,options) {
-        if (array && array.indexOf(object)>=0) {
+    "ifcontains": function (array, object, options) {
+        if (array && array.indexOf(object) >= 0) {
             return options.fn(this);
         }
         return options.inverse(this);
