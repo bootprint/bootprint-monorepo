@@ -1,6 +1,14 @@
 
 module.exports = {
-    "json-schema--datatype": dataType
+    "json-schema--datatype": dataType,
+    /**
+     * Extract then name of a subschema from a $ref property
+     * @param url
+     * @returns {*}
+     */
+    "json-schema--subschema-name": function(url) {
+        return url.replace("#/definitions/","");
+    }
 };
 
 

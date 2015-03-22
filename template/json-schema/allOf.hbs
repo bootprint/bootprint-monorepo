@@ -4,9 +4,7 @@
     <section class="json-schema-allOf-inherited">
         <ul>
             {{#each .}}
-                {{#if $ref}}
-                    <li><a href="{{$ref}}">{{$ref}}</a></li>
-                {{/if}}
+                {{>json-schema/reference $ref}}
             {{/each}}
         </ul>
     </section>

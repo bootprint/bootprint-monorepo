@@ -1,0 +1,6 @@
+{{!@public}}{{!Renders the main-schema as panel and the sub-schemas below.}}
+{{>json-schema/main-panel}}
+{{#if definitions}}
+    <h2>Definitions</h2>
+    {{>json-schema/definitions}}
+{{/if}}
