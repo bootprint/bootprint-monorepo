@@ -39,7 +39,6 @@ module.exports = {
         }
         var keys = Object.keys(context);
         keys.sort().forEach(function (key,index) {
-            console.log(index);
             if (options.data) {
                 data = Handlebars.createFrame(options.data || {});
                 data.index = index;
