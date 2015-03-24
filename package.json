@@ -20,5 +20,7 @@
   "peerDependencies": {
     "bootprint": "<1.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "bootprint-base": "<1.0.0"
+  }
 }
