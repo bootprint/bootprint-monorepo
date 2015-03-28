@@ -52,14 +52,6 @@ module.exports = {
         });
         return ret
     },
-    'methodClass': function (value) {
-        return {
-            "post": "success",
-            "put": "warning",
-            "get": "info",
-            "delete": "danger"
-        }[value];
-    },
     'md': function (value, strip) {
         if (!value) {
             return value;
