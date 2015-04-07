@@ -2,7 +2,7 @@
   "name": "bootprint-base",
   "version": "0.2.1",
   "description": "The base configuration used by other Bootprint modules",
-  "main": "bootprint-options.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,5 +23,8 @@
     "highlight.js": "^8.4.0",
     "json-stable-stringify": "^1.0.0",
     "marked": "^0.3.3"
+  },
+  "peerDependencies": {
+    "bootprint": "<1.0.0"
   }
 }
