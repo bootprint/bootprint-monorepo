@@ -1,13 +1,13 @@
 var path = require("path");
 
 // Export function to create new config (builder is passed in from outside)
-module.exports = function(builder) {
+module.exports = function (builder) {
 
     var bootstrapLess = require.resolve("bootstrap/less/bootstrap.less");
 
     return builder.merge({
         template: require.resolve("./handlebars/template.hbs"),
-        partials: path.resolve(__dirname,"handlebars"),
+        partials: path.resolve(__dirname, "handlebars", "partials"),
         helpers: require("./handlebars/helpers.js"),
         less: {
             main: [
@@ -24,7 +24,9 @@ module.exports = function(builder) {
          * @param obj the input object
          * @return a modified object or a promise for a modified object.
          */
-        preprocessor: function(obj) { return obj; }
+        preprocessor: function (obj) {
+            return obj;
+        }
     })
 };
 
