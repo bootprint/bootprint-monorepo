@@ -24,6 +24,11 @@ marked.setOptions({
 });
 
 module.exports = {
+    /**
+     * Converts a string to uppercase
+     * @param {string} value the input string
+     * @returns {string} the uppercase string
+     */
     'toUpperCase': function (value) {
         if (value) {
             return new Handlebars.SafeString(value.toUpperCase());
@@ -59,9 +64,9 @@ module.exports = {
         var $ = cheerio.load(marked(value));
         return new Handlebars.SafeString(strip ? $("p").html() : $.html());
     },
-    // http://stackoverflow.com/questions/8853396/logical-operator-in-a-handlebars-js-if-conditional
-    "ifeq": function (v1, v2, options) {
 
+    "ifeq": function (v1, v2, options) {
+        // http://stackoverflow.com/questions/8853396/logical-operator-in-a-handlebars-js-if-conditional
         if (v1 === v2) {
             return options.fn(this);
         }
