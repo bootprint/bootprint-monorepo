@@ -8,7 +8,7 @@ module.exports = function (builder) {
     return builder.merge({
         template: require.resolve("./handlebars/template.hbs"),
         partials: path.resolve(__dirname, "handlebars", "partials"),
-        helpers: require("./handlebars/helpers.js"),
+        helpers: require.resolve("./handlebars/helpers.js"),
         less: {
             main: [
                 bootstrapLess,
