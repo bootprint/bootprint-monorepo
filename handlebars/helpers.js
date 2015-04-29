@@ -1,5 +1,3 @@
-// This module create handlbars-helpers for swagger-to-html
-
 var Handlebars = require("handlebars");
 var marked = require("marked");
 var cheerio = require("cheerio");
@@ -26,16 +24,40 @@ marked.setOptions({
 module.exports = {
     /**
      * Converts a string to uppercase
+     * @name toUpperCase
      * @param {string} value the input string
      * @returns {string} the uppercase string
+     * @api public
      */
-    'toUpperCase': function (value) {
-        if (value) {
-            return new Handlebars.SafeString(value.toUpperCase());
-        } else {
-            return '';
-        }
+    'toUpperCase': function(value) {
+        return value ? value.toUpperCase : '';
     },
+    /**
+     * This block-helper can be used to iterate objects sorted by key. It behaves like the built-in
+     * `{{#each ...}}`-helper except that it can only be used for objects and the output is in a
+     * deterministic order (i.e. sorted).
+     *
+     * Example template:
+     *
+     * ```handlebars
+     * {{#eachSorted obj}}
+     *    {{@index}} of {{@length}}: {{@key}}={{.}}
+     * {{/eachSorted}}
+     * ```
+     *
+     * With the data `{ b: 'another one', a: 'first' }`, ignoring newlines and indents, this will output
+     *
+     * ```text
+     * 1 of 2: a=first
+     * 2 of 2: b=another one
+     * ```
+     *
+     * The helper will set the following @-values according to the Handlebars documentation:
+     * `@first`, `@index`, `@key`, `@last`, `@length`
+     * @name eachSorted
+     * @returns {string}
+     * @api public
+     */
     'eachSorted': function (context, options) {
         var ret = "";
         var data;
