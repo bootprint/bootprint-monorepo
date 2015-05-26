@@ -6,15 +6,14 @@
                 {{!Single property, default type is "object"}}
                 <span class="json-property-name">{{@key}}:</span>
                 {{>json-schema/datatype}}
-            </dt>
-            <dd>
-                {{#ifeq @key ../discriminator}}
-                    <span class="json-property-discriminator"></span>
-                {{/ifeq}}
                 {{#ifcontains ../required @key}}
                     <span class="json-property-required"></span>
                 {{/ifcontains}}
-
+                {{#ifeq @key ../discriminator}}
+                    <span class="json-property-discriminator"></span>
+                {{/ifeq}}
+            </dt>
+            <dd>
                 {{md description}}
                 {{!Show details of nested property schema}}
                 <div class="json-inner-schema">
