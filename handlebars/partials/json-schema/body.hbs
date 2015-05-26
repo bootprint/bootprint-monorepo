@@ -7,6 +7,11 @@ renders a json-schema without the surrounding panel.
         {{md description}}
     </section>
 {{/if}}
+{{#if example}}
+    <section class="json-schema-example">
+        {{example}}
+    </section>
+{{/if}}
 {{#if properties}}
     {{>json-schema/properties}}
 {{/if}}

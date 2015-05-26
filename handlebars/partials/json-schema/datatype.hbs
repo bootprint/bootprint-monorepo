@@ -14,12 +14,21 @@ the 'format'-value (e.g. "date-time") and "enum"-values.
 {{#if format}}
     <span class="json-property-format">({{format}})</span>
 {{/if}}
-
+{{!-- Enum values --}}
 {{#if enum}}
     <span class="json-property-enum" title="Possible values">&isin; {
         {{#each enum}}
-            <span class="json-property-enum-item">{{.}}</span>{{#unless @last}},{{/unless}}
+            <span class="json-property-enum-item">{{.}}</span>
+            {{#ifeq ../default .}}
+                (default)
+            {{/ifeq}}
+            {{#unless @last}},{{/unless}}
+
         {{/each}}
         }
         </span>
 {{/if}}
+{{!-- Default values (for non-enum types) --}}
+{{#unless enum}}{{#if default}}
+    <span class="json-property-default-value">{{default}}</span>
+{{/if}}{{/unless}}
