@@ -1,6 +1,6 @@
 {
   "name": "bootprint-json-schema",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Converts a json-schema into a static html page",
   "main": "index.js",
   "scripts": {
