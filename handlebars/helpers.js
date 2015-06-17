@@ -30,7 +30,7 @@ module.exports = {
      * @api public
      */
     'toUpperCase': function(value) {
-        return value ? value.toUpperCase : '';
+        return value ? value.toUpperCase() : '';
     },
     /**
      * This block-helper can be used to iterate objects sorted by key. It behaves like the built-in
