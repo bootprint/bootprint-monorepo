@@ -4,7 +4,7 @@
   "description": "The base configuration used by other Bootprint modules",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine"
   },
   "repository": {
     "type": "git",
