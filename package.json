@@ -26,5 +26,8 @@
   },
   "peerDependencies": {
     "bootprint": "<1.0.0"
+  },
+  "devDependencies": {
+    "jasmine": "^2.3.1"
   }
 }
