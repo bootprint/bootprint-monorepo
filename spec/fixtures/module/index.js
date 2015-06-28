@@ -1,11 +1,21 @@
-
 var path = require("path");
 var files = require("../../../lib/files.js")
 
-module.exports = function(rideover) {
+module.exports = function (rideover) {
   return rideover.merge({
-    handlebars: {
-      partials: path.join(__dirname,"handlebars","partials")
+    test: {
+      files: path.join(__dirname, "files"),
+      objects: {
+        b: {
+          y: 'y2'
+        }
+      },
+      leafs: {
+        b: {
+          y: 'y2'
+        }
+      },
+      array: ['item2']
     }
   });
 }

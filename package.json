@@ -22,7 +22,14 @@
     "preformat": "npm list --depth=0 -g standard || npm -g install standard",
     "format": "standard --format"
   },
-  "dependencies": {},
+  "dependencies": {
+    "debug": "^2.2.0",
+    "lodash": "^3.9.3",
+    "minimatch": "^2.0.8",
+    "q": "^1.4.1",
+    "q-deep": "^1.0.1",
+    "q-io": "^1.13.1"
+  },
   "devDependencies": {
     "jasmine": "^2.3.1"
   },
