@@ -31,6 +31,13 @@ function Customize (config, parentConfig, engines) {
    * @param {function} engine
    */
   this.registerEngine = function (id, engine) {
+    if (!_.isString(id)) {
+      throw new Error("Engine-id must be a string, but is "+id);
+    }
+    if(_.isUndefined(engine["run"])) {
+      throw new Error("Engine needs a run method");
+    }
+
     // This is only allowed if now engine with the same id exists.
     if (!(_.isUndefined(engines[id]) && _.isUndefined(_config[id]))) {
       var error = new Error("Engine '" + id + "' already registered.", 'ERR_ENGINE_EXISTS')
