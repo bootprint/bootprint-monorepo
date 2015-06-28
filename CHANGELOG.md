@@ -2,7 +2,7 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Upcoming
+## v0.0.1 - 2015-06-28
 ### Initial version
 
 Abstraction of the configuration-override functionality from `bootprint`.
