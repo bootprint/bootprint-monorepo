@@ -1,6 +1,6 @@
 {
   "name": "customize",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A simple framework to create customizable engines",
   "repository": {
     "type": "git",
@@ -22,9 +22,7 @@
     "preformat": "npm list --depth=0 -g standard || npm -g install standard",
     "format": "standard --format"
   },
-  "dependencies": {
-    
-  },
+  "dependencies": {},
   "devDependencies": {
     "jasmine": "^2.3.1"
   },
