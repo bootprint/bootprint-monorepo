@@ -2,7 +2,7 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Upcoming
+## v0.1.0 - 2015-06-29
 ### Update
 
 - Engines are now expected to return an object `{ defaultConfig: object, preprocessConfig: function, run: function }`
