@@ -46,10 +46,12 @@ describe('ride-over:', function () {
     }
   });
 
+  // Load a configuration-module
+  var ro3 = ro1.load(require("./fixtures/module/index.js"));
+
   it("should load and resolve a simple config", function (next) {
     ro1.run()
       .then(function (results) {
-        console.log(results);
         expect(results).toEqual(
           {
             handlebars: {
@@ -57,24 +59,38 @@ describe('ride-over:', function () {
               'b.md': 'Template B Eins one\nTemplate B Zwei two\n'
             }
           }
-    );
+        );
+      })
+      .done(next)
   })
-    .done(next)
-})
 
-it("should merge values of a configuration with new values", function (next) {
-  ro2.run()
-    .then(function (results) {
-      console.log(results);
-      expect(results).toEqual(
-        {
-          handlebars: {
-            'a.md': 'Template A Eins one\nTemplate A Two times two is quatre helper1\n',
-            'b.md': 'Template B Eins one\nTemplate B Two times two is quatre\n'
+  it("should merge values of a configuration with new values", function (next) {
+    ro2.run()
+      .then(function (results) {
+        expect(results).toEqual(
+          {
+            handlebars: {
+              'a.md': 'Template A Eins one\nTemplate A Two times two is quatre helper1\n',
+              'b.md': 'Template B Eins one\nTemplate B Two times two is quatre\n'
+            }
           }
-        }
-      );
-    })
-    .done(next)
-})
+        );
+      })
+      .done(next)
+  })
+
+  it("should load values of a configuration-module", function (next) {
+    ro3.run()
+      .then(function (results) {
+        expect(results).toEqual(
+          {
+            handlebars: {
+              'a.md': 'Template A Eins one\nTemplate A Overridden in Module helper1\n',
+              'b.md': 'Template B Eins one\nTemplate B Overridden in Module\n'
+            }
+          }
+        );
+      })
+      .done(next)
+  })
 })

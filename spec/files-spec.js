@@ -3,16 +3,8 @@ var _ = require("lodash");
 var directory = require("../lib/files.js")
 var deep = require("q-deep");
 var Q = require("q");
+var overrider = require("../").overrider;
 
-
-function overrider(a, b) {
-  // Merge values resolving promises, if they are not leaf-promises
-  if (Q.isPromiseAlike(a) && Q.isPromiseAlike(b) && !a.leaf && !b.leaf) {
-    return Q.all([a,b]).spread(function(_a,_b) {
-      return _.merge(_a,_b, overrider);
-    });
-  }
-}
 
 describe("the directory-function", function () {
   it("should resolve to the contents of all contained files", function (next) {

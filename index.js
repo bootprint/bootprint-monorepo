@@ -163,3 +163,10 @@ function customOverrider(a, b, propertyName) {
 
 }
 
+/**
+ * @readonly
+ * @type {customOverrider}
+ */
+module.exports.overrider = customOverrider;
+
+
