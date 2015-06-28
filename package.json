@@ -1,10 +1,10 @@
 {
-  "name": "ride-over",
+  "name": "customize",
   "version": "0.0.0",
-  "description": "A simlpe framework to create overidable configurations",
+  "description": "A simple framework to create customizable engines",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nknapp/ride-over.git"
+    "url": "https://github.com/nknapp/customize.git"
   },
   "author": {
     "name": "Nils Knappmeier",
@@ -12,13 +12,14 @@
     "url": "https://github.com/nknapp"
   },
   "bugs": {
-    "url": "https://github.com/nknapp/ride-over/issues"
+    "url": "https://github.com/nknapp/customize/issues"
   },
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "pretest": "npm list --depth=0 -g standard || npm -g install standard",
     "test": "jasmine && standard",
+    "preformat": "npm list --depth=0 -g standard || npm -g install standard",
     "format": "standard --format"
   },
   "dependencies": {

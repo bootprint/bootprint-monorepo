@@ -6,29 +6,28 @@
  */
 
 /* global describe */
-// /* global it */
+/* global it */
+/* global expect */
+/* global jasmine */
 // /* global xdescribe */
 // /* global xit */
 
 'use strict'
 
-var rideover = require('../');
-var _ = require("lodash");
-var files = require("../lib/files");
+var rideover = require('../')
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000000;
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000000
 
 describe('ride-over:', function () {
-
   var ro1 = rideover()
-    .registerEngine("handlebars", require("../lib/Handlebars.js"))
+    .registerEngine('handlebars', require('../lib/Handlebars.js'))
     .merge({
       handlebars: {
-        partials: "spec/fixtures/testPartials1",
-        templates: "spec/fixtures/templates",
+        partials: 'spec/fixtures/testPartials1',
+        templates: 'spec/fixtures/templates',
         helpers: {
           helper1: function () {
-            return "helper1";
+            return 'helper1'
           }
         },
         data: {
@@ -38,18 +37,18 @@ describe('ride-over:', function () {
           vier: 'quatre'
         }
       }
-    });
+    })
 
   var ro2 = ro1.merge({
     handlebars: {
-      partials: "spec/fixtures/testPartials2"
+      partials: 'spec/fixtures/testPartials2'
     }
-  });
+  })
 
   // Load a configuration-module
-  var ro3 = ro1.load(require("./fixtures/module/index.js"));
+  var ro3 = ro1.load(require('./fixtures/module/index.js'))
 
-  it("should load and resolve a simple config", function (next) {
+  it('should load and resolve a simple config', function (next) {
     ro1.run()
       .then(function (results) {
         expect(results).toEqual(
@@ -59,12 +58,12 @@ describe('ride-over:', function () {
               'b.md': 'Template B Eins one\nTemplate B Zwei two\n'
             }
           }
-        );
+        )
       })
       .done(next)
   })
 
-  it("should merge values of a configuration with new values", function (next) {
+  it('should merge values of a configuration with new values', function (next) {
     ro2.run()
       .then(function (results) {
         expect(results).toEqual(
@@ -74,12 +73,12 @@ describe('ride-over:', function () {
               'b.md': 'Template B Eins one\nTemplate B Two times two is quatre\n'
             }
           }
-        );
+        )
       })
       .done(next)
   })
 
-  it("should load values of a configuration-module", function (next) {
+  it('should load values of a configuration-module', function (next) {
     ro3.run()
       .then(function (results) {
         expect(results).toEqual(
@@ -89,7 +88,7 @@ describe('ride-over:', function () {
               'b.md': 'Template B Eins one\nTemplate B Overridden in Module\n'
             }
           }
-        );
+        )
       })
       .done(next)
   })
