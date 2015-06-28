@@ -17,14 +17,21 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "pretest": "npm list --depth=0 -g standard || npm -g install standard",
     "test": "jasmine && standard",
+    "preformat": "npm list --depth=0 -g standard || npm -g install standard",
     "format": "standard --format"
   },
-  "dependencies": {},
+  "dependencies": {
+    "handlebars": "^3.0.3",
+    "lodash": "^3.9.3"
+  },
   "devDependencies": {
     "jasmine": "^2.3.1",
-    "standard": "^3.11.0",
-    "verb": "^0.7.4"
+    "customize": "<1.0.0"
+  },
+  "peerDependencies": {
+    "customize": "<1.0.0"
   },
   "standard": {
     "ignore": [
