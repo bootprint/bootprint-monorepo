@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Engines are now expected to return an object `{ defaultConfig: object, preprocessConfig: function, run: function }`
 - Expose I/O-helper functions as `require('customize/helpers-io')`.
+- More rigid parameter validation in `Customizer#registerEngines(id,engine)`
 
 ## v0.0.2 - 2015-06-28
 ### Fix
