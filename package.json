@@ -1,7 +1,7 @@
 {
   "name": "ride-over",
   "version": "0.0.0",
-  "description": "A simlpe framework to create overidable configurations and engine",
+  "description": "A simlpe framework to create overidable configurations",
   "repository": {
     "type": "git",
     "url": "https://github.com/nknapp/ride-over.git"
@@ -17,14 +17,15 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "pretest": "npm list --depth=0 -g standard || npm -g install standard",
     "test": "jasmine && standard",
     "format": "standard --format"
   },
-  "dependencies": {},
+  "dependencies": {
+    
+  },
   "devDependencies": {
-    "jasmine": "^2.3.1",
-    "standard": "^3.11.0",
-    "verb": "^0.7.4"
+    "jasmine": "^2.3.1"
   },
   "standard": {
     "ignore": [
