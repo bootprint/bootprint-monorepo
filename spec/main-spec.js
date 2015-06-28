@@ -34,6 +34,7 @@ var ro1 = customize()
         b: {x: 'x1', y: 'y1'}
       },
       array: ['item1']
+    // TODO: Tests for promises and functions
     }
   })
 

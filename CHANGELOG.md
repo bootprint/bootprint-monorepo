@@ -2,6 +2,12 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Upcoming
+### Update
+
+- Engines are now expected to return an object `{ defaultConfig: object, preprocessConfig: function, run: function }`
+- Expose I/O-helper functions as `require('customize/helpers-io')`.
+
 ## v0.0.2 - 2015-06-28
 ### Fix
 

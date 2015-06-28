@@ -1,5 +1,5 @@
 /*!
- * ride-over <https://github.com/nknapp/ride-over>
+ * customize <https://github.com/nknapp/ride-over>
  *
  * Copyright (c) 2015 Nils Knappmeier.
  * Released under the MIT license.
@@ -22,7 +22,7 @@ var _ = require('lodash')
  * @param {object<function>} engines
  * @constructor
  */
-function RideOver (config, parentConfig, engines) {
+function Customize (config, parentConfig, engines) {
   var _config = _.merge({}, parentConfig, config, customOverrider)
 
   /**
@@ -43,7 +43,7 @@ function RideOver (config, parentConfig, engines) {
     _engines[id] = engine
     var _defaultConfig = {}
     _defaultConfig[id] = engine.defaultConfig
-    return new RideOver(_defaultConfig, _config, _engines)
+    return new Customize(_defaultConfig, _config, _engines)
 
   }
 
@@ -51,7 +51,7 @@ function RideOver (config, parentConfig, engines) {
    * Creates a new instance of RideOver. The config of the current RideOver
    * are used as default values and are overridden by the config provided as parameter.
    * @param {object} config config overriding the config of this builder
-   * @return {RideOver} new Builder instance
+   * @return {Customize} new Builder instance
    */
   this.merge = function (config) {
     if (_.isUndefined(config)) {
@@ -71,7 +71,7 @@ function RideOver (config, parentConfig, engines) {
         return config
       })
     })
-    return new RideOver(preprocessedConfig, _config, engines)
+    return new Customize(preprocessedConfig, _config, engines)
   }
 
   /**
@@ -82,7 +82,7 @@ function RideOver (config, parentConfig, engines) {
    * with config from the builderFunction's result.
    * @param {function} builderFunction  that receives a RideOver as paramater
    *  and returns a RideOver with changed configuration.
-   * @return {RideOver} the result of the builderFunction
+   * @return {Customize} the result of the builderFunction
    */
   this.load = function (builderFunction) {
     if (builderFunction.package) {
@@ -105,7 +105,7 @@ function RideOver (config, parentConfig, engines) {
   this.run = function () {
     return this.build().then(function (resolvedConfig) {
       return deep(_.mapValues(engines, function (engine, key) {
-        return engine(resolvedConfig[key])
+        return engine.run(resolvedConfig[key])
       }))
     })
   }
@@ -114,13 +114,20 @@ function RideOver (config, parentConfig, engines) {
 
 /**
  * Create a new RideOver object with
- * @returns {RideOver}
+ * @returns {Customize}
  */
 module.exports = function () {
-  return new RideOver({}, {}, {})
+  return new Customize({}, {}, {})
 }
 
+/**
+ * @readonly
+ */
 module.exports.withParent = require('./lib/withParent')
+
+/**
+ * @readonly
+ */
 module.exports.leaf = require('./lib/leaf')
 
 /**
@@ -143,8 +150,8 @@ function customOverrider (a, b, propertyName) {
   }
 
   // Some objects have custom overriders
-  if (_.isFunction(b._ro_custom_overrider)) {
-    return b._ro_custom_overrider(a, b, propertyName)
+  if (_.isFunction(b._customize_custom_overrider)) {
+    return b._customize_custom_overrider(a, b, propertyName)
   }
 
   // Arrays should be concatenated
