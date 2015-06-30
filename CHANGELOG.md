@@ -13,7 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fix
 
 - Fix dependencies in package.json
-- Remove Handlebars-Engine (will be part of a separate package)
+- Removed Handlebars-Engine (will be part of a separate package)
 
 ## v0.0.1 - 2015-06-28
 ### Initial version

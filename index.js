@@ -10,7 +10,7 @@
 /**
  * Use the `debug`-module to provide debug output if needed
  */
-// var debug = require('debug')('customize')
+var debug = require('debug')('customize:index')
 var Q = require('q')
 var deep = require('q-deep')
 var _ = require('lodash')
@@ -22,7 +22,7 @@ var _ = require('lodash')
  * @param {object<function>} engines
  * @constructor
  */
-function Customize (config, parentConfig, engines) {
+function Customize(config, parentConfig, engines) {
   var _config = _.merge({}, parentConfig, config, customOverrider)
 
   /**
@@ -32,9 +32,12 @@ function Customize (config, parentConfig, engines) {
    */
   this.registerEngine = function (id, engine) {
     if (!_.isString(id)) {
-      throw new Error("Engine-id must be a string, but is "+id);
+      throw new Error("Engine-id must be a string, but is " + id);
     }
-    if(_.isUndefined(engine["run"])) {
+    if (id.substr(0, 1) === "_") {
+      throw new Error("Engine-id may not start with an underscore ('_')")
+    }
+    if (_.isUndefined(engine["run"])) {
       throw new Error("Engine needs a run method");
     }
 
@@ -55,7 +58,7 @@ function Customize (config, parentConfig, engines) {
   }
 
   /**
-   * Creates a new instance of RideOver. The config of the current RideOver
+   * Creates a new instance of Customize. The config of the current Customize
    * are used as default values and are overridden by the config provided as parameter.
    * @param {object} config config overriding the config of this builder
    * @return {Customize} new Builder instance
@@ -83,12 +86,12 @@ function Customize (config, parentConfig, engines) {
 
   /**
    * Inherit configuration config from another module.
-   * `require("rideover-modulename")` usually return a function(builder)
+   * `require("Customize-modulename")` usually return a function(builder)
    * and this functions needs to be passed in here.
-   * A new RideOver will be returned that overrides the current config
+   * A new Customize will be returned that overrides the current config
    * with config from the builderFunction's result.
-   * @param {function} builderFunction  that receives a RideOver as paramater
-   *  and returns a RideOver with changed configuration.
+   * @param {function} builderFunction  that receives a Customize as paramater
+   *  and returns a Customize with changed configuration.
    * @return {Customize} the result of the builderFunction
    */
   this.load = function (builderFunction) {
@@ -106,21 +109,27 @@ function Customize (config, parentConfig, engines) {
     return deep(_config)
   }
 
+  this.tap = function(fn) {
+    deep(_config).done(fn);
+    return this;
+  }
+
   /**
    * Run each engine with its part of the config.
    */
   this.run = function () {
     return this.build().then(function (resolvedConfig) {
-      return deep(_.mapValues(engines, function (engine, key) {
+      var result = _.mapValues(engines, function (engine, key) {
         return engine.run(resolvedConfig[key])
-      }))
+      });
+      return deep(result)
     })
   }
 
 }
 
 /**
- * Create a new RideOver object with
+ * Create a new Customize object with
  * @returns {Customize}
  */
 module.exports = function () {
@@ -138,7 +147,7 @@ module.exports.withParent = require('./lib/withParent')
 module.exports.leaf = require('./lib/leaf')
 
 /**
- * RideOver has predefined override rules for merging configs.
+ * Customize has predefined override rules for merging configs.
  *
  * * If the overriding object has a `_ro_custom_overrider` function-property,
  *   it is called to perform the merger.
@@ -151,7 +160,7 @@ module.exports.leaf = require('./lib/leaf')
  * @param propertyName
  * @returns {*}
  */
-function customOverrider (a, b, propertyName) {
+function customOverrider(a, b, propertyName) {
   if (_.isUndefined(b)) {
     return a
   }
