@@ -53,6 +53,4 @@ describe('customize-engine-handlebars', function () {
     }).done(next)
     // body
   });
-
-
 })
