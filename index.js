@@ -10,7 +10,8 @@
 /**
  * Use the `debug`-module to provide debug output if needed
  */
-var debug = require('debug')('customize:index')
+var debug = require('debug')('customize:base')
+var debugState = require('debug')('customize:state')
 var Q = require('q')
 var deep = require('q-deep')
 var _ = require('lodash')
@@ -24,6 +25,10 @@ var _ = require('lodash')
  */
 function Customize(config, parentConfig, engines) {
   var _config = _.merge({}, parentConfig, config, customOverrider)
+  deep(_config).done(function(config) {
+    debugState("New configuration", config);
+  })
+
 
   /**
    * Register an engine with a default config
@@ -31,6 +36,7 @@ function Customize(config, parentConfig, engines) {
    * @param {function} engine
    */
   this.registerEngine = function (id, engine) {
+    debug("Registering engine '"+id+"'")
     if (!_.isString(id)) {
       throw new Error("Engine-id must be a string, but is " + id);
     }
@@ -68,6 +74,8 @@ function Customize(config, parentConfig, engines) {
       throw new Error("Cannot merge undefined 'config'")
     }
 
+    debug("Calling merge", config);
+
     // Assert that for each key in the other configuration, there is an engine present
     // Apply engine preprocessor to each config
     var preprocessedConfig = _.mapValues(config, function (value, key) {
@@ -78,6 +86,7 @@ function Customize(config, parentConfig, engines) {
       // Load preprocessor with identity as default
       var preprocessor = engine.preprocessConfig || _.identity
       return preprocessor(Q(value)).then(function (config) {
+        debug("Merging preprocessed config", config);
         return config
       })
     })
@@ -106,12 +115,10 @@ function Customize(config, parentConfig, engines) {
    * @return {Promise<object>} a promise for the whole configuration
    */
   this.build = function () {
-    return deep(_config)
-  }
-
-  this.tap = function(fn) {
-    deep(_config).done(fn);
-    return this;
+    return deep(_config).then(function(config) {
+      debug("Building",config);
+      return config;
+    })
   }
 
   /**
