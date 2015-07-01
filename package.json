@@ -24,7 +24,9 @@
   },
   "dependencies": {
     "handlebars": "^3.0.3",
-    "lodash": "^3.9.3"
+    "lodash": "^3.9.3",
+    "q": "^1.4.1",
+    "q-deep": "^1.0.1"
   },
   "devDependencies": {
     "jasmine": "^2.3.1",

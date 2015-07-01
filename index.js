@@ -10,13 +10,21 @@
 var Handlebars = require('handlebars')
 var _ = require('lodash')
 var files = require('customize/helpers-io').files
+var customize = require("customize");
+var Q = require("q");
+var deep = require("q-deep");
 
 module.exports = {
   /**
    * The default configuration for the handlebars engine
    */
   defaultConfig: {
-    partials: {}, helpers: {}, templates: {}, data: {}, preprocessor: _.identity
+    partials: {},
+    helpers: {},
+    templates: {},
+    data: {},
+    preprocessor: _.identity,
+    hbsOptions: {}
   },
 
   /**
@@ -25,27 +33,30 @@ module.exports = {
    * @return {Promise<object>} the configuration that is used passed into the merging process
    *    later expected as parameter to the main function of the engine
    */
-  preprocessConfig: function preprocessConfig (config) {
+  preprocessConfig: function preprocessConfig(config) {
     return config.then(function (config) {
       return {
         partials: files(config.partials),
         helpers: config.helpers,
         templates: files(config.templates),
-        data: config.data
+        data: config.data,
+        preprocessor: config.preprocessor && customize.withParent(config.preprocessor),
+        hbsOptions: config.hbsOptions
       }
     })
   },
 
-  run: function run (config) {
-    var hbs = Handlebars.create()
-    hbs.registerPartial(_.mapKeys(config.partials, stripHandlebarsExt))
-    hbs.registerHelper(config.helpers)
+  run: function run(config) {
+    return Q(config.data).then(config.preprocessor).then(deep).then(function (data) {
+      var hbs = Handlebars.create()
+      hbs.registerPartial(_.mapKeys(config.partials, stripHandlebarsExt))
+      hbs.registerHelper(config.helpers)
+      var templates = _.mapKeys(config.templates, stripHandlebarsExt)
 
-    var templates = _.mapKeys(config.templates, stripHandlebarsExt)
-
-    return _.mapValues(templates, function (template) {
-      var fn = hbs.compile(template)
-      return fn(config.data)
+      return _.mapValues(templates, function (template) {
+        var fn = hbs.compile(template, config.hbsOptions)
+        return fn(data)
+      })
     })
   }
 }
@@ -56,6 +67,6 @@ module.exports = {
  * @param {string} key the original filename
  * @returns {string} the filename without .hbs
  */
-function stripHandlebarsExt (value, key) {
+function stripHandlebarsExt(value, key) {
   return key.replace(/\.(handlebars|hbs)$/, '')
 }
