@@ -46,18 +46,25 @@ module.exports = {
     })
   },
 
+  /**
+   * Runs the handlebars-engine. The engine is
+   * @param config
+   */
   run: function run(config) {
-    return Q(config.data).then(config.preprocessor).then(deep).then(function (data) {
-      var hbs = Handlebars.create()
-      hbs.registerPartial(_.mapKeys(config.partials, stripHandlebarsExt))
-      hbs.registerHelper(config.helpers)
-      var templates = _.mapKeys(config.templates, stripHandlebarsExt)
+    return Q(config.preprocessor(config.data))
+      // Resolve any new promises
+      .then(deep)
+      .then(function (data) {
+        var hbs = Handlebars.create()
+        hbs.registerPartial(_.mapKeys(config.partials, stripHandlebarsExt))
+        hbs.registerHelper(config.helpers)
+        var templates = _.mapKeys(config.templates, stripHandlebarsExt)
 
-      return _.mapValues(templates, function (template) {
-        var fn = hbs.compile(template, config.hbsOptions)
-        return fn(data)
+        return _.mapValues(templates, function (template) {
+          var fn = hbs.compile(template, config.hbsOptions)
+          return fn(data)
+        })
       })
-    })
   }
 }
 
