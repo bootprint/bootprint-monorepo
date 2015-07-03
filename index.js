@@ -23,9 +23,9 @@ var _ = require('lodash')
  * @param {object<function>} engines
  * @constructor
  */
-function Customize(config, parentConfig, engines) {
+function Customize (config, parentConfig, engines) {
   var _config = _.merge({}, parentConfig, config, customOverrider)
-  deep(_config).done(function(config) {
+  deep(_config).done(function (config) {
     debugState("New configuration", config);
   })
 
@@ -36,7 +36,7 @@ function Customize(config, parentConfig, engines) {
    * @param {function} engine
    */
   this.registerEngine = function (id, engine) {
-    debug("Registering engine '"+id+"'")
+    debug("Registering engine '" + id + "'")
     if (!_.isString(id)) {
       throw new Error("Engine-id must be a string, but is " + id);
     }
@@ -115,7 +115,7 @@ function Customize(config, parentConfig, engines) {
    * @return {Promise<object>} a promise for the whole configuration
    */
   this.build = function () {
-    return deep(_config).then(function(config) {
+    return deep(_config).then(function (config) {
       debug("Building",config);
       return config;
     })
@@ -167,9 +167,14 @@ module.exports.leaf = require('./lib/leaf')
  * @param propertyName
  * @returns {*}
  */
-function customOverrider(a, b, propertyName) {
+function customOverrider (a, b, propertyName) {
   if (_.isUndefined(b)) {
     return a
+  }
+
+  if (_.isUndefined(a)) {
+    // Invoke default overrider
+    return undefined
   }
 
   // Some objects have custom overriders
@@ -183,7 +188,7 @@ function customOverrider(a, b, propertyName) {
   }
 
   // Merge values resolving promises, if they are not leaf-promises
-  if (Q.isPromiseAlike(a) && Q.isPromiseAlike(b) && !a.leaf && !b.leaf) {
+  if (Q.isPromiseAlike(a) || Q.isPromiseAlike(b)) {
     return Q.all([a, b]).spread(function (_a, _b) {
       // Merge the promise results
       return _.merge({}, {x: _a}, {x: _b}, customOverrider).x
