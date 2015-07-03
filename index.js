@@ -37,7 +37,7 @@ module.exports = {
     return config.then(function (config) {
       return {
         partials: files(config.partials),
-        helpers: config.helpers,
+        helpers: _.isFunction(config.helpers) ? config.helpers() : config.helpers,
         templates: files(config.templates),
         data: config.data,
         preprocessor: config.preprocessor && customize.withParent(config.preprocessor),
