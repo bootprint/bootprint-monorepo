@@ -13,6 +13,7 @@ var files = require('customize/helpers-io').files
 var customize = require("customize");
 var Q = require("q");
 var deep = require("q-deep");
+var qfs = require("q-io/fs");
 
 module.exports = {
   /**
@@ -20,7 +21,7 @@ module.exports = {
    */
   defaultConfig: {
     partials: {},
-    helpers: {},
+    helpers: undefined,
     templates: {},
     data: {},
     preprocessor: _.identity,
@@ -30,20 +31,31 @@ module.exports = {
   /**
    *
    * @param {Promise<object>} config the input configuration that is written by the user
-   * @return {Promise<object>} the configuration that is used passed into the merging process
+   * @return {Promise<object>} the configuration that is passed into the merging process
    *    later expected as parameter to the main function of the engine
    */
   preprocessConfig: function preprocessConfig(config) {
     return config.then(function (config) {
-      return {
-        partials: files(config.partials),
-        helpers: _.isFunction(config.helpers) ? config.helpers() : config.helpers,
-        templates: files(config.templates),
-        data: config.data,
-        preprocessor: config.preprocessor && customize.withParent(config.preprocessor),
-        hbsOptions: config.hbsOptions
+        var helpers = qfs.exists(config.helpers)
+          .then(function (exists) {
+            if (exists) {
+              var helpers = require(config.helpers);
+              // The helpers file may export an object or a promise for an object.
+              // Or a function returning and object or a promise for an object.
+              // If it's a function, use the result instead.
+              return _.isFunction(helpers) ? helpers() : helpers;
+            }
+          });
+        return {
+          partials: files(config.partials),
+          helpers: helpers,
+          templates: files(config.templates),
+          data: config.data,
+          preprocessor: config.preprocessor && customize.withParent(config.preprocessor),
+          hbsOptions: config.hbsOptions
+        }
       }
-    })
+    )
   },
 
   /**
