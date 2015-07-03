@@ -1,8 +1,8 @@
 var path = require("path");
 var files = require("../../../lib/files.js")
 
-module.exports = function (rideover) {
-  return rideover.merge({
+module.exports = function (custmoize) {
+  return customize.merge({
     test: {
       files: path.join(__dirname, "files"),
       objects: {
