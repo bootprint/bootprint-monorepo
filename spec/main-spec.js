@@ -6,7 +6,8 @@
  */
 
 /* global describe */
-// /* global it */
+/* global it */
+/* global expect */
 // /* global xdescribe */
 // /* global xit */
 
@@ -20,11 +21,7 @@ var hb = customize()
   .merge({
     handlebars: {
       partials: 'spec/fixtures/testPartials1',
-      helpers: {
-        helper1: function (abc) {
-          return 'helper1(' + abc + ')'
-        }
-      },
+      helpers: 'spec/fixtures/helpers.js',
       templates: 'spec/fixtures/templates',
       data: {
         eins: 'one',
@@ -45,12 +42,12 @@ describe('customize-engine-handlebars', function () {
     hb.run().tap(function (result) {
       expect(result).toEqual({
         handlebars: {
-          'a.md': 'a.md testPartials1/eins one',
-          'b.md': 'b.md testPartials1/zwei two helper1([object Object])'
+          'a.md': 'a.md testPartials1/eins ->one<-',
+          'b.md': 'b.md testPartials1/zwei ->two<- helper1(->two<-)'
         }
-      });
+      })
 
     }).done(next)
-    // body
-  });
+  // body
+  })
 })
