@@ -20,9 +20,18 @@ describe('the files-function', function () {
     )).then(function (result) {
       expect(result).toEqual({
         dir: {
-          'eins.hbs': 'testPartials1/eins {{eins}}',
-          'zwei.hbs': 'testPartials2/zwei {{zwei}}',
-          'drei.hbs': 'testPartials2/drei {{drei}}'
+          'eins.hbs': {
+            path: 'spec/fixtures/testPartials1/eins.hbs',
+            contents: 'testPartials1/eins {{eins}}'
+          },
+          'zwei.hbs': {
+            path: 'spec/fixtures/testPartials2/zwei.hbs',
+            contents: 'testPartials2/zwei {{zwei}}'
+          },
+          'drei.hbs': {
+            path: 'spec/fixtures/testPartials2/drei.hbs',
+            contents: 'testPartials2/drei {{drei}}'
+          }
         }
       })
       expect(x.valueOf()['eins.hbs'].inspect().state).toBe('fulfilled')

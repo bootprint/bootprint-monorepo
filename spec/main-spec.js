@@ -49,8 +49,14 @@ describe('After loading a config', function () {
   })
   it('the `files`-function should load contents from files', function () {
     expect(testResult.test.files).toEqual({
-      'eins.hbs': 'testPartials1/eins {{eins}}',
-      'zwei.hbs': 'testPartials1/zwei {{zwei}}'
+      'eins.hbs': {
+        path: 'spec/fixtures/testPartials1/eins.hbs',
+        contents: 'testPartials1/eins {{eins}}'
+      },
+      'zwei.hbs': {
+        path: 'spec/fixtures/testPartials1/zwei.hbs',
+        contents: 'testPartials1/zwei {{zwei}}'
+      }
     })
   })
   it('object values should exist', function () {
@@ -99,9 +105,18 @@ describe('After merging another config', function () {
 
   it('the files should be overridden on a per-file basis', function () {
     expect(testResult.test.files).toEqual({
-      'eins.hbs': 'testPartials1/eins {{eins}}',
-      'zwei.hbs': 'testPartials2/zwei {{zwei}}',
-      'drei.hbs': 'testPartials2/drei {{drei}}'
+      'eins.hbs': {
+        path: 'spec/fixtures/testPartials1/eins.hbs',
+        contents: 'testPartials1/eins {{eins}}'
+      },
+      'zwei.hbs': {
+        path: 'spec/fixtures/testPartials2/zwei.hbs',
+        contents: 'testPartials2/zwei {{zwei}}'
+      },
+      'drei.hbs': {
+        path: 'spec/fixtures/testPartials2/drei.hbs',
+        contents: 'testPartials2/drei {{drei}}'
+      }
     })
   })
   it('object values should be deep merged', function () {
@@ -135,8 +150,14 @@ describe('after loading a module', function () {
 
   it('the files should be overridden on a per-file basis', function () {
     expect(testResult.test.files).toEqual({
-      'eins.hbs': 'testPartials1/eins {{eins}}',
-      'zwei.hbs': 'module-partials/zwei {{zwei}}'
+      'eins.hbs': {
+        path: 'spec/fixtures/testPartials1/eins.hbs',
+        contents: 'testPartials1/eins {{eins}}'
+      },
+      'zwei.hbs': {
+        path: 'spec/fixtures/module/files/zwei.hbs',
+        contents: 'module-partials/zwei {{zwei}}'
+      }
     })
   })
   it('object values should be deep merged', function () {
