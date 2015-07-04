@@ -26,9 +26,8 @@ var _ = require('lodash')
 function Customize (config, parentConfig, engines) {
   var _config = _.merge({}, parentConfig, config, customOverrider)
   deep(_config).done(function (config) {
-    debugState("New configuration", config);
+    debugState('New configuration', config)
   })
-
 
   /**
    * Register an engine with a default config
@@ -38,13 +37,13 @@ function Customize (config, parentConfig, engines) {
   this.registerEngine = function (id, engine) {
     debug("Registering engine '" + id + "'")
     if (!_.isString(id)) {
-      throw new Error("Engine-id must be a string, but is " + id);
+      throw new Error('Engine-id must be a string, but is ' + id)
     }
-    if (id.substr(0, 1) === "_") {
+    if (id.substr(0, 1) === '_') {
       throw new Error("Engine-id may not start with an underscore ('_')")
     }
-    if (_.isUndefined(engine["run"])) {
-      throw new Error("Engine needs a run method");
+    if (_.isUndefined(engine['run'])) {
+      throw new Error('Engine needs a run method')
     }
 
     // This is only allowed if now engine with the same id exists.
@@ -74,7 +73,7 @@ function Customize (config, parentConfig, engines) {
       throw new Error("Cannot merge undefined 'config'")
     }
 
-    debug("Calling merge", config);
+    debug('Calling merge', config)
 
     // Assert that for each key in the other configuration, there is an engine present
     // Apply engine preprocessor to each config
@@ -86,7 +85,7 @@ function Customize (config, parentConfig, engines) {
       // Load preprocessor with identity as default
       var preprocessor = engine.preprocessConfig || _.identity
       return preprocessor(Q(value)).then(function (config) {
-        debug("Merging preprocessed config", config);
+        debug('Merging preprocessed config', config)
         return config
       })
     })
@@ -116,8 +115,8 @@ function Customize (config, parentConfig, engines) {
    */
   this.build = function () {
     return deep(_config).then(function (config) {
-      debug("Building",config);
-      return config;
+      debug('Building', config)
+      return config
     })
   }
 
@@ -128,7 +127,7 @@ function Customize (config, parentConfig, engines) {
     return this.build().then(function (resolvedConfig) {
       var result = _.mapValues(engines, function (engine, key) {
         return engine.run(resolvedConfig[key])
-      });
+      })
       return deep(result)
     })
   }
