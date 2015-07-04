@@ -84,7 +84,7 @@ function Customize (config, parentConfig, engines) {
       }
       // Load preprocessor with identity as default
       var preprocessor = engine.preprocessConfig || _.identity
-      return preprocessor(Q(value)).then(function (config) {
+      return Q(preprocessor(Q(value))).then(function (config) {
         debug('Merging preprocessed config', config)
         return config
       })
