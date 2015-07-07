@@ -7,9 +7,18 @@ module.exports = function (builder) {
 
     return builder.merge({
         handlebars: {
-            template: require.resolve("./handlebars/template.hbs"),
+            templates: path.resolve(__dirname, "handlebars", "templates"),
             partials: path.resolve(__dirname, "handlebars", "partials"),
-            helpers: require.resolve("./handlebars/helpers.js")
+            helpers: require.resolve("./handlebars/helpers.js"),
+            /**
+             * A preprocessor that may return a modified json before entering the rendering process.
+             * Access the inherited preprocessor is possible via <code>this.previous(json)</code>
+             * @param obj the input object
+             * @return a modified object or a promise for a modified object.
+             */
+            preprocessor: function (obj) {
+                return obj;
+            }
         },
         less: {
             main: [
@@ -19,15 +28,6 @@ module.exports = function (builder) {
             paths: [
                 path.dirname(bootstrapLess)
             ]
-        },
-        /**
-         * A preprocessor that may return a modified json before entering the rendering process.
-         * Access the inherited preprocessor is possible via <code>this.previous(json)</code>
-         * @param obj the input object
-         * @return a modified object or a promise for a modified object.
-         */
-        preprocessor: function (obj) {
-            return obj;
         }
     })
 };
