@@ -1,0 +1,18 @@
+This package is an abstraction of the [bootprint](https://github.com/nknapp/bootprint) package.
+More docs coming soon.
+
+Bootprint is a tool to generate styled HTML from JSON objects. It uses template modules 
+the contain Less definitions and Handlebars templates and partials. The nice thing is, that
+Bootprint allows you to override parts of the configuration (a Handlebars-partial or a Less definition)
+by merging configuration objects.
+
+Customize is an abstraction of the merging-behaviour. It allows you to create your own projects and engines
+(other than Less and Handlebars) and create overridable configurations for those.
+
+At its core, it uses [lodash#merge](https://lodash.com/docs#merge) to merge configurations, but it uses a customizer-function
+that also supports promises and custom overrider functions attached to the object.
+
+Currently, there is only one engine ([customize-engine-handlebars](https://npmjs.com/package/customize-engine-handlebars))
+and one project that actually uses Customize ([Thought](https://npmjs.com/package/thought)).
+Bootprint will use Customize as well, once all features (i.e. like a file watcher) are implemented.
+

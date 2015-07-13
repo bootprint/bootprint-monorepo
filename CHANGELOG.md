@@ -2,6 +2,25 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+
+## Upcoming
+
+### Update
+- Promises created with `files()` no longer resolve to the file contents, but 
+  to an object `{ path: string, contents: string }`
+- The overrider-function now resolves promises if either the original value 
+  or the overriding value is a promise (before, both needed to be promises).
+  This allows merging of promises and values of the same type
+  
+### Add
+
+- Engine preprocessors may return Promises or direct values. The result is 
+  coerced to a promise dynamically.
+
+### Devel
+- Internal renaming of RideOver (this over name) to Customize.
+
+
 ## v0.1.0 - 2015-06-29
 ### Update
 
