@@ -3,7 +3,7 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## Upcoming
+## v0.2.0 - 2015-07-14
 
 ### Update
 - Promises created with `files()` no longer resolve to the file contents, but 
