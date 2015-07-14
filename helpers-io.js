@@ -9,6 +9,7 @@
 
 /**
  * The file helper resolves the directory filename to the contents of the included files (promised).
- * @type {function(string,=object): Promise<object<Promise<string>>}
+ * @type {function(string,object=): Promise<object<Promise<string>>>}
+ * @api public
  */
 module.exports.files = require('./lib/files')

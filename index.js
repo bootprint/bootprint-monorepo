@@ -17,11 +17,23 @@ var deep = require('q-deep')
 var _ = require('lodash')
 
 /**
+ * Create a new Customize object with an empty configuration
+ * @returns {Customize}
+ * @api public
+ */
+module.exports = function () {
+  return new Customize({}, {}, {})
+}
+
+/**
+ * The main class. The heart of Customize
+ *
  *
  * @param config
  * @param parentConfig
  * @param {object<function>} engines
  * @constructor
+ * @api private
  */
 function Customize (config, parentConfig, engines) {
   var _config = _.merge({}, parentConfig, config, customOverrider)
@@ -33,6 +45,7 @@ function Customize (config, parentConfig, engines) {
    * Register an engine with a default config
    * @param {string} id the identifier of the engine (also within the config)
    * @param {function} engine
+   * @api public
    */
   this.registerEngine = function (id, engine) {
     debug("Registering engine '" + id + "'")
@@ -67,6 +80,7 @@ function Customize (config, parentConfig, engines) {
    * are used as default values and are overridden by the config provided as parameter.
    * @param {object} config config overriding the config of this builder
    * @return {Customize} new Builder instance
+   * @api public
    */
   this.merge = function (config) {
     if (_.isUndefined(config)) {
@@ -101,6 +115,7 @@ function Customize (config, parentConfig, engines) {
    * @param {function} builderFunction  that receives a Customize as paramater
    *  and returns a Customize with changed configuration.
    * @return {Customize} the result of the builderFunction
+   * @api public
    */
   this.load = function (builderFunction) {
     if (builderFunction.package) {
@@ -112,6 +127,7 @@ function Customize (config, parentConfig, engines) {
   /**
    * Build the configured Bootprint-instance.
    * @return {Promise<object>} a promise for the whole configuration
+   * @api public
    */
   this.build = function () {
     return deep(_config).then(function (config) {
@@ -122,6 +138,7 @@ function Customize (config, parentConfig, engines) {
 
   /**
    * Run each engine with its part of the config.
+   * @api public
    */
   this.run = function () {
     return this.build().then(function (resolvedConfig) {
@@ -135,36 +152,30 @@ function Customize (config, parentConfig, engines) {
 }
 
 /**
- * Create a new Customize object with
- * @returns {Customize}
- */
-module.exports = function () {
-  return new Customize({}, {}, {})
-}
-
-/**
  * @readonly
+ * @public
  */
 module.exports.withParent = require('./lib/withParent')
 
 /**
  * @readonly
+ * @public
  */
 module.exports.leaf = require('./lib/leaf')
 
 /**
  * Customize has predefined override rules for merging configs.
  *
- * * If the overriding object has a `_ro_custom_overrider` function-property,
+ * * If the overriding object has a `_customize_custom_overrider` function-property,
  *   it is called to perform the merger.
  * * Arrays are concatenated
  * * Promises are resolved and the results are merged
  *
  *
- * @param a
- * @param b
- * @param propertyName
- * @returns {*}
+ * @param a the overridden value
+ * @param b the overriding value
+ * @param propertyName the property name
+ * @returns {*} the merged value
  */
 function customOverrider (a, b, propertyName) {
   if (_.isUndefined(b)) {

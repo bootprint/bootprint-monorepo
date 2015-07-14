@@ -21,22 +21,109 @@ Bootprint will use Customize as well, once all features (i.e. like a file watche
 npm install customize
 ```
 
- 
-## Usage
-
-The following example demonstrates how to use this module:
-
-```js
-
-```
-
-This will generate the following output
-
-```
-
-```
 
 ##  API-reference
+
+# Global
+
+
+
+
+
+* * *
+
+### exports() 
+
+Create a new Customize object with an empty configuration
+
+**Returns**: `Customize`
+
+
+## Class: Customize
+The main class. The heart of Customize
+
+**withParent**:  , The main class. The heart of Customize
+**leaf**:  , The main class. The heart of Customize
+**overrider**: `customOverrider` , The main class. The heart of Customize
+### Customize.registerEngine(id, engine) 
+
+Register an engine with a default config
+
+**Parameters**
+
+**id**: `string`, the identifier of the engine (also within the config)
+
+**engine**: `function`, Register an engine with a default config
+
+
+### Customize.merge(config) 
+
+Creates a new instance of Customize. The config of the current Customize
+are used as default values and are overridden by the config provided as parameter.
+
+**Parameters**
+
+**config**: `object`, config overriding the config of this builder
+
+**Returns**: `Customize`, new Builder instance
+
+### Customize.load(builderFunction) 
+
+Inherit configuration config from another module.
+`require("Customize-modulename")` usually return a function(builder)
+and this functions needs to be passed in here.
+A new Customize will be returned that overrides the current config
+with config from the builderFunction's result.
+
+**Parameters**
+
+**builderFunction**: `function`, that receives a Customize as paramater
+ and returns a Customize with changed configuration.
+
+**Returns**: `Customize`, the result of the builderFunction
+
+### Customize.build() 
+
+Build the configured Bootprint-instance.
+
+**Returns**: `Promise.&lt;object&gt;`, a promise for the whole configuration
+
+### Customize.run() 
+
+Run each engine with its part of the config.
+
+
+### Customize.customOverrider(a, b, propertyName) 
+
+Customize has predefined override rules for merging configs.
+
+* If the overriding object has a `_ro_custom_overrider` function-property,
+  it is called to perform the merger.
+* Arrays are concatenated
+* Promises are resolved and the results are merged
+
+**Parameters**
+
+**a**: , the overridden value
+
+**b**: , the overriding value
+
+**propertyName**: , the property name
+
+**Returns**: `*`
+
+
+
+* * *
+
+
+
+
+
+
+
+
+
 
 
 
