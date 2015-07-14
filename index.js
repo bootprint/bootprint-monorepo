@@ -152,14 +152,21 @@ function Customize (config, parentConfig, engines) {
 }
 
 /**
+ * Wrap a function so that if it overrides another function, that function will
+ * be available as `this.parent`
+ * @param fn
+ * @api public
  * @readonly
- * @public
  */
 module.exports.withParent = require('./lib/withParent')
 
 /**
+ * Create a promise that is regarded as leaf in the configuration tree.
+ * That means, that the overrider of ride-over is no resolving this promise when overriding values.
+ * @param {*} promiseOrValue a promise or a valude that represents the leaf
+ * @returns {Promise}
+ * @api public
  * @readonly
- * @public
  */
 module.exports.leaf = require('./lib/leaf')
 
@@ -208,6 +215,7 @@ function customOverrider (a, b, propertyName) {
 }
 
 /**
+ * The custom-overrider used by Customize
  * @readonly
  * @type {customOverrider}
  */
