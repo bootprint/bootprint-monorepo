@@ -42,9 +42,11 @@ Create a new Customize object with an empty configuration
 #### Class: Customize
 The main class. The heart of Customize
 
-**withParent**:  , The main class. The heart of Customize
-**leaf**:  , The main class. The heart of Customize
-**overrider**: `customOverrider` , The main class. The heart of Customize
+**withParent**:  , Wrap a function so that if it overrides another function, that function will
+be available as `this.parent`
+**leaf**:  , Create a promise that is regarded as leaf in the configuration tree.
+That means, that the overrider of ride-over is no resolving this promise when overriding values.
+**overrider**: `customOverrider` , The custom-overrider used by Customize
 ##### Customize.registerEngine(id, engine) 
 
 Register an engine with a default config
