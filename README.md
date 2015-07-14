@@ -24,7 +24,7 @@ npm install customize
 
 ##  API-reference
 
-# Global
+### Global
 
 
 
@@ -32,20 +32,20 @@ npm install customize
 
 * * *
 
-### exports() 
+##### exports() 
 
 Create a new Customize object with an empty configuration
 
 **Returns**: `Customize`
 
 
-## Class: Customize
+#### Class: Customize
 The main class. The heart of Customize
 
 **withParent**:  , The main class. The heart of Customize
 **leaf**:  , The main class. The heart of Customize
 **overrider**: `customOverrider` , The main class. The heart of Customize
-### Customize.registerEngine(id, engine) 
+##### Customize.registerEngine(id, engine) 
 
 Register an engine with a default config
 
@@ -56,7 +56,7 @@ Register an engine with a default config
 **engine**: `function`, Register an engine with a default config
 
 
-### Customize.merge(config) 
+##### Customize.merge(config) 
 
 Creates a new instance of Customize. The config of the current Customize
 are used as default values and are overridden by the config provided as parameter.
@@ -67,7 +67,7 @@ are used as default values and are overridden by the config provided as paramete
 
 **Returns**: `Customize`, new Builder instance
 
-### Customize.load(builderFunction) 
+##### Customize.load(builderFunction) 
 
 Inherit configuration config from another module.
 `require("Customize-modulename")` usually return a function(builder)
@@ -82,22 +82,22 @@ with config from the builderFunction's result.
 
 **Returns**: `Customize`, the result of the builderFunction
 
-### Customize.build() 
+##### Customize.build() 
 
 Build the configured Bootprint-instance.
 
 **Returns**: `Promise.&lt;object&gt;`, a promise for the whole configuration
 
-### Customize.run() 
+##### Customize.run() 
 
 Run each engine with its part of the config.
 
 
-### Customize.customOverrider(a, b, propertyName) 
+##### Customize.customOverrider(a, b, propertyName) 
 
 Customize has predefined override rules for merging configs.
 
-* If the overriding object has a `_ro_custom_overrider` function-property,
+* If the overriding object has a `_customize_custom_overrider` function-property,
   it is called to perform the merger.
 * Arrays are concatenated
 * Promises are resolved and the results are merged
@@ -110,7 +110,7 @@ Customize has predefined override rules for merging configs.
 
 **propertyName**: , the property name
 
-**Returns**: `*`
+**Returns**: `*`, the merged value
 
 
 
