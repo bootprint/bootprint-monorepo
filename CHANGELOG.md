@@ -2,7 +2,7 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Upcoming
+## v0.2.2 - 2015-07-15
 
 * README-Updates in 0.2.1 and 0.2.2
 
