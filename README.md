@@ -45,7 +45,8 @@ The main class. The heart of Customize
 **withParent**:  , Wrap a function so that if it overrides another function, that function will
 be available as `this.parent`
 **leaf**:  , Create a promise that is regarded as leaf in the configuration tree.
-That means, that the overrider of ride-over is no resolving this promise when overriding values.
+That means, that the overrider is not resolving this promise when overriding values.
+Promised object values will not be merged but replaced.
 **overrider**: `customOverrider` , The custom-overrider used by Customize
 ##### Customize.registerEngine(id, engine) 
 

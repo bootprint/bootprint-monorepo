@@ -162,7 +162,8 @@ module.exports.withParent = require('./lib/withParent')
 
 /**
  * Create a promise that is regarded as leaf in the configuration tree.
- * That means, that the overrider of ride-over is no resolving this promise when overriding values.
+ * That means, that the overrider is not resolving this promise when overriding values.
+ * Promised object values will not be merged but replaced.
  * @param {*} promiseOrValue a promise or a valude that represents the leaf
  * @returns {Promise}
  * @api public
