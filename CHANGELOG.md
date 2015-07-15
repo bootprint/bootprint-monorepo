@@ -21,7 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   coerced to a promise dynamically.
 
 ### Devel
-- Internal renaming of RideOver (this over name) to Customize.
+- Internal renaming of RideOver (old name) to Customize.
 
 
 ## v0.1.0 - 2015-06-29
