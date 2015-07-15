@@ -2,6 +2,14 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+
+## Upcoming
+
+### Change
+
+* If the input configuration of an engine is a Promise, it is resolved 
+  before passing it to the engine's preprocessor. Inner Promises are not resolved.
+
 ## v0.2.2 - 2015-07-15
 
 * README-Updates in 0.2.1 and 0.2.2

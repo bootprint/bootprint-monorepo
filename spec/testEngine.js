@@ -18,14 +18,12 @@ module.exports = {
    *    later expected as parameter to the main function of the engine
    */
   preprocessConfig: function (config) {
-    return config.then(function (config) {
-      return {
-        files: files(config.files),
-        objects: config.objects,
-        leafs: _.mapValues(config.leafs, leaf),
-        array: config.array
-      }
-    })
+    return {
+      files: files(config.files),
+      objects: config.objects,
+      leafs: _.mapValues(config.leafs, leaf),
+      array: config.array
+    }
   },
 
   /**
