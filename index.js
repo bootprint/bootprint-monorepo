@@ -39,41 +39,38 @@ module.exports = {
    *    later expected as parameter to the main function of the engine
    */
   preprocessConfig: function preprocessConfig (config) {
-    return config.then(function (config) {
-      var helpers = config.helpers
-      try {
-        // If this is a string, treat if as module to be required
-        helpers = _.isString(helpers) ? require(path.resolve(helpers)) : helpers
-      } catch (e) {
-        console.log('Ignoring missing hb-helpers module: ' + helpers)
-        helpers = undefined
-      }
-      // The helpers file may export an object or a promise for an object.
-      // Or a function returning and object or a promise for an object.
-      // If it's a function, use the result instead.
-      helpers = _.isFunction(helpers) ? helpers() : helpers
+    var helpers = config.helpers
+    try {
+      // If this is a string, treat if as module to be required
+      helpers = _.isString(helpers) ? require(path.resolve(helpers)) : helpers
+    } catch (e) {
+      console.log('Ignoring missing hb-helpers module: ' + helpers)
+      helpers = undefined
+    }
+    // The helpers file may export an object or a promise for an object.
+    // Or a function returning and object or a promise for an object.
+    // If it's a function, use the result instead.
+    helpers = _.isFunction(helpers) ? helpers() : helpers
 
-      /**
-       * @type {string|function}
-       */
-      var preprocessor = config.preprocessor
-      try {
-        // If this is a string, treat if as module to be required
-        preprocessor = _.isString(preprocessor) ? require(path.resolve(preprocessor)) : preprocessor
-      } catch (e) {
-        console.log('Ignoring missing hb-preprocessor module: ' + preprocessor)
-        preprocessor = undefined
-      }
-      return {
-        partials: files(config.partials),
-        helpers: helpers,
-        templates: files(config.templates),
-        data: config.data,
-        preprocessor: preprocessor && customize.withParent(preprocessor),
-        hbsOptions: config.hbsOptions
-      }
-    })
-
+    /**
+     * @type {string|function}
+     */
+    var preprocessor = config.preprocessor
+    try {
+      // If this is a string, treat if as module to be required
+      preprocessor = _.isString(preprocessor) ? require(path.resolve(preprocessor)) : preprocessor
+    } catch (e) {
+      console.log('Ignoring missing hb-preprocessor module: ' + preprocessor)
+      preprocessor = undefined
+    }
+    return {
+      partials: files(config.partials),
+      helpers: helpers,
+      templates: files(config.templates),
+      data: config.data,
+      preprocessor: preprocessor && customize.withParent(preprocessor),
+      hbsOptions: config.hbsOptions
+    }
   },
 
   /**
