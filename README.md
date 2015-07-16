@@ -44,7 +44,7 @@ concatenates the contents of all files in a directory. We put this engine into
 the file `engine-concat-files.js` 
 
 ```js
-var files = require('../../helpers-io').files
+var files = require('customize/helpers-io').files
 
 module.exports = {
   // Initial configuration when registering the engine.
