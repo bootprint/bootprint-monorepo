@@ -21,7 +21,23 @@ var contents = function (partials) {
 }
 module.exports = {
   /**
+   * @typedef {object} CustomizeHandlebarsConfig
    * The default configuration for the handlebars engine
+   * @property {string} partials path to a partials directory. Each `.hbs`-file in the directory (or in the tree)
+   *   is registered as partial by its name (or relative path), without the `.hbs`-extension.
+   * @property {string|object|function} if this is an object it is assumed to be a list of helper functions,
+   *   if this is function it is assumed to return an object of helper functions, if this is a string,
+   *   it is assumed to be the path to a module returning either an object of a function as above.
+   * @property {string} template path to a directory containing templates. Handlebars is called with each `.hbs`-file
+   *   as template. The result of the engine consists of an object with a property for each template and the
+   *   Handlebars result for this template as value.
+   * @property {object} data a javascript-object to use as input for handlebars
+   * @property {function|string} preprocessor a function that takes the input data as first parameter and
+   *   transforms it into another object or the promise for an object. It the input data is a promise itself,
+   *   is resolved before calling this function. If the preprocessor is overridden, the parent
+   *   preprocessor is available with `this.parent(data)`
+   * @property {object} hbsOptions options to pass to `Handlebars.compile`.
+   * @api public
    */
   defaultConfig: {
     partials: {},
@@ -44,7 +60,7 @@ module.exports = {
       // If this is a string, treat if as module to be required
       helpers = _.isString(helpers) ? require(path.resolve(helpers)) : helpers
     } catch (e) {
-      console.log('Ignoring missing hb-helpers module: ' + helpers)
+      debug('Ignoring missing hb-helpers module: ' + helpers)
       helpers = undefined
     }
     // The helpers file may export an object or a promise for an object.
@@ -60,7 +76,7 @@ module.exports = {
       // If this is a string, treat if as module to be required
       preprocessor = _.isString(preprocessor) ? require(path.resolve(preprocessor)) : preprocessor
     } catch (e) {
-      console.log('Ignoring missing hb-preprocessor module: ' + preprocessor)
+      debug('Ignoring missing hb-preprocessor module: ' + preprocessor)
       preprocessor = undefined
     }
     return {
@@ -82,6 +98,7 @@ module.exports = {
       // Resolve any new promises
       .then(deep)
       .then(function (data) {
+        debug('Data after preprocessing:', data)
         var hbs = Handlebars.create()
 
         var partials = contents(config.partials)

@@ -1,0 +1,64 @@
+## Usage
+
+The following example demonstrates how to use this module:
+
+{{{dirtree 'examples' ''}}}
+
+### Configuration
+
+The following usage example has a configuration for all possible properties
+of the Handlebars-engine:
+
+{{{example 'examples/example.js'}}}
+
+This example loads its configuration from the module `config-module.js`
+
+{{{include 'examples/config-module.js'}}}
+
+*A quick note: If your are really creating a configuration-module, you should always
+use `require.resolve` or `__dirname` to determine the correct path to referenced files.*
+
+All the templates in the `templates` directory are called with the provided `data` (name and city).
+Each one generates an entry in the result of the engine. The templates call a partial that is 
+inserted below the main content. Helper functions from the `hb-helpers.js`-file are registered 
+with Handlebars and `text2.txt.hbs` uses the `shout`-helper from `hb-helpers.js` to turn a 
+string into upper-case. 
+
+{{{include 'examples/templates/text2.txt.hbs'}}}
+
+The example also includes a preprocessor (`hb-preprocessor.js`) that calls [the open weather map API](http://openweathermap.org/current#name)
+to determine the current weather in the given city. 
+
+{{{include 'examples/hb-preprocessor.js'}}}
+
+The result is injected into the data as `weather` property and rendered by 
+the `footer.hbs` partial.
+
+{{{include 'examples/partials/footer.hbs'}}}
+
+The output of this example is:
+
+{{{exec 'node example.js' cwd='examples/'}}}
+
+
+### Customizing configurations
+
+We can use the mechanism of {{npm 'customize'}} to adapt the configuration.
+In the following example, we replace the `footer.hbs`-partial by a different version.
+We do this by specifying a new partial directory. Partials with the same name as in 
+the previous directory will overwrite the old one.
+
+{{{example 'examples/example-merge.js'}}}
+
+The new `footer.hbs` writes only the current temperature, instead of the weather description
+
+{{{include 'examples/partials2/footer.hbs'}}}
+
+The output of this example is
+
+{{{exec 'node example-merge.js' cwd='examples/'}}}
+
+In a similar fashion, we could replace other parts of the configuration, like templates, helpers
+and the pre-processor. If we would provide a new preprocessor, it could call the old one,
+by calling `this.parent(args)`
+

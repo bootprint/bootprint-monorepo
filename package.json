@@ -34,8 +34,9 @@
     "q-deep": "^1.0.1"
   },
   "devDependencies": {
-    "jasmine": "^2.3.1",
-    "customize": "<1.0.0"
+    "customize": "<1.0.0",
+    "get-promise": "^1.4.0",
+    "jasmine": "^2.3.1"
   },
   "peerDependencies": {
     "customize": "<1.0.0"
