@@ -20,7 +20,12 @@
     "pretest": "npm list --depth=0 -g standard || npm -g install standard",
     "test": "jasmine && standard",
     "preformat": "npm list --depth=0 -g standard || npm -g install standard",
-    "format": "standard --format"
+    "format": "standard --format",
+    "thought": "thought run -a",
+    "prethoughtcheck": "npm list --depth=0 -g thought || npm -g install thought",
+    "thoughtcheck": "thought check-engines",
+    "version": "npm run thought",
+    "preversion": "npm run thoughtcheck"
   },
   "dependencies": {
     "handlebars": "^3.0.3",
@@ -40,5 +45,9 @@
       "spec/fixtures/**"
     ]
   },
-  "keywords": []
+  "keywords": [],
+  "paths": {
+    "relative": "package.json",
+    "absolute": "/home/nknappmeier/privat/node-libraries/customize-engine-handlebars/package.json"
+  }
 }
