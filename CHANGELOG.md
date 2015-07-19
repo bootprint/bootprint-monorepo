@@ -4,9 +4,23 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Upcoming
 
-## Documentation
+### Documentation
 
 - Comprehensive README example
+
+### Added
+
+- Options for `Handlebars#compile()` can be provided via the `hbsOptions`-property 
+  in the configuration
+- Allow `helpers` to be a function that returns a helper-object (or a promise for 
+  a helper object)
+- Allow `helpers` to be the path to a Javascript-module
+
+### Change
+- If the input configuration of a Customize-engine is a Promise, it is resolved 
+  before passing it to the engine's preprocessor. Inner Promises are not resolved.
+- Replaced filesystem access via `q-io/fs` by `require`.  Try to avoid browser
+  incompatibilities, althought `customize` does not support browsers yet.
 
 ## v0.0.1 - 2015-06-29
 ### Initial version
