@@ -1,6 +1,6 @@
 # Release notes
 
-## Upcoming
+## v0.5.0 - 2015-07-20
 ### Change
 
 * Align configuration to `customize-engine-handlebars`
