@@ -1,5 +1,14 @@
 # Release notes
 
+## Upcoming
+### Change
+
+* Align configuration to `customize-engine-handlebars`
+** `preprocessor` is moved to `handlebars.preprocessor`.
+** `handlebars.template` is deprecated. `handlebars.templates` should point to a 
+    directory containing an `index.html.hbs` file.
+    
+
 ## v0.3.1 - 2015-06-18
 ## Fix
 
