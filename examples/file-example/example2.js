@@ -10,6 +10,5 @@ customize()
     files: 'dir2'
   })
   .run()
-  .get("files")
+  .get('files')
   .done(console.log)
-
