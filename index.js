@@ -7,7 +7,7 @@
 
 'use strict'
 
-/**
+/*
  * Use the `debug`-module to provide debug output if needed
  */
 var debug = require('debug')('customize:base')
@@ -18,10 +18,16 @@ var _ = require('lodash')
 
 /**
  * Create a new Customize object with an empty configuration
+ *
+ * @module customize
+ */
+module.exports = customize;
+
+/**
  * @returns {Customize}
  * @api public
  */
-module.exports = function () {
+function customize() {
   return new Customize({}, {}, {})
 }
 
@@ -35,7 +41,7 @@ module.exports = function () {
  * @constructor
  * @api private
  */
-function Customize (config, parentConfig, engines) {
+function Customize(config, parentConfig, engines) {
   var _config = _.merge({}, parentConfig, config, customOverrider)
   deep(_config).done(function (config) {
     debugState('New configuration', config)
@@ -125,7 +131,7 @@ function Customize (config, parentConfig, engines) {
   }
 
   /**
-   * Build the configured Bootprint-instance.
+   * Build a promise for the merged configuration.
    * @return {Promise<object>} a promise for the whole configuration
    * @api public
    */
@@ -185,7 +191,7 @@ module.exports.leaf = require('./lib/leaf')
  * @param propertyName the property name
  * @returns {*} the merged value
  */
-function customOverrider (a, b, propertyName) {
+function customOverrider(a, b, propertyName) {
   if (_.isUndefined(b)) {
     return a
   }
@@ -214,10 +220,3 @@ function customOverrider (a, b, propertyName) {
   }
 
 }
-
-/**
- * The custom-overrider used by Customize
- * @readonly
- * @type {customOverrider}
- */
-module.exports.overrider = customOverrider

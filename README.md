@@ -162,7 +162,7 @@ customize()
     files: 'dir2'
   })
   .run()
-  .get("files")
+  .get('files')
   .done(console.log)
 ```
 
@@ -214,111 +214,55 @@ partials and definitions from other packages.
 
 The exported module is a function that creates a new empty Customize-instance.
 
-### Global
-
-
-
-
-
-* * *
-
-##### exports() 
-
-Create a new Customize object with an empty configuration
-
-**Returns**: `Customize`
-
-
-#### Class: Customize
-The main class. The heart of Customize
-
-**withParent**:  , Wrap a function so that if it overrides another function, that function will
-be available as `this.parent`
-**leaf**:  , Create a promise that is regarded as leaf in the configuration tree.
-That means, that the overrider is not resolving this promise when overriding values.
-Promised object values will not be merged but replaced.
-**overrider**: `customOverrider` , The custom-overrider used by Customize
-##### Customize.registerEngine(id, engine) 
-
-Register an engine with a default config
-
-**Parameters**
-
-**id**: `string`, the identifier of the engine (also within the config)
-
-**engine**: `function`, Register an engine with a default config
-
-
-##### Customize.merge(config) 
-
-Creates a new instance of Customize. The config of the current Customize
-are used as default values and are overridden by the config provided as parameter.
-
-**Parameters**
-
-**config**: `object`, config overriding the config of this builder
-
-**Returns**: `Customize`, new Builder instance
-
-##### Customize.load(builderFunction) 
-
-Inherit configuration config from another module.
-`require("Customize-modulename")` usually return a function(builder)
-and this functions needs to be passed in here.
-A new Customize will be returned that overrides the current config
-with config from the builderFunction's result.
-
-**Parameters**
-
-**builderFunction**: `function`, that receives a Customize as paramater
- and returns a Customize with changed configuration.
-
-**Returns**: `Customize`, the result of the builderFunction
-
-##### Customize.build() 
-
-Build the configured Bootprint-instance.
-
-**Returns**: `Promise.&lt;object&gt;`, a promise for the whole configuration
-
-##### Customize.run() 
-
-Run each engine with its part of the config.
-
-
-##### Customize.customOverrider(a, b, propertyName) 
-
-Customize has predefined override rules for merging configs.
-
-* If the overriding object has a `_customize_custom_overrider` function-property,
-  it is called to perform the merger.
-* Arrays are concatenated
-* Promises are resolved and the results are merged
-
-**Parameters**
-
-**a**: , the overridden value
-
-**b**: , the overriding value
-
-**propertyName**: , the property name
-
-**Returns**: `*`, the merged value
-
-
-
-* * *
+no template found for {
+  "line": 128,
+  "url": "https://github.com/nknapp/customize/blob/v0.2.3/index.js",
+  "moduleName": "customize",
+  "description": "Build a promise for the merged configuration.",
+  "returns": {
+    "title": "return",
+    "description": "a promise for the whole configuration",
+    "type": {
+      "type": "TypeApplication",
+      "expression": {
+        "type": "NameExpression",
+        "name": "Promise"
+      },
+      "applications": [
+        {
+          "type": "NameExpression",
+          "name": "object"
+        }
+      ]
+    }
+  },
+  "api": "public",
+  "isApidocComment": true
+}
 
 
 
 
 
 
-
-
-
-
-
+no template found for {
+  "line": 177,
+  "url": "https://github.com/nknapp/customize/blob/v0.2.3/index.js",
+  "moduleName": "customize",
+  "description": "Create a promise that is regarded as leaf in the configuration tree.\nThat means, that the overrider is not resolving this promise when overriding values.\nPromised object values will not be merged but replaced.",
+  "params": [
+    {
+      "title": "param",
+      "description": "a promise or a valude that represents the leaf",
+      "type": {
+        "type": "AllLiteral"
+      },
+      "name": "promiseOrValue"
+    }
+  ],
+  "api": "public",
+  "isApidocComment": true
+}
 
 ## IO/Helpers
 
