@@ -21,13 +21,13 @@ var _ = require('lodash')
  *
  * @module customize
  */
-module.exports = customize;
+module.exports = customize
 
 /**
  * @returns {Customize}
  * @api public
  */
-function customize() {
+function customize () {
   return new Customize({}, {}, {})
 }
 
@@ -41,7 +41,7 @@ function customize() {
  * @constructor
  * @api private
  */
-function Customize(config, parentConfig, engines) {
+function Customize (config, parentConfig, engines) {
   var _config = _.merge({}, parentConfig, config, customOverrider)
   deep(_config).done(function (config) {
     debugState('New configuration', config)
@@ -191,7 +191,7 @@ module.exports.leaf = require('./lib/leaf')
  * @param propertyName the property name
  * @returns {*} the merged value
  */
-function customOverrider(a, b, propertyName) {
+function customOverrider (a, b, propertyName) {
   if (_.isUndefined(b)) {
     return a
   }
