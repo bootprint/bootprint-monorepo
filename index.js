@@ -15,6 +15,7 @@ var Q = require('q')
 var deep = require('q-deep')
 var debug = require('debug')('customize-engine-handlebars:index')
 var path = require('path')
+var promisedHandlebars = require('promised-handlebars')
 
 var contents = function (partials) {
   return _(partials).mapKeys(stripHandlebarsExt).mapValues(_.property('contents')).value()
@@ -99,7 +100,7 @@ module.exports = {
       .then(deep)
       .then(function (data) {
         debug('Data after preprocessing:', data)
-        var hbs = Handlebars.create()
+        var hbs = promisedHandlebars(Handlebars)
 
         var partials = contents(config.partials)
         hbs.registerPartial(partials)
@@ -109,7 +110,9 @@ module.exports = {
         return _.mapValues(templates, function (template) {
           var fn = hbs.compile(template, config.hbsOptions)
           debug('hbs-data', data)
-          return fn(data)
+          var result = fn(data)
+          debug('fn(data) =' + data)
+          return result
         })
       })
   }

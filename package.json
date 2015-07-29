@@ -30,6 +30,7 @@
   "dependencies": {
     "handlebars": "^3.0.3",
     "lodash": "^3.9.3",
+    "promised-handlebars": "^0.3.1",
     "q": "^1.4.1",
     "q-deep": "^1.0.1"
   },
