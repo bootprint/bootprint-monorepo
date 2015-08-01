@@ -116,8 +116,8 @@ The output of this example is:
 
 ```
 { handlebars: 
-   { 'text1.txt': 'I\'m Nils\n\nI\'m living in Darmstadt.\n\n------\nWeather: scattered clouds',
-     'text2.txt': 'I\'m Nils\n\nI\'m living in DARMSTADT.\n\n------\nWeather: scattered clouds' } }
+   { 'text1.txt': 'I\'m Nils\n\nI\'m living in Darmstadt.\n\n------\nWeather: Sky is Clear',
+     'text2.txt': 'I\'m Nils\n\nI\'m living in DARMSTADT.\n\n------\nWeather: Sky is Clear' } }
 ```
 
 
@@ -154,8 +154,8 @@ The output of this example is
 
 ```
 { handlebars: 
-   { 'text1.txt': 'I\'m Nils\n\nI\'m living in Darmstadt.\n\n------\nTemperature: 21.35',
-     'text2.txt': 'I\'m Nils\n\nI\'m living in DARMSTADT.\n\n------\nTemperature: 21.35' } }
+   { 'text1.txt': 'I\'m Nils\n\nI\'m living in Darmstadt.\n\n------\nTemperature: 19.91',
+     'text2.txt': 'I\'m Nils\n\nI\'m living in DARMSTADT.\n\n------\nTemperature: 19.91' } }
 ```
 
 In a similar fashion, we could replace other parts of the configuration, like templates, helpers
@@ -223,14 +223,19 @@ Use in mapkeys to remove the hbs extension
 
 
 
+
 ## License
 
 `customize-engine-handlebars` is published under the MIT-license. 
 See [LICENSE.md](LICENSE.md) for details.
 
+## Release-Notes
+ 
+For release notes, see the [changelog](CHANGELOG.md)
+ 
 ## Contributing Guidelines
 
-<!-- Taken from @tunnckoCore: https://github.com/tunnckoCore/coreflow-templates/blob/master/template/CONTRIBUTING.md -->
+*This text is taken mainly from @tunnckoCore: https://github.com/tunnckoCore/coreflow-templates/blob/master/template/CONTRIBUTING.md*
 
 Contributions are always welcome!
 
@@ -239,6 +244,7 @@ Contributions are always welcome!
 Please search issues and pull requests before adding something new to avoid duplicating
 efforts and conversations.
 
+People submitting relevant contributions to the module will be granted commit access to the repository.
 
 ### Installing
 
