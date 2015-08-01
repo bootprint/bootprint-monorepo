@@ -47,9 +47,5 @@
       "spec/fixtures/**"
     ]
   },
-  "keywords": [],
-  "paths": {
-    "relative": "package.json",
-    "absolute": "/home/nknappmeier/privat/node-libraries/customize-engine-handlebars/package.json"
-  }
+  "keywords": []
 }
