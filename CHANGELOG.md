@@ -2,6 +2,13 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Upcoming
+
+### Change
+
+- The `promised-handlebars` module is now used to provide support for
+  helpers that return promises.
+
 ## v0.1.0 - 2015-07-19
 
 ### Documentation
