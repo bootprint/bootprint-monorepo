@@ -58,7 +58,6 @@ module.exports = {
   preprocessConfig: function preprocessConfig (config) {
     var helpers = config.helpers
     // If this is a string, treat if as module to be required
-    var moduleName = path.resolve(helpers)
     try {
       if (_.isString(helpers)) {
         // Attempt to find module without resolving the contents
@@ -66,7 +65,7 @@ module.exports = {
         // is ignored at the moment)
         // If there is no error, the module should be loaded and error while loading
         // the module should be reported
-        require.resolve(moduleName);
+        require.resolve(path.resolve(helpers));
       }
     } catch(e) {
       debug('Ignoring missing hb-helpers module: ' + helpers)
@@ -74,7 +73,7 @@ module.exports = {
     }
 
     // Require module if needed
-    helpers =  _.isString(helpers) ? require(moduleName) : helpers
+    helpers =  _.isString(helpers) ? require(path.resolve(helpers)) : helpers
 
     // The helpers file may export an object or a promise for an object.
     // Or a function returning and object or a promise for an object.
@@ -135,6 +134,7 @@ module.exports = {
  * @param {*} value ignored
  * @param {string} key the original filename
  * @returns {string} the filename without .hbs
+ * @private
  */
 function stripHandlebarsExt (value, key) {
   return key.replace(/\.(handlebars|hbs)$/, '')
