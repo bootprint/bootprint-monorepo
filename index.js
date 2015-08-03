@@ -57,13 +57,25 @@ module.exports = {
    */
   preprocessConfig: function preprocessConfig (config) {
     var helpers = config.helpers
+    // If this is a string, treat if as module to be required
+    var moduleName = path.resolve(helpers)
     try {
-      // If this is a string, treat if as module to be required
-      helpers = _.isString(helpers) ? require(path.resolve(helpers)) : helpers
-    } catch (e) {
+      if (_.isString(helpers)) {
+        // Attempt to find module without resolving the contents
+        // If there is an error, the module does not exist (which
+        // is ignored at the moment)
+        // If there is no error, the module should be loaded and error while loading
+        // the module should be reported
+        require.resolve(moduleName);
+      }
+    } catch(e) {
       debug('Ignoring missing hb-helpers module: ' + helpers)
-      helpers = undefined
+      helpers = undefined;
     }
+
+    // Require module if needed
+    helpers =  _.isString(helpers) ? require(moduleName) : helpers
+
     // The helpers file may export an object or a promise for an object.
     // Or a function returning and object or a promise for an object.
     // If it's a function, use the result instead.

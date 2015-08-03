@@ -9,7 +9,7 @@
 /* global it */
 /* global expect */
 // /* global xdescribe */
-// /* global xit */
+/* global xit */
 
 'use strict'
 
@@ -49,5 +49,8 @@ describe('customize-engine-handlebars', function () {
 
     }).done(next)
   // body
+  })
+
+  xit('should throw an exception if loading an existing helpers module fails', function() {
   })
 })
