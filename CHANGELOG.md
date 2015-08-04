@@ -9,8 +9,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 * Errors while loading a helper module are now reported.
   Missing modules are still ignored.
 
-## v0.2.0 - 2015-08-03
-
 ### Change
 
 - The `promised-handlebars` module is now used to provide support for
