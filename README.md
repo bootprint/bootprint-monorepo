@@ -147,7 +147,22 @@ needs to be replace by something else. In reality this might be a Handlebars par
 different contents, or an additional Less-file that changes some styles to follow Bob'
 company's style-guide.
 
-We can do this, by merging another configuration:
+We can do this, by merging another configuration, but let's have a look at the directory
+tree before doing this:
+
+<pre><code>file-example/
+├── dir1/
+│   ├── a.md
+│   └── b.md
+├── dir2/
+│   └── a.md
+├── engine-concat-files.js
+├── example-build.js
+├── example1.js
+└── example2.js</code></pre>
+
+You can see that the second directory contains a file `a.md`. We will use this file to
+replace the file of the first directory.
 
 ```js
 var customize = require('customize')
@@ -166,11 +181,11 @@ customize()
   .done(console.log)
 ```
 
-Notice the additional `.merge()`-call? Its input is also passed to the engine's preprocessor,
-so now we get two objects containing files and their contents and those are merged by the 
-[`.merge`-function of the lodash library](https://lodash.com/docs#merge), so that in the above 
-example, the property `a.md` is replace by the value in the second configuration. So the output 
-of this example is
+There is an additional call to `.merge` in this code. Its input is also passed to the 
+engine's preprocessor, so now we get two objects containing files and their contents 
+and those are merged by the [`.merge`-function of the lodash library](https://lodash.com/docs#merge),
+so that in the above example, the property `a.md` is replace by the value in the 
+second configuration. So the output of this example is
 
 ```
 First file (from dir2)
@@ -214,90 +229,171 @@ partials and definitions from other packages.
 
 The exported module is a function that creates a new empty Customize-instance.
 
-no template found for {
-  "line": 128,
-  "url": "https://github.com/nknapp/customize/blob/v0.2.3/index.js",
-  "moduleName": "customize",
-  "description": "Build a promise for the merged configuration.",
-  "returns": {
-    "title": "return",
-    "description": "a promise for the whole configuration",
-    "type": {
-      "type": "TypeApplication",
-      "expression": {
-        "type": "NameExpression",
-        "name": "Promise"
-      },
-      "applications": [
-        {
-          "type": "NameExpression",
-          "name": "object"
-        }
-      ]
-    }
-  },
-  "api": "public",
-  "isApidocComment": true
-}
+<a name="module_customize"></a>
+## customize
+Create a new Customize object with an empty configuration
 
 
+* [customize](#module_customize)
+  * _static_
+    * [.withParent](#module_customize.withParent)
+    * [.leaf](#module_customize.leaf) ⇒ <code>Promise</code>
+  * _inner_
+    * [~Customize](#module_customize..Customize)
+      * [new Customize(config, parentConfig, engines)](#new_module_customize..Customize_new)
+      * [.registerEngine(id, engine)](#module_customize..Customize+registerEngine)
+      * [.merge(config)](#module_customize..Customize+merge) ⇒ <code>Customize</code>
+      * [.load(builderFunction)](#module_customize..Customize+load) ⇒ <code>Customize</code>
+      * [.build()](#module_customize..Customize+build) ⇒ <code>Promise.&lt;object&gt;</code>
+      * [.run()](#module_customize..Customize+run)
+    * [~customize()](#module_customize..customize) ⇒ <code>Customize</code>
+    * [~customOverrider(a, b, propertyName)](#module_customize..customOverrider) ⇒ <code>\*</code>
+
+<a name="module_customize.withParent"></a>
+### customize.withParent
+Wrap a function so that if it overrides another function, that function will
+be available as `this.parent`
+
+**Kind**: static property of <code>[customize](#module_customize)</code>  
+**Read only**: true  
+**Api**: public  
+
+| Param |
+| --- |
+| fn | 
+
+<a name="module_customize.leaf"></a>
+### customize.leaf ⇒ <code>Promise</code>
+Create a promise that is regarded as leaf in the configuration tree.
+That means, that the overrider is not resolving this promise when overriding values.
+Promised object values will not be merged but replaced.
+
+**Kind**: static property of <code>[customize](#module_customize)</code>  
+**Read only**: true  
+**Api**: public  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| promiseOrValue | <code>\*</code> | a promise or a valude that represents the leaf |
+
+<a name="module_customize..Customize"></a>
+### customize~Customize
+**Kind**: inner class of <code>[customize](#module_customize)</code>  
+**Api**: private  
+
+  * [~Customize](#module_customize..Customize)
+    * [new Customize(config, parentConfig, engines)](#new_module_customize..Customize_new)
+    * [.registerEngine(id, engine)](#module_customize..Customize+registerEngine)
+    * [.merge(config)](#module_customize..Customize+merge) ⇒ <code>Customize</code>
+    * [.load(builderFunction)](#module_customize..Customize+load) ⇒ <code>Customize</code>
+    * [.build()](#module_customize..Customize+build) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [.run()](#module_customize..Customize+run)
+
+<a name="new_module_customize..Customize_new"></a>
+#### new Customize(config, parentConfig, engines)
+The main class. The heart of Customize
 
 
+| Param | Type |
+| --- | --- |
+| config |  | 
+| parentConfig |  | 
+| engines | <code>object.&lt;function()&gt;</code> | 
+
+<a name="module_customize..Customize+registerEngine"></a>
+#### customize.registerEngine(id, engine)
+Register an engine with a default config
+
+**Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
+**Api**: public  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| id | <code>string</code> | the identifier of the engine (also within the config) |
+| engine | <code>function</code> |  |
+
+<a name="module_customize..Customize+merge"></a>
+#### customize.merge(config) ⇒ <code>Customize</code>
+Creates a new instance of Customize. The config of the current Customize
+are used as default values and are overridden by the config provided as parameter.
+
+**Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
+**Returns**: <code>Customize</code> - new Builder instance  
+**Api**: public  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| config | <code>object</code> | config overriding the config of this builder |
+
+<a name="module_customize..Customize+load"></a>
+#### customize.load(builderFunction) ⇒ <code>Customize</code>
+Inherit configuration config from another module.
+`require("Customize-modulename")` usually return a function(builder)
+and this functions needs to be passed in here.
+A new Customize will be returned that overrides the current config
+with config from the builderFunction's result.
+
+**Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
+**Returns**: <code>Customize</code> - the result of the builderFunction  
+**Api**: public  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| builderFunction | <code>function</code> | that receives a Customize as paramater  and returns a Customize with changed configuration. |
+
+<a name="module_customize..Customize+build"></a>
+#### customize.build() ⇒ <code>Promise.&lt;object&gt;</code>
+Build a promise for the merged configuration.
+
+**Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
+**Returns**: <code>Promise.&lt;object&gt;</code> - a promise for the whole configuration  
+**Api**: public  
+<a name="module_customize..Customize+run"></a>
+#### customize.run()
+Run each engine with its part of the config.
+
+**Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
+**Api**: public  
+<a name="module_customize..customize"></a>
+### customize~customize() ⇒ <code>Customize</code>
+**Kind**: inner method of <code>[customize](#module_customize)</code>  
+**Api**: public  
+<a name="module_customize..customOverrider"></a>
+### customize~customOverrider(a, b, propertyName) ⇒ <code>\*</code>
+Customize has predefined override rules for merging configs.
+
+* If the overriding object has a `_customize_custom_overrider` function-property,
+  it is called to perform the merger.
+* Arrays are concatenated
+* Promises are resolved and the results are merged
+
+**Kind**: inner method of <code>[customize](#module_customize)</code>  
+**Returns**: <code>\*</code> - the merged value  
+
+| Param | Description |
+| --- | --- |
+| a | the overridden value |
+| b | the overriding value |
+| propertyName | the property name |
 
 
-no template found for {
-  "line": 177,
-  "url": "https://github.com/nknapp/customize/blob/v0.2.3/index.js",
-  "moduleName": "customize",
-  "description": "Create a promise that is regarded as leaf in the configuration tree.\nThat means, that the overrider is not resolving this promise when overriding values.\nPromised object values will not be merged but replaced.",
-  "params": [
-    {
-      "title": "param",
-      "description": "a promise or a valude that represents the leaf",
-      "type": {
-        "type": "AllLiteral"
-      },
-      "name": "promiseOrValue"
-    }
-  ],
-  "api": "public",
-  "isApidocComment": true
-}
 
 ## IO/Helpers
 
 
-### Global
-
-
-
-
-
-* * *
-
-##### files(baseDir) 
-
+<a name="files"></a>
+## files(baseDir) ⇒ <code>Promise.&lt;object.&lt;Promise.&lt;string&gt;&gt;&gt;</code>
 The file helper resolves the directory filename to the contents of the included files (promised).
 
-**Parameters**
-
-**baseDir**: `string`, the name of the directory
-
-**Returns**: `Promise.&lt;object.&lt;Promise.&lt;string&gt;&gt;&gt;`, an object, containing one entry for each file.
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;object.&lt;Promise.&lt;string&gt;&gt;&gt;</code> - an object, containing one entry for each file.
 The key of each entry is the path to the file (relative to the baseDir). The value is
-a promise that resolves to the file-contents when the `.then()` method is called.
+a promise that resolves to the file-contents when the `.then()` method is called.  
+**Api**: public  
 
-
-
-* * *
-
-
-
-
-
-
-
-
+| Param | Type | Description |
+| --- | --- | --- |
+| baseDir | <code>string</code> | the name of the directory |
 
 
 
@@ -308,9 +404,13 @@ a promise that resolves to the file-contents when the `.then()` method is called
 `customize` is published under the MIT-license. 
 See [LICENSE.md](LICENSE.md) for details.
 
+## Release-Notes
+ 
+For release notes, see the [changelog](CHANGELOG.md)
+ 
 ## Contributing Guidelines
 
-<!-- Taken from @tunnckoCore: https://github.com/tunnckoCore/coreflow-templates/blob/master/template/CONTRIBUTING.md -->
+*This text is taken mainly from @tunnckoCore: https://github.com/tunnckoCore/coreflow-templates/blob/master/template/CONTRIBUTING.md*
 
 Contributions are always welcome!
 
@@ -319,6 +419,7 @@ Contributions are always welcome!
 Please search issues and pull requests before adding something new to avoid duplicating
 efforts and conversations.
 
+People submitting relevant contributions to the module will be granted commit access to the repository.
 
 ### Installing
 

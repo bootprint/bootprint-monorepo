@@ -60,15 +60,21 @@ needs to be replace by something else. In reality this might be a Handlebars par
 different contents, or an additional Less-file that changes some styles to follow Bob'
 company's style-guide.
 
-We can do this, by merging another configuration:
+We can do this, by merging another configuration, but let's have a look at the directory
+tree before doing this:
+
+{{{dirtree 'examples/file-example' ''}}}
+
+You can see that the second directory contains a file `a.md`. We will use this file to
+replace the file of the first directory.
 
 {{{example 'examples/file-example/example2.js'}}}
 
-Notice the additional `.merge()`-call? Its input is also passed to the engine's preprocessor,
-so now we get two objects containing files and their contents and those are merged by the 
-[`.merge`-function of the lodash library](https://lodash.com/docs#merge), so that in the above 
-example, the property `a.md` is replace by the value in the second configuration. So the output 
-of this example is
+There is an additional call to `.merge` in this code. Its input is also passed to the 
+engine's preprocessor, so now we get two objects containing files and their contents 
+and those are merged by the [`.merge`-function of the lodash library](https://lodash.com/docs#merge),
+so that in the above example, the property `a.md` is replace by the value in the 
+second configuration. So the output of this example is
 
 {{{exec 'node example2.js' cwd='examples/file-example/'}}}
 
