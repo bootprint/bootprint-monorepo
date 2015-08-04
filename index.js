@@ -20,29 +20,48 @@ var promisedHandlebars = require('promised-handlebars')
 var contents = function (partials) {
   return _(partials).mapKeys(stripHandlebarsExt).mapValues(_.property('contents')).value()
 }
+
+/**
+ * @typedef {object} CustomizeHandlebarsConfig
+ * The default configuration for the handlebars engine
+ * @property {string} partials path to a partials directory. Each `.hbs`-file in the directory (or in the tree)
+ *   is registered as partial by its name (or relative path), without the `.hbs`-extension.
+ * @property {string|object|function} helpers if this is an object it is assumed to be a list of helper functions,
+ *   if this is function it is assumed to return an object of helper functions, if this is a string,
+ *   it is assumed to be the path to a module returning either an object of a function as above.
+ * @property {string} templates path to a directory containing templates. Handlebars is called with each `.hbs`-file
+ *   as template. The result of the engine consists of an object with a property for each template and the
+ *   Handlebars result for this template as value.
+ * @property {object} data a javascript-object to use as input for handlebars
+ * @property {function|string} preprocessor a function that takes the input data as first parameter and
+ *   transforms it into another object or the promise for an object. It the input data is a promise itself,
+ *   is resolved before calling this function. If the preprocessor is overridden, the parent
+ *   preprocessor is available with `this.parent(data)`
+ * @property {object} hbsOptions options to pass to `Handlebars.compile`.
+ * @api public
+ */
+
+/**
+ * @typedef {object} InternalHbsConfig the internal configuration object that
+ *   is passed into the merge function.
+ * @property {object<{path:string,contents:string}>} partials the Handlebars partials that should be registered
+ * @property {object<function> helpers the Handlebars helpers that should be registered
+ * @property {object<{path:string,contents:string}>} templates
+ * @property {object} data the data object to render with Handlebars
+ * @property {function(object): (object|Promise<object>)} preprocessor
+ *    preprocessor for the handlebars data
+ * @property {object} hbsOptions options to pass to `Handlebars.compile`.
+ * @private
+ */
+
+/**
+ * The export of this module is the customize-engine-handlebars
+ */
 module.exports = {
-  /**
-   * @typedef {object} CustomizeHandlebarsConfig
-   * The default configuration for the handlebars engine
-   * @property {string} partials path to a partials directory. Each `.hbs`-file in the directory (or in the tree)
-   *   is registered as partial by its name (or relative path), without the `.hbs`-extension.
-   * @property {string|object|function} helpers if this is an object it is assumed to be a list of helper functions,
-   *   if this is function it is assumed to return an object of helper functions, if this is a string,
-   *   it is assumed to be the path to a module returning either an object of a function as above.
-   * @property {string} templates path to a directory containing templates. Handlebars is called with each `.hbs`-file
-   *   as template. The result of the engine consists of an object with a property for each template and the
-   *   Handlebars result for this template as value.
-   * @property {object} data a javascript-object to use as input for handlebars
-   * @property {function|string} preprocessor a function that takes the input data as first parameter and
-   *   transforms it into another object or the promise for an object. It the input data is a promise itself,
-   *   is resolved before calling this function. If the preprocessor is overridden, the parent
-   *   preprocessor is available with `this.parent(data)`
-   * @property {object} hbsOptions options to pass to `Handlebars.compile`.
-   * @api public
-   */
+
   defaultConfig: {
     partials: {},
-    helpers: undefined,
+    helpers: {},
     templates: {},
     data: {},
     preprocessor: _.identity,
@@ -51,8 +70,8 @@ module.exports = {
 
   /**
    *
-   * @param {Promise<object>} config the input configuration that is written by the user
-   * @return {Promise<object>} the configuration that is passed into the merging process
+   * @param {Promise<CustomizeHandlebarsConfig>} config the input configuration that is written by the user
+   * @return {Promise<InternalHbsConfig>} the configuration that is passed into the merging process
    *    later expected as parameter to the main function of the engine
    */
   preprocessConfig: function preprocessConfig (config) {
@@ -102,15 +121,19 @@ module.exports = {
   },
 
   /**
-   * Runs the handlebars-engine. The engine is
-   * @param config
+   * Runs Handlebars with the data object
+   * @param {InternalHbsConfig} config the configuration
    */
   run: function run (config) {
-    return Q(config.preprocessor ? config.preprocessor(config.data) : config.data)
+    // Run the preprocessor
+    return Q(config.preprocessor(config.data))
       // Resolve any new promises
       .then(deep)
+      // Process the result with Handlebars
       .then(function (data) {
         debug('Data after preprocessing:', data)
+        // We use the `promised-handlebars` module to
+        // support helpers returning promises
         var hbs = promisedHandlebars(Handlebars)
 
         var partials = contents(config.partials)
