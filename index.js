@@ -26,10 +26,10 @@ module.exports = {
    * The default configuration for the handlebars engine
    * @property {string} partials path to a partials directory. Each `.hbs`-file in the directory (or in the tree)
    *   is registered as partial by its name (or relative path), without the `.hbs`-extension.
-   * @property {string|object|function} if this is an object it is assumed to be a list of helper functions,
+   * @property {string|object|function} helpers if this is an object it is assumed to be a list of helper functions,
    *   if this is function it is assumed to return an object of helper functions, if this is a string,
    *   it is assumed to be the path to a module returning either an object of a function as above.
-   * @property {string} template path to a directory containing templates. Handlebars is called with each `.hbs`-file
+   * @property {string} templates path to a directory containing templates. Handlebars is called with each `.hbs`-file
    *   as template. The result of the engine consists of an object with a property for each template and the
    *   Handlebars result for this template as value.
    * @property {object} data a javascript-object to use as input for handlebars
