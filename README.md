@@ -240,14 +240,13 @@ Create a new Customize object with an empty configuration
     * [.leaf](#module_customize.leaf) ⇒ <code>Promise</code>
   * _inner_
     * [~Customize](#module_customize..Customize)
-      * [new Customize(config, parentConfig, engines)](#new_module_customize..Customize_new)
+      * [new Customize()](#new_module_customize..Customize_new)
       * [.registerEngine(id, engine)](#module_customize..Customize+registerEngine)
       * [.merge(config)](#module_customize..Customize+merge) ⇒ <code>Customize</code>
-      * [.load(builderFunction)](#module_customize..Customize+load) ⇒ <code>Customize</code>
+      * [.load(customizeModule)](#module_customize..Customize+load) ⇒ <code>Customize</code>
       * [.build()](#module_customize..Customize+build) ⇒ <code>Promise.&lt;object&gt;</code>
-      * [.run()](#module_customize..Customize+run)
+      * [.run()](#module_customize..Customize+run) ⇒ <code>Promise.&lt;object&gt;</code>
     * [~customize()](#module_customize..customize) ⇒ <code>Customize</code>
-    * [~customOverrider(a, b, propertyName)](#module_customize..customOverrider) ⇒ <code>\*</code>
 
 <a name="module_customize.withParent"></a>
 ### customize.withParent
@@ -269,8 +268,8 @@ That means, that the overrider is not resolving this promise when overriding val
 Promised object values will not be merged but replaced.
 
 **Kind**: static property of <code>[customize](#module_customize)</code>  
+**Access:** public  
 **Read only**: true  
-**Api**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -279,103 +278,87 @@ Promised object values will not be merged but replaced.
 <a name="module_customize..Customize"></a>
 ### customize~Customize
 **Kind**: inner class of <code>[customize](#module_customize)</code>  
-**Api**: private  
 
   * [~Customize](#module_customize..Customize)
-    * [new Customize(config, parentConfig, engines)](#new_module_customize..Customize_new)
+    * [new Customize()](#new_module_customize..Customize_new)
     * [.registerEngine(id, engine)](#module_customize..Customize+registerEngine)
     * [.merge(config)](#module_customize..Customize+merge) ⇒ <code>Customize</code>
-    * [.load(builderFunction)](#module_customize..Customize+load) ⇒ <code>Customize</code>
+    * [.load(customizeModule)](#module_customize..Customize+load) ⇒ <code>Customize</code>
     * [.build()](#module_customize..Customize+build) ⇒ <code>Promise.&lt;object&gt;</code>
-    * [.run()](#module_customize..Customize+run)
+    * [.run()](#module_customize..Customize+run) ⇒ <code>Promise.&lt;object&gt;</code>
 
 <a name="new_module_customize..Customize_new"></a>
-#### new Customize(config, parentConfig, engines)
-The main class. The heart of Customize
-
-
-| Param | Type |
-| --- | --- |
-| config |  | 
-| parentConfig |  | 
-| engines | <code>object.&lt;function()&gt;</code> | 
+#### new Customize()
+This class does the actual work. When calling
+`require('customize')()` a new instance of this
+class is returned with an empty configuration, so
+`new Customize(...)` should never be called outside
+this module
 
 <a name="module_customize..Customize+registerEngine"></a>
 #### customize.registerEngine(id, engine)
-Register an engine with a default config
+Register an engine an engine
 
 **Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
-**Api**: public  
+**Access:** public  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| id | <code>string</code> | the identifier of the engine (also within the config) |
-| engine | <code>function</code> |  |
+| id | <code>string</code> | the identifier of the engine. This identifier is also used  within the config as key within the configuration object to identify the  sub-configuration stored for this engine. |
+| engine | <code>Object</code> | a customize engine that is registered |
 
 <a name="module_customize..Customize+merge"></a>
 #### customize.merge(config) ⇒ <code>Customize</code>
-Creates a new instance of Customize. The config of the current Customize
-are used as default values and are overridden by the config provided as parameter.
+Creates a new instance of Customize. The configuration values of the current Customize
+are used as default values and are overridden by the configuration provided as parameter.
 
 **Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
-**Returns**: <code>Customize</code> - new Builder instance  
+**Returns**: <code>Customize</code> - the new Customize instance  
 **Api**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| config | <code>object</code> | config overriding the config of this builder |
+| config | <code>object</code> | configuration overriding the current configuration |
 
 <a name="module_customize..Customize+load"></a>
-#### customize.load(builderFunction) ⇒ <code>Customize</code>
+#### customize.load(customizeModule) ⇒ <code>Customize</code>
 Inherit configuration config from another module.
-`require("Customize-modulename")` usually return a function(builder)
-and this functions needs to be passed in here.
-A new Customize will be returned that overrides the current config
-with config from the builderFunction's result.
+a Customizer-module usually exports a `function(Customize):Customize`
+which in tern calls `Customize.merge` to create a new Customize instance.
+This function needs to be passed in here.
+
+A new Customize will be returned that overrides the current configuration
+with the configuration of the module.
 
 **Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
-**Returns**: <code>Customize</code> - the result of the builderFunction  
-**Api**: public  
+**Returns**: <code>Customize</code> - the Customize instance returned by the module  
+**Access:** public  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| builderFunction | <code>function</code> | that receives a Customize as paramater  and returns a Customize with changed configuration. |
+| customizeModule | <code>function</code> | that receives a Customize as paramater  and returns a Customize with changed configuration. |
 
 <a name="module_customize..Customize+build"></a>
 #### customize.build() ⇒ <code>Promise.&lt;object&gt;</code>
-Build a promise for the merged configuration.
+Return a promise for the merged configuration.
+This functions is only needed to inspect intermediate configuration results
+(i.e. for testing and documentation purposes)
 
 **Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
 **Returns**: <code>Promise.&lt;object&gt;</code> - a promise for the whole configuration  
-**Api**: public  
+**Access:** public  
 <a name="module_customize..Customize+run"></a>
-#### customize.run()
+#### customize.run() ⇒ <code>Promise.&lt;object&gt;</code>
 Run each engine with its part of the config.
 
 **Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
-**Api**: public  
+**Returns**: <code>Promise.&lt;object&gt;</code> - an object containing on property per registered engine
+ (the key is the engine-id) containing the result of each engine  
+**Access:** public  
 <a name="module_customize..customize"></a>
 ### customize~customize() ⇒ <code>Customize</code>
 **Kind**: inner method of <code>[customize](#module_customize)</code>  
 **Api**: public  
-<a name="module_customize..customOverrider"></a>
-### customize~customOverrider(a, b, propertyName) ⇒ <code>\*</code>
-Customize has predefined override rules for merging configs.
-
-* If the overriding object has a `_customize_custom_overrider` function-property,
-  it is called to perform the merger.
-* Arrays are concatenated
-* Promises are resolved and the results are merged
-
-**Kind**: inner method of <code>[customize](#module_customize)</code>  
-**Returns**: <code>\*</code> - the merged value  
-
-| Param | Description |
-| --- | --- |
-| a | the overridden value |
-| b | the overriding value |
-| propertyName | the property name |
-
 
 
 ## IO/Helpers

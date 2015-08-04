@@ -32,14 +32,13 @@ function customize () {
 }
 
 /**
- * The main class. The heart of Customize
+ * This class does the actual work. When calling
+ * `require('customize')()` a new instance of this
+ * class is returned with an empty configuration, so
+ * `new Customize(...)` should never be called outside
+ * this module
  *
- *
- * @param config
- * @param parentConfig
- * @param {object<function>} engines
  * @constructor
- * @api private
  */
 function Customize (config, parentConfig, engines) {
   var _config = _.merge({}, parentConfig, config, customOverrider)
@@ -48,10 +47,13 @@ function Customize (config, parentConfig, engines) {
   })
 
   /**
-   * Register an engine with a default config
-   * @param {string} id the identifier of the engine (also within the config)
-   * @param {function} engine
-   * @api public
+   * Register an engine an engine
+   * @param {string} id the identifier of the engine. This identifier is also used
+   *  within the config as key within the configuration object to identify the
+   *  sub-configuration stored for this engine.
+   * @param {{defaultConfig: object, preprocessConfig: function, run: function}} engine
+   *  a customize engine that is registered
+   * @public
    */
   this.registerEngine = function (id, engine) {
     debug("Registering engine '" + id + "'")
@@ -82,10 +84,10 @@ function Customize (config, parentConfig, engines) {
   }
 
   /**
-   * Creates a new instance of Customize. The config of the current Customize
-   * are used as default values and are overridden by the config provided as parameter.
-   * @param {object} config config overriding the config of this builder
-   * @return {Customize} new Builder instance
+   * Creates a new instance of Customize. The configuration values of the current Customize
+   * are used as default values and are overridden by the configuration provided as parameter.
+   * @param {object} config configuration overriding the current configuration
+   * @return {Customize} the new Customize instance
    * @api public
    */
   this.merge = function (config) {
@@ -114,26 +116,30 @@ function Customize (config, parentConfig, engines) {
 
   /**
    * Inherit configuration config from another module.
-   * `require("Customize-modulename")` usually return a function(builder)
-   * and this functions needs to be passed in here.
-   * A new Customize will be returned that overrides the current config
-   * with config from the builderFunction's result.
-   * @param {function} builderFunction  that receives a Customize as paramater
+   * a Customizer-module usually exports a `function(Customize):Customize`
+   * which in tern calls `Customize.merge` to create a new Customize instance.
+   * This function needs to be passed in here.
+   *
+   * A new Customize will be returned that overrides the current configuration
+   * with the configuration of the module.
+   * @param {function(Customize):Customize} customizeModule  that receives a Customize as paramater
    *  and returns a Customize with changed configuration.
-   * @return {Customize} the result of the builderFunction
-   * @api public
+   * @return {Customize} the Customize instance returned by the module
+   * @public
    */
-  this.load = function (builderFunction) {
-    if (builderFunction.package) {
-      console.log('Loading', builderFunction.package.name, builderFunction.package.version)
+  this.load = function (customizeModule) {
+    if (customizeModule.package) {
+      console.log('Loading', customizeModule.package.name, customizeModule.package.version)
     }
-    return builderFunction(this)
+    return customizeModule(this)
   }
 
   /**
-   * Build a promise for the merged configuration.
+   * Return a promise for the merged configuration.
+   * This functions is only needed to inspect intermediate configuration results
+   * (i.e. for testing and documentation purposes)
    * @return {Promise<object>} a promise for the whole configuration
-   * @api public
+   * @public
    */
   this.build = function () {
     return deep(_config).then(function (config) {
@@ -144,7 +150,10 @@ function Customize (config, parentConfig, engines) {
 
   /**
    * Run each engine with its part of the config.
-   * @api public
+   *
+   * @return {Promise<object>} an object containing on property per registered engine
+   *  (the key is the engine-id) containing the result of each engine
+   * @public
    */
   this.run = function () {
     return this.build().then(function (resolvedConfig) {
@@ -172,7 +181,7 @@ module.exports.withParent = require('./lib/withParent')
  * Promised object values will not be merged but replaced.
  * @param {*} promiseOrValue a promise or a valude that represents the leaf
  * @returns {Promise}
- * @api public
+ * @public
  * @readonly
  */
 module.exports.leaf = require('./lib/leaf')
@@ -181,7 +190,7 @@ module.exports.leaf = require('./lib/leaf')
  * Customize has predefined override rules for merging configs.
  *
  * * If the overriding object has a `_customize_custom_overrider` function-property,
- *   it is called to perform the merger.
+ *   it isk called to perform the merger.
  * * Arrays are concatenated
  * * Promises are resolved and the results are merged
  *
@@ -190,6 +199,8 @@ module.exports.leaf = require('./lib/leaf')
  * @param b the overriding value
  * @param propertyName the property name
  * @returns {*} the merged value
+ * @private
+ * @readonly
  */
 function customOverrider (a, b, propertyName) {
   if (_.isUndefined(b)) {
