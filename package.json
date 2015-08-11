@@ -1,6 +1,6 @@
 {
   "name": "customize-engine-handlebars",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Use handlebars as engine for customize",
   "repository": {
     "type": "git",
