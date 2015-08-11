@@ -145,6 +145,7 @@ function stripHandlebarsExt (value, key) {
  * @param {string|*} pathOrObject path to the file or configuration
  * @param {string} type additional information that can displayed in case the module is not found.
  * @returns {*}
+ * @private
  */
 function moduleIfString (pathOrObject, type) {
   // If this is a string, treat if as module to be required

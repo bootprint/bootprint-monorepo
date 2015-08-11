@@ -116,8 +116,8 @@ The output of this example is:
 
 ```
 { handlebars: 
-   { 'text1.txt': 'I\'m Nils\n\nI\'m living in Darmstadt.\n\n------\nWeather: broken clouds',
-     'text2.txt': 'I\'m Nils\n\nI\'m living in DARMSTADT.\n\n------\nWeather: broken clouds' } }
+   { 'text1.txt': 'I\'m Nils\n\nI\'m living in Darmstadt.\n\n------\nWeather: ',
+     'text2.txt': 'I\'m Nils\n\nI\'m living in DARMSTADT.\n\n------\nWeather: ' } }
 ```
 
 
@@ -154,8 +154,8 @@ The output of this example is
 
 ```
 { handlebars: 
-   { 'text1.txt': 'I\'m Nils\n\nI\'m living in Darmstadt.\n\n------\nTemperature: 22.86',
-     'text2.txt': 'I\'m Nils\n\nI\'m living in DARMSTADT.\n\n------\nTemperature: 22.86' } }
+   { 'text1.txt': 'I\'m Nils\n\nI\'m living in Darmstadt.\n\n------\nTemperature: ',
+     'text2.txt': 'I\'m Nils\n\nI\'m living in DARMSTADT.\n\n------\nTemperature: ' } }
 ```
 
 In a similar fashion, we could replace other parts of the configuration, like templates, helpers
@@ -166,7 +166,7 @@ by calling `this.parent(args)`
 ##  API-reference
 
 <a name="CustomizeHandlebarsConfig"></a>
-## CustomizeHandlebarsConfig : <code>object</code>
+### CustomizeHandlebarsConfig : <code>object</code>
 The default configuration for the handlebars engine
 
 **Kind**: global typedef  
@@ -194,41 +194,6 @@ See [LICENSE.md](LICENSE.md) for details.
  
 For release notes, see the [changelog](CHANGELOG.md)
  
-## Contributing Guidelines
+## Contributing guidelines
 
-*This text is taken mainly from @tunnckoCore: https://github.com/tunnckoCore/coreflow-templates/blob/master/template/CONTRIBUTING.md*
-
-Contributions are always welcome!
-
-**Before spending lots of time on something, ask for feedback on your idea first!**
-
-Please search issues and pull requests before adding something new to avoid duplicating
-efforts and conversations.
-
-People submitting relevant contributions to the module will be granted commit access to the repository.
-
-### Installing
-
-Fork and clone the repo, then `npm install` to install all dependencies and `npm test` to
-ensure all is okay before you start anything.
-
-
-### Testing
-
-Tests are run with `npm test`. Please ensure all tests are passing before submitting
-a pull request (unless you're creating a failing test to increase test coverage or show a problem).
-
-### Code Style
-
-[![standard][standard-image]][standard-url]
-
-This repository uses [`standard`][standard-url] to maintain code style and consistency,
-and to avoid style arguments.
-```
-npm i standard -g
-```
-
-It is intentional to don't have `standard`, `istanbul` and `coveralls` in the devDependencies. Travis will handle all that stuffs. That approach will save bandwidth also installing and development time.
-
-[standard-image]: https://cdn.rawgit.com/feross/standard/master/badge.svg
-[standard-url]: https://github.com/feross/standard
+See [CONTRIBUTING.md](CONTRIBUTING.md).
