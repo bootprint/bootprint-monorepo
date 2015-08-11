@@ -42,23 +42,22 @@ var contents = function (partials) {
  */
 
 /**
- * @typedef {object} InternalHbsConfig the internal configuration object that
- *   is passed into the merge function.
- * @property {object<{path:string,contents:string}>} partials the Handlebars partials that should be registered
- * @property {object<function> helpers the Handlebars helpers that should be registered
- * @property {object<{path:string,contents:string}>} templates
- * @property {object} data the data object to render with Handlebars
- * @property {function(object): (object|Promise<object>)} preprocessor
- *    preprocessor for the handlebars data
- * @property {object} hbsOptions options to pass to `Handlebars.compile`.
- * @private
- */
+  * @typedef {object} InternalHbsConfig the internal configuration object that
+  *   is passed into the merge function.
+  * @property {object<{path:string,contents:string}>} partials the Handlebars partials that should be registered
+  * @property {object<function> helpers the Handlebars helpers that should be registered
+  * @property {object<{path:string,contents:string}>} templates
+  * @property {object} data the data object to render with Handlebars
+  * @property {function(object): (object|Promise<object>)} preprocessor
+  *    preprocessor for the handlebars data
+  * @property {object} hbsOptions options to pass to `Handlebars.compile`.
+  * @private
+  */
 
 /**
  * The export of this module is the customize-engine-handlebars
  */
 module.exports = {
-
   defaultConfig: {
     partials: {},
     helpers: {},
@@ -75,41 +74,13 @@ module.exports = {
    *    later expected as parameter to the main function of the engine
    */
   preprocessConfig: function preprocessConfig (config) {
-    var helpers = config.helpers
-    // If this is a string, treat if as module to be required
-    try {
-      if (_.isString(helpers)) {
-        // Attempt to find module without resolving the contents
-        // If there is an error, the module does not exist (which
-        // is ignored at the moment)
-        // If there is no error, the module should be loaded and error while loading
-        // the module should be reported
-        require.resolve(path.resolve(helpers));
-      }
-    } catch(e) {
-      debug('Ignoring missing hb-helpers module: ' + helpers)
-      helpers = undefined;
-    }
-
-    // Require module if needed
-    helpers =  _.isString(helpers) ? require(path.resolve(helpers)) : helpers
-
+    var helpers = moduleIfString(config.helpers, 'hb-helpers')
     // The helpers file may export an object or a promise for an object.
     // Or a function returning and object or a promise for an object.
     // If it's a function, use the result instead.
     helpers = _.isFunction(helpers) ? helpers() : helpers
 
-    /**
-     * @type {string|function}
-     */
-    var preprocessor = config.preprocessor
-    try {
-      // If this is a string, treat if as module to be required
-      preprocessor = _.isString(preprocessor) ? require(path.resolve(preprocessor)) : preprocessor
-    } catch (e) {
-      debug('Ignoring missing hb-preprocessor module: ' + preprocessor)
-      preprocessor = undefined
-    }
+    var preprocessor = moduleIfString(config.preprocessor, 'hb-preprocessor')
     return {
       partials: files(config.partials),
       helpers: helpers,
@@ -153,7 +124,7 @@ module.exports = {
 }
 
 /**
- * Use in mapkeys to remove the hbs extension
+ * Used in _.mapKeys to remove the hbs extension
  * @param {*} value ignored
  * @param {string} key the original filename
  * @returns {string} the filename without .hbs
@@ -161,4 +132,37 @@ module.exports = {
  */
 function stripHandlebarsExt (value, key) {
   return key.replace(/\.(handlebars|hbs)$/, '')
+}
+
+/**
+ * Internal function that returns `require`s a module if the parameter is a string.
+ *
+ * If parameter is a string (path) and a file with that path exists, load it as module
+ * If the parameter is not a string, juet return it.
+ * If the parameter is a string, but the file does not exist, return `undefined`
+ *
+ *
+ * @param {string|*} pathOrObject path to the file or configuration
+ * @param {string} type additional information that can displayed in case the module is not found.
+ * @returns {*}
+ */
+function moduleIfString (pathOrObject, type) {
+  // If this is a string, treat if as module to be required
+  try {
+    if (_.isString(pathOrObject)) {
+      // Attempt to find module without resolving the contents
+      // If there is an error, the module does not exist (which
+      // is ignored at the moment)
+      // If there is no error, the module should be loaded and error while loading
+      // the module should be reported
+      require.resolve(path.resolve(pathOrObject))
+    }
+  } catch (e) {
+    debug('Ignoring missing ' + type + ' module: ' + pathOrObject)
+    pathOrObject = undefined
+  }
+
+  // Require module if needed
+  pathOrObject = _.isString(pathOrObject) ? require(path.resolve(pathOrObject)) : pathOrObject
+  return pathOrObject
 }

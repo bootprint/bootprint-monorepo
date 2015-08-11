@@ -2,6 +2,13 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Upcoming
+
+### Fix
+
+* Errors while loading a preprocessor module are now reported.
+  Missing modules are still ignored.
+
 ## v0.2.0 - 2015-08-04
 
 ### Fix
