@@ -87,12 +87,20 @@ module.exports = {
      * @returns {Handlebars.SafeString} a Handlebars-SafeString containing the provieded
      *      markdown, rendered as HTML.
      */
-    'md': function (value, strip) {
+    'md': function (value, options) {
         if (!value) {
             return value;
         }
-        var $ = cheerio.load(marked(value));
-        return new Handlebars.SafeString(strip ? $("p").html() : $.html());
+        var html = marked(value);
+        // We strip the surrounding <p>-tag, if
+        if (options.hash && options.hash.stripParagraph) {
+            var $ = cheerio("<root>"+ html+"</root>")
+            // Only strip <p>-tags and only if there is just one of them.
+            if ($.children().length === 1 && $.children('p').length === 1) {
+                html = $.children('p').html()
+            }
+        }
+        return new Handlebars.SafeString(html);
     },
 
     /**
@@ -100,11 +108,11 @@ module.exports = {
      * Example:
      *
      * ```hbs
-     * {#ifeq value 10}
+     * {{#ifeq value 10}}
      *    Value is 10
-     * {else}
+     * {{else}}
      *    Value is not 10
-     * {/ifeq}
+     * {{/ifeq}}
      * ```
      *
      * @param {object} `v1` the first value
