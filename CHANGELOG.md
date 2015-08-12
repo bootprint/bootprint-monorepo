@@ -1,6 +1,6 @@
 # Release notes
 
-## Upcoming
+## v0.5.1 - 2015-08-13
 ### Fix
 
 * `bootprint-swagger#62`: md-helper is not loosing html-tags anymore
