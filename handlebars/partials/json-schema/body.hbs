@@ -1,7 +1,6 @@
 {{!
 renders a json-schema without the surrounding panel.
 }}
-{{>json-schema/reference $ref}}
 {{#if description}}
     <section class="json-schema-description">
         {{md description}}
@@ -12,16 +11,19 @@ renders a json-schema without the surrounding panel.
         {{json example}}
     </section>
 {{/if}}
-{{#if properties}}
+{{#if $ref}}
+    {{>json-schema/reference $ref}}
+{{else ifeq type 'object'}}
     {{>json-schema/properties}}
-{{/if}}
-{{#if additionalProperties}}
-    {{>json-schema/additionalProperties additionalProperties}}
+    {{#if additionalProperties}}
+        {{>json-schema/additionalProperties additionalProperties}}
+    {{/if}}
+{{else ifeq type 'array'}}
+    {{>json-schema/array-items items}}
+{{else}}
+    {{>json-schema/datatype .}}
 {{/if}}
 
-{{#if items}}
-    {{>json-schema/array-items items}}
-{{/if}}
 {{#if allOf}}
     {{>json-schema/allOf allOf}}
 {{/if}}
