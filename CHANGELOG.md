@@ -1,5 +1,10 @@
 # Release notes
 
+## Upcoming
+### Fix
+
+* bootprint-swagger#26: Definition objects not getting any details
+
 ## v0.5.1 - 2015-09-01
 ### Fix
 
