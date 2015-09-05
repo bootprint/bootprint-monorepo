@@ -16,7 +16,7 @@
 {{#if type}}
     {{! Render differently depending on type}}
     {{#ifeq type 'object'}}
-        {{> json-schema/type-object}}
+        {{>json-schema/type-object}}
     {{else}}
         {{#ifeq type 'array'}}
             {{>json-schema/array-items items}}
@@ -29,5 +29,5 @@
         {{>json-schema/anyOf anyOf}}
     {{/if}}
 {{else}}
-    {{> json-schema/type-object}}
+    {{>json-schema/type-object}}
 {{/if}}
