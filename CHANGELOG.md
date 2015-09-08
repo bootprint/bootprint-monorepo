@@ -1,5 +1,10 @@
 # Release notes
 
+## Upcoming
+### Fix
+
+* bootprint-swagger#28: Read-only fields in parameter schema
+
 ## v0.5.2 - 2015-09-05
 ### Fix
 

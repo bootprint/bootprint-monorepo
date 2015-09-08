@@ -12,6 +12,9 @@
                 {{#ifeq @key ../discriminator}}
                     <span class="json-property-discriminator"></span>
                 {{/ifeq}}
+                {{#if readOnly}}
+                    <span class="json-property-read-only"></span>
+                {{/if}}
             </dt>
             <dd>
                 {{md description}}
