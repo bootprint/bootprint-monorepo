@@ -1,6 +1,6 @@
 # Release notes
 
-## Upcoming
+## v0.6.1 - 2015-09-19
 ### Fix
 
 * Helper for resolving $ref-properties now returns "undefined" instead of an exception
