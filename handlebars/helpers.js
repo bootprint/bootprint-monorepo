@@ -26,9 +26,11 @@ module.exports = {
     // TODO : Download remote json from url if url not empty
     var current = options.data.root
     hashParts.forEach(function (hashPart) {
-      console.log('\n\n\n\ncurrent value\n', current)
       // Traverse schema from root along the path
       if (hashPart.trim().length > 0) {
+        if (typeof current==='undefined') {
+          return undefined;
+        }
         current = current[hashPart]
       }
     })

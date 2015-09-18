@@ -1,5 +1,12 @@
 # Release notes
 
+## Upcoming
+### Fix
+
+* Helper for resolving $ref-properties now returns "undefined" instead of an exception
+  when a path cannot be followed completely (because a property in the middle of the path 
+  is missing)
+
 ## v0.6.0 - 2015-09-18
 ### Add
 
