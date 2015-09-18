@@ -1,5 +1,10 @@
 # Release notes
 
+## Upcoming
+### Add
+
+* Helper for resolving $ref-properties to their reference object (needed for bootprint-swagger#31)
+
 ## v0.5.3 - 2015-09-10
 ### Fix
 
