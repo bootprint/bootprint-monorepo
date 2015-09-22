@@ -34,7 +34,6 @@ module.exports = {
         current = current[hashPart]
       }
     })
-    console.log(current)
     return current
   }
 }
@@ -45,6 +44,7 @@ module.exports = {
  * @returns {String} a string like <code>string[]</code> or <code>object[][]</code>
  */
 function dataType (value) {
+  if (!value) return null;
   if (value['anyOf'] || value['allOf'] || value['oneOf']) {
     return ''
   }
