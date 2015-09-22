@@ -1,5 +1,10 @@
 # Release notes
 
+## Upcoming
+### Fix 
+
+* Be forgiving on calling datatype-helper with empty argument
+
 ## v0.6.1 - 2015-09-19
 ### Fix
 
