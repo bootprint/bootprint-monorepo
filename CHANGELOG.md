@@ -1,5 +1,10 @@
 # Release notes
 
+## Upcoming
+### Add
+
+* Display string-length limits
+
 ## v0.6.2 - 2015-09-22
 ### Fix 
 
