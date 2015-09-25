@@ -1,5 +1,10 @@
 # Release notes
 
+## v0.8.0
+### Add
+
+* Testcases for intervals and string-length limits
+
 ## v0.7.0 - 2015-09-25
 ### Add
 
