@@ -2,7 +2,7 @@
 <section class="json-schema-properties">
     <dl>
         {{#each properties}}
-            <dt>
+            <dt data-property-name="{{htmlId @key}}">
                 {{!Single property, default type is "object"}}
                 <span class="json-property-name">{{@key}}:</span>
                 {{>json-schema/datatype}}
