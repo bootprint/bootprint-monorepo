@@ -1,9 +1,9 @@
 # Release notes
 
-## v0.8.0
-### Add
+## Upcoming
+### Fix
 
-* Testcases for intervals and string-length limits
+* bootprint-swagger#35: "allOf" renders incorrect HTML doc
 
 ## v0.7.0 - 2015-09-25
 ### Add
