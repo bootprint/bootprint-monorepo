@@ -1,4 +1,5 @@
 {{!Renders json-schema object properties.}}
+{{#if properties}}
 <section class="json-schema-properties">
     <dl>
         {{#each properties}}
@@ -26,3 +27,4 @@
         {{/each}}
     </dl>
 </section>
+{{/if}}

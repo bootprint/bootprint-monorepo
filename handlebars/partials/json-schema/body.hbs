@@ -22,12 +22,12 @@
             {{>json-schema/array-items items}}
         {{/ifeq}}
     {{/ifeq}}
-    {{#if allOf}}
-        {{>json-schema/allOf allOf}}
-    {{/if}}
-    {{#if anyOf}}
-        {{>json-schema/anyOf anyOf}}
-    {{/if}}
 {{else}}
     {{>json-schema/type-object}}
+{{/if}}
+{{#if allOf}}
+    {{>json-schema/allOf allOf}}
+{{/if}}
+{{#if anyOf}}
+    {{>json-schema/anyOf anyOf}}
 {{/if}}
