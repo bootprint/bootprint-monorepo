@@ -1,6 +1,6 @@
 # Release notes
 
-## Upcoming
+## v0.7.1 - 2015-09-27
 ### Fix
 
 * bootprint-swagger#35: "allOf" renders incorrect HTML doc
