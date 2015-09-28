@@ -62,3 +62,16 @@ In a similar fashion, we could replace other parts of the configuration, like te
 and the pre-processor. If we would provide a new preprocessor, it could call the old one,
 by calling `this.parent(args)`
 
+### Accessing engine and configuration helpers
+
+The configuration and the engine itself is passed as additional parameter into each helper call:
+
+```
+module.exports = {
+    function(value, options, customizeConfig) {
+        console.log("handlebars", custOptions.engine)
+        console.log("customizeConfig", custOptions.config)
+    }
+}
+
+

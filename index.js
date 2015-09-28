@@ -109,7 +109,7 @@ module.exports = {
 
         var partials = contents(config.partials)
         hbs.registerPartial(partials)
-        hbs.registerHelper(config.helpers)
+        hbs.registerHelper(addEngine(config.helpers, hbs, config))
         var templates = contents(config.templates)
 
         return _.mapValues(templates, function (template) {
@@ -166,4 +166,23 @@ function moduleIfString (pathOrObject, type) {
   // Require module if needed
   pathOrObject = _.isString(pathOrObject) ? require(path.resolve(pathOrObject)) : pathOrObject
   return pathOrObject
+}
+
+/**
+ * Wraps helpers with a function that provides
+ * and object {engine, config} as additional parameter
+ * @param {object<function>} helpers the helpers object
+ * @param {Handlebars} hbs the current handlebars engine
+ * @param {object} hbsOptions the options of the Handlebars engine
+ */
+function addEngine (helpers, hbs, hbsOptions) {
+  hbs.logger.level = 0
+  // Provide the engine as last parameter to all helpers in order to
+  // enable things like calling partials from a helper.
+  hbs.registerHelper(_.mapValues(helpers, function (helper) {
+    return _.partialRight(helper, {
+      engine: hbs,
+      config: hbsOptions
+    })
+  }))
 }
