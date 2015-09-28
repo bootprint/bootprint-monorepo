@@ -2,6 +2,12 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Upcoming
+
+### Add
+
+* Append engine and customize-config to each helper-call
+
 ## v0.2.1 - 2015-08-12
 
 ### Fix
