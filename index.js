@@ -30,7 +30,7 @@ module.exports = {
     return less.render(lessSource, {
       paths: config.paths,
       sourceMap: {},
-      filename: 'main.less',
+      filename: 'customize-bundle.less',
       compress: true
     })
   }
