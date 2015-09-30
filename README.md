@@ -35,6 +35,7 @@ This will generate the following output
 ```
 { less: 
    { css: 'div{color:blue;background-color:green}',
+     map: '{"version":3,"sources":["/home/nknappmeier/privat/node-libraries/customize-engine-less/examples/main.less"],"names":[],"mappings":"AAGA,IACE,UAAA,CACA"}',
      imports: [ '/home/nknappmeier/privat/node-libraries/customize-engine-less/examples/main.less' ] } }
 ```
 
@@ -42,6 +43,7 @@ This will generate the following output
 
 <a name="coerceToArray"></a>
 ### coerceToArray(objOrArray) ⇒
+n
 If `objOrArray` exists and is a non-array, it is replaced by
 an array with the property as single object.
 
