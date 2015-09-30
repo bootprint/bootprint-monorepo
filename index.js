@@ -10,6 +10,14 @@ var _ = require('lodash')
 var less = require('less')
 var Q = require('q')
 
+/**
+ * @typedef {object} CustomizeLessConfig
+ * Configuration for the customize less-engine
+ * @property {string|string[]} main absolute path to a lesscss-file or a list of absolute paths to less files
+ * @property {string|string[]} path absolute path (or a list of those) to paths to use as import path
+ * @api public
+ */
+
 module.exports = {
   defaultConfig: {
     main: [],
