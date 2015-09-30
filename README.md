@@ -20,10 +20,16 @@ var customize = require('customize')
 // Load files from one directory and merge with second
 customize()
   .registerEngine('less', require('customize-engine-less'))
+  // Add one less file
   .merge({
     less: {
       main: require.resolve('./main.less'),
-      paths: __dirname
+    }
+  })
+  // Add another less file overriding some variables
+  .merge({
+    less: {
+      main: require.resolve('./override.less'),
     }
   })
   .run()
@@ -34,9 +40,11 @@ This will generate the following output
 
 ```
 { less: 
-   { css: 'div{color:blue;background-color:green}',
-     map: '{"version":3,"sources":["/home/nknappmeier/privat/node-libraries/customize-engine-less/examples/main.less"],"names":[],"mappings":"AAGA,IACE,UAAA,CACA"}',
-     imports: [ '/home/nknappmeier/privat/node-libraries/customize-engine-less/examples/main.less' ] } }
+   { css: 'div{color:red;background-color:green}',
+     map: '{"version":3,"sources":["/home/nknappmeier/privat/node-libraries/customize-engine-less/examples/main.less"],"names":[],"mappings":"AAGA,IACE,SAAA,CACA"}',
+     imports: 
+      [ '/home/nknappmeier/privat/node-libraries/customize-engine-less/examples/main.less',
+        '/home/nknappmeier/privat/node-libraries/customize-engine-less/examples/override.less' ] } }
 ```
 
 ##  API-reference
