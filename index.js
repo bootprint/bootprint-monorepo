@@ -69,14 +69,14 @@ module.exports = {
 
   /**
    *
-   * @param {Promise<CustomizeHandlebarsConfig>} config the input configuration that is written by the user
-   * @return {Promise<InternalHbsConfig>} the configuration that is passed into the merging process
+   * @param {CustomizeHandlebarsConfig} config the input configuration that is written by the user
+   * @return {InternalHbsConfig} the configuration that is passed into the merging process
    *    later expected as parameter to the main function of the engine
    */
   preprocessConfig: function preprocessConfig (config) {
     var helpers = moduleIfString(config.helpers, 'hb-helpers')
     // The helpers file may export an object or a promise for an object.
-    // Or a function returning and object or a promise for an object.
+    // Or a function returning an object or a promise for an object.
     // If it's a function, use the result instead.
     helpers = _.isFunction(helpers) ? helpers() : helpers
 
@@ -89,6 +89,13 @@ module.exports = {
       preprocessor: preprocessor && customize.withParent(preprocessor),
       hbsOptions: config.hbsOptions
     }
+  },
+
+  watched : function(config) {
+    return [
+      config.partials,
+      config.templates
+    ];
   },
 
   /**
