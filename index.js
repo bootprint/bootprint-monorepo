@@ -37,6 +37,11 @@ function customize () {
  * class is returned with an empty configuration, so
  * `new Customize(...)` should never be called outside
  * this module
+ * `config` and `parentConfig` are of the form
+ *
+ * ```js
+ * { engine: { config: ..., watched: [ ... ] } }
+ * ```
  *
  * @constructor
  */
@@ -78,7 +83,10 @@ function Customize (config, parentConfig, engines) {
     var _engines = _.clone(engines)
     _engines[id] = engine
     var _defaultConfig = {}
-    _defaultConfig[id] = engine.defaultConfig
+    _defaultConfig[id] = {
+      config: engine.defaultConfig || {},
+      watched: engine.defaultWatched || []
+    }
     return new Customize(_defaultConfig, _config, _engines)
 
   }
@@ -99,17 +107,29 @@ function Customize (config, parentConfig, engines) {
 
     // Assert that for each key in the other configuration, there is an engine present
     // Apply engine preprocessor to each config
-    var preprocessedConfig = _.mapValues(config, function (value, key) {
+    var preprocessedConfig = _.mapValues(config, function (engineConf, key) {
       var engine = engines[key]
       if (_.isUndefined(engine)) {
         throw new Error("Engine '" + key + "' not found. Refusing to store configuration")
       }
       // Load preprocessor with identity as default
       var preprocessor = engine.preprocessConfig || _.identity
-      return Q(value).then(preprocessor).then(function (config) {
+      // Watch no files by default (constant [])
+      var watched = engine.watched || _.constant([])
+      return Q(engineConf).then(function(engineConf) {
+        return {
+          config: preprocessor(engineConf),
+          watched: watched(engineConf)
+        }
+      }).then(function (config) {
         debug('Merging preprocessed config', config)
         return config
       })
+    })
+
+    // Gather to-be-watched files and dirs from each engine
+    var _watched = _.mapValues(config, function(value, key) {
+
     })
     return new Customize(preprocessedConfig, _config, engines)
   }
@@ -143,27 +163,56 @@ function Customize (config, parentConfig, engines) {
    */
   this.build = function () {
     return deep(_config).then(function (config) {
+      return _.mapValues(config,_.property("config"))
+    }).then(function (config) {
       debug('Building', config)
       return config
     })
   }
 
   /**
+   * Return a promise for the files needing to be watched in watch-mode,
+   * indexed by engine.
+   * @return {Promise<object<string[]>>} a promise for the files to be watched.
+   *
+   * @public
+   */
+  this.watched = function () {
+    return deep(_config).then(function (config) {
+      return _.mapValues(config,_.property("watched"))
+    }).then(function (watchedFileds) {
+      debug('Watched files', watchedFileds)
+      return watchedFileds
+    })
+  }
+
+
+  /**
    * Run each engine with its part of the config.
    *
+   * @param {object=} options optional paramters
+   * @param {string=} options.onlyEngine optionally the name of an engine, if only a single engine should
+   *  be executed
    * @return {Promise<object>} an object containing on property per registered engine
    *  (the key is the engine-id) containing the result of each engine
    * @public
    */
-  this.run = function () {
+  this.run = function (options) {
+    var onlyEngine = options && options.onlyEngine;
     return this.build().then(function (resolvedConfig) {
       var result = _.mapValues(engines, function (engine, key) {
-        return engine.run(resolvedConfig[key])
+        // if "onlyEngine" is set to a value, execute on the engine with the same name
+        if (!onlyEngine || onlyEngine === key) {
+          return engine.run(resolvedConfig[key])
+        }
       })
       return deep(result)
     })
   }
 
+  this.watch = function() {
+    return require("./lib/watcher.js")(this, _config);
+  }
 }
 
 /**
