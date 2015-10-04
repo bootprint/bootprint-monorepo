@@ -1,0 +1,36 @@
+{
+  "name": "customize-watch",
+  "version": "0.0.0",
+  "description": "A file watcher for customize",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nknapp/customize-watch.git"
+  },
+  "author": {
+    "name": "Nils Knappmeier",
+    "email": "npm@knappi.org",
+    "url": "https://github.com/nknapp"
+  },
+  "bugs": {
+    "url": "https://github.com/nknapp/customize-watch/issues"
+  },
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "pretest": "npm list --depth=0 -g standard || npm -g install standard",
+    "test": "mocha && standard",
+    "preformat": "npm list --depth=0 -g standard || npm -g install standard",
+    "format": "standard --format"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.2.5"
+  },
+  "standard": {
+    "ignore": [
+      "spec/fixtures/**"
+    ]
+  },
+  "keywords": []
+}
