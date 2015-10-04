@@ -31,6 +31,10 @@ module.exports = {
     }
   },
 
+  watched: function(config) {
+    return coerceToArray(config.main).concat(coerceToArray(config.paths))
+  },
+
   run: function (config) {
     var lessSource = config.main.map(function (file) {
       return '@import "' + file + '";'
