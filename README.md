@@ -49,6 +49,19 @@ This will generate the following output
 
 ##  API-reference
 
+### Functions
+<dl>
+<dt><a href="#coerceToArray">coerceToArray(objOrArray)</a> ⇒</dt>
+<dd><p>If <code>objOrArray</code> exists and is a non-array, it is replaced by
+an array with the property as single object.</p>
+</dd>
+</dl>
+### Typedefs
+<dl>
+<dt><a href="#CustomizeLessConfig">CustomizeLessConfig</a> : <code>object</code></dt>
+<dd><p>Configuration for the customize less-engine</p>
+</dd>
+</dl>
 <a name="coerceToArray"></a>
 ### coerceToArray(objOrArray) ⇒
 If `objOrArray` exists and is a non-array, it is replaced by
@@ -60,6 +73,19 @@ an array with the property as single object.
 | Param | Type | Description |
 | --- | --- | --- |
 | objOrArray | <code>object</code> | the object or an array |
+
+<a name="CustomizeLessConfig"></a>
+### CustomizeLessConfig : <code>object</code>
+Configuration for the customize less-engine
+
+**Kind**: global typedef  
+**Api**: public  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| main | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> | absolute path to a lesscss-file or a list of absolute paths to less files |
+| path | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> | absolute path (or a list of those) to paths to use as import path |
 
 
 
