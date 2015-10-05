@@ -3,7 +3,7 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## Upcoming 
+## v0.3.0 - 2015-10-05 
 ### Add
 
 * Necessary methods to add support for `customize-watch`
