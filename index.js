@@ -7,10 +7,10 @@
 
 'use strict'
 
-var customize = require("customize");
+var customize = require('customize')
 
 module.exports = function watcher () {
-  return new Recustomize(customize);
+  return new Recustomize(customize)
 }
 
 /**
@@ -23,8 +23,7 @@ module.exports = function watcher () {
  *
  * @constructor
  */
-function Recustomize(builder) {
-
+function Recustomize (builder) {
   /**
    * Wrap the method of a Customize object such that
    * instead of the new Customize object, new Recustomize object
@@ -32,38 +31,54 @@ function Recustomize(builder) {
    *
    * @param fnName
    * @returns {Function}
+   * @api private
    */
-  function wrap(fnName) {
-    return function(/* dynamic arguments */) {
-      var args = arguments;
-      return new Recustomize(function() {
-        var customize = builder();
-        return customize[fnName].apply(customize,args);
+  function wrap (fnName) {
+    /* dynamic arguments */
+    return function () {
+      var args = arguments
+      return new Recustomize(function () {
+        var customize = builder()
+        return customize[fnName].apply(customize, args)
       })
     }
   }
 
-  // Wrapped functions
-  this.merge = wrap("merge")
-  this.registerEngine = wrap("registerEngine")
-  this.load = wrap("load");
+  /**
+   * Wrapped function. See [customize](https://github.com/nknapp/customize) for details
+   * @api private
+   */
+  this.merge = wrap('merge')
+
+  /**
+   * Wrapped function. See [customize](https://github.com/nknapp/customize) for details
+   * @api private
+   */
+  this.registerEngine = wrap('registerEngine')
+
+  /**
+   * Wrapped function. See [customize](https://github.com/nknapp/customize) for details
+   * @api private
+   */
+  this.load = wrap('load')
 
   /**
    * Return the configuation object
    * @returns {Promise<object>}
+   * @api private
    */
-  this.build = function() {
-    return builder().build();
+  this.build = function () {
+    return builder().build()
   }
-
 
   /**
    * Return a list of files and directories that need to be watched
    * in watch-mode.
    * @return {Promise<object<string[]>>} a list of paths to files or directories for each engine
+   * @api private
    */
-  this.watched = function() {
-    return builder().watched();
+  this.watched = function () {
+    return builder().watched()
   }
 
   /**
@@ -72,21 +87,19 @@ function Recustomize(builder) {
    * a file has changed.
    * @return {EventEmitter}
    */
-  this.watch = function() {
-    return require("./lib/watcher.js")(this);
+  this.watch = function () {
+    return require('./lib/watcher.js')(this)
   }
-
-
 
   /**
    * Wraps the run(...)-method of the customize object, rebuilding the whole configuration
    * before running.
    * @returns {object}
+   * @api private
    */
-  this.run = function( /* dynamic args */ ) {
-    var custObj = builder();
-    return custObj.run.apply(custObj, arguments);
+  /* dynamic args */
+  this.run = function () {
+    var custObj = builder()
+    return custObj.run.apply(custObj, arguments)
   }
 }
-
-

@@ -15,7 +15,7 @@ module.exports = {
 
   // This function is called to determine the files and directories
   // to watch in developmentMode
-  watched: function(config) {
+  watched: function (config) {
     return [
       // The config itself is the directory-path
       config

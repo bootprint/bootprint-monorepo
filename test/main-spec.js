@@ -12,8 +12,6 @@
 
 'use strict'
 
-var customizeWatch = require('../')
-
 describe('customize-watch:', function () {
   // body
 })
