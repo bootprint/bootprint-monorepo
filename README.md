@@ -2,7 +2,7 @@
 
 > A file watcher for customize
 
-`` is a file watcher for [customize](https://github.com/nknapp/customize)
+`customize-watch` is a file watcher for [customize](https://github.com/nknapp/customize)
 It attaches watchers (using [chokidar](https://github.com/paulmillr/chokidar)) to 
 the files and directories that are relevant for computing a result with `customize`.
 
