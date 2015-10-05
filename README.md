@@ -116,8 +116,8 @@ The output of this example is:
 
 ```
 { handlebars: 
-   { 'text1.txt': 'I\'m Nils\n\nI\'m living in Darmstadt.\n\n------\nWeather: heavy intensity rain',
-     'text2.txt': 'I\'m Nils\n\nI\'m living in DARMSTADT.\n\n------\nWeather: heavy intensity rain' } }
+   { 'text1.txt': 'I\'m Nils\n\nI\'m living in Darmstadt.\n\n------\nWeather: light rain',
+     'text2.txt': 'I\'m Nils\n\nI\'m living in DARMSTADT.\n\n------\nWeather: light rain' } }
 ```
 
 
@@ -154,8 +154,8 @@ The output of this example is
 
 ```
 { handlebars: 
-   { 'text1.txt': 'I\'m Nils\n\nI\'m living in Darmstadt.\n\n------\nTemperature: 7.88',
-     'text2.txt': 'I\'m Nils\n\nI\'m living in DARMSTADT.\n\n------\nTemperature: 7.88' } }
+   { 'text1.txt': 'I\'m Nils\n\nI\'m living in Darmstadt.\n\n------\nTemperature: 14.32',
+     'text2.txt': 'I\'m Nils\n\nI\'m living in DARMSTADT.\n\n------\nTemperature: 14.32' } }
 ```
 
 In a similar fashion, we could replace other parts of the configuration, like templates, helpers
