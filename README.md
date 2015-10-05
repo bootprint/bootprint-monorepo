@@ -50,10 +50,22 @@ module.exports = {
   // Initial configuration when registering the engine.
   defaultConfig: null,
 
+  // Files/Dirs to-be-watched with the default configuration
+  defaultWatched: [],
+
   // This function is called for any `.merge` input.
   // It converts the input into its mergable form
   preprocessConfig: function (config) {
     return files(config)
+  },
+
+  // This function is called to determine the files and directories
+  // to watch in developmentMode
+  watched: function(config) {
+    return [
+      // The config itself is the directory-path
+      config
+    ]
   },
 
   // Runs the engine with a resolved configuration.
@@ -230,7 +242,7 @@ partials and definitions from other packages.
 The exported module is a function that creates a new empty Customize-instance.
 
 <a name="module_customize"></a>
-## customize
+#### customize
 Create a new Customize object with an empty configuration
 
 
@@ -245,11 +257,12 @@ Create a new Customize object with an empty configuration
       * [.merge(config)](#module_customize..Customize+merge) ⇒ <code>Customize</code>
       * [.load(customizeModule)](#module_customize..Customize+load) ⇒ <code>Customize</code>
       * [.build()](#module_customize..Customize+build) ⇒ <code>Promise.&lt;object&gt;</code>
-      * [.run()](#module_customize..Customize+run) ⇒ <code>Promise.&lt;object&gt;</code>
+      * [.watched()](#module_customize..Customize+watched) ⇒ <code>Promise.&lt;object.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+      * [.run([options])](#module_customize..Customize+run) ⇒ <code>Promise.&lt;object&gt;</code>
     * [~customize()](#module_customize..customize) ⇒ <code>Customize</code>
 
 <a name="module_customize.withParent"></a>
-### customize.withParent
+##### customize.withParent
 Wrap a function so that if it overrides another function, that function will
 be available as `this.parent`
 
@@ -262,7 +275,7 @@ be available as `this.parent`
 | fn | 
 
 <a name="module_customize.leaf"></a>
-### customize.leaf ⇒ <code>Promise</code>
+##### customize.leaf ⇒ <code>Promise</code>
 Create a promise that is regarded as leaf in the configuration tree.
 That means, that the overrider is not resolving this promise when overriding values.
 Promised object values will not be merged but replaced.
@@ -276,7 +289,7 @@ Promised object values will not be merged but replaced.
 | promiseOrValue | <code>\*</code> | a promise or a valude that represents the leaf |
 
 <a name="module_customize..Customize"></a>
-### customize~Customize
+##### customize~Customize
 **Kind**: inner class of <code>[customize](#module_customize)</code>  
 
   * [~Customize](#module_customize..Customize)
@@ -285,18 +298,24 @@ Promised object values will not be merged but replaced.
     * [.merge(config)](#module_customize..Customize+merge) ⇒ <code>Customize</code>
     * [.load(customizeModule)](#module_customize..Customize+load) ⇒ <code>Customize</code>
     * [.build()](#module_customize..Customize+build) ⇒ <code>Promise.&lt;object&gt;</code>
-    * [.run()](#module_customize..Customize+run) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [.watched()](#module_customize..Customize+watched) ⇒ <code>Promise.&lt;object.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+    * [.run([options])](#module_customize..Customize+run) ⇒ <code>Promise.&lt;object&gt;</code>
 
 <a name="new_module_customize..Customize_new"></a>
-#### new Customize()
+###### new Customize()
 This class does the actual work. When calling
 `require('customize')()` a new instance of this
 class is returned with an empty configuration, so
 `new Customize(...)` should never be called outside
 this module
+`config` and `parentConfig` are of the form
+
+```js
+{ engine: { config: ..., watched: [ ... ] } }
+```
 
 <a name="module_customize..Customize+registerEngine"></a>
-#### customize.registerEngine(id, engine)
+###### customize.registerEngine(id, engine)
 Register an engine an engine
 
 **Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
@@ -308,7 +327,7 @@ Register an engine an engine
 | engine | <code>Object</code> | a customize engine that is registered |
 
 <a name="module_customize..Customize+merge"></a>
-#### customize.merge(config) ⇒ <code>Customize</code>
+###### customize.merge(config) ⇒ <code>Customize</code>
 Creates a new instance of Customize. The configuration values of the current Customize
 are used as default values and are overridden by the configuration provided as parameter.
 
@@ -321,7 +340,7 @@ are used as default values and are overridden by the configuration provided as p
 | config | <code>object</code> | configuration overriding the current configuration |
 
 <a name="module_customize..Customize+load"></a>
-#### customize.load(customizeModule) ⇒ <code>Customize</code>
+###### customize.load(customizeModule) ⇒ <code>Customize</code>
 Inherit configuration config from another module.
 a Customizer-module usually exports a `function(Customize):Customize`
 which in tern calls `Customize.merge` to create a new Customize instance.
@@ -339,7 +358,7 @@ with the configuration of the module.
 | customizeModule | <code>function</code> | that receives a Customize as paramater  and returns a Customize with changed configuration. |
 
 <a name="module_customize..Customize+build"></a>
-#### customize.build() ⇒ <code>Promise.&lt;object&gt;</code>
+###### customize.build() ⇒ <code>Promise.&lt;object&gt;</code>
 Return a promise for the merged configuration.
 This functions is only needed to inspect intermediate configuration results
 (i.e. for testing and documentation purposes)
@@ -347,16 +366,30 @@ This functions is only needed to inspect intermediate configuration results
 **Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
 **Returns**: <code>Promise.&lt;object&gt;</code> - a promise for the whole configuration  
 **Access:** public  
+<a name="module_customize..Customize+watched"></a>
+###### customize.watched() ⇒ <code>Promise.&lt;object.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+Return a promise for the files needing to be watched in watch-mode,
+indexed by engine.
+
+**Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
+**Returns**: <code>Promise.&lt;object.&lt;Array.&lt;string&gt;&gt;&gt;</code> - a promise for the files to be watched.  
+**Access:** public  
 <a name="module_customize..Customize+run"></a>
-#### customize.run() ⇒ <code>Promise.&lt;object&gt;</code>
+###### customize.run([options]) ⇒ <code>Promise.&lt;object&gt;</code>
 Run each engine with its part of the config.
 
 **Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
 **Returns**: <code>Promise.&lt;object&gt;</code> - an object containing on property per registered engine
  (the key is the engine-id) containing the result of each engine  
 **Access:** public  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [options] | <code>object</code> | optional paramters |
+| [options.onlyEngine] | <code>string</code> | optionally the name of an engine, if only a single engine should  be executed |
+
 <a name="module_customize..customize"></a>
-### customize~customize() ⇒ <code>Customize</code>
+##### customize~customize() ⇒ <code>Customize</code>
 **Kind**: inner method of <code>[customize](#module_customize)</code>  
 **Api**: public  
 
@@ -365,7 +398,7 @@ Run each engine with its part of the config.
 
 
 <a name="files"></a>
-## files(baseDir) ⇒ <code>Promise.&lt;object.&lt;Promise.&lt;string&gt;&gt;&gt;</code>
+#### files(baseDir) ⇒ <code>Promise.&lt;object.&lt;Promise.&lt;string&gt;&gt;&gt;</code>
 The file helper resolves the directory filename to the contents of the included files (promised).
 
 **Kind**: global function  
@@ -389,43 +422,8 @@ See [LICENSE.md](LICENSE.md) for details.
 
 ## Release-Notes
  
-For release notes, see the [changelog](CHANGELOG.md)
+For release notes, see [CHANGELOG.md](CHANGELOG.md)
  
-## Contributing Guidelines
+## Contributing guidelines
 
-*This text is taken mainly from @tunnckoCore: https://github.com/tunnckoCore/coreflow-templates/blob/master/template/CONTRIBUTING.md*
-
-Contributions are always welcome!
-
-**Before spending lots of time on something, ask for feedback on your idea first!**
-
-Please search issues and pull requests before adding something new to avoid duplicating
-efforts and conversations.
-
-People submitting relevant contributions to the module will be granted commit access to the repository.
-
-### Installing
-
-Fork and clone the repo, then `npm install` to install all dependencies and `npm test` to
-ensure all is okay before you start anything.
-
-
-### Testing
-
-Tests are run with `npm test`. Please ensure all tests are passing before submitting
-a pull request (unless you're creating a failing test to increase test coverage or show a problem).
-
-### Code Style
-
-[![standard][standard-image]][standard-url]
-
-This repository uses [`standard`][standard-url] to maintain code style and consistency,
-and to avoid style arguments.
-```
-npm i standard -g
-```
-
-It is intentional to don't have `standard`, `istanbul` and `coveralls` in the devDependencies. Travis will handle all that stuffs. That approach will save bandwidth also installing and development time.
-
-[standard-image]: https://cdn.rawgit.com/feross/standard/master/badge.svg
-[standard-url]: https://github.com/feross/standard
+See [CONTRIBUTING.md](CONTRIBUTING.md).
