@@ -1,6 +1,6 @@
 {
   "name": "customize-watch",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A file watcher for customize",
   "repository": {
     "type": "git",
