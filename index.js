@@ -15,7 +15,9 @@ module.exports = function watcher () {
 
 /**
  * Recustomize has the same interface as Customize, but instead of storing
- * the current state, it stores a function that computes the current state.
+ * the current configuration-state, it stores a function that computes the state.
+ * The only difference is the [watch()](#Recustomize+watch)-method. It can be
+ * used to emit an event every time one of the input files is added, removed or changed.
  *
  * @param {function():customize} builder a builder function for a Customize object
  *
@@ -65,7 +67,10 @@ function Recustomize(builder) {
   }
 
   /**
-   *
+   * Register file-watchers for all relevant files.
+   * Rebuild the config and run the appropriate engine, whenever
+   * a file has changed.
+   * @return {EventEmitter}
    */
   this.watch = function() {
     return require("./lib/watcher.js")(this);
