@@ -31,6 +31,9 @@ module.exports = {
         result += config[filename].contents + '\n'
       }
     }
-    return result
+    return {
+      // Return a file called "concat.txt"
+      'concat.txt': result
+    }
   }
 }
