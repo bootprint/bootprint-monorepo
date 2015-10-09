@@ -35,6 +35,11 @@ module.exports = {
     return coerceToArray(config.main).concat(coerceToArray(config.paths))
   },
 
+  /**
+   * Compute the raw CSS from the input files and store them as "main.css" and the source-map
+   * as "main.css.map"
+   * @param config
+   */
   run: function (config) {
     var lessSource = config.main.map(function (file) {
       return '@import "' + file + '";'
@@ -44,6 +49,11 @@ module.exports = {
       sourceMap: {},
       filename: 'customize-bundle.less',
       compress: true
+    }).then(function(lessResult) {
+      return {
+        "main.css": lessResult.css,
+        "main.css.map": lessResult.map
+      }
     })
   }
 }
