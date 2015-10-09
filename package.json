@@ -27,10 +27,16 @@
     "version": "npm run thought",
     "preversion": "npm run thoughtcheck"
   },
-  "dependencies": {},
+  "dependencies": {
+    "debug": "^2.2.0",
+    "q": "^1.4.1",
+    "q-io": "^1.13.1"
+  },
   "devDependencies": {
     "chai": "^3.2.0",
-    "mocha": "^2.2.5"
+    "mocha": "^2.2.5",
+    "customize": "<1.0.0",
+    "customize-engine-less": "<1.0.0"
   },
   "standard": {
     "ignore": [

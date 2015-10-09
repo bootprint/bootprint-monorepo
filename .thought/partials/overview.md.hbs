@@ -1,0 +1,21 @@
+The {{npm 'customize'}} module is a framework for creating overridable configurations for different
+engines. It is, in principle, designed to be platform independent (that's actually only half-true).
+Engines running in `customize` always return file-contents as JavaScript-object in the form
+
+```js
+{
+  'engineName': {
+    'file.txt': 'contents of the file',
+    'subdir/file.txt': 'contents of the other file'
+  }
+```
+
+The contents of the file may be one of the following
+
+* A string (to be stored in the file `utf-8`-encoded) 
+* A buffer
+* A readable stream.
+
+The goal of `{{name}}` is to act as an NodeJS-adapter for customize 
+and store the result of `customize` in a local directory structure.
+ 
