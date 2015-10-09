@@ -1,0 +1,36 @@
+{
+  "name": "customize-write-files",
+  "version": "0.0.0",
+  "description": "Post-processor that stores the result of a customize-run in a local directory",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nknapp/customize-write-files.git"
+  },
+  "author": {
+    "name": "Nils Knappmeier",
+    "email": "npm@knappi.org",
+    "url": "https://github.com/nknapp"
+  },
+  "bugs": {
+    "url": "https://github.com/nknapp/customize-write-files/issues"
+  },
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "pretest": "npm list --depth=0 -g standard || npm -g install standard",
+    "test": "mocha && standard",
+    "preformat": "npm list --depth=0 -g standard || npm -g install standard",
+    "format": "standard --format"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.2.5"
+  },
+  "standard": {
+    "ignore": [
+      "spec/fixtures/**"
+    ]
+  },
+  "keywords": []
+}
