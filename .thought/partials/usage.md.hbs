@@ -18,7 +18,17 @@ the file `engine-concat-files.js`
 * The `preprocessor` of the engine assumes that the input configuration for this
   engine a path to a directory. It then uses the `files` io-helper to convert 
   this path into an object of lazy promises.
-* The `run`-function concatenates and returns the contents of each file.
+* The `run`-function concatenates the contents of the files. It returns 
+  an object 
+
+  ```js
+    { "filename.txt": "contents", ... } 
+  ```
+
+  output file. The module {{npm 'customize-write-files'}} can be used to 
+  write such files to disk in a node environment. In order to this to work, 
+  the contents must either be a string, a buffer or a [raadable stream](https://nodejs.org/api/stream.html#stream_class_stream_readable).
+  Strings will be stored in `utf-8` encoding.
 
 ### Loading a configuration
 

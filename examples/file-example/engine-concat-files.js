@@ -24,6 +24,12 @@ module.exports = {
 
   // Runs the engine with a resolved configuration.
   // The config contains no Promises anymore.
+  // The function returns an object
+  //
+  // {
+  //    "filename.txt": "file-contents"
+  // }
+  //
   run: function (config) {
     var result = ''
     for (var filename in config) {
@@ -31,6 +37,9 @@ module.exports = {
         result += config[filename].contents + '\n'
       }
     }
-    return result
+    return {
+      // Return a file called "concat.txt"
+      "concat.txt": result
+    }
   }
 }
