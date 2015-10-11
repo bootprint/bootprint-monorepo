@@ -28,14 +28,17 @@
     "preversion": "npm run thoughtcheck"
   },
   "dependencies": {
-    "customize": "^0.2.3",
     "less": "^2.5.3",
     "lodash": "^3.10.1",
     "q": "^1.4.1"
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "mocha": "^2.2.5"
+    "mocha": "^2.2.5",
+    "customize": "<1.0.0"
+  },
+  "peerDependencies": {
+    "customize": "<1.0.0"
   },
   "standard": {
     "ignore": [
