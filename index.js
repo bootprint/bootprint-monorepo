@@ -13,6 +13,8 @@ module.exports = function watcher () {
   return new Recustomize(customize)
 }
 
+module.exports.Customize = Recustomize;
+
 /**
  * Recustomize has the same interface as Customize, but instead of storing
  * the current configuration-state, it stores a function that computes the state.
@@ -67,8 +69,8 @@ function Recustomize (builder) {
    * @returns {Promise<object>}
    * @api private
    */
-  this.build = function () {
-    return builder().build()
+  this.buildConfig = function () {
+    return builder().buildConfig()
   }
 
   /**

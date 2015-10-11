@@ -2,6 +2,18 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Upcoming
+
+### Add
+
+* The constructor of the Customize class can be accessed via `require('customize').Customize`
+
+### Change
+
+* The `build()`-method is now called `buildConfig()` to allow backward compatibility
+  of the `bootprint`-package. The `build()`-method of bootprint has different semantics
+
+
 ## v0.2.2 - 2015-10-05
 ### Fix
 
