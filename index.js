@@ -19,6 +19,8 @@ var Q = require('q')
  */
 
 module.exports = {
+  schema: require("./schema.js"),
+
   defaultConfig: {
     main: [],
     paths: []
@@ -34,6 +36,7 @@ module.exports = {
   watched: function(config) {
     return coerceToArray(config.main).concat(coerceToArray(config.paths))
   },
+
 
   /**
    * Compute the raw CSS from the input files and store them as "main.css" and the source-map
