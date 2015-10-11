@@ -58,6 +58,8 @@ var contents = function (partials) {
  * The export of this module is the customize-engine-handlebars
  */
 module.exports = {
+  schema: require("./schema.js"),
+
   defaultConfig: {
     partials: {},
     helpers: {},
@@ -91,6 +93,12 @@ module.exports = {
     }
   },
 
+  /**
+   * Return the files that must be watched (i.e. the files and directories
+   * that may alter the output). (This is currently just the template and partials directory)
+   * @param config
+   * @returns {string[]}
+   */
   watched : function(config) {
     return [
       config.partials,
