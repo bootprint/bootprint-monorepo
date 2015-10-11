@@ -6,5 +6,5 @@ customize()
   .merge({
     files: 'dir1'
   })
-  .build()
+  .buildConfig()
   .done(console.log)

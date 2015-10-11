@@ -37,6 +37,12 @@ extra(validator);
 module.exports = customize
 
 /**
+ * Exposes the constructor of the `customize` object
+ * @type {customize}
+ */
+module.exports.Customize = customize;
+
+/**
  * @returns {Customize}
  * @api public
  */
@@ -189,7 +195,7 @@ function Customize (config, parentConfig, engines) {
    * @return {Promise<object>} a promise for the whole configuration
    * @public
    */
-  this.build = function () {
+  this.buildConfig = function () {
     return deep(_config).then(function (config) {
       return _.mapValues(config,_.property("config"))
     }).then(function (config) {
@@ -227,7 +233,7 @@ function Customize (config, parentConfig, engines) {
    */
   this.run = function (options) {
     var onlyEngine = options && options.onlyEngine;
-    return this.build().then(function (resolvedConfig) {
+    return this.buildConfig().then(function (resolvedConfig) {
       var result = _.mapValues(engines, function (engine, key) {
         // if "onlyEngine" is set to a value, execute on the engine with the same name
         if (!onlyEngine || onlyEngine === key) {

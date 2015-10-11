@@ -35,15 +35,15 @@ the file `engine-concat-files.js`
 In order to see, how the preprocessor and the `files`-helper works, we can display 
 the configuration after a merge:
 
-{{{example 'examples/file-example/example-build.js'}}}
+{{{example 'examples/file-example/example-buildConfig.js'}}}
 
 The example creates a new Customize-instances, registers our engine under the name 
 `files` and provides the path to a directory as configuration for the `files` engine 
 (i.e. as property `files` within the configuration object). It then uses the 
-`.build` function convert all nested promises to a single promise for the whole
+`.buildConfig()` function convert all nested promises to a single promise for the whole
 config. This example prints the following result.
 
-{{{exec 'node example-build.js' cwd='examples/file-example/' lang='js'}}}
+{{{exec 'node example-buildConfig.js' cwd='examples/file-example/' lang='js'}}}
 
 We can see that the `files`-call of the preprocessor converted the directory path into 
 an object containing a one property for each file in the directory.
@@ -51,7 +51,7 @@ an object containing a one property for each file in the directory.
 ### Running the engine 
 
 So far, we have loaded and displayed the preprocessed configuration. Now replace the 
-`.build()`-call by `.run()`
+`.buildConfig()`-call by `.run()`
 
 {{{example 'examples/file-example/example1.js'}}}
 

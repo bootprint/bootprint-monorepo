@@ -33,7 +33,7 @@ io-helper. Consider the following file tree
 ├── dir2/
 │   └── a.md
 ├── engine-concat-files.js
-├── example-build.js
+├── example-buildConfig.js
 ├── example1.js
 └── example2.js</code></pre>
 
@@ -47,6 +47,13 @@ the file `engine-concat-files.js`
 var files = require('customize/helpers-io').files
 
 module.exports = {
+  // Optional input schema for engine-configurations
+  // If this is present, the JSON will be validated before being passed into "preprocessConfig"
+  schema: {
+    description: 'Path to a directory containing files',
+    type: 'string'
+  },
+
   // Initial configuration when registering the engine.
   defaultConfig: null,
 
@@ -61,7 +68,7 @@ module.exports = {
 
   // This function is called to determine the files and directories
   // to watch in developmentMode
-  watched: function(config) {
+  watched: function (config) {
     return [
       // The config itself is the directory-path
       config
@@ -70,6 +77,12 @@ module.exports = {
 
   // Runs the engine with a resolved configuration.
   // The config contains no Promises anymore.
+  // The function returns an object
+  //
+  // {
+  //    "filename.txt": "file-contents"
+  // }
+  //
   run: function (config) {
     var result = ''
     for (var filename in config) {
@@ -77,7 +90,10 @@ module.exports = {
         result += config[filename].contents + '\n'
       }
     }
-    return result
+    return {
+      // Return a file called "concat.txt"
+      'concat.txt': result
+    }
   }
 }
 ```
@@ -87,7 +103,17 @@ module.exports = {
 * The `preprocessor` of the engine assumes that the input configuration for this
   engine a path to a directory. It then uses the `files` io-helper to convert 
   this path into an object of lazy promises.
-* The `run`-function concatenates and returns the contents of each file.
+* The `run`-function concatenates the contents of the files. It returns 
+  an object 
+
+  ```js
+    { "filename.txt": "contents", ... } 
+  ```
+
+  output file. The module [customize-write-files](https://npmjs.com/package/customize-write-files) can be used to 
+  write such files to disk in a node environment. In order to this to work, 
+  the contents must either be a string, a buffer or a [raadable stream](https://nodejs.org/api/stream.html#stream_class_stream_readable).
+  Strings will be stored in `utf-8` encoding.
 
 ### Loading a configuration
 
@@ -103,14 +129,14 @@ customize()
   .merge({
     files: 'dir1'
   })
-  .build()
+  .buildConfig()
   .done(console.log)
 ```
 
 The example creates a new Customize-instances, registers our engine under the name 
 `files` and provides the path to a directory as configuration for the `files` engine 
 (i.e. as property `files` within the configuration object). It then uses the 
-`.build` function convert all nested promises to a single promise for the whole
+`.buildConfig()` function convert all nested promises to a single promise for the whole
 config. This example prints the following result.
 
 ```js
@@ -125,7 +151,7 @@ an object containing a one property for each file in the directory.
 ### Running the engine 
 
 So far, we have loaded and displayed the preprocessed configuration. Now replace the 
-`.build()`-call by `.run()`
+`.buildConfig()`-call by `.run()`
 
 ```js
 var customize = require('customize')
@@ -145,8 +171,7 @@ The engines `run()`-method will now be executed with the resolved configuration,
 which yields the following output:
 
 ```
-First file (from dir1)
-Second file (from dir1)
+{ 'concat.txt': 'First file (from dir1)\nSecond file (from dir1)\n' }
 ```
 
 ### Merging another configuration
@@ -169,7 +194,7 @@ tree before doing this:
 ├── dir2/
 │   └── a.md
 ├── engine-concat-files.js
-├── example-build.js
+├── example-buildConfig.js
 ├── example1.js
 └── example2.js</code></pre>
 
@@ -200,8 +225,7 @@ so that in the above example, the property `a.md` is replace by the value in the
 second configuration. So the output of this example is
 
 ```
-First file (from dir2)
-Second file (from dir1)
+{ 'concat.txt': 'First file (from dir2)\nSecond file (from dir1)\n' }
 ```
 
 ### Advanced usage
@@ -241,6 +265,21 @@ partials and definitions from other packages.
 
 The exported module is a function that creates a new empty Customize-instance.
 
+#### Modules
+<dl>
+<dt><a href="#module_customize">customize</a></dt>
+<dd><p>Create a new Customize object with an empty configuration</p>
+</dd>
+</dl>
+#### Members
+<dl>
+<dt><a href="#jsonschema">jsonschema</a></dt>
+<dd><p>The configuration file is defined (and validated) by a JSON-schema
+(see <a href="./config-schema.js">the config-schema file</a>) for details.
+We use the <code>jsonschema</code> module for validation, along the the
+<code>jsonschema-extra</code>-module, because the JSON can contain functions.</p>
+</dd>
+</dl>
 <a name="module_customize"></a>
 #### customize
 Create a new Customize object with an empty configuration
@@ -248,6 +287,7 @@ Create a new Customize object with an empty configuration
 
 * [customize](#module_customize)
   * _static_
+    * [.Customize](#module_customize.Customize) : <code>customize</code>
     * [.withParent](#module_customize.withParent)
     * [.leaf](#module_customize.leaf) ⇒ <code>Promise</code>
   * _inner_
@@ -256,11 +296,16 @@ Create a new Customize object with an empty configuration
       * [.registerEngine(id, engine)](#module_customize..Customize+registerEngine)
       * [.merge(config)](#module_customize..Customize+merge) ⇒ <code>Customize</code>
       * [.load(customizeModule)](#module_customize..Customize+load) ⇒ <code>Customize</code>
-      * [.build()](#module_customize..Customize+build) ⇒ <code>Promise.&lt;object&gt;</code>
+      * [.buildConfig()](#module_customize..Customize+buildConfig) ⇒ <code>Promise.&lt;object&gt;</code>
       * [.watched()](#module_customize..Customize+watched) ⇒ <code>Promise.&lt;object.&lt;Array.&lt;string&gt;&gt;&gt;</code>
       * [.run([options])](#module_customize..Customize+run) ⇒ <code>Promise.&lt;object&gt;</code>
     * [~customize()](#module_customize..customize) ⇒ <code>Customize</code>
 
+<a name="module_customize.Customize"></a>
+##### customize.Customize : <code>customize</code>
+Exposes the constructor of the `customize` object
+
+**Kind**: static property of <code>[customize](#module_customize)</code>  
 <a name="module_customize.withParent"></a>
 ##### customize.withParent
 Wrap a function so that if it overrides another function, that function will
@@ -297,7 +342,7 @@ Promised object values will not be merged but replaced.
     * [.registerEngine(id, engine)](#module_customize..Customize+registerEngine)
     * [.merge(config)](#module_customize..Customize+merge) ⇒ <code>Customize</code>
     * [.load(customizeModule)](#module_customize..Customize+load) ⇒ <code>Customize</code>
-    * [.build()](#module_customize..Customize+build) ⇒ <code>Promise.&lt;object&gt;</code>
+    * [.buildConfig()](#module_customize..Customize+buildConfig) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.watched()](#module_customize..Customize+watched) ⇒ <code>Promise.&lt;object.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.run([options])](#module_customize..Customize+run) ⇒ <code>Promise.&lt;object&gt;</code>
 
@@ -357,8 +402,8 @@ with the configuration of the module.
 | --- | --- | --- |
 | customizeModule | <code>function</code> | that receives a Customize as paramater  and returns a Customize with changed configuration. |
 
-<a name="module_customize..Customize+build"></a>
-###### customize.build() ⇒ <code>Promise.&lt;object&gt;</code>
+<a name="module_customize..Customize+buildConfig"></a>
+###### customize.buildConfig() ⇒ <code>Promise.&lt;object&gt;</code>
 Return a promise for the merged configuration.
 This functions is only needed to inspect intermediate configuration results
 (i.e. for testing and documentation purposes)
@@ -392,6 +437,14 @@ Run each engine with its part of the config.
 ##### customize~customize() ⇒ <code>Customize</code>
 **Kind**: inner method of <code>[customize](#module_customize)</code>  
 **Api**: public  
+<a name="jsonschema"></a>
+#### jsonschema
+The configuration file is defined (and validated) by a JSON-schema
+(see [the config-schema file](./config-schema.js)) for details.
+We use the `jsonschema` module for validation, along the the
+`jsonschema-extra`-module, because the JSON can contain functions.
+
+**Kind**: global variable  
 
 
 ## IO/Helpers
