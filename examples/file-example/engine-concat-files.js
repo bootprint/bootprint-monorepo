@@ -1,6 +1,13 @@
 var files = require('../../helpers-io').files
 
 module.exports = {
+  // Optional input schema for engine-configurations
+  // If this is present, the JSON will be validated before being passed into "preprocessConfig"
+  schema: {
+    description: 'Path to a directory containing files',
+    type: 'string'
+  },
+
   // Initial configuration when registering the engine.
   defaultConfig: null,
 
@@ -15,7 +22,7 @@ module.exports = {
 
   // This function is called to determine the files and directories
   // to watch in developmentMode
-  watched: function(config) {
+  watched: function (config) {
     return [
       // The config itself is the directory-path
       config
@@ -39,7 +46,7 @@ module.exports = {
     }
     return {
       // Return a file called "concat.txt"
-      "concat.txt": result
+      'concat.txt': result
     }
   }
 }

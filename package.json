@@ -38,9 +38,6 @@
   "devDependencies": {
     "jasmine": "^2.3.1"
   },
-  "peerDependencies": {
-    "chokidar": "^1.1.0"
-  },
   "standard": {
     "ignore": [
       "spec/fixtures/**"

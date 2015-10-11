@@ -16,6 +16,19 @@ var Q = require('q')
 var deep = require('q-deep')
 var _ = require('lodash')
 
+
+/**
+ * The configuration file is defined (and validated) by a JSON-schema
+ * (see [the config-schema file](./config-schema.js)) for details.
+ * We use the `jsonschema` module for validation, along the the
+ * `jsonschema-extra`-module, because the JSON can contain functions.
+ */
+var jsonschema = require('jsonschema');
+var extra = require('jsonschema-extra');
+var validator = new jsonschema.Validator();
+extra(validator);
+
+
 /**
  * Create a new Customize object with an empty configuration
  *
@@ -107,16 +120,31 @@ function Customize (config, parentConfig, engines) {
 
     // Assert that for each key in the other configuration, there is an engine present
     // Apply engine preprocessor to each config
-    var preprocessedConfig = _.mapValues(config, function (engineConf, key) {
-      var engine = engines[key]
+    var preprocessedConfig = _.mapValues(config, function (engineConf, engineName) {
+      var engine = engines[engineName]
       if (_.isUndefined(engine)) {
-        throw new Error("Engine '" + key + "' not found. Refusing to store configuration")
+        throw new Error("Engine '" + engineName + "' not found. Refusing to store configuration")
       }
       // Load preprocessor with identity as default
       var preprocessor = engine.preprocessConfig || _.identity
       // Watch no files by default (constant [])
       var watched = engine.watched || _.constant([])
+
       return Q(engineConf).then(function(engineConf) {
+        if (engine.schema) {
+          debug("Validating schema for ",engineName);
+          /**
+           * The overriding configuration must validate against the [JSON-schema for configurations](./config-schema.html)
+           * Otherwise we refuse to proceed.
+           */
+          var validationErrors = validator.validate(engineConf, engine.schema).errors;
+          if (validationErrors.length > 0) {
+            console.error("Error while validating config for engine '"+engineName+"': ",engineConf);
+            console.error("Errors: ",validationErrors.map(String).join("\n"));
+            throw new Error("Error while validating options-object",validationErrors);
+          }
+        }
+
         return {
           config: preprocessor(engineConf),
           watched: watched(engineConf)
