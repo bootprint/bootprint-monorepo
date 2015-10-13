@@ -19,7 +19,9 @@
         {{>json-schema/type-object}}
     {{else}}
         {{#ifeq type 'array'}}
-            {{>json-schema/array-items items}}
+            {{#if items}}
+                {{>json-schema/array-items items}}
+            {{/if}}
         {{/ifeq}}
     {{/ifeq}}
 {{else}}
