@@ -4,7 +4,7 @@
 
 ### Fix
 
-* Silently ignore missing `items` tag in `array`-definitionsSilently ignore missing `items` tag in `array`-definitions
+* Silently ignore missing `items` tag in `array`-definitions
 
 ## v0.7.1 - 2015-09-27
 ### Fix
