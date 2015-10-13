@@ -9,6 +9,10 @@
 
 ## v0.7.2 - 2015-10-13 
 
+### Add
+
+* Enums are linked to subschema-definitions, if a property is a swagger-discriminator 
+
 ### Fix
 
 * Silently ignore missing `items` tag in `array`-definitions
