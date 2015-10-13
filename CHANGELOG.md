@@ -1,5 +1,11 @@
 # Release notes
 
+## Upcoming 
+
+### Change 
+
+* The `eachSorted` helper now sorts in a case-insensitive manner. 
+
 ## v0.5.1 - 2015-08-13
 ### Fix
 

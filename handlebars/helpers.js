@@ -3,7 +3,6 @@ var marked = require("marked");
 var cheerio = require("cheerio");
 var highlight = require('highlight.js');
 
-
 highlight.configure({
     "useBR": true
 });
@@ -29,7 +28,7 @@ module.exports = {
      * @returns {string} the uppercase string
      * @api public
      */
-    'toUpperCase': function(value) {
+    'toUpperCase': function (value) {
         return value ? value.toUpperCase() : '';
     },
     /**
@@ -65,19 +64,37 @@ module.exports = {
             return ret;
         }
         var keys = Object.keys(context);
-        keys.sort().forEach(function (key,index) {
+        keys.sort(function (a,b) {
+            // http://stackoverflow.com/questions/8996963/how-to-perform-case-insensitive-sorting-in-javascript
+            a = String(a).toLowerCase();
+            b = String(b).toLowerCase();
+            if( a == b) return 0;
+            if( a > b) return 1;
+            return -1;
+        }).forEach(function (key, index) {
             if (options.data) {
                 data = Handlebars.createFrame(options.data || {});
                 data.index = index;
                 data.key = key;
                 data.length = keys.length;
                 data.first = index === 0;
-                data.last = index === keys.length-1;
+                data.last = index === keys.length - 1;
 
             }
-            ret = ret + options.fn(context[key], { data: data})
+            ret = ret + options.fn(context[key], {data: data})
         });
         return ret
+    },
+
+    /**
+     * Checks whether two values a equal as in (==)
+     * @param value1
+     * @param value2
+     * @returns {boolean}
+     */
+    'equal': function(value1,value2) {
+        console.log(value1,value2,value1==value2);
+        return value1 == value2;
     },
     /**
      * Render a markdown-formatted text as HTML.
@@ -94,7 +111,7 @@ module.exports = {
         var html = marked(value);
         // We strip the surrounding <p>-tag, if
         if (options.hash && options.hash.stripParagraph) {
-            var $ = cheerio("<root>"+ html+"</root>")
+            var $ = cheerio("<root>" + html + "</root>")
             // Only strip <p>-tags and only if there is just one of them.
             if ($.children().length === 1 && $.children('p').length === 1) {
                 html = $.children('p').html()
@@ -153,8 +170,8 @@ module.exports = {
      * There is still the restriction that IDs may only start with letters, which
      * is not addressed by this helper.
      */
-    "htmlId": function(value) {
-        return value.replace(/[^A-Za-z0-9-_:.]/g,"-");
+    "htmlId": function (value) {
+        return value.replace(/[^A-Za-z0-9-_:.]/g, "-");
     }
 };
 
