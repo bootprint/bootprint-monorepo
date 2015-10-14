@@ -1,5 +1,12 @@
 # Release notes
 
+## Upcoming
+
+### Change
+
+* bootprint-swagger#39: Attempting to resolve invalid JSON-references (e.g. for Swagger responses) 
+  now throws an error
+
 ## v0.7.2 - 2015-10-13 
 
 ### Fix

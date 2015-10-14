@@ -18,7 +18,7 @@ module.exports = {
   'json-schema--resolve-ref': function (reference, options) {
     reference = reference.trim()
     if (reference.lastIndexOf('#', 0) < 0) {
-      console.warn('References must start with "#" (but was ' + reference + ')')
+      console.warn('Remote references not supported yet. Reference must start with "#" (but was ' + reference + ')')
       return {}
     }
     var components = reference.split('#')
@@ -31,7 +31,7 @@ module.exports = {
       // Traverse schema from root along the path
       if (hashPart.trim().length > 0) {
         if (typeof current==='undefined') {
-          return undefined;
+          throw new Error("Reference '"+reference+"' cannot be resolved. '"+hashPart+"' is undefined.");
         }
         current = current[hashPart]
       }
