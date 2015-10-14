@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Add
 
 * The constructor of the Customize class can be accessed via `require('customize').Customize`
+* Schema-Validation of engine configurations
 
 ### Change
 
