@@ -63,6 +63,7 @@ module.exports = function (customize) {
     }
   })
 }
+
 ```
 
 
@@ -84,29 +85,29 @@ I'm living in {{shout city}}.
 ```
 
 
-The example also includes a preprocessor (`hb-preprocessor.js`) that calls [the open weather map API](http://openweathermap.org/current#name)
-to determine the current weather in the given city. 
+The example also includes a preprocessor (`hb-preprocessor.js`) that calls 
+[the github API](https://developer.github.com/v3/users/#get-a-single-user)
+to retrieve information about the user. 
 
 ```js
-
 module.exports = function (data) {
   var url = 'https://api.github.com/users/' + data.name
   console.log(url)
   return {
     name: data.name,
     city: data.city,
-    github: require('get-promise')('https://api.github.com/users/nknapp',{
+    github: require('get-promise')('https://api.github.com/users/nknapp', {
       headers: {
-        "User-Agent": "Node"
+        'User-Agent': 'Node'
       }
-    }).get("data").then(JSON.parse)
+    }).get('data').then(JSON.parse)
   }
 }
 
 ```
 
 
-The result is injected into the data as `weather` property and rendered by 
+The result is injected into the data as `github` property and rendered by 
 the `footer.hbs` partial.
 
 ```hbs
@@ -178,6 +179,12 @@ module.exports = {
         console.log("customizeConfig", custOptions.config)
     }
 }
+
+### Asynchronous helpers
+
+The `customize-engine-handlebars` uses the [promised-handlebars](https://npmjs.com/package/promised-handlebars) package as wrapper around Handlebars.
+It allows helpers to return promises instead of real values.
+
 
 
 
