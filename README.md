@@ -40,11 +40,8 @@ This will generate the following output
 
 ```
 { less: 
-   { css: 'div{color:red;background-color:green}',
-     map: '{"version":3,"sources":["/home/nknappmeier/privat/node-libraries/customize-engine-less/examples/main.less"],"names":[],"mappings":"AAGA,IACE,SAAA,CACA"}',
-     imports: 
-      [ '/home/nknappmeier/privat/node-libraries/customize-engine-less/examples/main.less',
-        '/home/nknappmeier/privat/node-libraries/customize-engine-less/examples/override.less' ] } }
+   { 'main.css': 'div{color:red;background-color:green}',
+     'main.css.map': '{"version":3,"sources":["/home/nknappmeier/privat/node-libraries/customize-engine-less/examples/main.less"],"names":[],"mappings":"AAGA,IACE,SAAA,CACA"}' } }
 ```
 
 ##  API-reference
