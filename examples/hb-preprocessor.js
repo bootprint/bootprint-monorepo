@@ -1,10 +1,13 @@
 module.exports = function (data) {
-  var url = 'http://api.openweathermap.org/data/2.5/weather?q=' +
-    data.city +
-    '&units=metric'
+  var url = 'https://api.github.com/users/' + data.name
+  console.log(url)
   return {
     name: data.name,
     city: data.city,
-    weather: require('get-promise')(url).get('data').then(JSON.parse)
+    github: require('get-promise')('https://api.github.com/users/nknapp', {
+      headers: {
+        'User-Agent': 'Node'
+      }
+    }).get('data').then(JSON.parse)
   }
 }

@@ -46,11 +46,9 @@ describe('customize-engine-handlebars', function () {
           'b.md': 'b.md testPartials1/zwei ->two<- helper1(->two<-)'
         }
       })
-
     }).done(next)
   // body
   })
 
-  xit('should throw an exception if loading an existing helpers module fails', function() {
-  })
+  xit('should throw an exception if loading an existing helpers module fails', function () {})
 })

@@ -11,7 +11,7 @@ module.exports = function (customize) {
       preprocessor: 'hb-preprocessor.js',
       // Input data for Handlebars
       data: {
-        name: 'Nils',
+        name: 'nknapp',
         city: 'Darmstadt'
       }
     }

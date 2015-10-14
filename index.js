@@ -58,7 +58,7 @@ var contents = function (partials) {
  * The export of this module is the customize-engine-handlebars
  */
 module.exports = {
-  schema: require("./schema.js"),
+  schema: require('./schema.js'),
 
   defaultConfig: {
     partials: {},
@@ -99,11 +99,11 @@ module.exports = {
    * @param config
    * @returns {string[]}
    */
-  watched : function(config) {
+  watched: function (config) {
     return [
       config.partials,
       config.templates
-    ];
+    ]
   },
 
   /**

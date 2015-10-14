@@ -26,12 +26,13 @@ string into upper-case.
 
 {{{include 'examples/templates/text2.txt.hbs'}}}
 
-The example also includes a preprocessor (`hb-preprocessor.js`) that calls [the open weather map API](http://openweathermap.org/current#name)
-to determine the current weather in the given city. 
+The example also includes a preprocessor (`hb-preprocessor.js`) that calls 
+[the github API](https://developer.github.com/v3/users/#get-a-single-user)
+to retrieve information about the user. 
 
 {{{include 'examples/hb-preprocessor.js'}}}
 
-The result is injected into the data as `weather` property and rendered by 
+The result is injected into the data as `github` property and rendered by 
 the `footer.hbs` partial.
 
 {{{include 'examples/partials/footer.hbs'}}}
@@ -73,5 +74,11 @@ module.exports = {
         console.log("customizeConfig", custOptions.config)
     }
 }
+
+### Asynchronous helpers
+
+The `customize-engine-handlebars` uses the {{npm 'promised-handlebars'}} package as wrapper around Handlebars.
+It allows helpers to return promises instead of real values.
+
 
 

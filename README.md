@@ -57,13 +57,12 @@ module.exports = function (customize) {
       preprocessor: 'hb-preprocessor.js',
       // Input data for Handlebars
       data: {
-        name: 'Nils',
+        name: 'nknapp',
         city: 'Darmstadt'
       }
     }
   })
 }
-
 ```
 
 
@@ -89,14 +88,18 @@ The example also includes a preprocessor (`hb-preprocessor.js`) that calls [the 
 to determine the current weather in the given city. 
 
 ```js
+
 module.exports = function (data) {
-  var url = 'http://api.openweathermap.org/data/2.5/weather?q=' +
-    data.city +
-    '&units=metric'
+  var url = 'https://api.github.com/users/' + data.name
+  console.log(url)
   return {
     name: data.name,
     city: data.city,
-    weather: require('get-promise')(url).get('data').then(JSON.parse)
+    github: require('get-promise')('https://api.github.com/users/nknapp',{
+      headers: {
+        "User-Agent": "Node"
+      }
+    }).get("data").then(JSON.parse)
   }
 }
 
@@ -108,16 +111,17 @@ the `footer.hbs` partial.
 
 ```hbs
 ------
-Weather: {{{weather.weather.0.description}}}
+Github-Name: {{{github.name}}}
 ```
 
 
 The output of this example is:
 
 ```
+https://api.github.com/users/nknapp
 { handlebars: 
-   { 'text1.txt': 'I\'m Nils\n\nI\'m living in Darmstadt.\n\n------\nWeather: light rain',
-     'text2.txt': 'I\'m Nils\n\nI\'m living in DARMSTADT.\n\n------\nWeather: light rain' } }
+   { 'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n------\nGithub-Name: Nils Knappmeier',
+     'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n------\nGithub-Name: Nils Knappmeier' } }
 ```
 
 
@@ -146,16 +150,17 @@ The new `footer.hbs` writes only the current temperature, instead of the weather
 
 ```hbs
 ------
-Temperature: {{{weather.main.temp}}}
+Blog: {{{github.blog}}}
 ```
 
 
 The output of this example is
 
 ```
+https://api.github.com/users/nknapp
 { handlebars: 
-   { 'text1.txt': 'I\'m Nils\n\nI\'m living in Darmstadt.\n\n------\nTemperature: 14.32',
-     'text2.txt': 'I\'m Nils\n\nI\'m living in DARMSTADT.\n\n------\nTemperature: 14.32' } }
+   { 'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n------\nBlog: http://www.knappmeier.de',
+     'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n------\nBlog: http://www.knappmeier.de' } }
 ```
 
 In a similar fashion, we could replace other parts of the configuration, like templates, helpers
