@@ -2,6 +2,10 @@
 
 ## Upcoming 
 
+### Add
+
+* `equal`-helper to compare two values
+
 ### Change 
 
 * The `eachSorted` helper now sorts in a case-insensitive manner. 
