@@ -175,5 +175,4 @@ describe('after loading a module', function () {
   it('array values should exist', function () {
     expect(testResult.test.array).toEqual(['item1', 'item2'])
   })
-
 })

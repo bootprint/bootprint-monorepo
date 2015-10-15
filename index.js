@@ -16,18 +16,16 @@ var Q = require('q')
 var deep = require('q-deep')
 var _ = require('lodash')
 
-
 /**
  * The configuration file is defined (and validated) by a JSON-schema
  * (see [the config-schema file](./config-schema.js)) for details.
  * We use the `jsonschema` module for validation, along the the
  * `jsonschema-extra`-module, because the JSON can contain functions.
  */
-var jsonschema = require('jsonschema');
-var extra = require('jsonschema-extra');
-var validator = new jsonschema.Validator();
-extra(validator);
-
+var jsonschema = require('jsonschema')
+var extra = require('jsonschema-extra')
+var validator = new jsonschema.Validator()
+extra(validator)
 
 /**
  * Create a new Customize object with an empty configuration
@@ -40,7 +38,7 @@ module.exports = customize
  * Exposes the constructor of the `customize` object
  * @type {customize}
  */
-module.exports.Customize = customize;
+module.exports.Customize = customize
 
 /**
  * @returns {Customize}
@@ -107,7 +105,6 @@ function Customize (config, parentConfig, engines) {
       watched: engine.defaultWatched || []
     }
     return new Customize(_defaultConfig, _config, _engines)
-
   }
 
   /**
@@ -136,18 +133,18 @@ function Customize (config, parentConfig, engines) {
       // Watch no files by default (constant [])
       var watched = engine.watched || _.constant([])
 
-      return Q(engineConf).then(function(engineConf) {
+      return Q(engineConf).then(function (engineConf) {
         if (engine.schema) {
-          debug("Validating schema for ",engineName);
+          debug('Validating schema for ', engineName)
           /**
            * The overriding configuration must validate against the [JSON-schema for configurations](./config-schema.html)
            * Otherwise we refuse to proceed.
            */
-          var validationErrors = validator.validate(engineConf, engine.schema).errors;
+          var validationErrors = validator.validate(engineConf, engine.schema).errors
           if (validationErrors.length > 0) {
-            console.error("Error while validating config for engine '"+engineName+"': ",engineConf);
-            console.error("Errors: ",validationErrors.map(String).join("\n"));
-            throw new Error("Error while validating options-object",validationErrors);
+            console.error("Error while validating config for engine '" + engineName + "': ", engineConf)
+            console.error('Errors: ', validationErrors.map(String).join('\n'))
+            throw new Error('Error while validating options-object', validationErrors)
           }
         }
 
@@ -161,10 +158,6 @@ function Customize (config, parentConfig, engines) {
       })
     })
 
-    // Gather to-be-watched files and dirs from each engine
-    var _watched = _.mapValues(config, function(value, key) {
-
-    })
     return new Customize(preprocessedConfig, _config, engines)
   }
 
@@ -197,7 +190,7 @@ function Customize (config, parentConfig, engines) {
    */
   this.buildConfig = function () {
     return deep(_config).then(function (config) {
-      return _.mapValues(config,_.property("config"))
+      return _.mapValues(config, _.property('config'))
     }).then(function (config) {
       debug('Building', config)
       return config
@@ -213,13 +206,12 @@ function Customize (config, parentConfig, engines) {
    */
   this.watched = function () {
     return deep(_config).then(function (config) {
-      return _.mapValues(config,_.property("watched"))
+      return _.mapValues(config, _.property('watched'))
     }).then(function (watchedFileds) {
       debug('Watched files', watchedFileds)
       return watchedFileds
     })
   }
-
 
   /**
    * Run each engine with its part of the config.
@@ -232,7 +224,7 @@ function Customize (config, parentConfig, engines) {
    * @public
    */
   this.run = function (options) {
-    var onlyEngine = options && options.onlyEngine;
+    var onlyEngine = options && options.onlyEngine
     return this.buildConfig().then(function (resolvedConfig) {
       var result = _.mapValues(engines, function (engine, key) {
         // if "onlyEngine" is set to a value, execute on the engine with the same name
@@ -244,8 +236,8 @@ function Customize (config, parentConfig, engines) {
     })
   }
 
-  this.watch = function() {
-    return require("./lib/watcher.js")(this, _config);
+  this.watch = function () {
+    return require('./lib/watcher.js')(this, _config)
   }
 }
 
@@ -312,5 +304,4 @@ function customOverrider (a, b, propertyName) {
       return _.merge({}, {x: _a}, {x: _b}, customOverrider).x
     })
   }
-
 }
