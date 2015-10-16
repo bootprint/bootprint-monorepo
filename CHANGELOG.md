@@ -1,6 +1,6 @@
 # Release notes
 
-## Upcoming
+## v0.8.1 - 2015-10-17
 
 ### Add
 
