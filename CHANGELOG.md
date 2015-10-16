@@ -1,5 +1,11 @@
 # Release notes
 
+## Upcoming
+
+### Add
+
+* Enums are linked to subschema-definitions, if a property is a swagger-discriminator
+
 ## v0.8.0 - 2015-10-14
 
 ### Change
