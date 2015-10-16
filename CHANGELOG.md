@@ -2,6 +2,12 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Upcoming
+
+### Fix
+
+* Only allow strings in list of watched files. Ignore undefined file-paths.
+
 ## v0.4.0 - 2015-10-14
 
 ### Add
