@@ -150,7 +150,7 @@ function Customize (config, parentConfig, engines) {
 
         return {
           config: preprocessor(engineConf),
-          watched: watched(engineConf)
+          watched: watched(engineConf).filter(_.isString)
         }
       }).then(function (config) {
         debug('Merging preprocessed config', config)
