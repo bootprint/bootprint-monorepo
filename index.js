@@ -304,4 +304,6 @@ function customOverrider (a, b, propertyName) {
       return _.merge({}, {x: _a}, {x: _b}, customOverrider).x
     })
   }
+
+  // Non of these options apply. Implicit "undefined" return value to invoke default overrider.
 }
