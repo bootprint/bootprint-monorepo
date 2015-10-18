@@ -42,6 +42,11 @@
       "spec/fixtures/**"
     ]
   },
+  "files": [
+    "lib",
+    "index.js",
+    "helper-io.js"
+  ],
   "keywords": [],
   "devDependencies": {
     "chai": "^3.3.0",

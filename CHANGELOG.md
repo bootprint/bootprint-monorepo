@@ -2,6 +2,12 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Upcoming
+
+### Fix
+
+* Add `files`-property to package.json
+
 ## v0.4.2 - 2015-10-18
 
 ### Fix
