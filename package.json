@@ -47,5 +47,9 @@
       "spec/fixtures/**"
     ]
   },
+  "files": [
+    "index.js",
+    "schema.js"
+  ],
   "keywords": []
 }
