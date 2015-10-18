@@ -45,7 +45,7 @@
   "files": [
     "lib",
     "index.js",
-    "helper-io.js"
+    "helpers-io.js"
   ],
   "keywords": [],
   "devDependencies": {
