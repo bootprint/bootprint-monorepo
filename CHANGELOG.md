@@ -2,6 +2,12 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Upcoming
+
+## Fix
+
+* Fix `files`-property 
+
 ## v0.4.3 - 2015-10-19
 
 ### Fix
