@@ -288,6 +288,7 @@ Create a new Customize object with an empty configuration
 * [customize](#module_customize)
   * _static_
     * [.Customize](#module_customize.Customize) : <code>customize</code>
+    * [.overrider](#module_customize.overrider) : <code>customOverrider</code>
     * [.withParent](#module_customize.withParent)
     * [.leaf](#module_customize.leaf) ⇒ <code>Promise</code>
   * _inner_
@@ -304,6 +305,11 @@ Create a new Customize object with an empty configuration
 <a name="module_customize.Customize"></a>
 ##### customize.Customize : <code>customize</code>
 Exposes the constructor of the `customize` object
+
+**Kind**: static property of <code>[customize](#module_customize)</code>  
+<a name="module_customize.overrider"></a>
+##### customize.overrider : <code>customOverrider</code>
+Custom overrider-function (that is used as `customizer` in (lodash#merge)[https://lodash.com/docs#merge]
 
 **Kind**: static property of <code>[customize](#module_customize)</code>  
 <a name="module_customize.withParent"></a>
