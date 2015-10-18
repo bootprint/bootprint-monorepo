@@ -28,5 +28,10 @@
   },
   "devDependencies": {
     "jasmine": "^2.3.1"
-  }
+  },
+  "files": [
+    "handlebars",
+    "less",
+    "index.js"
+  ]
 }

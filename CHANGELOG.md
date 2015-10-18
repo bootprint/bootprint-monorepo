@@ -1,5 +1,11 @@
 # Release notes
 
+## Upcoming
+
+# Fix
+
+* Add `files`-property to package.json
+
 ## v0.6.0 - 2015-10-15 
 
 ### Add
