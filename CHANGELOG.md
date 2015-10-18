@@ -2,6 +2,13 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Upcoming
+
+### Fix
+
+* Remove unused dependencies
+* Use `mocha`-`chai` as testing framework.
+
 ## v0.4.1 - 2015-10-16
 
 ### Fix
