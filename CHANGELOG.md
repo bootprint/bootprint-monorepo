@@ -2,6 +2,12 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Upcoming 
+
+## Add
+
+* Adapt to `customize@0.4.2`. Expose `overrider`
+
 ## v0.3.0 - 2015-10-15
 
 ### Add

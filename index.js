@@ -14,6 +14,7 @@ module.exports = function watcher () {
 }
 
 module.exports.Customize = Recustomize;
+module.exports.overrider = customize.overrider;
 
 /**
  * Recustomize has the same interface as Customize, but instead of storing
