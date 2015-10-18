@@ -39,7 +39,7 @@
   },
   "standard": {
     "ignore": [
-      "spec/fixtures/**"
+      "test/fixtures/**"
     ]
   },
   "files": [
