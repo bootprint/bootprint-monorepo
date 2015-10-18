@@ -7,6 +7,7 @@
 
 /* global describe */
 /* global it */
+/* global before */
 
 // /* global xdescribe */
 // /* global xit */

@@ -1,6 +1,6 @@
 var _ = require('lodash')
-var files = require('../lib/files')
-var leaf = require('../lib/leaf')
+var files = require('../helpers-io').files
+var leaf = require('../').leaf
 var Q = require('q')
 
 module.exports = {

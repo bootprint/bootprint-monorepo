@@ -1,6 +1,6 @@
 var _ = require('lodash')
 
-var files = require('../lib/files.js')
+var files = require('../helpers-io').files
 var deep = require('q-deep')
 var overrider = require('../').overrider
 var expect = require('chai').expect

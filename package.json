@@ -18,7 +18,7 @@
   "license": "MIT",
   "scripts": {
     "pretest": "standard --version || npm -g install standard",
-    "test": "jasmine && standard",
+    "test": "mocha && standard",
     "preformat": "standard --version || npm -g install standard",
     "format": "standard --format",
     "thought": "thought run -a",

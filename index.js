@@ -46,7 +46,6 @@ module.exports.Customize = Customize
  */
 module.exports.overrider = customOverrider
 
-
 /**
  * @returns {Customize}
  * @api public
@@ -312,5 +311,5 @@ function customOverrider (a, b, propertyName) {
     })
   }
 
-  // Non of these options apply. Implicit "undefined" return value to invoke default overrider.
+// Non of these options apply. Implicit "undefined" return value to invoke default overrider.
 }
