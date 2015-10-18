@@ -38,7 +38,14 @@ module.exports = customize
  * Exposes the constructor of the `customize` object
  * @type {customize}
  */
-module.exports.Customize = customize
+module.exports.Customize = Customize
+
+/**
+ * Custom overrider-function (that is used as `customizer` in (lodash#merge)[https://lodash.com/docs#merge]
+ * @type {customOverrider}
+ */
+module.exports.overrider = customOverrider
+
 
 /**
  * @returns {Customize}

@@ -7,24 +7,20 @@
 
 /* global describe */
 /* global it */
-/* global expect */
-/* global jasmine */
-/* global beforeAll */
 
 // /* global xdescribe */
 // /* global xit */
 
 'use strict'
 
+var expect = require('chai').expect
 var customize = require('../')
-
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000000
 
 var ro1 = customize()
   .registerEngine('test', require('./testEngine.js'))
   .merge({
     test: {
-      files: 'spec/fixtures/testPartials1',
+      files: 'test/fixtures/testPartials1',
       objects: {
         a: {x: 'x1', y: 'y1'},
         b: {x: 'x1', y: 'y1'}
@@ -39,50 +35,51 @@ var ro1 = customize()
   })
 
 describe('After loading a config', function () {
+  this.timeout(10000)
+
   var testResult = null
-  beforeAll(function (next) {
-    ro1.run()
-      .then(function (result) {
-        testResult = result
-      })
-      .done(next)
+  before(function () {
+    return ro1.run().then(function (result) {
+      testResult = result
+    })
   })
+
   it('the `files`-function should load contents from files', function () {
-    expect(testResult.test.files).toEqual({
+    expect(testResult.test.files).to.eql({
       'eins.hbs': {
-        path: 'spec/fixtures/testPartials1/eins.hbs',
+        path: 'test/fixtures/testPartials1/eins.hbs',
         contents: 'testPartials1/eins {{eins}}'
       },
       'zwei.hbs': {
-        path: 'spec/fixtures/testPartials1/zwei.hbs',
+        path: 'test/fixtures/testPartials1/zwei.hbs',
         contents: 'testPartials1/zwei {{zwei}}'
       }
     })
   })
   it('object values should exist', function () {
-    expect(testResult.test.objects).toEqual({
+    expect(testResult.test.objects).to.eql({
       a: {x: 'x1', y: 'y1'},
       b: {x: 'x1', y: 'y1'}
     })
   })
   it('leaf values should exist', function () {
-    expect(testResult.test.leafs).toEqual({
+    expect(testResult.test.leafs).to.eql({
       a: {x: 'x1', y: 'y1'},
       b: {x: 'x1', y: 'y1'}
     })
   })
   it('array values should exist', function () {
-    expect(testResult.test.array).toEqual(['item1'])
+    expect(testResult.test.array).to.eql(['item1'])
   })
 })
 
 describe('After merging another config', function () {
   var testResult = null
-  beforeAll(function (next) {
-    ro1
+  before(function () {
+    return ro1
       .merge({
         test: {
-          files: 'spec/fixtures/testPartials2',
+          files: 'test/fixtures/testPartials2',
           objects: {
             b: {
               y: 'y2'
@@ -100,79 +97,78 @@ describe('After merging another config', function () {
       .then(function (result) {
         testResult = result
       })
-      .done(next)
   })
 
   it('the files should be overridden on a per-file basis', function () {
-    expect(testResult.test.files).toEqual({
+    expect(testResult.test.files).to.eql({
       'eins.hbs': {
-        path: 'spec/fixtures/testPartials1/eins.hbs',
+        path: 'test/fixtures/testPartials1/eins.hbs',
         contents: 'testPartials1/eins {{eins}}'
       },
       'zwei.hbs': {
-        path: 'spec/fixtures/testPartials2/zwei.hbs',
+        path: 'test/fixtures/testPartials2/zwei.hbs',
         contents: 'testPartials2/zwei {{zwei}}'
       },
       'drei.hbs': {
-        path: 'spec/fixtures/testPartials2/drei.hbs',
+        path: 'test/fixtures/testPartials2/drei.hbs',
         contents: 'testPartials2/drei {{drei}}'
       }
     })
   })
   it('object values should be deep merged', function () {
-    expect(testResult.test.objects).toEqual({
+    expect(testResult.test.objects).to.eql({
       a: {x: 'x1', y: 'y1'},
       b: {x: 'x1', y: 'y2'}
     })
   })
   it('leaf values should be replaced', function () {
-    expect(testResult.test.leafs).toEqual({
+    expect(testResult.test.leafs).to.eql({
       a: {x: 'x1', y: 'y1'},
       b: {y: 'y2'}
     })
   })
   it('array values should exist', function () {
-    expect(testResult.test.array).toEqual(['item1', 'item2'])
+    expect(testResult.test.array).to.eql(['item1', 'item2'])
   })
 })
 
 describe('after loading a module', function () {
   var testResult = null
-  beforeAll(function (next) {
+  before(function () {
     // Load a configuration-module
-    ro1
+    return ro1
       .load(require('./fixtures/module/index.js'))
       .run()
       .then(function (result) {
         testResult = result
-      }).done(next)
+      })
   })
 
   it('the files should be overridden on a per-file basis', function () {
-    expect(testResult.test.files).toEqual({
+    expect(testResult.test.files).to.eql({
       'eins.hbs': {
-        path: 'spec/fixtures/testPartials1/eins.hbs',
+        path: 'test/fixtures/testPartials1/eins.hbs',
         contents: 'testPartials1/eins {{eins}}'
       },
       'zwei.hbs': {
-        path: 'spec/fixtures/module/files/zwei.hbs',
+        path: 'test/fixtures/module/files/zwei.hbs',
         contents: 'module-partials/zwei {{zwei}}'
       }
     })
   })
   it('object values should be deep merged', function () {
-    expect(testResult.test.objects).toEqual({
+    expect(testResult.test.objects).to.eql({
       a: {x: 'x1', y: 'y1'},
       b: {x: 'x1', y: 'y2'}
     })
   })
   it('leaf values should be replaced', function () {
-    expect(testResult.test.leafs).toEqual({
+    expect(testResult.test.leafs).to.eql({
       a: {x: 'x1', y: 'y1'},
       b: {y: 'y2'}
     })
   })
   it('array values should exist', function () {
-    expect(testResult.test.array).toEqual(['item1', 'item2'])
+    expect(testResult.test.array).to.eql(['item1', 'item2'])
   })
 })
