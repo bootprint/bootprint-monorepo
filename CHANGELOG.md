@@ -2,6 +2,15 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+
+## Upcoming
+
+### Fix
+
+* Add `files`-property to package.json
+* Added missing `helpers-io.js` file 
+* Include complete testsuite of `customize` to ensure compatibility 
+
 ## v0.4.0 - 2015-10-18 
 
 ## Add

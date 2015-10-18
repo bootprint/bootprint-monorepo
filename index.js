@@ -13,8 +13,14 @@ module.exports = function watcher () {
   return new Recustomize(customize)
 }
 
-module.exports.Customize = Recustomize;
-module.exports.overrider = customize.overrider;
+var key
+for (key in customize) {
+  if (customize.hasOwnProperty(key)) {
+    module.exports[key] = customize[key]
+  }
+}
+
+module.exports.Customize = Recustomize
 
 /**
  * Recustomize has the same interface as Customize, but instead of storing
