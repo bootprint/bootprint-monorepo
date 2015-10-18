@@ -18,8 +18,7 @@
   "homepage": "https://github.com/nknapp/bootprint-base",
   "dependencies": {
     "bootstrap": "^3.3.2",
-    "cheerio": "^0.18.0",
-    "handlebars": "^3.0.0",
+    "cheerio": "^0.19.0",
     "highlight.js": "^8.4.0",
     "json-stable-stringify": "^1.0.0",
     "marked": "^0.3.3"
