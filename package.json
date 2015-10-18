@@ -22,5 +22,10 @@
   },
   "dependencies": {
     "bootprint-base": "<1.0.0"
-  }
+  },
+  "files": [
+    "handlebasr",
+    "less",
+    "index.js"
+  ]
 }
