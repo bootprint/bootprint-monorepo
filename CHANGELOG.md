@@ -4,7 +4,7 @@
 
 # Fix
 
-* Typo in `files`-property, causing the build to be broken
+* Typo in `files`-property, causing the build to be broken (Thanks @davoad for PR #6)
 
 ## v0.8.2 - 2015-10-19 (BROKEN)
 
