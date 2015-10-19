@@ -1,6 +1,12 @@
 # Release notes
 
-## v0.8.2 - 2015-10-19
+## Upcoming
+
+# Fix
+
+* Typo in `files`-property, causing the build to be broken
+
+## v0.8.2 - 2015-10-19 (BROKEN)
 
 # Fix
 
