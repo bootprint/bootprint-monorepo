@@ -1,5 +1,11 @@
 # Release notes
 
+## Upcoming
+
+# Fix
+
+* Re-add missing Handlebars-dependency
+
 ## v0.6.1 - 2015-10-19
 
 # Fix
