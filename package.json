@@ -1,6 +1,6 @@
 {
   "name": "bootprint-base",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "The base configuration used by other Bootprint modules",
   "main": "index.js",
   "scripts": {
