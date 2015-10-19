@@ -1,6 +1,6 @@
 # Release notes
 
-## Upcoming
+## v0.6.2 - 2015-10-19
 
 # Fix
 
