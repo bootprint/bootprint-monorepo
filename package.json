@@ -24,7 +24,7 @@
     "bootprint-base": "<1.0.0"
   },
   "files": [
-    "handlebasr",
+    "handlebars",
     "less",
     "index.js"
   ]
