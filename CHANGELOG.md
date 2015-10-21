@@ -2,11 +2,19 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Upcoming
+
+### Change/Fix
+ 
+* The `files`-function of `require('customize/helpers-io')` now always returns paths
+  in POSIX-style, that are separated by slashes and not backslashed (even on Windows)
+  (see [bootprint-swagger#42](https://github.com/nknapp/bootprint-swagger/issues/42#issuecomment-149803466))
+
 ## v0.4.4 - 2015-10-19
 
-## Fix
+### Fix
 
-* Fix `files`-property 
+* Fix `files`-property in package.json 
 
 ## v0.4.3 - 2015-10-19
 
