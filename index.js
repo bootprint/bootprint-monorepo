@@ -181,10 +181,18 @@ function Customize (config, parentConfig, engines) {
    * @public
    */
   this.load = function (customizeModule) {
+    // Container for configuration metadata (e.g. versions of loaded modules)
+    var _metadata = {
+      config: {
+        modules: []
+      }
+    };
     if (customizeModule.package) {
       console.log('Loading', customizeModule.package.name, customizeModule.package.version)
+      _metadata.config.modules.push(customizeModule.package);
     }
-    return customizeModule(this)
+
+    return customizeModule( new Customize({ _metadata: _metadata}, _config, engines));
   }
 
   /**

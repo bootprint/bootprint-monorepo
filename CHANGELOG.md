@@ -2,6 +2,12 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Upcoming
+
+### Add
+
+* Include `package.json` of loaded modules in `_metadata` in configuration. (Can be access using the `buildConfig()`-method)
+
 ## v0.5.0 - 2015-10-21
 
 ### Change/Fix
