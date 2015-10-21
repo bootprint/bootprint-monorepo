@@ -17,9 +17,6 @@
     "url": "https://github.com/nknapp/bootprint-json-schema/issues"
   },
   "homepage": "https://github.com/nknapp/bootprint-json-schema",
-  "peerDependencies": {
-    "bootprint": "<1.0.0"
-  },
   "dependencies": {
     "bootprint-base": "<1.0.0"
   },
