@@ -24,9 +24,6 @@
     "json-stable-stringify": "^1.0.0",
     "marked": "^0.3.3"
   },
-  "peerDependencies": {
-    "bootprint": "<1.0.0"
-  },
   "devDependencies": {
     "jasmine": "^2.3.1"
   },
