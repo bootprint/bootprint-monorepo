@@ -186,13 +186,13 @@ function Customize (config, parentConfig, engines) {
       config: {
         modules: []
       }
-    };
+    }
     if (customizeModule.package) {
       console.log('Loading', customizeModule.package.name, customizeModule.package.version)
-      _metadata.config.modules.push(customizeModule.package);
+      _metadata.config.modules.push(customizeModule.package)
     }
 
-    return customizeModule( new Customize({ _metadata: _metadata}, _config, engines));
+    return customizeModule(new Customize({ _metadata: _metadata }, _config, engines))
   }
 
   /**
