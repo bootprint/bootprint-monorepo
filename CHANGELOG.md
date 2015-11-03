@@ -2,6 +2,12 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Upcoming 
+
+# Fix
+
+* Add missing dependency on `debug`
+
 ## v0.5.2 - 2015-10-19
 
 # Fix

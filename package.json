@@ -28,6 +28,7 @@
     "preversion": "npm run thoughtcheck"
   },
   "dependencies": {
+    "debug": "^2.2.0",
     "handlebars": "^3.0.3",
     "lodash": "^3.9.3",
     "promised-handlebars": "^1.0.0",
