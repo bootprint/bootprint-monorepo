@@ -3,7 +3,7 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## Upcoming
+## v0.4.2 - 2015-11-08
 
 ### Fix
 
