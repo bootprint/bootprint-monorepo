@@ -69,10 +69,16 @@ function customize () {
  * @constructor
  */
 function Customize (config, parentConfig, engines) {
+
   var _config = _.merge({}, parentConfig, config, customOverrider)
-  deep(_config).done(function (config) {
-    debugState('New configuration', config)
-  })
+  // Debug logging
+  if (debugState.enabled) {
+    deep(_config).done(function (config) {
+      debugState('New configuration', config)
+    },function(e) {
+      console.error("Error while debug-logging the built configuration " + e.stack)
+    })
+  }
 
   /**
    * Register an engine an engine

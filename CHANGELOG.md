@@ -2,6 +2,12 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Upcoming
+
+### Fix
+
+* Exception-Handling for DEBUG=customize:state
+
 ## v0.6.0 - 2015-10-22
 
 ### Add
