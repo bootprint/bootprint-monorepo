@@ -1,6 +1,6 @@
 {
   "name": "customize-write-files",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Post-processor that stores the result of a customize-run in a local directory",
   "repository": {
     "type": "git",
