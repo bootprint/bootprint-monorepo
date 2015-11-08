@@ -32,7 +32,9 @@ var contents = function (partials) {
  * @property {string} templates path to a directory containing templates. Handlebars is called with each `.hbs`-file
  *   as template. The result of the engine consists of an object with a property for each template and the
  *   Handlebars result for this template as value.
- * @property {object} data a javascript-object to use as input for handlebars
+ * @property {string|object|function} data a javascript-object to use as input for handlebars. Same as with the `helpers`,
+ *   it is also acceptable to specify the path to a module exporting the data and a function computing
+ *   the data.
  * @property {function|string} preprocessor a function that takes the input data as first parameter and
  *   transforms it into another object or the promise for an object. It the input data is a promise itself,
  *   is resolved before calling this function. If the preprocessor is overridden, the parent
@@ -42,17 +44,17 @@ var contents = function (partials) {
  */
 
 /**
-  * @typedef {object} InternalHbsConfig the internal configuration object that
-  *   is passed into the merge function.
-  * @property {object<{path:string,contents:string}>} partials the Handlebars partials that should be registered
-  * @property {object<function> helpers the Handlebars helpers that should be registered
-  * @property {object<{path:string,contents:string}>} templates
-  * @property {object} data the data object to render with Handlebars
-  * @property {function(object): (object|Promise<object>)} preprocessor
-  *    preprocessor for the handlebars data
-  * @property {object} hbsOptions options to pass to `Handlebars.compile`.
-  * @private
-  */
+ * @typedef {object} InternalHbsConfig the internal configuration object that
+ *   is passed into the merge function.
+ * @property {object<{path:string,contents:string}>} partials the Handlebars partials that should be registered
+ * @property {object<function> helpers the Handlebars helpers that should be registered
+ * @property {object<{path:string,contents:string}>} templates
+ * @property {object} data the data object to render with Handlebars
+ * @property {function(object): (object|Promise<object>)} preprocessor
+ *    preprocessor for the handlebars data
+ * @property {object} hbsOptions options to pass to `Handlebars.compile`.
+ * @private
+ */
 
 /**
  * The export of this module is the customize-engine-handlebars
@@ -75,19 +77,24 @@ module.exports = {
    * @return {InternalHbsConfig} the configuration that is passed into the merging process
    *    later expected as parameter to the main function of the engine
    */
-  preprocessConfig: function preprocessConfig (config) {
-    var helpers = moduleIfString(config.helpers, 'hb-helpers')
+  preprocessConfig: function preprocessConfig(config) {
+    var helpers = moduleIfString(config.helpers, 'helpers')
     // The helpers file may export an object or a promise for an object.
     // Or a function returning an object or a promise for an object.
     // If it's a function, use the result instead.
     helpers = _.isFunction(helpers) ? helpers() : helpers
 
-    var preprocessor = moduleIfString(config.preprocessor, 'hb-preprocessor')
+    var preprocessor = moduleIfString(config.preprocessor, 'preprocessor')
+
+    // The `data` is handled just like the helpers.
+    var data = moduleIfString(config.data, 'data');
+    data = _.isFunction(data) ? data() : data;
+
     return {
       partials: files(config.partials),
       helpers: helpers,
       templates: files(config.templates),
-      data: config.data,
+      data: data,
       preprocessor: preprocessor && customize.withParent(preprocessor),
       hbsOptions: config.hbsOptions
     }
@@ -100,17 +107,27 @@ module.exports = {
    * @returns {string[]}
    */
   watched: function (config) {
-    return [
+    return _.flatten([
       config.partials,
-      config.templates
-    ]
+      config.templates,
+      // The data (in case it's a string)
+      config.data,
+      // The data.watch-files (in case `data` is a function)
+      _.isFunction(config.data) && config.data.watch,
+      // The helpers file (in case it's a string)
+      config.helpers,
+      // The helpers.watch-files (in case `helpers` is a function)
+      _.isFunction(config.helpers) && config.helpers.watch,
+      // The preprocessor (in case it's a string)
+      config.preprocessor
+    ]).filter(_.isString);
   },
 
   /**
    * Runs Handlebars with the data object
    * @param {InternalHbsConfig} config the configuration
    */
-  run: function run (config) {
+  run: function run(config) {
     // Run the preprocessor
     return Q(config.preprocessor(config.data))
       // Resolve any new promises
@@ -145,7 +162,7 @@ module.exports = {
  * @returns {string} the filename without .hbs
  * @private
  */
-function stripHandlebarsExt (value, key) {
+function stripHandlebarsExt(value, key) {
   return key.replace(/\.(handlebars|hbs)$/, '')
 }
 
@@ -162,7 +179,7 @@ function stripHandlebarsExt (value, key) {
  * @returns {*}
  * @private
  */
-function moduleIfString (pathOrObject, type) {
+function moduleIfString(pathOrObject, type) {
   // If this is a string, treat if as module to be required
   try {
     if (_.isString(pathOrObject)) {
@@ -179,7 +196,11 @@ function moduleIfString (pathOrObject, type) {
   }
 
   // Require module if needed
-  pathOrObject = _.isString(pathOrObject) ? require(path.resolve(pathOrObject)) : pathOrObject
+  if (_.isString(pathOrObject)) {
+    var absPath = path.resolve(pathOrObject);
+    delete require.cache[absPath];
+    pathOrObject = require(absPath);
+  }
   return pathOrObject
 }
 
@@ -190,7 +211,7 @@ function moduleIfString (pathOrObject, type) {
  * @param {Handlebars} hbs the current handlebars engine
  * @param {object} hbsOptions the options of the Handlebars engine
  */
-function addEngine (helpers, hbs, hbsOptions) {
+function addEngine(helpers, hbs, hbsOptions) {
   hbs.logger.level = 0
   // Provide the engine as last parameter to all helpers in order to
   // enable things like calling partials from a helper.

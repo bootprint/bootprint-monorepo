@@ -2,6 +2,15 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Upcoming
+
+### Add
+
+* Possibility to pass a file-path as `data` property to reference a CommonJS-module 
+  containing a helper object, or passing function generating the `data`-object.
+* File-watcher for `data`, `helpers` and `preprocessor` as long as they are files or functions with a `watch`-property.
+  
+
 ## v0.5.3 - 2015-11-03 
 
 # Fix
