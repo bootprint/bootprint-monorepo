@@ -1,6 +1,6 @@
 {
   "name": "customize",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "A simple framework to create customizable engines",
   "repository": {
     "type": "git",
