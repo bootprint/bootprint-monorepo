@@ -81,6 +81,10 @@ function customizeWriteFiles (customizeResult, targetDir) {
  */
 
 function writePromised (filename, contents) {
+  // Ignore undefined contents
+  if (contents == null) {
+    return;
+  }
   if (typeof contents === 'string' || Buffer.isBuffer(contents)) {
     return writeBufferOrString(filename, contents)
   } else if (typeof contents.pipe === 'function') {
