@@ -13,19 +13,21 @@ npm install customize-engine-handlebars
 
 The following example demonstrates how to use this module:
 
-<pre><code>examples/
+<pre><code>
+
 ├── config-module.js
 ├── example-merge.js
 ├── example.js
 ├── hb-helpers.js
 ├── hb-preprocessor.js
-├── partials/
-│   └── footer.hbs
-├── partials2/
-│   └── footer.hbs
-└── templates/
-    ├── text1.txt.hbs
-    └── text2.txt.hbs</code></pre>
+├─┬ partials
+│ └── footer.hbs
+├─┬ partials2
+│ └── footer.hbs
+└─┬ templates
+  ├── text1.txt.hbs
+  └── text2.txt.hbs
+</code></pre>
 
 ### Configuration
 
@@ -179,6 +181,7 @@ module.exports = {
         console.log("customizeConfig", custOptions.config)
     }
 }
+```
 
 ### Asynchronous helpers
 
