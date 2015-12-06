@@ -26,16 +26,18 @@ npm install customize
 The following example should demonstrate the usage of Customize and the `files` 
 io-helper. Consider the following file tree
 
-<pre><code>file-example/
-├── dir1/
-│   ├── a.md
-│   └── b.md
-├── dir2/
-│   └── a.md
+<pre><code>
+
+├─┬ dir1
+│ ├── a.md
+│ └── b.md
+├─┬ dir2
+│ └── a.md
 ├── engine-concat-files.js
 ├── example-buildConfig.js
 ├── example1.js
-└── example2.js</code></pre>
+└── example2.js
+</code></pre>
 
 ### Creating an engine
 
@@ -187,16 +189,18 @@ company's style-guide.
 We can do this, by merging another configuration, but let's have a look at the directory
 tree before doing this:
 
-<pre><code>file-example/
-├── dir1/
-│   ├── a.md
-│   └── b.md
-├── dir2/
-│   └── a.md
+<pre><code>
+
+├─┬ dir1
+│ ├── a.md
+│ └── b.md
+├─┬ dir2
+│ └── a.md
 ├── engine-concat-files.js
 ├── example-buildConfig.js
 ├── example1.js
-└── example2.js</code></pre>
+└── example2.js
+</code></pre>
 
 You can see that the second directory contains a file `a.md`. We will use this file to
 replace the file of the first directory.
