@@ -2,6 +2,7 @@
  * Returns a JSON-Schema for the configuration object.
  */
 module.exports = {
+  description: 'The configuration schema of the "customize-engine-less"',
   definitions: {
     'stringArray': {
       type: 'array',

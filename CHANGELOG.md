@@ -2,9 +2,13 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## v0.2.1 - 2015-10-19
+## Upcoming
+### Fix
 
-# Fix
+* Added description to `schema.js`
+
+## v0.2.1 - 2015-10-19
+### Fix
 
 * Add `files`-property to package.json
 
