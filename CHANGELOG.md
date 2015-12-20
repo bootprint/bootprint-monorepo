@@ -2,7 +2,7 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Upcoming
+## v0.2.2 - 2015-12-20
 ### Fix
 
 * Added description to `schema.js`
