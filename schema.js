@@ -2,6 +2,7 @@
  * Returns a JSON-Schema for the configuration object.
  */
 module.exports = {
+  description: 'The configuration schema of the "customize-engine-handlebars"',
   definitions: {
     'stringArray': {
       type: 'array',
@@ -12,11 +13,11 @@ module.exports = {
   },
   properties: {
     'templates': {
-      description: 'Path to a directory containing Handlebars-templates',
+      description: 'Path to a directory tree containing Handlebars-templates',
       type: 'string'
     },
     'partials': {
-      description: 'Path to a directory containing Handlebars-partials',
+      description: 'Path to a directory tree containing Handlebars-partials',
       type: 'string'
     },
     'helpers': {

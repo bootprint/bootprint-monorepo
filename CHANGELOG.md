@@ -2,6 +2,12 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Upcoming
+
+### Fix
+
+* Added description to `schema.js`
+
 ## v0.6.0 - 2015-11-08
 
 ### Add
