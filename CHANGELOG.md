@@ -2,6 +2,12 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Upcoming
+
+### Add
+
+* Added a `.configSchema()` method that creates the JSON schema required for input configurations.
+
 ## v0.6.1 - 2015-11-08
 
 ### Fix
