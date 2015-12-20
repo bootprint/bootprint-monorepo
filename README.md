@@ -299,6 +299,7 @@ Create a new Customize object with an empty configuration
     * [~Customize](#module_customize..Customize)
       * [new Customize()](#new_module_customize..Customize_new)
       * [.registerEngine(id, engine)](#module_customize..Customize+registerEngine)
+      * [.configSchema()](#module_customize..Customize+configSchema)
       * [.merge(config)](#module_customize..Customize+merge) ⇒ <code>Customize</code>
       * [.load(customizeModule)](#module_customize..Customize+load) ⇒ <code>Customize</code>
       * [.buildConfig()](#module_customize..Customize+buildConfig) ⇒ <code>Promise.&lt;object&gt;</code>
@@ -350,6 +351,7 @@ Promised object values will not be merged but replaced.
   * [~Customize](#module_customize..Customize)
     * [new Customize()](#new_module_customize..Customize_new)
     * [.registerEngine(id, engine)](#module_customize..Customize+registerEngine)
+    * [.configSchema()](#module_customize..Customize+configSchema)
     * [.merge(config)](#module_customize..Customize+merge) ⇒ <code>Customize</code>
     * [.load(customizeModule)](#module_customize..Customize+load) ⇒ <code>Customize</code>
     * [.buildConfig()](#module_customize..Customize+buildConfig) ⇒ <code>Promise.&lt;object&gt;</code>
@@ -381,6 +383,12 @@ Register an engine an engine
 | id | <code>string</code> | the identifier of the engine. This identifier is also used  within the config as key within the configuration object to identify the  sub-configuration stored for this engine. |
 | engine | <code>Object</code> | a customize engine that is registered |
 
+<a name="module_customize..Customize+configSchema"></a>
+###### customize.configSchema()
+Returns the JSON-schema that configuration objects must match for this
+configuration. The schema does not contain main description property
+
+**Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
 <a name="module_customize..Customize+merge"></a>
 ###### customize.merge(config) ⇒ <code>Customize</code>
 Creates a new instance of Customize. The configuration values of the current Customize
