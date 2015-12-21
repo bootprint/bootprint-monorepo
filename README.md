@@ -62,6 +62,7 @@ as argument, every time the computation has finished.
     * [.merge](#Recustomize+merge)
     * [.registerEngine](#Recustomize+registerEngine)
     * [.load](#Recustomize+load)
+    * [.configSchema()](#Recustomize+configSchema) : <code>function</code>
     * [.buildConfig()](#Recustomize+buildConfig) ⇒ <code>Promise.&lt;object&gt;</code>
     * [.watched()](#Recustomize+watched) ⇒ <code>Promise.&lt;object.&lt;Array.&lt;string&gt;&gt;&gt;</code>
     * [.watch()](#Recustomize+watch) ⇒ <code>EventEmitter</code>
@@ -99,6 +100,11 @@ Wrapped function. See [customize](https://github.com/nknapp/customize) for detai
 
 **Kind**: instance property of <code>[Recustomize](#Recustomize)</code>  
 **Api**: private  
+<a name="Recustomize+configSchema"></a>
+#### recustomize.configSchema() : <code>function</code>
+Wrapped function. See [customize](https://github.com/nknapp/customize) for details
+
+**Kind**: instance method of <code>[Recustomize](#Recustomize)</code>  
 <a name="Recustomize+buildConfig"></a>
 #### recustomize.buildConfig() ⇒ <code>Promise.&lt;object&gt;</code>
 Return the configuation object
