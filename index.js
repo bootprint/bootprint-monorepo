@@ -122,16 +122,16 @@ function Customize (config, parentConfig, engines) {
    * Returns the JSON-schema that configuration objects must match for this
    * configuration. The schema does not contain main description property
    */
-  this.configSchema = function() {
+  this.configSchema = function () {
     return {
-      "id": "http://json-schema.org/draft-04/schema#",
-      "$schema": "http://json-schema.org/draft-04/schema#",
-      "type": "object",
-      "properties": _.mapValues(engines, function(engine) {
+      'id': 'http://json-schema.org/draft-04/schema#',
+      '$schema': 'http://json-schema.org/draft-04/schema#',
+      'type': 'object',
+      'properties': _.mapValues(engines, function (engine) {
         return engine.schema || {
-            type: "object",
-            description: "No expicit schema has been provided for this engine"
-          }
+          type: 'object',
+          description: 'No expicit schema has been provided for this engine'
+        }
       })
 
     }
@@ -218,7 +218,6 @@ function Customize (config, parentConfig, engines) {
 
     return customizeModule(new Customize({ _metadata: _metadata }, _config, engines))
   }
-
 
   /**
    * Return a promise for the merged configuration.
