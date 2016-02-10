@@ -7,6 +7,20 @@ highlight.configure({
   'useBR': true
 })
 
+var renderer = new marked.Renderer()
+
+// Renderer for HTML-tables with Bootstrap-classes
+renderer.table = function (header, body) {
+  return '<table class="table table-bordered">\n'
+  + '<thead>\n'
+  + header
+  + '</thead>\n'
+  + '<tbody>\n'
+  + body
+  + '</tbody>\n'
+  + '</table>\n'
+}
+
 marked.setOptions({
   highlight: function (code, name) {
     var highlighted
@@ -16,7 +30,8 @@ marked.setOptions({
       highlighted = highlight.highlightAuto(code).value
     }
     return highlight.fixMarkup(highlighted)
-  }
+  },
+  renderer: renderer
 })
 
 module.exports = {
