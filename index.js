@@ -80,7 +80,7 @@ function Customize (config, parentConfig, engines) {
   }
 
   /**
-   * Register an engine an engine
+   * Register an engine
    * @param {string} id the identifier of the engine. This identifier is also used
    *  within the config as key within the configuration object to identify the
    *  sub-configuration stored for this engine.
