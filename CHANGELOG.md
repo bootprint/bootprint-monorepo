@@ -1,6 +1,6 @@
 # Release notes
 
-## Upcoming
+## v0.7.0 - 2016-02-10
 
 * Create borders around tables created through markdown (fixes nknapp/bootprint-openapi#52)
 
