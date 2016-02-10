@@ -1,5 +1,9 @@
 # Release notes
 
+## Upcoming
+
+* Create borders around tables created through markdown (fixes nknapp/bootprint-openapi#52)
+
 ## v0.6.3 - 2015-10-21
 
 * Remove `bootprint` as peer-dependency, because `npm` versions 1 and 2 download it needlessly.

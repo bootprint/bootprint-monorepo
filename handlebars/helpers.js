@@ -9,7 +9,6 @@ highlight.configure({
 
 marked.setOptions({
     highlight: function (code, name) {
-
         var highlighted;
         if (name) {
             highlighted = highlight.highlight(name, code).value;
