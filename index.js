@@ -84,8 +84,13 @@ function Customize (config, parentConfig, engines) {
    * @param {string} id the identifier of the engine. This identifier is also used
    *  within the config as key within the configuration object to identify the
    *  sub-configuration stored for this engine.
-   * @param {{defaultConfig: object, preprocessConfig: function, run: function}} engine
-   *  a customize engine that is registered
+   * @param {object} engine  a customize engine that is registered
+   * @param {object=} engine.defaultConfig the default configuration of the engine
+   * @param {function(object):object=} engine.preprocessConfig a preprocessor to convert a merge-configuration to the internal format of the engine
+   * @param {function(object):object} engine.run the execution function of the engine (the merged config is passed as parameter
+   * @param {function(object):object} engine.run the execution function of the engine (the merged config is passed as parameter)
+   * @param {object=} engine.schema a JSON-schema to validate the merge-configurations against.
+   *
    * @public
    */
   this.registerEngine = function (id, engine) {
@@ -94,13 +99,13 @@ function Customize (config, parentConfig, engines) {
       throw new Error('Engine-id must be a string, but is ' + id)
     }
     if (id.substr(0, 1) === '_') {
-      throw new Error("Engine-id may not start with an underscore ('_')")
+      throw new Error('Engine-id may not start with an underscore ("_"), but is ' + id)
     }
     if (_.isUndefined(engine['run'])) {
-      throw new Error('Engine needs a run method')
+      throw new Error('Engine ' + id + ' needs a run method')
     }
 
-    // This is only allowed if now engine with the same id exists.
+    // This is only allowed if no engine with the same id exists.
     if (!(_.isUndefined(engines[id]) && _.isUndefined(_config[id]))) {
       var error = new Error("Engine '" + id + "' already registered.", 'ERR_ENGINE_EXISTS')
       error.engine = engines[id]
@@ -172,9 +177,11 @@ function Customize (config, parentConfig, engines) {
            */
           var validationErrors = validator.validate(engineConf, engine.schema).errors
           if (validationErrors.length > 0) {
-            console.error("Error while validating config for engine '" + engineName + "': ", engineConf)
-            console.error('Errors: ', validationErrors.map(String).join('\n'))
-            throw new Error('Error while validating options-object', validationErrors)
+            debug("Error while validating config for engine '" + engineName + "': ", engineConf)
+            debug('Errors: ', validationErrors.map(String).join('\n'))
+            var error = new Error('Error while validating Customize configuration')
+            error.validationErrors = validationErrors
+            throw error
           }
         }
 
