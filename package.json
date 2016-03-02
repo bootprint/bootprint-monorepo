@@ -24,7 +24,7 @@
     "thought": "thought run -a",
     "prethoughtcheck": "thought --version || npm -g install thought",
     "thoughtcheck": "thought check-engines",
-    "version": "npm run thought",
+    "version": "thoughtful.js changelog -o -a && npm run thought",
     "preversion": "npm run thoughtcheck"
   },
   "dependencies": {
@@ -48,9 +48,16 @@
     "helpers-io.js"
   ],
   "keywords": [],
+  "config": {
+    "ghooks": {
+      "pre-commit": "thoughtful precommit && standard && thought run -a"
+    }
+  },
   "devDependencies": {
     "chai": "^3.3.0",
     "chai-as-promised": "^5.2.0",
-    "mocha": "^2.3.3"
+    "ghooks": "^1.0.3",
+    "mocha": "^2.3.3",
+    "thoughtful-release": "^0.3.0"
   }
 }

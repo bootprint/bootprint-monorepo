@@ -1,4 +1,10 @@
-# customize
+# customize 
+
+[![NPM version](https://badge.fury.io/js/customize.svg)](http://badge.fury.io/js/customize)
+     [![Travis Build Status](https://travis-ci.org/nknapp/customize.svg?branch=master)](https://travis-ci.org/nknapp/customize)
+     [![Appveyor Build Status](https://ci.appveyor.com/api/projects/status/github/nknapp/customize?svg=true&branch=master)](https://ci.appveyor.com/project/nknapp/customize)
+  [![Coverage Status](https://img.shields.io/coveralls/nknapp/customize.svg)](https://coveralls.io/r/nknapp/customize)
+
 
 > A simple framework to create customizable engines
 
@@ -373,7 +379,7 @@ this module
 
 <a name="module_customize..Customize+registerEngine"></a>
 ###### customize.registerEngine(id, engine)
-Register an engine an engine
+Register an engine
 
 **Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
 **Access:** public  
