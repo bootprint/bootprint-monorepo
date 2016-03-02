@@ -280,10 +280,6 @@ function Customize (config, parentConfig, engines) {
       return deep(result)
     })
   }
-
-  this.watch = function () {
-    return require('./lib/watcher.js')(this, _config)
-  }
 }
 
 /**
