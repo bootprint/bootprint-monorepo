@@ -66,4 +66,8 @@ describe('the files-function', function () {
         })
       })
   })
+
+  it('should return "undefined" if the path is undefined', function () {
+    expect(files(undefined)).to.equal(undefined)
+  })
 })

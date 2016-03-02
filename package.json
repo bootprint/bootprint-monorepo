@@ -58,6 +58,7 @@
     "chai-as-promised": "^5.2.0",
     "ghooks": "^1.0.3",
     "mocha": "^2.3.3",
-    "thoughtful-release": "^0.3.0"
+    "thoughtful-release": "^0.3.0",
+    "trace": "^2.3.0"
   }
 }

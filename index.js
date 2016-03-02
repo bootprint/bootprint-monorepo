@@ -35,6 +35,16 @@ extra(validator)
 module.exports = customize
 
 /**
+ * For coverage testing: Expose the debugState object so it can be enabled an disabled in testcases
+ */
+module.exports.debugState = debugState
+
+/**
+ * For coverage testing: Expose the debug object so it can be enabled an disabled in testcases
+ */
+module.exports.debug = debug
+
+/**
  * Exposes the constructor of the `customize` object
  * @type {customize}
  */
@@ -70,13 +80,17 @@ function customize () {
  */
 function Customize (config, parentConfig, engines) {
   var _config = _.merge({}, parentConfig, config, customOverrider)
+  console.log('custom', require('debug')('customize:state').enabled, config)
+  console.log('debugState', debugState.enabled, config)
+
   // Debug logging
   if (debugState.enabled) {
     deep(_config).done(function (config) {
       debugState('New configuration', config)
-    }, function (e) {
-      console.error('Error while debug-logging the built configuration ' + e.stack)
-    })
+    }, /* istanbul ignore next */
+      function (e) {
+        console.error('Error while debug-logging the built configuration ' + e.stack)
+      })
   }
 
   /**

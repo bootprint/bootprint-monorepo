@@ -14,7 +14,10 @@ module.exports = function (customize) {
           y: 'y2'
         }
       },
-      array: ['item2']
+      array: ['item2'],
+      withParent: function(value) {
+        return this.parent(value) * 2
+      }
     }
   })
 }
