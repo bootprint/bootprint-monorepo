@@ -50,7 +50,7 @@
   "keywords": [],
   "config": {
     "ghooks": {
-      "pre-commit": "thoughtful precommit && standard && thought run -a"
+      "pre-commit": "thoughtful precommit && standard"
     }
   },
   "devDependencies": {
