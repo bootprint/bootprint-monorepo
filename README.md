@@ -148,6 +148,12 @@ The example creates a new Customize-instances, registers our engine under the na
 config. This example prints the following result.
 
 ```js
+custom false {}
+debugState false {}
+custom false { files: { config: {}, watched: [] } }
+debugState false { files: { config: {}, watched: [] } }
+custom false { files: { state: 'pending' } }
+debugState false { files: { state: 'pending' } }
 { files: 
    { 'a.md': { path: 'dir1/a.md', contents: 'First file (from dir1)' },
      'b.md': { path: 'dir1/b.md', contents: 'Second file (from dir1)' } } }
@@ -179,6 +185,12 @@ The engines `run()`-method will now be executed with the resolved configuration,
 which yields the following output:
 
 ```
+custom false {}
+debugState false {}
+custom false { files: { config: {}, watched: [] } }
+debugState false { files: { config: {}, watched: [] } }
+custom false { files: { state: 'pending' } }
+debugState false { files: { state: 'pending' } }
 { 'concat.txt': 'First file (from dir1)\nSecond file (from dir1)\n' }
 ```
 
@@ -235,6 +247,14 @@ so that in the above example, the property `a.md` is replace by the value in the
 second configuration. So the output of this example is
 
 ```
+custom false {}
+debugState false {}
+custom false { files: { config: {}, watched: [] } }
+debugState false { files: { config: {}, watched: [] } }
+custom false { files: { state: 'pending' } }
+debugState false { files: { state: 'pending' } }
+custom false { files: { state: 'pending' } }
+debugState false { files: { state: 'pending' } }
 { 'concat.txt': 'First file (from dir2)\nSecond file (from dir1)\n' }
 ```
 
@@ -297,6 +317,8 @@ Create a new Customize object with an empty configuration
 
 * [customize](#module_customize)
   * _static_
+    * [.debugState](#module_customize.debugState)
+    * [.debug](#module_customize.debug)
     * [.Customize](#module_customize.Customize) : <code>customize</code>
     * [.overrider](#module_customize.overrider) : <code>customOverrider</code>
     * [.withParent](#module_customize.withParent)
@@ -313,6 +335,16 @@ Create a new Customize object with an empty configuration
       * [.run([options])](#module_customize..Customize+run) ⇒ <code>Promise.&lt;object&gt;</code>
     * [~customize()](#module_customize..customize) ⇒ <code>Customize</code>
 
+<a name="module_customize.debugState"></a>
+##### customize.debugState
+For coverage testing: Expose the debugState object so it can be enabled an disabled in testcases
+
+**Kind**: static property of <code>[customize](#module_customize)</code>  
+<a name="module_customize.debug"></a>
+##### customize.debug
+For coverage testing: Expose the debug object so it can be enabled an disabled in testcases
+
+**Kind**: static property of <code>[customize](#module_customize)</code>  
 <a name="module_customize.Customize"></a>
 ##### customize.Customize : <code>customize</code>
 Exposes the constructor of the `customize` object
@@ -387,7 +419,12 @@ Register an engine
 | Param | Type | Description |
 | --- | --- | --- |
 | id | <code>string</code> | the identifier of the engine. This identifier is also used  within the config as key within the configuration object to identify the  sub-configuration stored for this engine. |
-| engine | <code>Object</code> | a customize engine that is registered |
+| engine | <code>object</code> | a customize engine that is registered |
+| [engine.defaultConfig] | <code>object</code> | the default configuration of the engine |
+| engine.preprocessConfig | <code>function</code> | a preprocessor to convert a merge-configuration to the internal format of the engine |
+| engine.run | <code>function</code> | the execution function of the engine (the merged config is passed as parameter |
+| engine.run | <code>function</code> | the execution function of the engine (the merged config is passed as parameter) |
+| [engine.schema] | <code>object</code> | a JSON-schema to validate the merge-configurations against. |
 
 <a name="module_customize..Customize+configSchema"></a>
 ###### customize.configSchema()

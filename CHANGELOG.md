@@ -3,6 +3,14 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 0.8.0 (Wed, 02 Mar 2016 16:40:54 GMT)
+
+* [5c87900](https://github.com/nknapp/customize/commit/5c87900) Added more unit tests to increase test-coverage - Nils Knappmeier
+* [6972f07](https://github.com/nknapp/customize/commit/6972f07) Remove method "watch" - Nils Knappmeier
+* [2580eb6](https://github.com/nknapp/customize/commit/2580eb6) Better error messages, update jsdoc, less console-output - Nils Knappmeier
+* [0cdc00a](https://github.com/nknapp/customize/commit/0cdc00a) customize.withParent() now handles an undefined-argument gracefully - Nils Knappmeier
+* [d406762](https://github.com/nknapp/customize/commit/d406762) Use `thoughtful-release` to enforce git-workflow - Nils Knappmeier
+* [2bef8b4](https://github.com/nknapp/customize/commit/2bef8b4) Typo in JsDoc-Comment - Nils Knappmeier
 
 ## v0.7.0 - 2015-12-20
 
