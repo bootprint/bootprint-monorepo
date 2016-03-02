@@ -3,6 +3,10 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 0.8.1 (Wed, 02 Mar 2016 18:49:17 GMT)
+
+* [8f7dcc3](https://github.com/nknapp/customize/commit/8f7dcc3) Load the "trace"-module only for tests with node version >= 1 - Nils Knappmeier
+
 # Version 0.8.0 (Wed, 02 Mar 2016 16:40:54 GMT)
 
 * [5c87900](https://github.com/nknapp/customize/commit/5c87900) Added more unit tests to increase test-coverage - Nils Knappmeier
