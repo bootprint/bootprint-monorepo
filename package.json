@@ -24,7 +24,7 @@
     "thought": "thought run -a",
     "prethoughtcheck": "thought --version || npm -g install thought",
     "thoughtcheck": "thought check-engines",
-    "version": "thoughtful.js changelog -o -a && npm run thought",
+    "version": "thoughtful changelog -o -a && npm run thought",
     "preversion": "npm run thoughtcheck"
   },
   "dependencies": {
