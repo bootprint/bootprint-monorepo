@@ -15,7 +15,9 @@
 
 'use strict'
 
-require('trace')
+if (Number(process.version.match(/^v(\d+)/)[1])) {
+  require('trace')
+}
 
 var expect = require('chai').expect
 var customize = require('../')
