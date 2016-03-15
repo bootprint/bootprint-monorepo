@@ -24,7 +24,7 @@
     "thought": "thought run -a",
     "prethoughtcheck": "thought --version || npm -g install thought",
     "thoughtcheck": "thought check-engines",
-    "version": "npm run thought",
+    "version": "thoughtful changelog -o -a && npm run thought",
     "preversion": "npm run thoughtcheck"
   },
   "dependencies": {
@@ -36,6 +36,7 @@
     "chai": "^3.2.0",
     "customize": "<1.0.0",
     "customize-engine-less": "<1.0.0",
+    "ghooks": "^1.0.3",
     "mocha": "^2.2.5",
     "thoughtful-release": "^0.3.0"
   },
@@ -43,6 +44,11 @@
     "ignore": [
       "spec/fixtures/**"
     ]
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "standard"
+    }
   },
   "keywords": []
 }

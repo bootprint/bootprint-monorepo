@@ -69,7 +69,6 @@ function customizeWriteFiles (customizeResult, targetDir) {
       debug('Written files ', filenames)
       return filenames
     })
-
 }
 /**
  * Write a stream, buffer or string to a file and return a promised for the finished operation
@@ -83,7 +82,7 @@ function customizeWriteFiles (customizeResult, targetDir) {
 function writePromised (filename, contents) {
   // Ignore undefined contents
   if (contents == null) {
-    return;
+    return
   }
   if (typeof contents === 'string' || Buffer.isBuffer(contents)) {
     return writeBufferOrString(filename, contents)

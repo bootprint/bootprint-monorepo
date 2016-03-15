@@ -24,7 +24,7 @@ describe('customize-write-files:', function () {
   var outputDir
 
   function read (filename) {
-    var fullPath = path.join(outputDir,filename)
+    var fullPath = path.join(outputDir, filename)
     return fs.readFileSync(fullPath, { encoding: 'utf-8' })
   }
 
@@ -34,7 +34,7 @@ describe('customize-write-files:', function () {
 
     // From: http://stackoverflow.com/questions/12755997/how-to-create-streams-from-string-in-node-js
     var s = new stream.Readable()
-    s._read = function noop () {}; // redundant? see update below
+    s._read = function noop () {}
     s.push('abc')
     s.push(null)
 

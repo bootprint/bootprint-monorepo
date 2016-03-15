@@ -2,6 +2,7 @@
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+<a name="current-release"></a>
 ## v0.1.2 - 2015-11-10
 
 ### Fix
