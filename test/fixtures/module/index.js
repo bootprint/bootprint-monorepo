@@ -1,7 +1,6 @@
 var path = require('path')
-var files = require('../../../lib/files.js')
 
-module.exports = function (custmoize) {
+module.exports = function (customize) {
   return customize.merge({
     test: {
       files: path.join(__dirname, 'files'),
