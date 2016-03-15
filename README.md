@@ -1,8 +1,8 @@
 # customize 
 
 [![NPM version](https://badge.fury.io/js/customize.svg)](http://badge.fury.io/js/customize)
-     [![Travis Build Status](https://travis-ci.org/nknapp/customize.svg?branch=master)](https://travis-ci.org/nknapp/customize)
-   [![Coverage Status](https://img.shields.io/coveralls/nknapp/customize.svg)](https://coveralls.io/r/nknapp/customize)
+     [![Travis Build Status](https://travis-ci.org/bootprint/customize.svg?branch=master)](https://travis-ci.org/bootprint/customize)
+   [![Coverage Status](https://img.shields.io/coveralls/bootprint/customize.svg)](https://coveralls.io/r/bootprint/customize)
 
 
 > A simple framework to create customizable engines

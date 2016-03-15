@@ -3,6 +3,11 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 0.8.2 (Tue, 15 Mar 2016 08:42:44 GMT)
+
+* [1a1f8ed](https://github.com/bootprint/customize/commit/1a1f8ed) Move package to bootprint-org on github, remove locked branch settings - Nils Knappmeier
+
+
 # Version 0.8.1 (Wed, 02 Mar 2016 18:49:17 GMT)
 
 * [8f7dcc3](https://github.com/nknapp/customize/commit/8f7dcc3) Load the "trace"-module only for tests with node version >= 1 - Nils Knappmeier
