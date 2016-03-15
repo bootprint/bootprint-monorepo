@@ -8,7 +8,6 @@
 
 var _ = require('lodash')
 var less = require('less')
-var Q = require('q')
 
 /**
  * @typedef {object} CustomizeLessConfig
@@ -19,7 +18,7 @@ var Q = require('q')
  */
 
 module.exports = {
-  schema: require("./schema.js"),
+  schema: require('./schema.js'),
 
   defaultConfig: {
     main: [],
@@ -33,10 +32,9 @@ module.exports = {
     }
   },
 
-  watched: function(config) {
+  watched: function (config) {
     return coerceToArray(config.main).concat(coerceToArray(config.paths))
   },
-
 
   /**
    * Compute the raw CSS from the input files and store them as "main.css" and the source-map
@@ -52,10 +50,10 @@ module.exports = {
       sourceMap: {},
       filename: 'customize-bundle.less',
       compress: true
-    }).then(function(lessResult) {
+    }).then(function (lessResult) {
       return {
-        "main.css": lessResult.css,
-        "main.css.map": lessResult.map
+        'main.css': lessResult.css,
+        'main.css.map': lessResult.map
       }
     })
   }
@@ -69,8 +67,7 @@ module.exports = {
  */
 function coerceToArray (objOrArray) {
   if (!_.isUndefined(objOrArray) && !_.isArray(objOrArray)) {
-    return [ objOrArray ];
+    return [ objOrArray ]
   }
-  return objOrArray;
-
+  return objOrArray
 }

@@ -4,7 +4,7 @@
   "description": "A less-engine for customize",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nknapp/customize-engine-less.git"
+    "url": "https://github.com/bootprint/customize-engine-less.git"
   },
   "author": {
     "name": "Nils Knappmeier",
@@ -12,7 +12,7 @@
     "url": "https://github.com/nknapp"
   },
   "bugs": {
-    "url": "https://github.com/nknapp/customize-engine-less/issues"
+    "url": "https://github.com/bootprint/customize-engine-less/issues"
   },
   "main": "index.js",
   "license": "MIT",
@@ -24,7 +24,7 @@
     "thought": "thought run -a",
     "prethoughtcheck": "thought --version || npm -g install thought",
     "thoughtcheck": "thought check-engines",
-    "version": "npm run thought",
+    "version": "thoughtful changelog -o -a && npm run thought",
     "preversion": "npm run thoughtcheck"
   },
   "dependencies": {
@@ -34,8 +34,10 @@
   },
   "devDependencies": {
     "chai": "^3.2.0",
+    "customize": "<1.0.0",
+    "ghooks": "^1.0.3",
     "mocha": "^2.2.5",
-    "customize": "<1.0.0"
+    "thoughtful-release": "^0.3.0"
   },
   "peerDependencies": {
     "customize": "<1.0.0"
@@ -49,5 +51,10 @@
     "index.js",
     "schema.js"
   ],
+  "config": {
+    "ghooks": {
+      "pre-commit": "standard"
+    }
+  },
   "keywords": []
 }
