@@ -4,7 +4,7 @@
   "description": "A simple framework to create customizable engines",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nknapp/customize.git"
+    "url": "https://github.com/bootprint/customize.git"
   },
   "author": {
     "name": "Nils Knappmeier",
@@ -12,7 +12,7 @@
     "url": "https://github.com/nknapp"
   },
   "bugs": {
-    "url": "https://github.com/nknapp/customize/issues"
+    "url": "https://github.com/bootprint/customize/issues"
   },
   "main": "index.js",
   "license": "MIT",
@@ -50,7 +50,7 @@
   "keywords": [],
   "config": {
     "ghooks": {
-      "pre-commit": "thoughtful precommit && standard"
+      "pre-commit": "standard"
     }
   },
   "devDependencies": {
