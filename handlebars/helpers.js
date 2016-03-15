@@ -11,14 +11,14 @@ var renderer = new marked.Renderer()
 
 // Renderer for HTML-tables with Bootstrap-classes
 renderer.table = function (header, body) {
-  return '<table class="table table-bordered">\n'
-  + '<thead>\n'
-  + header
-  + '</thead>\n'
-  + '<tbody>\n'
-  + body
-  + '</tbody>\n'
-  + '</table>\n'
+  return '<table class="table table-bordered">\n' +
+  '<thead>\n' +
+  header +
+  '</thead>\n' +
+  '<tbody>\n' +
+  body +
+  '</tbody>\n' +
+  '</table>\n'
 }
 
 marked.setOptions({
@@ -82,7 +82,7 @@ module.exports = {
       // http://stackoverflow.com/questions/8996963/how-to-perform-case-insensitive-sorting-in-javascript
       a = String(a).toLowerCase()
       b = String(b).toLowerCase()
-      if (a == b) return 0
+      if (a === b) return 0
       if (a > b) return 1
       return -1
     }).forEach(function (key, index) {
@@ -93,7 +93,6 @@ module.exports = {
         data.length = keys.length
         data.first = index === 0
         data.last = index === keys.length - 1
-
       }
       ret = ret + options.fn(context[key], {data: data})
     })
@@ -107,7 +106,7 @@ module.exports = {
    * @returns {boolean}
    */
   'equal': function (value1, value2) {
-    return value1 == value2
+    return value1 == value2 // eslint-disable-line
   },
   /**
    * Render a markdown-formatted text as HTML.

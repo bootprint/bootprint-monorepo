@@ -4,18 +4,26 @@
   "description": "The base configuration used by other Bootprint modules",
   "main": "index.js",
   "scripts": {
-    "test": "jasmine"
+    "pretest": "standard --version || npm -g install standard",
+    "test": "jasmine && standard",
+    "preformat": "standard --version || npm -g install standard",
+    "format": "standard --format",
+    "thought": "thought run -a",
+    "prethoughtcheck": "thought --version || npm -g install thought",
+    "thoughtcheck": "thought check-engines",
+    "version": "thoughtful changelog -o -a && npm run thought",
+    "preversion": "npm run thoughtcheck"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nknapp/bootprint-base.git"
+    "url": "https://github.com/bootprint/bootprint-base.git"
   },
   "author": "Nils Knappmeier",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nknapp/bootprint-base/issues"
+    "url": "https://github.com/bootprint/bootprint-base/issues"
   },
-  "homepage": "https://github.com/nknapp/bootprint-base",
+  "homepage": "https://github.com/bootprint/bootprint-base",
   "dependencies": {
     "bootstrap": "^3.3.2",
     "handlebars": "^3.0.0",
@@ -25,7 +33,14 @@
     "marked": "^0.3.3"
   },
   "devDependencies": {
-    "jasmine": "^2.3.1"
+    "ghooks": "^1.0.3",
+    "jasmine": "^2.3.1",
+    "thoughtful-release": "^0.3.0"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "standard"
+    }
   },
   "files": [
     "handlebars",
