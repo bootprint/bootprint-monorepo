@@ -1,4 +1,9 @@
-# customize-write-files
+# customize-write-files 
+
+[![NPM version](https://badge.fury.io/js/customize-write-files.svg)](http://badge.fury.io/js/customize-write-files)
+     [![Travis Build Status](https://travis-ci.org/bootprint/customize-write-files.svg?branch=master)](https://travis-ci.org/bootprint/customize-write-files)
+   [![Coverage Status](https://img.shields.io/coveralls/bootprint/customize-write-files.svg)](https://coveralls.io/r/bootprint/customize-write-files)
+
 
 > Post-processor that stores the result of a customize-run in a local directory
 
@@ -44,12 +49,12 @@ customize()
   // Add one less file
   .merge({
     less: {
-      main: require.resolve('./main.less'),
+      main: require.resolve('./main.less')
     }
   })
   .run()
   // Write contents to the "target"-directory
-  .then(write("target"))
+  .then(write('target'))
   // Output the names of the files being written
   .done(console.log)
 ```
@@ -57,6 +62,12 @@ customize()
 This will generate the following output
 
 ```
+custom false {}
+debugState false {}
+custom false { less: { config: { main: [], paths: [] }, watched: [] } }
+debugState false { less: { config: { main: [], paths: [] }, watched: [] } }
+custom false { less: { state: 'pending' } }
+debugState false { less: { state: 'pending' } }
 [ 'target/main.css', 'target/main.css.map' ]
 ```
 
