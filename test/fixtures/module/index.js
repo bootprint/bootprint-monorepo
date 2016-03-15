@@ -1,10 +1,10 @@
-var path = require("path");
-var files = require("../../../lib/files.js")
+var path = require('path')
+var files = require('../../../lib/files.js')
 
 module.exports = function (custmoize) {
   return customize.merge({
     test: {
-      files: path.join(__dirname, "files"),
+      files: path.join(__dirname, 'files'),
       objects: {
         b: {
           y: 'y2'
@@ -17,7 +17,7 @@ module.exports = function (custmoize) {
       },
       array: ['item2']
     }
-  });
+  })
 }
 
 module.exports.package = {

@@ -36,10 +36,13 @@
     "q-deep": "^1.0.1"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-as-promised": "^5.2.0",
     "customize": "<1.0.0",
     "get-promise": "^1.4.0",
     "ghooks": "^1.0.3",
     "jasmine": "^2.3.1",
+    "mocha": "^2.4.5",
     "thoughtful-release": "^0.3.0"
   },
   "peerDependencies": {
@@ -47,7 +50,7 @@
   },
   "standard": {
     "ignore": [
-      "spec/fixtures/**"
+      "test/fixtures/**"
     ]
   },
   "files": [

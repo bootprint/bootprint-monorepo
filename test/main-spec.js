@@ -7,7 +7,6 @@
 
 /* global describe */
 /* global it */
-/* global expect */
 // /* global xdescribe */
 /* global xit */
 
@@ -15,14 +14,19 @@
 
 var customize = require('customize')
 var _ = require('lodash')
+var chai = require('chai')
+var chaiAsPromised = require('chai-as-promised')
+chai.use(chaiAsPromised)
+
+var expect = chai.expect
 
 var hb = customize()
   .registerEngine('handlebars', require('../'))
   .merge({
     handlebars: {
-      partials: 'spec/fixtures/testPartials1',
-      helpers: 'spec/fixtures/helpers.js',
-      templates: 'spec/fixtures/templates',
+      partials: 'test/fixtures/testPartials1',
+      helpers: 'test/fixtures/helpers.js',
+      templates: 'test/fixtures/templates',
       data: {
         eins: 'one',
         zwei: 'two',
@@ -38,16 +42,13 @@ var hb = customize()
   })
 
 describe('customize-engine-handlebars', function () {
-  it('should load partials and templates and return one result per template', function (next) {
-    hb.run().tap(function (result) {
-      expect(result).toEqual({
-        handlebars: {
-          'a.md': 'a.md testPartials1/eins ->one<-',
-          'b.md': 'b.md testPartials1/zwei ->two<- helper1(->two<-)'
-        }
-      })
-    }).done(next)
-  // body
+  it('should load partials and templates and return one result per template', function () {
+    return expect(hb.run()).to.eventually.deep.equal({
+      handlebars: {
+        'a.md': 'a.md testPartials1/eins ->one<-',
+        'b.md': 'b.md testPartials1/zwei ->two<- helper1(->two<-)'
+      }
+    })
   })
 
   xit('should throw an exception if loading an existing helpers module fails', function () {})
