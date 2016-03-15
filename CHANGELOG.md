@@ -2,6 +2,14 @@
 
 
 <a name="current-release"></a>
+# Version 0.8.5 (Tue, 15 Mar 2016 14:27:33 GMT)
+
+* [40ca080](https://github.com/bootprint/bootprint-json-schema/commit/40ca080) Generate README with "thought" - Nils Knappmeier
+* [2222c27](https://github.com/bootprint/bootprint-json-schema/commit/2222c27) Add "require" to main-spec in order to get (low) coverage - Nils Knappmeier
+* [2cfccb8](https://github.com/bootprint/bootprint-json-schema/commit/2cfccb8) Add mocha and chai as dev-dependencies - Nils Knappmeier
+* [98a14f8](https://github.com/bootprint/bootprint-json-schema/commit/98a14f8) Adjust travis-configuration - Nils Knappmeier
+* [3b7b322](https://github.com/bootprint/bootprint-json-schema/commit/3b7b322) Move to bootprint-organization and enable ghook for StandardJS - Nils Knappmeier
+
 ## v0.8.4 - 2015-10-21
 
 # Fix
@@ -88,4 +96,3 @@
 ## The dark past
 
 * You'll have to look through the commit log to get details.
-
