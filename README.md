@@ -1,4 +1,9 @@
-# customize-engine-less
+# customize-engine-less 
+
+[![NPM version](https://badge.fury.io/js/customize-engine-less.svg)](http://badge.fury.io/js/customize-engine-less)
+     [![Travis Build Status](https://travis-ci.org/bootprint/customize-engine-less.svg?branch=master)](https://travis-ci.org/bootprint/customize-engine-less)
+   [![Coverage Status](https://img.shields.io/coveralls/bootprint/customize-engine-less.svg)](https://coveralls.io/r/bootprint/customize-engine-less)
+
 
 > A less-engine for customize
 
@@ -23,13 +28,13 @@ customize()
   // Add one less file
   .merge({
     less: {
-      main: require.resolve('./main.less'),
+      main: require.resolve('./main.less')
     }
   })
   // Add another less file overriding some variables
   .merge({
     less: {
-      main: require.resolve('./override.less'),
+      main: require.resolve('./override.less')
     }
   })
   .run()
@@ -39,6 +44,14 @@ customize()
 This will generate the following output
 
 ```
+custom false {}
+debugState false {}
+custom false { less: { config: { main: [], paths: [] }, watched: [] } }
+debugState false { less: { config: { main: [], paths: [] }, watched: [] } }
+custom false { less: { state: 'pending' } }
+debugState false { less: { state: 'pending' } }
+custom false { less: { state: 'pending' } }
+debugState false { less: { state: 'pending' } }
 { less: 
    { 'main.css': 'div{color:red;background-color:green}',
      'main.css.map': '{"version":3,"sources":["/home/nknappmeier/privat/node-libraries/customize-engine-less/examples/main.less"],"names":[],"mappings":"AAGA,IACE,SAAA,CACA"}' } }

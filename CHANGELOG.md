@@ -3,6 +3,13 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 0.2.3 (Tue, 15 Mar 2016 14:03:18 GMT)
+
+* [d3f4fc7](https://github.com/bootprint/customize-engine-less/commit/d3f4fc7) Add "require" to main-spec in order to get (low) coverage - Nils Knappmeier
+* [5b70ade](https://github.com/bootprint/customize-engine-less/commit/5b70ade) Adjust travis-configuration - Nils Knappmeier
+* [6fea911](https://github.com/bootprint/customize-engine-less/commit/6fea911) Added dummy test - Nils Knappmeier
+* [d1a50f2](https://github.com/bootprint/customize-engine-less/commit/d1a50f2) Move to bootprint-organization and enable ghook for StandardJS - Nils Knappmeier
+
 ## v0.2.2 - 2015-12-20
 ### Fix
 
