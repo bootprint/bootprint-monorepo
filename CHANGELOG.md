@@ -3,6 +3,10 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 0.1.4 (Tue, 15 Mar 2016 10:02:28 GMT)
+
+* [9f16b7f](https://github.com/bootprint/customize-write-files/commit/9f16b7f) Fix test-cases - Nils Knappmeier
+
 # Version 0.1.3 (Tue, 15 Mar 2016 09:45:48 GMT)
 
 * [a7dc588](https://github.com/bootprint/customize-write-files/commit/a7dc588) Pre-commit hook for StandardJS, Changelog with thoughtful-release - Nils Knappmeier
