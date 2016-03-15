@@ -1,4 +1,4 @@
-var util = require("util");
+var util = require('util')
 
 module.exports = {
   'json-schema--datatype': dataType,
@@ -22,7 +22,7 @@ module.exports = {
       return {}
     }
     var components = reference.split('#')
-    var url = components[0]
+    // var url = components[0]
     var hash = components[1]
     var hashParts = hash.split('/')
     // TODO : Download remote json from url if url not empty
@@ -30,8 +30,8 @@ module.exports = {
     hashParts.forEach(function (hashPart) {
       // Traverse schema from root along the path
       if (hashPart.trim().length > 0) {
-        if (typeof current==='undefined') {
-          throw new Error("Reference '"+reference+"' cannot be resolved. '"+hashPart+"' is undefined.");
+        if (typeof current === 'undefined') {
+          throw new Error("Reference '" + reference + "' cannot be resolved. '" + hashPart + "' is undefined.")
         }
         current = current[hashPart]
       }
@@ -47,41 +47,40 @@ module.exports = {
    * @param {boolean} [range.maximumExclusive]
    * @param {Handlebars} engine the current handlebars engine
    */
-  'json-schema--range': function(range, options, bootprint) {
-
-    var hasMinimum = range.minimum || range.minimum === 0;
-    var hasMaximum = range.maximum || range.maximum === 0;
+  'json-schema--range': function (range, options, bootprint) {
+    var hasMinimum = range.minimum || range.minimum === 0
+    var hasMaximum = range.maximum || range.maximum === 0
 
     if (!hasMinimum && !hasMaximum) {
       // There is no range
-      return "";
+      return ''
     }
 
-    var numberSet = "";
-    if (range.type === "integer") {
-      numberSet = "\u2208 \u2124" // ELEMENT OF - DOUBLE-STRUCK CAPITAL Z
-    } else if (range.type === "number") {
-      numberSet = "\u2208 \u211D" // ELEMENT OF - DOUBLE-STRUCK CAPITAL R
+    var numberSet = ''
+    if (range.type === 'integer') {
+      numberSet = '\u2208 \u2124' // ELEMENT OF - DOUBLE-STRUCK CAPITAL Z
+    } else if (range.type === 'number') {
+      numberSet = '\u2208 \u211D' // ELEMENT OF - DOUBLE-STRUCK CAPITAL R
     }
 
     if (hasMinimum && !hasMaximum) {
-      return util.format(", { x %s | x %s %d }",
-          numberSet,
-          range.minimumExclusive ? ">" : "\u2265",
-          range.minimum);
+      return util.format(', { x %s | x %s %d }',
+        numberSet,
+        range.minimumExclusive ? '>' : '\u2265',
+        range.minimum)
     } else if (hasMaximum && !hasMinimum) {
-      return util.format(", { x %s | x %s %d }",
-          numberSet,
-          range.maximumExclusive ? "<" : "\u2264",
-          range.maximum);
+      return util.format(', { x %s | x %s %d }',
+        numberSet,
+        range.maximumExclusive ? '<' : '\u2264',
+        range.maximum)
     } else {
       // if (hasMaxmium && hasMinimum)
-      return util.format(", { x %s | %d %s x %s %d }",
-          numberSet,
-          range.minimum,
-          range.minimumExclusive ? "<" : "\u2264",
-          range.maximumExclusive ? "<" : "\u2264",
-          range.maximum);
+      return util.format(', { x %s | %d %s x %s %d }',
+        numberSet,
+        range.minimum,
+        range.minimumExclusive ? '<' : '\u2264',
+        range.maximumExclusive ? '<' : '\u2264',
+        range.maximum)
     }
   }
 }
@@ -92,7 +91,7 @@ module.exports = {
  * @returns {String} a string like <code>string[]</code> or <code>object[][]</code>
  */
 function dataType (value) {
-  if (!value) return null;
+  if (!value) return null
   if (value['anyOf'] || value['allOf'] || value['oneOf']) {
     return ''
   }

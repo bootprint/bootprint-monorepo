@@ -4,19 +4,20 @@
   "description": "Converts a json-schema into a static html page",
   "main": "index.js",
   "scripts": {
-    "test": "nodeunit tests/"
+    "test": "nodeunit tests/",
+    "version": "thoughtful changelog -o -a"
   },
   "preferGlobal": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/nknapp/bootprint-json-schema.git"
+    "url": "https://github.com/bootprint/bootprint-json-schema.git"
   },
   "author": "Nils Knappmeier",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nknapp/bootprint-json-schema/issues"
+    "url": "https://github.com/bootprint/bootprint-json-schema/issues"
   },
-  "homepage": "https://github.com/nknapp/bootprint-json-schema",
+  "homepage": "https://github.com/bootprint/bootprint-json-schema",
   "dependencies": {
     "bootprint-base": "<1.0.0"
   },
@@ -24,5 +25,14 @@
     "handlebars",
     "less",
     "index.js"
-  ]
+  ],
+  "config": {
+    "ghooks": {
+      "pre-commit": "standard"
+    }
+  },
+  "devDependencies": {
+    "ghooks": "^1.0.3",
+    "thoughtful-release": "^0.3.0"
+  }
 }
