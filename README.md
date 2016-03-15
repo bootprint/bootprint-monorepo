@@ -1,4 +1,9 @@
-# customize-watch
+# customize-watch 
+
+[![NPM version](https://badge.fury.io/js/customize-watch.svg)](http://badge.fury.io/js/customize-watch)
+     [![Travis Build Status](https://travis-ci.org/nknapp/customize-watch.svg?branch=master)](https://travis-ci.org/nknapp/customize-watch)
+   [![Coverage Status](https://img.shields.io/coveralls/nknapp/customize-watch.svg)](https://coveralls.io/r/nknapp/customize-watch)
+
 
 > A file watcher for customize
 

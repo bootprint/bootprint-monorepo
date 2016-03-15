@@ -3,6 +3,11 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 0.5.1 (Tue, 15 Mar 2016 09:13:05 GMT)
+
+* [7e47da7](https://github.com/nknapp/customize-watch/commit/7e47da7) Generate changelog with "thoughtful-release" - Nils Knappmeier
+* [493ffa8](https://github.com/nknapp/customize-watch/commit/493ffa8) Add pre-commit hook to check code-style against StandardJS - Nils Knappmeier
+
 ## v0.5.0 - 2015-12-21
 ### Fix
 
