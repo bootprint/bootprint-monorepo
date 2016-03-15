@@ -3,6 +3,10 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 0.5.4 (Tue, 15 Mar 2016 13:56:51 GMT)
+
+* [5b7fd70](https://github.com/bootprint/customize-watch/commit/5b7fd70) Adjust travis-configuration - Nils Knappmeier
+
 # Version 0.5.3 (Tue, 15 Mar 2016 09:22:54 GMT)
 
 * [a5c2643](https://github.com/bootprint/customize-watch/commit/a5c2643) Update .travis.yml to use mocha and all node-versions - Nils Knappmeier
