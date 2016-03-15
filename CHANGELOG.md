@@ -1,6 +1,12 @@
 # Release notes
 
 <a name="current-release"></a>
+# Version 0.7.2 (Tue, 15 Mar 2016 14:21:10 GMT)
+
+* [d6b24d6](https://github.com/bootprint/bootprint-base/commit/d6b24d6) Fix "npm test" script - Nils Knappmeier
+* [b7f76c0](https://github.com/bootprint/bootprint-base/commit/b7f76c0) Adjust travis-configuration - Nils Knappmeier
+* [033c47e](https://github.com/bootprint/bootprint-base/commit/033c47e) Move to bootprint-organization and enable ghook for StandardJS - Nils Knappmeier
+
 ## v0.7.1 - 2016-02-10
 
 * Now really: Create borders around tables created through markdown (fixes nknapp/bootprint-openapi#52)
