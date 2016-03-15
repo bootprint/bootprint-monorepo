@@ -1,4 +1,9 @@
-# customize-engine-handlebars
+# customize-engine-handlebars 
+
+[![NPM version](https://badge.fury.io/js/customize-engine-handlebars.svg)](http://badge.fury.io/js/customize-engine-handlebars)
+     [![Travis Build Status](https://travis-ci.org/bootprint/customize-engine-handlebars.svg?branch=master)](https://travis-ci.org/bootprint/customize-engine-handlebars)
+   [![Coverage Status](https://img.shields.io/coveralls/bootprint/customize-engine-handlebars.svg)](https://coveralls.io/r/bootprint/customize-engine-handlebars)
+
 
 > Use handlebars as engine for customize
 
@@ -121,6 +126,30 @@ Github-Name: {{{github.name}}}
 The output of this example is:
 
 ```
+custom false {}
+debugState false {}
+custom false { handlebars: 
+   { config: 
+      { partials: {},
+        helpers: {},
+        templates: {},
+        data: {},
+        preprocessor: [Function: identity],
+        hbsOptions: {} },
+     watched: [] } }
+debugState false { handlebars: 
+   { config: 
+      { partials: {},
+        helpers: {},
+        templates: {},
+        data: {},
+        preprocessor: [Function: identity],
+        hbsOptions: {} },
+     watched: [] } }
+custom false { _metadata: { config: { modules: [] } } }
+debugState false { _metadata: { config: { modules: [] } } }
+custom false { handlebars: { state: 'pending' } }
+debugState false { handlebars: { state: 'pending' } }
 https://api.github.com/users/nknapp
 { handlebars: 
    { 'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n------\nGithub-Name: Nils Knappmeier',
@@ -160,6 +189,32 @@ Blog: {{{github.blog}}}
 The output of this example is
 
 ```
+custom false {}
+debugState false {}
+custom false { handlebars: 
+   { config: 
+      { partials: {},
+        helpers: {},
+        templates: {},
+        data: {},
+        preprocessor: [Function: identity],
+        hbsOptions: {} },
+     watched: [] } }
+debugState false { handlebars: 
+   { config: 
+      { partials: {},
+        helpers: {},
+        templates: {},
+        data: {},
+        preprocessor: [Function: identity],
+        hbsOptions: {} },
+     watched: [] } }
+custom false { _metadata: { config: { modules: [] } } }
+debugState false { _metadata: { config: { modules: [] } } }
+custom false { handlebars: { state: 'pending' } }
+debugState false { handlebars: { state: 'pending' } }
+custom false { handlebars: { state: 'pending' } }
+debugState false { handlebars: { state: 'pending' } }
 https://api.github.com/users/nknapp
 { handlebars: 
    { 'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n------\nBlog: http://www.knappmeier.de',

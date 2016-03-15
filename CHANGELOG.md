@@ -3,6 +3,13 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 0.6.2 (Tue, 15 Mar 2016 13:59:11 GMT)
+
+* [1fdab40](https://github.com/bootprint/customize-engine-handlebars/commit/1fdab40) Fix testcase and do not run mocha recursively - Nils Knappmeier
+* [db1b6d4](https://github.com/bootprint/customize-engine-handlebars/commit/db1b6d4) Use mocha to run tests - Nils Knappmeier
+* [bccf9ec](https://github.com/bootprint/customize-engine-handlebars/commit/bccf9ec) Adjust travis-configuration - Nils Knappmeier
+* [94a70f9](https://github.com/bootprint/customize-engine-handlebars/commit/94a70f9), [612208d](https://github.com/bootprint/customize-engine-handlebars/commit/612208d) Move to bootprint-organization and enable ghook for StandardJS - Nils Knappmeier
+
 ## v0.6.1 - 2015-12-20
 
 ### Fix
