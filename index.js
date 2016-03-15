@@ -77,7 +77,7 @@ module.exports = {
    * @return {InternalHbsConfig} the configuration that is passed into the merging process
    *    later expected as parameter to the main function of the engine
    */
-  preprocessConfig: function preprocessConfig(config) {
+  preprocessConfig: function preprocessConfig (config) {
     var helpers = moduleIfString(config.helpers, 'helpers')
     // The helpers file may export an object or a promise for an object.
     // Or a function returning an object or a promise for an object.
@@ -87,8 +87,8 @@ module.exports = {
     var preprocessor = moduleIfString(config.preprocessor, 'preprocessor')
 
     // The `data` is handled just like the helpers.
-    var data = moduleIfString(config.data, 'data');
-    data = _.isFunction(data) ? data() : data;
+    var data = moduleIfString(config.data, 'data')
+    data = _.isFunction(data) ? data() : data
 
     return {
       partials: files(config.partials),
@@ -120,14 +120,14 @@ module.exports = {
       _.isFunction(config.helpers) && config.helpers.watch,
       // The preprocessor (in case it's a string)
       config.preprocessor
-    ]).filter(_.isString);
+    ]).filter(_.isString)
   },
 
   /**
    * Runs Handlebars with the data object
    * @param {InternalHbsConfig} config the configuration
    */
-  run: function run(config) {
+  run: function run (config) {
     // Run the preprocessor
     return Q(config.preprocessor(config.data))
       // Resolve any new promises
@@ -162,7 +162,7 @@ module.exports = {
  * @returns {string} the filename without .hbs
  * @private
  */
-function stripHandlebarsExt(value, key) {
+function stripHandlebarsExt (value, key) {
   return key.replace(/\.(handlebars|hbs)$/, '')
 }
 
@@ -179,7 +179,7 @@ function stripHandlebarsExt(value, key) {
  * @returns {*}
  * @private
  */
-function moduleIfString(pathOrObject, type) {
+function moduleIfString (pathOrObject, type) {
   // If this is a string, treat if as module to be required
   try {
     if (_.isString(pathOrObject)) {
@@ -197,9 +197,9 @@ function moduleIfString(pathOrObject, type) {
 
   // Require module if needed
   if (_.isString(pathOrObject)) {
-    var absPath = path.resolve(pathOrObject);
-    delete require.cache[absPath];
-    pathOrObject = require(absPath);
+    var absPath = path.resolve(pathOrObject)
+    delete require.cache[absPath]
+    pathOrObject = require(absPath)
   }
   return pathOrObject
 }
@@ -211,7 +211,7 @@ function moduleIfString(pathOrObject, type) {
  * @param {Handlebars} hbs the current handlebars engine
  * @param {object} hbsOptions the options of the Handlebars engine
  */
-function addEngine(helpers, hbs, hbsOptions) {
+function addEngine (helpers, hbs, hbsOptions) {
   hbs.logger.level = 0
   // Provide the engine as last parameter to all helpers in order to
   // enable things like calling partials from a helper.

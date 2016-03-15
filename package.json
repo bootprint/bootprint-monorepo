@@ -4,7 +4,7 @@
   "description": "Use handlebars as engine for customize",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nknapp/customize-engine-handlebars.git"
+    "url": "https://github.com/bootprint/customize-engine-handlebars.git"
   },
   "author": {
     "name": "Nils Knappmeier",
@@ -12,7 +12,7 @@
     "url": "https://github.com/nknapp"
   },
   "bugs": {
-    "url": "https://github.com/nknapp/customize-engine-handlebars/issues"
+    "url": "https://github.com/bootprint/customize-engine-handlebars/issues"
   },
   "main": "index.js",
   "license": "MIT",
@@ -24,7 +24,7 @@
     "thought": "thought run -a",
     "prethoughtcheck": "thought --version || npm -g install thought",
     "thoughtcheck": "thought check-engines",
-    "version": "npm run thought",
+    "version": "thoughtful changelog -o -a && npm run thought",
     "preversion": "npm run thoughtcheck"
   },
   "dependencies": {
@@ -38,7 +38,8 @@
   "devDependencies": {
     "customize": "<1.0.0",
     "get-promise": "^1.4.0",
-    "jasmine": "^2.3.1"
+    "jasmine": "^2.3.1",
+    "thoughtful-release": "^0.3.0"
   },
   "peerDependencies": {
     "customize": "<1.0.0"
@@ -52,5 +53,11 @@
     "index.js",
     "schema.js"
   ],
+  "config": {
+    "ghooks": {
+      "pre-commit": "standard"
+    }
+  },
+
   "keywords": []
 }
