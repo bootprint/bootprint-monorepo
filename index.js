@@ -69,8 +69,8 @@ function Recustomize (builder) {
    * Wrapped function. See [customize](https://github.com/nknapp/customize) for details
    * @type {Function}
      */
-  this.configSchema = function() {
-    return builder().configSchema();
+  this.configSchema = function () {
+    return builder().configSchema()
   }
 
   /**
