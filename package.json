@@ -4,7 +4,7 @@
   "description": "Post-processor that stores the result of a customize-run in a local directory",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nknapp/customize-write-files.git"
+    "url": "https://github.com/bootprint/customize-write-files.git"
   },
   "author": {
     "name": "Nils Knappmeier",
@@ -12,7 +12,7 @@
     "url": "https://github.com/nknapp"
   },
   "bugs": {
-    "url": "https://github.com/nknapp/customize-write-files/issues"
+    "url": "https://github.com/bootprint/customize-write-files/issues"
   },
   "main": "index.js",
   "license": "MIT",
@@ -30,13 +30,14 @@
   "dependencies": {
     "debug": "^2.2.0",
     "q": "^1.4.1",
-    "q-io": "^1.13.1"
+    "q-io": "^1.13.2"
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "mocha": "^2.2.5",
     "customize": "<1.0.0",
-    "customize-engine-less": "<1.0.0"
+    "customize-engine-less": "<1.0.0",
+    "mocha": "^2.2.5",
+    "thoughtful-release": "^0.3.0"
   },
   "standard": {
     "ignore": [
