@@ -40,13 +40,13 @@ describe('customize-write-files:', function () {
 
     // Call the module and return the promise for finishing the operation,
     // so that mocha waits until all files have been written
-    return customizeWriteFiles({
+    return customizeWriteFiles(outputDir)({
       'engine1': {
         'stream.txt': s,
         'buffer.txt': new Buffer('abc', 'utf8'),
         'string.txt': 'abc'
       }
-    }, outputDir)
+    })
   })
 
   // Clean up
