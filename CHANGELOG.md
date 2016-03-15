@@ -3,6 +3,11 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 0.1.5 (Tue, 15 Mar 2016 13:57:57 GMT)
+
+* [f54f5d6](https://github.com/bootprint/customize-write-files/commit/f54f5d6) Adjust travis-configuration - Nils Knappmeier
+
+
 # Version 0.1.4 (Tue, 15 Mar 2016 10:02:28 GMT)
 
 * [9f16b7f](https://github.com/bootprint/customize-write-files/commit/9f16b7f) Fix test-cases - Nils Knappmeier
