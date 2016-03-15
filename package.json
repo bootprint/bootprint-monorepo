@@ -38,6 +38,7 @@
   "devDependencies": {
     "customize": "<1.0.0",
     "get-promise": "^1.4.0",
+    "ghooks": "^1.0.3",
     "jasmine": "^2.3.1",
     "thoughtful-release": "^0.3.0"
   },
@@ -58,6 +59,5 @@
       "pre-commit": "standard"
     }
   },
-
   "keywords": []
 }
