@@ -80,8 +80,6 @@ function customize () {
  */
 function Customize (config, parentConfig, engines) {
   var _config = _.merge({}, parentConfig, config, customOverrider)
-  console.log('custom', require('debug')('customize:state').enabled, config)
-  console.log('debugState', debugState.enabled, config)
 
   // Debug logging
   if (debugState.enabled) {
