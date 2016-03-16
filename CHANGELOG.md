@@ -3,6 +3,12 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 0.8.4 (Wed, 16 Mar 2016 21:49:32 GMT)
+
+* [92c2ab0](https://github.com/bootprint/customize/commit/92c2ab0) Remove unnecessary debug output - Nils Knappmeier
+
+
+
 # Version 0.8.3 (Tue, 15 Mar 2016 13:46:57 GMT)
 
 * [2b04495](https://github.com/bootprint/customize/commit/2b04495) Adjust travis-configuration - Nils Knappmeier

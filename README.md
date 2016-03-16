@@ -147,12 +147,6 @@ The example creates a new Customize-instances, registers our engine under the na
 config. This example prints the following result.
 
 ```js
-custom false {}
-debugState false {}
-custom false { files: { config: {}, watched: [] } }
-debugState false { files: { config: {}, watched: [] } }
-custom false { files: { state: 'pending' } }
-debugState false { files: { state: 'pending' } }
 { files: 
    { 'a.md': { path: 'dir1/a.md', contents: 'First file (from dir1)' },
      'b.md': { path: 'dir1/b.md', contents: 'Second file (from dir1)' } } }
@@ -184,12 +178,6 @@ The engines `run()`-method will now be executed with the resolved configuration,
 which yields the following output:
 
 ```
-custom false {}
-debugState false {}
-custom false { files: { config: {}, watched: [] } }
-debugState false { files: { config: {}, watched: [] } }
-custom false { files: { state: 'pending' } }
-debugState false { files: { state: 'pending' } }
 { 'concat.txt': 'First file (from dir1)\nSecond file (from dir1)\n' }
 ```
 
@@ -246,14 +234,6 @@ so that in the above example, the property `a.md` is replace by the value in the
 second configuration. So the output of this example is
 
 ```
-custom false {}
-debugState false {}
-custom false { files: { config: {}, watched: [] } }
-debugState false { files: { config: {}, watched: [] } }
-custom false { files: { state: 'pending' } }
-debugState false { files: { state: 'pending' } }
-custom false { files: { state: 'pending' } }
-debugState false { files: { state: 'pending' } }
 { 'concat.txt': 'First file (from dir2)\nSecond file (from dir1)\n' }
 ```
 
