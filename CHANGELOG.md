@@ -2,6 +2,12 @@
 
 
 <a name="current-release"></a>
+# Version 0.8.6 (Thu, 24 Mar 2016 07:31:16 GMT)
+
+* [4d70db8](https://github.com/bootprint/bootprint-json-schema/commit/4d70db8) #3: Corrected typo in partial (maxLength-variable spelled wrongly) - Nils Knappmeier
+
+
+
 # Version 0.8.5 (Tue, 15 Mar 2016 14:27:33 GMT)
 
 * [40ca080](https://github.com/bootprint/bootprint-json-schema/commit/40ca080) Generate README with "thought" - Nils Knappmeier
