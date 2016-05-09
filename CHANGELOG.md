@@ -3,6 +3,10 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 0.2.4 (Mon, 09 May 2016 20:24:25 GMT)
+
+* [04029a1](https://github.com/bootprint/customize-engine-less/commit/04029a1) Always use less@2.6.1 - Nils Knappmeier
+
 # Version 0.2.3 (Tue, 15 Mar 2016 14:03:18 GMT)
 
 * [d3f4fc7](https://github.com/bootprint/customize-engine-less/commit/d3f4fc7) Add "require" to main-spec in order to get (low) coverage - Nils Knappmeier

@@ -44,17 +44,9 @@ customize()
 This will generate the following output
 
 ```
-custom false {}
-debugState false {}
-custom false { less: { config: { main: [], paths: [] }, watched: [] } }
-debugState false { less: { config: { main: [], paths: [] }, watched: [] } }
-custom false { less: { state: 'pending' } }
-debugState false { less: { state: 'pending' } }
-custom false { less: { state: 'pending' } }
-debugState false { less: { state: 'pending' } }
 { less: 
    { 'main.css': 'div{color:red;background-color:green}',
-     'main.css.map': '{"version":3,"sources":["/home/nknappmeier/privat/node-libraries/customize-engine-less/examples/main.less"],"names":[],"mappings":"AAGA,IACE,SAAA,CACA"}' } }
+     'main.css.map': '{"version":3,"sources":["/home/nknappmeier/privat/bootprint/customize-engine-less/examples/main.less"],"names":[],"mappings":"AAGA,IACE,SAAA,CACA"}' } }
 ```
 
 ##  API-reference
