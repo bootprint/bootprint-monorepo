@@ -3,6 +3,12 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 0.2.5 (Mon, 09 May 2016 20:56:37 GMT)
+
+* [a7ce66d](https://github.com/bootprint/customize-engine-less/commit/a7ce66d) Bump less to version 2.7.1 - Nils Knappmeier
+
+
+
 # Version 0.2.4 (Mon, 09 May 2016 20:24:25 GMT)
 
 * [04029a1](https://github.com/bootprint/customize-engine-less/commit/04029a1) Always use less@2.6.1 - Nils Knappmeier
