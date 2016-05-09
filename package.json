@@ -28,7 +28,7 @@
     "preversion": "npm run thoughtcheck"
   },
   "dependencies": {
-    "less": "^2.5.3",
+    "less": "2.6.1",
     "lodash": "^3.10.1",
     "q": "^1.4.1"
   },
