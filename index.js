@@ -26,6 +26,12 @@ var contents = function (partials) {
  * The default configuration for the handlebars engine
  * @property {string} partials path to a partials directory. Each `.hbs`-file in the directory (or in the tree)
  *   is registered as partial by its name (or relative path), without the `.hbs`-extension.
+ * @property {function(string, string):(string|Promise<string>)} partialWrapper a function that can modify partials
+ *   just before they are registered with the Handlebars engine. It receives the partial contents as
+ *   first parameter and the partial name as second parameter and must return the new content (or a promise for
+ *   the content. The parameter was introduced mainly for debugging purposes (i.e. to surround each
+ *   partial with a string containing the name of the partial). When this function is overridden, the
+ *   parent function is available throught `this.parent`.
  * @property {string|object|function} helpers if this is an object it is assumed to be a list of helper functions,
  *   if this is function it is assumed to return an object of helper functions, if this is a string,
  *   it is assumed to be the path to a module returning either an object of a function as above.
@@ -47,6 +53,7 @@ var contents = function (partials) {
  * @typedef {object} InternalHbsConfig the internal configuration object that
  *   is passed into the merge function.
  * @property {object<{path:string,contents:string}>} partials the Handlebars partials that should be registered
+ * @property {function(string,string): (string|Promise<string>)} partialWrapper the partial wrapper function.
  * @property {object<function> helpers the Handlebars helpers that should be registered
  * @property {object<{path:string,contents:string}>} templates
  * @property {object} data the data object to render with Handlebars
@@ -64,6 +71,7 @@ module.exports = {
 
   defaultConfig: {
     partials: {},
+    partialWrapper: function (contents, name) { return contents },
     helpers: {},
     templates: {},
     data: {},
@@ -92,6 +100,7 @@ module.exports = {
 
     return {
       partials: files(config.partials),
+      partialWrapper: config.partialWrapper && customize.withParent(config.partialWrapper),
       helpers: helpers,
       templates: files(config.templates),
       data: data,
@@ -139,7 +148,7 @@ module.exports = {
         // support helpers returning promises
         var hbs = promisedHandlebars(Handlebars)
 
-        var partials = contents(config.partials)
+        var partials = _.mapValues(contents(config.partials), config.partialWrapper)
         hbs.registerPartial(partials)
         hbs.registerHelper(addEngine(config.helpers, hbs, config))
         var templates = contents(config.templates)

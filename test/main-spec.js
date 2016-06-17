@@ -52,4 +52,43 @@ describe('customize-engine-handlebars', function () {
   })
 
   xit('should throw an exception if loading an existing helpers module fails', function () {})
+
+  it('should apply the partial wrapper', function () {
+    var hb2 = hb.merge({
+      handlebars: {
+        partialWrapper: function (contents, name) {
+          return '[' + name + '] ' + contents + ' [/' + name + ']'
+        }
+      }
+    })
+    return expect(hb2.run()).to.eventually.deep.equal({
+      handlebars: {
+        'a.md': 'a.md [eins] testPartials1/eins ->one<- [/eins]',
+        'b.md': 'b.md [zwei] testPartials1/zwei ->two<- [/zwei] helper1(->two<-)'
+      }
+    })
+  })
+
+  it('the parent partial wrapper should be available through `this.parent()`', function () {
+    var hb2 = hb.merge({
+      handlebars: {
+        partialWrapper: function (contents, name) {
+          return '[' + name + '] ' + contents + ' [/' + name + ']'
+        }
+      }
+    })
+      .merge({
+        handlebars: {
+          partialWrapper: function (contents, name) {
+            return '(' + this.parent(contents, name) + ')'
+          }
+        }
+      })
+    return expect(hb2.run()).to.eventually.deep.equal({
+      handlebars: {
+        'a.md': 'a.md ([eins] testPartials1/eins ->one<- [/eins])',
+        'b.md': 'b.md ([zwei] testPartials1/zwei ->two<- [/zwei]) helper1(->two<-)'
+      }
+    })
+  })
 })

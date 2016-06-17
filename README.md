@@ -22,6 +22,7 @@ The following example demonstrates how to use this module:
 
 ├── config-module.js
 ├── example-merge.js
+├── example-partial-names.js
 ├── example.js
 ├── hb-helpers.js
 ├── hb-preprocessor.js
@@ -126,30 +127,6 @@ Github-Name: {{{github.name}}}
 The output of this example is:
 
 ```
-custom false {}
-debugState false {}
-custom false { handlebars: 
-   { config: 
-      { partials: {},
-        helpers: {},
-        templates: {},
-        data: {},
-        preprocessor: [Function: identity],
-        hbsOptions: {} },
-     watched: [] } }
-debugState false { handlebars: 
-   { config: 
-      { partials: {},
-        helpers: {},
-        templates: {},
-        data: {},
-        preprocessor: [Function: identity],
-        hbsOptions: {} },
-     watched: [] } }
-custom false { _metadata: { config: { modules: [] } } }
-debugState false { _metadata: { config: { modules: [] } } }
-custom false { handlebars: { state: 'pending' } }
-debugState false { handlebars: { state: 'pending' } }
 https://api.github.com/users/nknapp
 { handlebars: 
    { 'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n------\nGithub-Name: Nils Knappmeier',
@@ -189,32 +166,6 @@ Blog: {{{github.blog}}}
 The output of this example is
 
 ```
-custom false {}
-debugState false {}
-custom false { handlebars: 
-   { config: 
-      { partials: {},
-        helpers: {},
-        templates: {},
-        data: {},
-        preprocessor: [Function: identity],
-        hbsOptions: {} },
-     watched: [] } }
-debugState false { handlebars: 
-   { config: 
-      { partials: {},
-        helpers: {},
-        templates: {},
-        data: {},
-        preprocessor: [Function: identity],
-        hbsOptions: {} },
-     watched: [] } }
-custom false { _metadata: { config: { modules: [] } } }
-debugState false { _metadata: { config: { modules: [] } } }
-custom false { handlebars: { state: 'pending' } }
-debugState false { handlebars: { state: 'pending' } }
-custom false { handlebars: { state: 'pending' } }
-debugState false { handlebars: { state: 'pending' } }
 https://api.github.com/users/nknapp
 { handlebars: 
    { 'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n------\nBlog: http://www.knappmeier.de',
@@ -224,6 +175,39 @@ https://api.github.com/users/nknapp
 In a similar fashion, we could replace other parts of the configuration, like templates, helpers
 and the pre-processor. If we would provide a new preprocessor, it could call the old one,
 by calling `this.parent(args)`
+
+### Which partial generates what?
+
+When we want to overriding parts of the output, we are looking for the correct partial to do so. 
+For this purpose, the engine allows to specify a "wrapper function" for partials. This function
+is called with the contents and the name of a partial and returns the new content. Programs like
+`Thought` can optionally include the partial names into the output to show the user which partial
+to override in order to modify a given part of the output.
+
+
+```js
+var customize = require('customize')
+customize()
+  .registerEngine('handlebars', require('customize-engine-handlebars'))
+  .load(require('./config-module.js'))
+  .merge({
+    handlebars: {
+      partials: 'partials2',
+      partialWrapper: function (contents, name) {
+        return '[BEGIN ' + name + ']\n' + contents + '[END ' + name + ']'
+      }
+    }
+  })
+  .run()
+  .done(console.log)
+```
+
+```
+https://api.github.com/users/nknapp
+{ handlebars: 
+   { 'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n[BEGIN footer]\n------\nBlog: http://www.knappmeier.de[END footer]',
+     'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n[BEGIN footer]\n------\nBlog: http://www.knappmeier.de[END footer]' } }
+```
 
 ### Accessing engine and configuration helpers
 
@@ -285,6 +269,7 @@ The default configuration for the handlebars engine
 | Name | Type | Description |
 | --- | --- | --- |
 | partials | <code>string</code> | path to a partials directory. Each `.hbs`-file in the directory (or in the tree)   is registered as partial by its name (or relative path), without the `.hbs`-extension. |
+| partialWrapper | <code>function</code> | a function that can modify partials   just before they are registered with the Handlebars engine. It receives the partial contents as   first parameter and the partial name as second parameter and must return the new content (or a promise for   the content. The parameter was introduced mainly for debugging purposes (i.e. to surround each   partial with a string containing the name of the partial). When this function is overridden, the   parent function is available throught `this.parent`. |
 | helpers | <code>string</code> &#124; <code>object</code> &#124; <code>function</code> | if this is an object it is assumed to be a list of helper functions,   if this is function it is assumed to return an object of helper functions, if this is a string,   it is assumed to be the path to a module returning either an object of a function as above. |
 | templates | <code>string</code> | path to a directory containing templates. Handlebars is called with each `.hbs`-file   as template. The result of the engine consists of an object with a property for each template and the   Handlebars result for this template as value. |
 | data | <code>string</code> &#124; <code>object</code> &#124; <code>function</code> | a javascript-object to use as input for handlebars. Same as with the `helpers`,   it is also acceptable to specify the path to a module exporting the data and a function computing   the data. |

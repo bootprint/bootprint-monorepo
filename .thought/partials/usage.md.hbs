@@ -63,6 +63,19 @@ In a similar fashion, we could replace other parts of the configuration, like te
 and the pre-processor. If we would provide a new preprocessor, it could call the old one,
 by calling `this.parent(args)`
 
+### Which partial generates what?
+
+When we want to overriding parts of the output, we are looking for the correct partial to do so. 
+For this purpose, the engine allows to specify a "wrapper function" for partials. This function
+is called with the contents and the name of a partial and returns the new content. Programs like
+`Thought` can optionally include the partial names into the output to show the user which partial
+to override in order to modify a given part of the output.
+
+
+{{{example 'examples/example-partial-names.js'}}}
+
+{{{exec 'node example-partial-names.js' cwd='examples/'}}}
+
 ### Accessing engine and configuration helpers
 
 The configuration and the engine itself is passed as additional parameter into each helper call:
