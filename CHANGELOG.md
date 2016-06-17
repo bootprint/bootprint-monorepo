@@ -3,6 +3,10 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 0.7.0 (Fri, 17 Jun 2016 21:32:39 GMT)
+
+* [b9812b9](https://github.com/bootprint/customize-engine-handlebars/commit/b9812b9) Add `partialWrapper`-option to output partial-names - Nils Knappmeier
+
 # Version 0.6.2 (Tue, 15 Mar 2016 13:59:11 GMT)
 
 * [1fdab40](https://github.com/bootprint/customize-engine-handlebars/commit/1fdab40) Fix testcase and do not run mocha recursively - Nils Knappmeier
