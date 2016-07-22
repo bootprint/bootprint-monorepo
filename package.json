@@ -34,8 +34,7 @@
     "lodash": "^3.9.3",
     "minimatch": "^3.0.0",
     "q": "^1.4.1",
-    "q-deep": "^1.0.1",
-    "q-io": "2"
+    "q-deep": "^1.0.1"
   },
   "standard": {
     "ignore": [
