@@ -8,6 +8,7 @@
 
 var _ = require('lodash')
 var less = require('less')
+var path = require('path')
 
 /**
  * @typedef {object} CustomizeLessConfig
@@ -43,7 +44,11 @@ module.exports = {
    */
   run: function (config) {
     var lessSource = config.main.map(function (file) {
-      return '@import "' + file + '";'
+      if (path.extname(file) === '.css') {
+        return '@import (inline) "' + file + '";'
+      } else {
+        return '@import "' + file + '";'
+      }
     }).join('\n')
     return less.render(lessSource, {
       paths: config.paths,
