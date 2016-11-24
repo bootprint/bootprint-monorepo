@@ -22,6 +22,7 @@ module.exports = function (builder) {
     less: {
       main: [
         bootstrapLess,
+        require.resolve('highlight.js/styles/default.css'),
         require.resolve('./less/main.less')
       ],
       paths: [
