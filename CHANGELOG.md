@@ -3,6 +3,10 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 0.2.6 (Thu, 24 Nov 2016 22:14:45 GMT)
+
+* [70a86d9](https://github.com/bootprint/customize-engine-less/commit/70a86d9) Import CSS-files with the "(inline)"-option (fixes bootprint/bootprint#16) - Nils Knappmeier
+
 # Version 0.2.5 (Mon, 09 May 2016 20:56:37 GMT)
 
 * [a7ce66d](https://github.com/bootprint/customize-engine-less/commit/a7ce66d) Bump less to version 2.7.1 - Nils Knappmeier

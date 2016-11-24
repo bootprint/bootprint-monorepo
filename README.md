@@ -1,8 +1,8 @@
 # customize-engine-less 
 
 [![NPM version](https://badge.fury.io/js/customize-engine-less.svg)](http://badge.fury.io/js/customize-engine-less)
-     [![Travis Build Status](https://travis-ci.org/bootprint/customize-engine-less.svg?branch=master)](https://travis-ci.org/bootprint/customize-engine-less)
-   [![Coverage Status](https://img.shields.io/coveralls/bootprint/customize-engine-less.svg)](https://coveralls.io/r/bootprint/customize-engine-less)
+[![Travis Build Status](https://travis-ci.org/bootprint/customize-engine-less.svg?branch=master)](https://travis-ci.org/bootprint/customize-engine-less)
+[![Coverage Status](https://img.shields.io/coveralls/bootprint/customize-engine-less.svg)](https://coveralls.io/r/bootprint/customize-engine-less)
 
 
 > A less-engine for customize
@@ -46,25 +46,30 @@ This will generate the following output
 ```
 { less: 
    { 'main.css': 'div{color:red;background-color:green}',
-     'main.css.map': '{"version":3,"sources":["/home/nknappmeier/privat/bootprint/customize-engine-less/examples/main.less"],"names":[],"mappings":"AAGA,IACE,SAAA,CACA"}' } }
+     'main.css.map': '{"version":3,"sources":["/home/nknappmeier/projects/bootprint/customize-engine-less/examples/main.less"],"names":[],"mappings":"AAGA,IACE,SAAA,CACA"}' } }
 ```
 
 ##  API-reference
 
 ### Functions
+
 <dl>
 <dt><a href="#coerceToArray">coerceToArray(objOrArray)</a> ⇒</dt>
 <dd><p>If <code>objOrArray</code> exists and is a non-array, it is replaced by
 an array with the property as single object.</p>
 </dd>
 </dl>
+
 ### Typedefs
+
 <dl>
 <dt><a href="#CustomizeLessConfig">CustomizeLessConfig</a> : <code>object</code></dt>
 <dd><p>Configuration for the customize less-engine</p>
 </dd>
 </dl>
+
 <a name="coerceToArray"></a>
+
 ### coerceToArray(objOrArray) ⇒
 If `objOrArray` exists and is a non-array, it is replaced by
 an array with the property as single object.
@@ -77,6 +82,7 @@ an array with the property as single object.
 | objOrArray | <code>object</code> | the object or an array |
 
 <a name="CustomizeLessConfig"></a>
+
 ### CustomizeLessConfig : <code>object</code>
 Configuration for the customize less-engine
 
