@@ -1,6 +1,10 @@
 # Release notes
 
 <a name="current-release"></a>
+# Version 0.7.3 (Thu, 24 Nov 2016 21:33:41 GMT)
+
+* [1e79060](https://github.com/bootprint/bootprint-base/commit/1e79060) Include `highlight.js`-styles into less file (fixes bootprint/bootprint#16). - Nils Knappmeier
+
 # Version 0.7.2 (Tue, 15 Mar 2016 14:21:10 GMT)
 
 * [d6b24d6](https://github.com/bootprint/bootprint-base/commit/d6b24d6) Fix "npm test" script - Nils Knappmeier
