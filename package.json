@@ -26,15 +26,18 @@
   "homepage": "https://github.com/bootprint/bootprint-base",
   "dependencies": {
     "bootstrap": "^3.3.2",
-    "handlebars": "^3.0.0",
     "cheerio": "^0.19.0",
+    "handlebars": "^3.0.0",
     "highlight.js": "^8.4.0",
+    "jquery": "^3.1.1",
     "json-stable-stringify": "^1.0.0",
     "marked": "^0.3.3"
   },
   "devDependencies": {
+    "bootprint": "<1.0.0",
     "chai": "^3.5.0",
     "ghooks": "^1.0.3",
+    "m-io": "^0.1.1",
     "mocha": "^2.4.5",
     "thoughtful-release": "^0.3.0"
   },

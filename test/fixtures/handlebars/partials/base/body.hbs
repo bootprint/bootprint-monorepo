@@ -1,0 +1,20 @@
+{{#if tabs}}
+    <div class="container">
+        <div class="well">
+            <ul class="nav nav-tabs" role="tablist">
+                {{#each tabs}}
+                    <li role="presentation" class="{{#if active}}active{{/if}}">
+                        <a href="#{{title}}" aria-controls="{{title}}" role="tab" data-toggle="tab">{{title}}</a>
+                    </li>
+                {{/each}}
+            </ul>
+            <div class="tab-content">
+                {{#each tabs}}
+                    <div role="tabpanel" class="tab-pane {{#if active}}active{{/if}}" id="{{title}}">
+                        <p>{{contents}}</p>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+{{/if}}
