@@ -1,6 +1,10 @@
 # Release notes
 
 <a name="current-release"></a>
+# Version 0.8.0 (Sun, 18 Dec 2016 14:09:55 GMT)
+
+* [915eef1](https://github.com/bootprint/bootprint-base/commit/915eef1) Use "uglify" to add the jQuery and Bootstrap JavaScript files. - Nils Knappmeier
+
 # Version 0.7.3 (Thu, 24 Nov 2016 21:33:41 GMT)
 
 * [1e79060](https://github.com/bootprint/bootprint-base/commit/1e79060) Include `highlight.js`-styles into less file (fixes bootprint/bootprint#16). - Nils Knappmeier
