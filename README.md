@@ -1,8 +1,8 @@
 # customize-write-files 
 
 [![NPM version](https://badge.fury.io/js/customize-write-files.svg)](http://badge.fury.io/js/customize-write-files)
-     [![Travis Build Status](https://travis-ci.org/bootprint/customize-write-files.svg?branch=master)](https://travis-ci.org/bootprint/customize-write-files)
-   [![Coverage Status](https://img.shields.io/coveralls/bootprint/customize-write-files.svg)](https://coveralls.io/r/bootprint/customize-write-files)
+[![Travis Build Status](https://travis-ci.org/bootprint/customize-write-files.svg?branch=master)](https://travis-ci.org/bootprint/customize-write-files)
+[![Coverage Status](https://img.shields.io/coveralls/bootprint/customize-write-files.svg)](https://coveralls.io/r/bootprint/customize-write-files)
 
 
 > Post-processor that stores the result of a customize-run in a local directory
@@ -25,7 +25,7 @@ The contents of the file may be one of the following
 * A buffer
 * A readable stream.
 
-The goal of `undefined` is to act as an NodeJS-adapter for customize 
+The goal of `` is to act as an NodeJS-adapter for customize 
 and store the result of `customize` in a local directory structure.
  
 # Installation
@@ -62,19 +62,14 @@ customize()
 This will generate the following output
 
 ```
-custom false {}
-debugState false {}
-custom false { less: { config: { main: [], paths: [] }, watched: [] } }
-debugState false { less: { config: { main: [], paths: [] }, watched: [] } }
-custom false { less: { state: 'pending' } }
-debugState false { less: { state: 'pending' } }
 [ 'target/main.css', 'target/main.css.map' ]
 ```
 
 ##  API-reference
 
 <a name="write"></a>
-### write(targetDir) ⇒ <code>function</code>
+
+## write(targetDir) ⇒ <code>function</code>
 Creates a function that writes the result of the `customize#run()` method to a
 local target directory.
 
