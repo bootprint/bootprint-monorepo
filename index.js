@@ -9,7 +9,7 @@
 
 var fs = require('fs')
 var Q = require('q')
-var qfs = require('q-io/fs')
+var qfs = require('m-io/fs')
 var path = require('path')
 var debug = require('debug')('customize-write-files:index')
 
@@ -34,7 +34,7 @@ function write (targetDir) {
 
 /**
  * Writes the results of a customize run into a directory in the local file-system
- * @param customizeResultls
+ * @param customizeResult
  * @param targetDir
  * @private
  */
@@ -73,12 +73,11 @@ function customizeWriteFiles (customizeResult, targetDir) {
 /**
  * Write a stream, buffer or string to a file and return a promised for the finished operation
  *
- * @param filename
+ * @param {string} filename the filename
  * @param {Buffer|string|Stream.Readable} contents
- * @returns {*}
+ * @returns {Promise<string>} a Promise for the filename
  * @private
  */
-
 function writePromised (filename, contents) {
   // Ignore undefined contents
   if (contents == null) {
@@ -95,27 +94,23 @@ function writePromised (filename, contents) {
 
 /**
  * Writes a buffer or a string to a file and returns a promise for the completed operation
- * @param filename
- * @returns {*}
+ * @param {string} filename the file name
+ * @param {string|Buffer} contents the file contents
+ * @returns {Promise<string>}
  * @private
  */
 function writeBufferOrString (filename, contents) {
-  // qfs.write has issues in node 4.1.0, so we create a simple wrapper using
-  // Q.defer() and fs.writeFile()
-  var defer = Q.defer()
-
-  fs.writeFile(filename, contents, defer.makeNodeResolver())
-  return defer.promise.then(function () {
+  return qfs.write(filename, contents).then(function () {
     return filename
   })
 }
 
 /**
  * Write a Readable to a file and
- * @param filename
- * @param contents
+ * @param {string} filename
+ * @param {stream.Readable} contents
  * @private
- * @returns {*}
+ * @returns {Promise<string>} a promise for the filename
  */
 function writeStream (filename, contents) {
   var defer = Q.defer()
