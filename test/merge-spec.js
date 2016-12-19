@@ -22,7 +22,7 @@ chai.use(chaiAsPromised)
 var overrider = require('../').overrider
 var Q = require('q')
 var _ = require('lodash')
-var deep = require('q-deep')
+var deep = require('deep-aplus')(Q.Promise)
 
 describe('The custom overrider', function () {
   it('should concatenate arrays', function () {

@@ -13,7 +13,7 @@
 var debug = require('debug')('customize:base')
 var debugState = require('debug')('customize:state')
 var Q = require('q')
-var deep = require('q-deep')
+var deep = require('deep-aplus')(Q.Promise)
 var _ = require('lodash')
 
 /**
