@@ -55,9 +55,11 @@
   "devDependencies": {
     "chai": "^3.3.0",
     "chai-as-promised": "^5.2.0",
+    "clarify": "^2.0.0",
     "ghooks": "^1.0.3",
     "mocha": "^2.3.3",
     "thoughtful-release": "^0.3.0",
-    "trace": "^2.3.0"
+    "trace": "^2.3.0",
+    "trace-and-clarify-if-possible": "^1.0.0"
   }
 }
