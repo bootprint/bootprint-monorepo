@@ -20,7 +20,7 @@
     "pretest": "standard --version || npm -g install standard",
     "test": "mocha && standard",
     "preformat": "standard --version || npm -g install standard",
-    "format": "standard --format",
+    "format": "standard --fix",
     "thought": "thought run -a",
     "prethoughtcheck": "thought --version || npm -g install thought",
     "thoughtcheck": "thought check-engines",
