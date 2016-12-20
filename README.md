@@ -15,9 +15,16 @@ At its core, it uses [lodash#merge](https://lodash.com/docs#merge) to merge conf
 but it uses a customizer-function that also supports promises and custom overrider functions 
 attached to the object.
 
-Currently, there is only one engine ([customize-engine-handlebars](https://npmjs.com/package/customize-engine-handlebars))
-and one project that actually uses Customize ([Thought](https://npmjs.com/package/thought)).
-Bootprint will use Customize as well, once all features (i.e. like a file watcher) are implemented.
+## Engines
+
+* [customize-engine-handlebars](https://npmjs.com/package/customize-engine-handlebars)
+* [customize-engine-less](https://npmjs.com/package/customize-engine-less)
+* [customize-engine-uglify](https://npmjs.com/package/customize-engine-uglify)
+
+## Used by
+
+* [thought](https://npmjs.com/package/thought)
+* [bootprint](https://npmjs.com/package/bootprint)
 
 
 # Installation
