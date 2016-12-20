@@ -3,6 +3,16 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 1.0.0 (Tue, 20 Dec 2016 00:23:05 GMT)
+
+* [9d460b4](https://github.com/bootprint/customize/commit/9d460b4) Use m-io/fs instead of custom "listTree"-implementation - Nils Knappmeier
+* [01af3e9](https://github.com/bootprint/customize/commit/01af3e9) Use "trace-and-clarify-if-possible" when running tests - Nils Knappmeier
+* [4773b02](https://github.com/bootprint/customize/commit/4773b02) Use current version of deep-aplus instead of q-deep - Nils Knappmeier
+* [753fad6](https://github.com/bootprint/customize/commit/753fad6) Remove the dependency to q-io and use custom implementations of the used functions. - Nils Knappmeier
+* [e987d49](https://github.com/bootprint/customize/commit/e987d49) Use q-io@2 to exclude wrongly implemented "Array.prototype.find"-method - Nils Knappmeier
+
+
+
 # Version 0.8.4 (Wed, 16 Mar 2016 21:49:32 GMT)
 
 * [92c2ab0](https://github.com/bootprint/customize/commit/92c2ab0) Remove unnecessary debug output - Nils Knappmeier

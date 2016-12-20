@@ -1,8 +1,8 @@
 # customize 
 
 [![NPM version](https://badge.fury.io/js/customize.svg)](http://badge.fury.io/js/customize)
-     [![Travis Build Status](https://travis-ci.org/bootprint/customize.svg?branch=master)](https://travis-ci.org/bootprint/customize)
-   [![Coverage Status](https://img.shields.io/coveralls/bootprint/customize.svg)](https://coveralls.io/r/bootprint/customize)
+[![Travis Build Status](https://travis-ci.org/bootprint/customize.svg?branch=master)](https://travis-ci.org/bootprint/customize)
+[![Coverage Status](https://img.shields.io/coveralls/bootprint/customize.svg)](https://coveralls.io/r/bootprint/customize)
 
 
 > A simple framework to create customizable engines
@@ -274,13 +274,16 @@ partials and definitions from other packages.
 
 The exported module is a function that creates a new empty Customize-instance.
 
-#### Modules
+## Modules
+
 <dl>
 <dt><a href="#module_customize">customize</a></dt>
 <dd><p>Create a new Customize object with an empty configuration</p>
 </dd>
 </dl>
-#### Members
+
+## Members
+
 <dl>
 <dt><a href="#jsonschema">jsonschema</a></dt>
 <dd><p>The configuration file is defined (and validated) by a JSON-schema
@@ -289,53 +292,60 @@ We use the <code>jsonschema</code> module for validation, along the the
 <code>jsonschema-extra</code>-module, because the JSON can contain functions.</p>
 </dd>
 </dl>
+
 <a name="module_customize"></a>
-#### customize
+
+## customize
 Create a new Customize object with an empty configuration
 
 
 * [customize](#module_customize)
-  * _static_
-    * [.debugState](#module_customize.debugState)
-    * [.debug](#module_customize.debug)
-    * [.Customize](#module_customize.Customize) : <code>customize</code>
-    * [.overrider](#module_customize.overrider) : <code>customOverrider</code>
-    * [.withParent](#module_customize.withParent)
-    * [.leaf](#module_customize.leaf) ⇒ <code>Promise</code>
-  * _inner_
-    * [~Customize](#module_customize..Customize)
-      * [new Customize()](#new_module_customize..Customize_new)
-      * [.registerEngine(id, engine)](#module_customize..Customize+registerEngine)
-      * [.configSchema()](#module_customize..Customize+configSchema)
-      * [.merge(config)](#module_customize..Customize+merge) ⇒ <code>Customize</code>
-      * [.load(customizeModule)](#module_customize..Customize+load) ⇒ <code>Customize</code>
-      * [.buildConfig()](#module_customize..Customize+buildConfig) ⇒ <code>Promise.&lt;object&gt;</code>
-      * [.watched()](#module_customize..Customize+watched) ⇒ <code>Promise.&lt;object.&lt;Array.&lt;string&gt;&gt;&gt;</code>
-      * [.run([options])](#module_customize..Customize+run) ⇒ <code>Promise.&lt;object&gt;</code>
-    * [~customize()](#module_customize..customize) ⇒ <code>Customize</code>
+    * _static_
+        * [.debugState](#module_customize.debugState)
+        * [.debug](#module_customize.debug)
+        * [.Customize](#module_customize.Customize) : <code>customize</code>
+        * [.overrider](#module_customize.overrider) : <code>customOverrider</code>
+        * [.withParent](#module_customize.withParent)
+        * [.leaf](#module_customize.leaf) ⇒ <code>Promise</code>
+    * _inner_
+        * [~Customize](#module_customize..Customize)
+            * [new Customize()](#new_module_customize..Customize_new)
+            * [.registerEngine(id, engine)](#module_customize..Customize+registerEngine)
+            * [.configSchema()](#module_customize..Customize+configSchema)
+            * [.merge(config)](#module_customize..Customize+merge) ⇒ <code>Customize</code>
+            * [.load(customizeModule)](#module_customize..Customize+load) ⇒ <code>Customize</code>
+            * [.buildConfig()](#module_customize..Customize+buildConfig) ⇒ <code>Promise.&lt;object&gt;</code>
+            * [.watched()](#module_customize..Customize+watched) ⇒ <code>Promise.&lt;object.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+            * [.run([options])](#module_customize..Customize+run) ⇒ <code>Promise.&lt;object&gt;</code>
+        * [~customize()](#module_customize..customize) ⇒ <code>Customize</code>
 
 <a name="module_customize.debugState"></a>
-##### customize.debugState
+
+### customize.debugState
 For coverage testing: Expose the debugState object so it can be enabled an disabled in testcases
 
 **Kind**: static property of <code>[customize](#module_customize)</code>  
 <a name="module_customize.debug"></a>
-##### customize.debug
+
+### customize.debug
 For coverage testing: Expose the debug object so it can be enabled an disabled in testcases
 
 **Kind**: static property of <code>[customize](#module_customize)</code>  
 <a name="module_customize.Customize"></a>
-##### customize.Customize : <code>customize</code>
+
+### customize.Customize : <code>customize</code>
 Exposes the constructor of the `customize` object
 
 **Kind**: static property of <code>[customize](#module_customize)</code>  
 <a name="module_customize.overrider"></a>
-##### customize.overrider : <code>customOverrider</code>
+
+### customize.overrider : <code>customOverrider</code>
 Custom overrider-function (that is used as `customizer` in (lodash#merge)[https://lodash.com/docs#merge]
 
 **Kind**: static property of <code>[customize](#module_customize)</code>  
 <a name="module_customize.withParent"></a>
-##### customize.withParent
+
+### customize.withParent
 Wrap a function so that if it overrides another function, that function will
 be available as `this.parent`
 
@@ -348,7 +358,8 @@ be available as `this.parent`
 | fn | 
 
 <a name="module_customize.leaf"></a>
-##### customize.leaf ⇒ <code>Promise</code>
+
+### customize.leaf ⇒ <code>Promise</code>
 Create a promise that is regarded as leaf in the configuration tree.
 That means, that the overrider is not resolving this promise when overriding values.
 Promised object values will not be merged but replaced.
@@ -362,10 +373,11 @@ Promised object values will not be merged but replaced.
 | promiseOrValue | <code>\*</code> | a promise or a valude that represents the leaf |
 
 <a name="module_customize..Customize"></a>
-##### customize~Customize
+
+### customize~Customize
 **Kind**: inner class of <code>[customize](#module_customize)</code>  
 
-  * [~Customize](#module_customize..Customize)
+* [~Customize](#module_customize..Customize)
     * [new Customize()](#new_module_customize..Customize_new)
     * [.registerEngine(id, engine)](#module_customize..Customize+registerEngine)
     * [.configSchema()](#module_customize..Customize+configSchema)
@@ -376,7 +388,8 @@ Promised object values will not be merged but replaced.
     * [.run([options])](#module_customize..Customize+run) ⇒ <code>Promise.&lt;object&gt;</code>
 
 <a name="new_module_customize..Customize_new"></a>
-###### new Customize()
+
+#### new Customize()
 This class does the actual work. When calling
 `require('customize')()` a new instance of this
 class is returned with an empty configuration, so
@@ -389,7 +402,8 @@ this module
 ```
 
 <a name="module_customize..Customize+registerEngine"></a>
-###### customize.registerEngine(id, engine)
+
+#### customize.registerEngine(id, engine)
 Register an engine
 
 **Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
@@ -406,13 +420,15 @@ Register an engine
 | [engine.schema] | <code>object</code> | a JSON-schema to validate the merge-configurations against. |
 
 <a name="module_customize..Customize+configSchema"></a>
-###### customize.configSchema()
+
+#### customize.configSchema()
 Returns the JSON-schema that configuration objects must match for this
 configuration. The schema does not contain main description property
 
 **Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
 <a name="module_customize..Customize+merge"></a>
-###### customize.merge(config) ⇒ <code>Customize</code>
+
+#### customize.merge(config) ⇒ <code>Customize</code>
 Creates a new instance of Customize. The configuration values of the current Customize
 are used as default values and are overridden by the configuration provided as parameter.
 
@@ -425,7 +441,8 @@ are used as default values and are overridden by the configuration provided as p
 | config | <code>object</code> | configuration overriding the current configuration |
 
 <a name="module_customize..Customize+load"></a>
-###### customize.load(customizeModule) ⇒ <code>Customize</code>
+
+#### customize.load(customizeModule) ⇒ <code>Customize</code>
 Inherit configuration config from another module.
 a Customizer-module usually exports a `function(Customize):Customize`
 which in tern calls `Customize.merge` to create a new Customize instance.
@@ -443,7 +460,8 @@ with the configuration of the module.
 | customizeModule | <code>function</code> | that receives a Customize as paramater  and returns a Customize with changed configuration. |
 
 <a name="module_customize..Customize+buildConfig"></a>
-###### customize.buildConfig() ⇒ <code>Promise.&lt;object&gt;</code>
+
+#### customize.buildConfig() ⇒ <code>Promise.&lt;object&gt;</code>
 Return a promise for the merged configuration.
 This functions is only needed to inspect intermediate configuration results
 (i.e. for testing and documentation purposes)
@@ -452,7 +470,8 @@ This functions is only needed to inspect intermediate configuration results
 **Returns**: <code>Promise.&lt;object&gt;</code> - a promise for the whole configuration  
 **Access:** public  
 <a name="module_customize..Customize+watched"></a>
-###### customize.watched() ⇒ <code>Promise.&lt;object.&lt;Array.&lt;string&gt;&gt;&gt;</code>
+
+#### customize.watched() ⇒ <code>Promise.&lt;object.&lt;Array.&lt;string&gt;&gt;&gt;</code>
 Return a promise for the files needing to be watched in watch-mode,
 indexed by engine.
 
@@ -460,7 +479,8 @@ indexed by engine.
 **Returns**: <code>Promise.&lt;object.&lt;Array.&lt;string&gt;&gt;&gt;</code> - a promise for the files to be watched.  
 **Access:** public  
 <a name="module_customize..Customize+run"></a>
-###### customize.run([options]) ⇒ <code>Promise.&lt;object&gt;</code>
+
+#### customize.run([options]) ⇒ <code>Promise.&lt;object&gt;</code>
 Run each engine with its part of the config.
 
 **Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
@@ -474,11 +494,13 @@ Run each engine with its part of the config.
 | [options.onlyEngine] | <code>string</code> | optionally the name of an engine, if only a single engine should  be executed |
 
 <a name="module_customize..customize"></a>
-##### customize~customize() ⇒ <code>Customize</code>
+
+### customize~customize() ⇒ <code>Customize</code>
 **Kind**: inner method of <code>[customize](#module_customize)</code>  
 **Api**: public  
 <a name="jsonschema"></a>
-#### jsonschema
+
+## jsonschema
 The configuration file is defined (and validated) by a JSON-schema
 (see [the config-schema file](./config-schema.js)) for details.
 We use the `jsonschema` module for validation, along the the
@@ -491,7 +513,8 @@ We use the `jsonschema` module for validation, along the the
 
 
 <a name="files"></a>
-#### files(baseDir) ⇒ <code>Promise.&lt;object.&lt;Promise.&lt;string&gt;&gt;&gt;</code>
+
+## files(baseDir) ⇒ <code>Promise.&lt;object.&lt;Promise.&lt;string&gt;&gt;&gt;</code>
 The file helper resolves the directory filename to the contents of the included files (promised).
 
 **Kind**: global function  
