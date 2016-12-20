@@ -1,7 +1,7 @@
 var _ = require('lodash')
 
 var files = require('../helpers-io').files
-var deep = require('q-deep')
+var deep = require('deep-aplus')(require('q').Promise)
 var overrider = require('../').overrider
 var expect = require('chai').expect
 
@@ -10,12 +10,11 @@ var expect = require('chai').expect
 // /* global xit */
 
 describe('the files-function', function () {
-  var x
-
   it('should resolve to the contents of all contained files', function () {
+    var x = files('test/fixtures/testPartials1')
     return deep(
       _.merge(
-        {dir: x = files('test/fixtures/testPartials1')},
+        {dir: x},
         {dir: files('test/fixtures/testPartials2')},
         overrider)
     )
@@ -45,9 +44,10 @@ describe('the files-function', function () {
   })
 
   it('should work correctly with globs', function () {
+    var x = files('test/fixtures/testPartials1', { glob: '*ei.hbs' })
     return deep(
       _.merge(
-        {dir: x = files('test/fixtures/testPartials1', { glob: '*ei.hbs' })},
+        {dir: x},
         {dir: files('test/fixtures/testPartials2', { glob: '*ei.hbs' })},
         overrider)
     )
