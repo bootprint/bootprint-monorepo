@@ -3,6 +3,16 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 1.0.0 (Tue, 20 Dec 2016 09:37:25 GMT)
+
+* [3835177](https://github.com/bootprint/customize-engine-handlebars/commit/3835177) Perform protected branch check on push - Nils Knappmeier
+* [a378631](https://github.com/bootprint/customize-engine-handlebars/commit/a378631) Bump customize-dependency to ^1.0.0 - Nils Knappmeier
+* [0c5da7d](https://github.com/bootprint/customize-engine-handlebars/commit/0c5da7d) Testsetup fixed and improved - Nils Knappmeier
+* [919bb90](https://github.com/bootprint/customize-engine-handlebars/commit/919bb90) Pending test implemented - Nils Knappmeier
+* [dface1a](https://github.com/bootprint/customize-engine-handlebars/commit/dface1a) Add `partialWrapper`-option to output partial-names (#1) - Nils Knappmeier
+
+
+
 # Version 0.7.0 (Fri, 17 Jun 2016 21:32:39 GMT)
 
 * [b9812b9](https://github.com/bootprint/customize-engine-handlebars/commit/b9812b9) Add `partialWrapper`-option to output partial-names - Nils Knappmeier

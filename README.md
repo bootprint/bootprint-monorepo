@@ -1,8 +1,8 @@
 # customize-engine-handlebars 
 
 [![NPM version](https://badge.fury.io/js/customize-engine-handlebars.svg)](http://badge.fury.io/js/customize-engine-handlebars)
-     [![Travis Build Status](https://travis-ci.org/bootprint/customize-engine-handlebars.svg?branch=master)](https://travis-ci.org/bootprint/customize-engine-handlebars)
-   [![Coverage Status](https://img.shields.io/coveralls/bootprint/customize-engine-handlebars.svg)](https://coveralls.io/r/bootprint/customize-engine-handlebars)
+[![Travis Build Status](https://travis-ci.org/bootprint/customize-engine-handlebars.svg?branch=master)](https://travis-ci.org/bootprint/customize-engine-handlebars)
+[![Coverage Status](https://img.shields.io/coveralls/bootprint/customize-engine-handlebars.svg)](https://coveralls.io/r/bootprint/customize-engine-handlebars)
 
 
 > Use handlebars as engine for customize
@@ -129,8 +129,8 @@ The output of this example is:
 ```
 https://api.github.com/users/nknapp
 { handlebars: 
-   { 'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n------\nGithub-Name: Nils Knappmeier',
-     'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n------\nGithub-Name: Nils Knappmeier' } }
+   { 'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n------\nGithub-Name: Nils Knappmeier',
+     'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n------\nGithub-Name: Nils Knappmeier' } }
 ```
 
 
@@ -205,8 +205,8 @@ customize()
 ```
 https://api.github.com/users/nknapp
 { handlebars: 
-   { 'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n[BEGIN footer]\n------\nBlog: http://www.knappmeier.de[END footer]',
-     'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n[BEGIN footer]\n------\nBlog: http://www.knappmeier.de[END footer]' } }
+   { 'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n[BEGIN footer]\n------\nBlog: http://www.knappmeier.de[END footer]',
+     'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n[BEGIN footer]\n------\nBlog: http://www.knappmeier.de[END footer]' } }
 ```
 
 ### Accessing engine and configuration helpers
@@ -232,21 +232,26 @@ It allows helpers to return promises instead of real values.
 
 ##  API-reference
 
-### Functions
+## Functions
+
 <dl>
 <dt><a href="#addEngine">addEngine(helpers, hbs, hbsOptions)</a></dt>
 <dd><p>Wraps helpers with a function that provides
 and object {engine, config} as additional parameter</p>
 </dd>
 </dl>
-### Typedefs
+
+## Typedefs
+
 <dl>
 <dt><a href="#CustomizeHandlebarsConfig">CustomizeHandlebarsConfig</a> : <code>object</code></dt>
 <dd><p>The default configuration for the handlebars engine</p>
 </dd>
 </dl>
+
 <a name="addEngine"></a>
-### addEngine(helpers, hbs, hbsOptions)
+
+## addEngine(helpers, hbs, hbsOptions)
 Wraps helpers with a function that provides
 and object {engine, config} as additional parameter
 
@@ -259,7 +264,8 @@ and object {engine, config} as additional parameter
 | hbsOptions | <code>object</code> | the options of the Handlebars engine |
 
 <a name="CustomizeHandlebarsConfig"></a>
-### CustomizeHandlebarsConfig : <code>object</code>
+
+## CustomizeHandlebarsConfig : <code>object</code>
 The default configuration for the handlebars engine
 
 **Kind**: global typedef  
