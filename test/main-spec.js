@@ -8,7 +8,7 @@
 /* global describe */
 /* global it */
 // /* global xdescribe */
-/* global xit */
+/* global it */
 
 'use strict'
 
@@ -51,7 +51,13 @@ describe('customize-engine-handlebars', function () {
     })
   })
 
-  xit('should throw an exception if loading an existing helpers module fails', function () {})
+  it('should throw an exception if loading an existing helpers module fails', function () {
+    return expect(hb.merge({
+      handlebars: {
+        helpers: 'test/fixtures/helpers-error.js'
+      }
+    }).run()).to.be.rejected
+  })
 
   it('should apply the partial wrapper', function () {
     var hb2 = hb.merge({
