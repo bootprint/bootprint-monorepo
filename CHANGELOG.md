@@ -3,6 +3,10 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 1.0.0 (Tue, 20 Dec 2016 14:47:29 GMT)
+
+* [61c2f8b](https://github.com/bootprint/customize-write-files/commit/61c2f8b) Preparations for version 1.0. - Nils Knappmeier
+
 # Version 0.1.6 (Mon, 19 Dec 2016 23:11:26 GMT)
 
 * [258c87a](https://github.com/bootprint/customize-write-files/commit/258c87a) Refactor tests and add one for creating subdirectories - Nils Knappmeier
