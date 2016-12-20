@@ -25,7 +25,7 @@ The contents of the file may be one of the following
 * A buffer
 * A readable stream.
 
-The goal of `` is to act as an NodeJS-adapter for customize 
+The goal of `customize-write-files` is to act as an NodeJS-adapter for customize 
 and store the result of `customize` in a local directory structure.
  
 # Installation
