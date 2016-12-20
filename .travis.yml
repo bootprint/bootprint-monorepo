@@ -5,13 +5,14 @@ node_js:
   - "0.12"
   - "iojs"
   - "4"
-  - "5"
+  - "6"
+  - "7"
 before_script:
   - npm install standard
   - standard
 script:
   - npm install istanbul
-  - istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- --recursive
+  - istanbul cover ./node_modules/.bin/_mocha --report lcovonly
 after_script:
   - npm install coveralls
   - cat ./coverage/lcov.info | coveralls

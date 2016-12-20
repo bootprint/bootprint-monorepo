@@ -56,3 +56,4 @@ npm-debug.log
 ._*
 *.iml
 /test-output/
+/examples/target/
