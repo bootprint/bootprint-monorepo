@@ -168,8 +168,8 @@ The output of this example is
 ```
 https://api.github.com/users/nknapp
 { handlebars: 
-   { 'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n------\nBlog: http://www.knappmeier.de',
-     'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n------\nBlog: http://www.knappmeier.de' } }
+   { 'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n------\nBlog: http://www.knappmeier.de',
+     'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n------\nBlog: http://www.knappmeier.de' } }
 ```
 
 In a similar fashion, we could replace other parts of the configuration, like templates, helpers
@@ -205,8 +205,8 @@ customize()
 ```
 https://api.github.com/users/nknapp
 { handlebars: 
-   { 'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n[BEGIN footer]\n------\nBlog: http://www.knappmeier.de[END footer]',
-     'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n[BEGIN footer]\n------\nBlog: http://www.knappmeier.de[END footer]' } }
+   { 'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n[BEGIN footer]\n------\nBlog: http://www.knappmeier.de[END footer]',
+     'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n[BEGIN footer]\n------\nBlog: http://www.knappmeier.de[END footer]' } }
 ```
 
 ### Accessing engine and configuration helpers

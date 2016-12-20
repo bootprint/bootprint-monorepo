@@ -3,6 +3,11 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 1.0.1 (Tue, 20 Dec 2016 13:26:01 GMT)
+
+* [14a9fa7](https://github.com/bootprint/customize-engine-handlebars/commit/14a9fa7) Travis CI Setup for current node versions - Nils Knappmeier
+* [986a470](https://github.com/bootprint/customize-engine-handlebars/commit/986a470) Add missing dependency to "m-io" - Nils Knappmeier
+
 # Version 1.0.0 (Tue, 20 Dec 2016 09:37:25 GMT)
 
 * [3835177](https://github.com/bootprint/customize-engine-handlebars/commit/3835177) Perform protected branch check on push - Nils Knappmeier
