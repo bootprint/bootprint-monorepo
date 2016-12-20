@@ -51,7 +51,7 @@ This will generate the following output
 
 ##  API-reference
 
-### Functions
+## Functions
 
 <dl>
 <dt><a href="#coerceToArray">coerceToArray(objOrArray)</a> ⇒</dt>
@@ -60,7 +60,7 @@ an array with the property as single object.</p>
 </dd>
 </dl>
 
-### Typedefs
+## Typedefs
 
 <dl>
 <dt><a href="#CustomizeLessConfig">CustomizeLessConfig</a> : <code>object</code></dt>
@@ -70,7 +70,7 @@ an array with the property as single object.</p>
 
 <a name="coerceToArray"></a>
 
-### coerceToArray(objOrArray) ⇒
+## coerceToArray(objOrArray) ⇒
 If `objOrArray` exists and is a non-array, it is replaced by
 an array with the property as single object.
 
@@ -83,7 +83,7 @@ an array with the property as single object.
 
 <a name="CustomizeLessConfig"></a>
 
-### CustomizeLessConfig : <code>object</code>
+## CustomizeLessConfig : <code>object</code>
 Configuration for the customize less-engine
 
 **Kind**: global typedef  
@@ -93,7 +93,7 @@ Configuration for the customize less-engine
 | Name | Type | Description |
 | --- | --- | --- |
 | main | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> | absolute path to a lesscss-file or a list of absolute paths to less files |
-| path | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> | absolute path (or a list of those) to paths to use as import path |
+| paths | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> | absolute path (or a list of those) to paths to use as import path |
 
 
 

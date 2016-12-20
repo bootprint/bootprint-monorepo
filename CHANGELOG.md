@@ -3,6 +3,16 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 1.0.0 (Tue, 20 Dec 2016 14:13:40 GMT)
+
+* [f3ac701](https://github.com/bootprint/customize-engine-less/commit/f3ac701) Update node versions in TravisCI configuration - Nils Knappmeier
+* [dfcb71b](https://github.com/bootprint/customize-engine-less/commit/dfcb71b) Use "standard --fix" instead of "standard --format" to format code - Nils Knappmeier
+* [563c107](https://github.com/bootprint/customize-engine-less/commit/563c107) Register pre-push hook - Nils Knappmeier
+* [0d01b6b](https://github.com/bootprint/customize-engine-less/commit/0d01b6b) Bump customize-dependency to ^1.0.0 - Nils Knappmeier
+* [3d8ab93](https://github.com/bootprint/customize-engine-less/commit/3d8ab93) Type correction in configuration reference - Nils Knappmeier
+* [132fd78](https://github.com/bootprint/customize-engine-less/commit/132fd78) Add some simple tests. Run tests with trace-and-clarify-if-possible - Nils Knappmeier
+* [65ff2bb](https://github.com/bootprint/customize-engine-less/commit/65ff2bb) Fix configuration-schema - Nils Knappmeier
+
 # Version 0.2.6 (Thu, 24 Nov 2016 22:14:45 GMT)
 
 * [70a86d9](https://github.com/bootprint/customize-engine-less/commit/70a86d9) Import CSS-files with the "(inline)"-option (fixes bootprint/bootprint#16) - Nils Knappmeier
