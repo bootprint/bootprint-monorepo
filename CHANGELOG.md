@@ -3,6 +3,10 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 1.0.0 (Tue, 20 Dec 2016 15:27:42 GMT)
+
+* [6200a82](https://github.com/bootprint/customize-watch/commit/6200a82) Preparations for version 1.0. - Nils Knappmeier
+
 # Version 0.5.4 (Tue, 15 Mar 2016 13:56:51 GMT)
 
 * [5b7fd70](https://github.com/bootprint/customize-watch/commit/5b7fd70) Adjust travis-configuration - Nils Knappmeier
