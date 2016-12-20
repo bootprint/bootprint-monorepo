@@ -3,6 +3,10 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 1.0.1 (Tue, 20 Dec 2016 00:29:30 GMT)
+
+* [d99a2fe](https://github.com/bootprint/customize/commit/d99a2fe) Update README - Nils Knappmeier
+
 # Version 1.0.0 (Tue, 20 Dec 2016 00:23:05 GMT)
 
 * [9d460b4](https://github.com/bootprint/customize/commit/9d460b4) Use m-io/fs instead of custom "listTree"-implementation - Nils Knappmeier
