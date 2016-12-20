@@ -31,6 +31,7 @@
     "debug": "^2.2.0",
     "handlebars": "^3.0.3",
     "lodash": "^3.9.3",
+    "m-io": "^0.3.1",
     "promised-handlebars": "^1.0.0",
     "q": "^1.4.1",
     "q-deep": "^1.0.1"
