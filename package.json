@@ -59,7 +59,7 @@
   ],
   "config": {
     "ghooks": {
-      "pre-commit": "standard"
+      "pre-push": "thoughtful precommit && standard"
     }
   },
   "keywords": []
