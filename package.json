@@ -33,6 +33,7 @@
     "jsonschema": "^1.0.2",
     "jsonschema-extra": "^1.2.0",
     "lodash": "^3.9.3",
+    "m-io": "^0.3.1",
     "minimatch": "^3.0.0",
     "q": "^1.4.1"
   },
