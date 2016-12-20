@@ -20,7 +20,7 @@
     "pretest": "standard --version || npm -g install standard",
     "test": "mocha && standard",
     "preformat": "standard --version || npm -g install standard",
-    "format": "standard --format",
+    "format": "standard --fix",
     "thought": "thought run -a",
     "prethoughtcheck": "thought --version || npm -g install thought",
     "thoughtcheck": "thought check-engines",
@@ -34,13 +34,15 @@
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "customize": "<1.0.0",
+    "chai-as-promised": "^6.0.0",
+    "customize": "^1.0.0",
     "ghooks": "^1.0.3",
     "mocha": "^2.4.5",
-    "thoughtful-release": "^0.3.0"
+    "thoughtful-release": "^0.3.0",
+    "trace-and-clarify-if-possible": "^1.0.0"
   },
   "peerDependencies": {
-    "customize": "<1.0.0"
+    "customize": "^1.0.0"
   },
   "standard": {
     "ignore": [
@@ -53,7 +55,7 @@
   ],
   "config": {
     "ghooks": {
-      "pre-commit": "standard"
+      "pre-push": "thoughtful precommit && standard"
     }
   },
   "keywords": []

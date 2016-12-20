@@ -14,7 +14,7 @@ var path = require('path')
  * @typedef {object} CustomizeLessConfig
  * Configuration for the customize less-engine
  * @property {string|string[]} main absolute path to a lesscss-file or a list of absolute paths to less files
- * @property {string|string[]} path absolute path (or a list of those) to paths to use as import path
+ * @property {string|string[]} paths absolute path (or a list of those) to paths to use as import path
  * @api public
  */
 
