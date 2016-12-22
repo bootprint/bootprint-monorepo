@@ -3,6 +3,11 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 1.1.0 (Thu, 22 Dec 2016 21:43:36 GMT)
+
+* [6761bff](https://github.com/bootprint/customize/commit/6761bff) IO-Helper "readFiles" for returning the contents of files as stream or Buffer (#1) - Nils Knappmeier
+* [0144f70](https://github.com/bootprint/customize/commit/0144f70) Add missing dependency to "m-io" - Nils Knappmeier
+
 # Version 1.0.1 (Tue, 20 Dec 2016 00:29:30 GMT)
 
 * [d99a2fe](https://github.com/bootprint/customize/commit/d99a2fe) Update README - Nils Knappmeier

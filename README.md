@@ -155,8 +155,8 @@ config. This example prints the following result.
 
 ```js
 { files: 
-   { 'a.md': { path: 'dir1/a.md', contents: 'First file (from dir1)' },
-     'b.md': { path: 'dir1/b.md', contents: 'Second file (from dir1)' } } }
+   { 'b.md': { path: 'dir1/b.md', contents: 'Second file (from dir1)' },
+     'a.md': { path: 'dir1/a.md', contents: 'First file (from dir1)' } } }
 ```
 
 We can see that the `files`-call of the preprocessor converted the directory path into 
@@ -241,7 +241,7 @@ so that in the above example, the property `a.md` is replace by the value in the
 second configuration. So the output of this example is
 
 ```
-{ 'concat.txt': 'Second file (from dir1)\nFirst file (from dir2)\n' }
+{ 'concat.txt': 'First file (from dir2)\nSecond file (from dir1)\n' }
 ```
 
 ### Advanced usage
@@ -522,19 +522,20 @@ We use the `jsonschema` module for validation, along the the
 ## Functions
 
 <dl>
-<dt><a href="#readFiles">readFiles(directoryPath, options)</a> ⇒ <code>Promise.&lt;object.&lt;string, Promise.&lt;{path:string, contents:string}&gt;&gt;&gt;</code></dt>
+<dt><a href="#readFiles">readFiles(directoryPath, [options])</a> ⇒ <code>Promise.&lt;object.&lt;string, Promise.&lt;{path:string, contents:string}&gt;&gt;&gt;</code></dt>
 <dd><p>An overridable directory which resolves to the contents of all its files (recursively).
 Returns an undefined value if the directory path is undefined.</p>
 </dd>
-<dt><del><a href="#files">files(directoryPath, options)</a> ⇒ <code>Promise.&lt;object.&lt;string, Promise.&lt;{path:string, contents:string}&gt;&gt;&gt;</code></del></dt>
+<dt><del><a href="#files">files(directoryPath, [options])</a> ⇒ <code>Promise.&lt;object.&lt;string, Promise.&lt;{path:string, contents:string}&gt;&gt;&gt;</code></del></dt>
 <dd><p>An overridable directory which resolves to the contents of all its files (recursively).
-Returns an undefined value if the directory path is undefined.</p>
+Returns an undefined value if the directory path is undefined.
+The contents of each file is a UTF-8 encoded string.</p>
 </dd>
 </dl>
 
 <a name="readFiles"></a>
 
-## readFiles(directoryPath, options) ⇒ <code>Promise.&lt;object.&lt;string, Promise.&lt;{path:string, contents:string}&gt;&gt;&gt;</code>
+## readFiles(directoryPath, [options]) ⇒ <code>Promise.&lt;object.&lt;string, Promise.&lt;{path:string, contents:string}&gt;&gt;&gt;</code>
 An overridable directory which resolves to the contents of all its files (recursively).
 Returns an undefined value if the directory path is undefined.
 
@@ -544,19 +545,20 @@ Returns an undefined value if the directory path is undefined.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| directoryPath | <code>string</code> | the path to the directory |
-| options | <code>object</code> |  |
+| directoryPath | <code>string</code> &#124; <code>null</code> &#124; <code>undefined</code> | the path to the directory |
+| [options] | <code>object</code> |  |
 | [options.glob] | <code>string</code> | an optional glob pattern for filtering files |
 | [options.stream] | <code>boolean</code> | if set to true, the contents of a file will be a readable stream   instead of the actual data. |
 | [options.encoding] | <code>string</code> | the file is expected to be encoded. This means that the   instead of a Buffer, a string is returned. If the 'stream' option is set, the stream's encoding   will be set via [readable.setEncoding(encoding)](https://nodejs.org/api/stream.html#stream_readable_setencoding_encoding) |
 
 <a name="files"></a>
 
-## ~~files(directoryPath, options) ⇒ <code>Promise.&lt;object.&lt;string, Promise.&lt;{path:string, contents:string}&gt;&gt;&gt;</code>~~
+## ~~files(directoryPath, [options]) ⇒ <code>Promise.&lt;object.&lt;string, Promise.&lt;{path:string, contents:string}&gt;&gt;&gt;</code>~~
 ***Deprecated***
 
 An overridable directory which resolves to the contents of all its files (recursively).
 Returns an undefined value if the directory path is undefined.
+The contents of each file is a UTF-8 encoded string.
 
 **Kind**: global function  
 **Returns**: <code>Promise.&lt;object.&lt;string, Promise.&lt;{path:string, contents:string}&gt;&gt;&gt;</code> - an object containing
@@ -564,9 +566,9 @@ Returns an undefined value if the directory path is undefined.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| directoryPath | <code>string</code> | the path to the directory |
-| options | <code>object</code> |  |
-| options.glob | <code>string</code> | an optional glob pattern for filtering files |
+| directoryPath | <code>string</code> &#124; <code>null</code> &#124; <code>undefined</code> | the path to the directory |
+| [options] | <code>object</code> |  |
+| [options.glob] | <code>string</code> | an optional glob pattern for filtering files |
 
 
 
