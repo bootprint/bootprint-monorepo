@@ -241,7 +241,7 @@ so that in the above example, the property `a.md` is replace by the value in the
 second configuration. So the output of this example is
 
 ```
-{ 'concat.txt': 'First file (from dir2)\nSecond file (from dir1)\n' }
+{ 'concat.txt': 'Second file (from dir1)\nFirst file (from dir2)\n' }
 ```
 
 ### Advanced usage
@@ -519,20 +519,54 @@ We use the `jsonschema` module for validation, along the the
 ## IO/Helpers
 
 
-<a name="files"></a>
+## Functions
 
-## files(baseDir) ⇒ <code>Promise.&lt;object.&lt;Promise.&lt;string&gt;&gt;&gt;</code>
-The file helper resolves the directory filename to the contents of the included files (promised).
+<dl>
+<dt><a href="#readFiles">readFiles(directoryPath, options)</a> ⇒ <code>Promise.&lt;object.&lt;string, Promise.&lt;{path:string, contents:string}&gt;&gt;&gt;</code></dt>
+<dd><p>An overridable directory which resolves to the contents of all its files (recursively).
+Returns an undefined value if the directory path is undefined.</p>
+</dd>
+<dt><del><a href="#files">files(directoryPath, options)</a> ⇒ <code>Promise.&lt;object.&lt;string, Promise.&lt;{path:string, contents:string}&gt;&gt;&gt;</code></del></dt>
+<dd><p>An overridable directory which resolves to the contents of all its files (recursively).
+Returns an undefined value if the directory path is undefined.</p>
+</dd>
+</dl>
+
+<a name="readFiles"></a>
+
+## readFiles(directoryPath, options) ⇒ <code>Promise.&lt;object.&lt;string, Promise.&lt;{path:string, contents:string}&gt;&gt;&gt;</code>
+An overridable directory which resolves to the contents of all its files (recursively).
+Returns an undefined value if the directory path is undefined.
 
 **Kind**: global function  
-**Returns**: <code>Promise.&lt;object.&lt;Promise.&lt;string&gt;&gt;&gt;</code> - an object, containing one entry for each file.
-The key of each entry is the path to the file (relative to the baseDir). The value is
-a promise that resolves to the file-contents when the `.then()` method is called.  
-**Api**: public  
+**Returns**: <code>Promise.&lt;object.&lt;string, Promise.&lt;{path:string, contents:string}&gt;&gt;&gt;</code> - an object containing
+   the relative file-path from the directoryPath as key and the file-path and the file-contents as value  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| baseDir | <code>string</code> | the name of the directory |
+| directoryPath | <code>string</code> | the path to the directory |
+| options | <code>object</code> |  |
+| [options.glob] | <code>string</code> | an optional glob pattern for filtering files |
+| [options.stream] | <code>boolean</code> | if set to true, the contents of a file will be a readable stream   instead of the actual data. |
+| [options.encoding] | <code>string</code> | the file is expected to be encoded. This means that the   instead of a Buffer, a string is returned. If the 'stream' option is set, the stream's encoding   will be set via [readable.setEncoding(encoding)](https://nodejs.org/api/stream.html#stream_readable_setencoding_encoding) |
+
+<a name="files"></a>
+
+## ~~files(directoryPath, options) ⇒ <code>Promise.&lt;object.&lt;string, Promise.&lt;{path:string, contents:string}&gt;&gt;&gt;</code>~~
+***Deprecated***
+
+An overridable directory which resolves to the contents of all its files (recursively).
+Returns an undefined value if the directory path is undefined.
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;object.&lt;string, Promise.&lt;{path:string, contents:string}&gt;&gt;&gt;</code> - an object containing
+   the relative file-path from the directoryPath as key and the file-path and the file-contents as value  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| directoryPath | <code>string</code> | the path to the directory |
+| options | <code>object</code> |  |
+| options.glob | <code>string</code> | an optional glob pattern for filtering files |
 
 
 
