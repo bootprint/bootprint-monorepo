@@ -7,7 +7,7 @@
     "pretest": "standard --version || npm -g install standard",
     "test": "mocha && standard",
     "preformat": "standard --version || npm -g install standard",
-    "format": "standard --format",
+    "format": "standard --fix",
     "thought": "thought run -a",
     "prethoughtcheck": "thought --version || npm -g install thought",
     "thoughtcheck": "thought check-engines",
@@ -34,16 +34,20 @@
     "marked": "^0.3.3"
   },
   "devDependencies": {
-    "bootprint": "<1.0.0",
+    "bootprint": "^1.0.0",
     "chai": "^3.5.0",
     "ghooks": "^1.0.3",
-    "m-io": "^0.1.1",
+    "m-io": "^0.3.1",
     "mocha": "^2.4.5",
-    "thoughtful-release": "^0.3.0"
+    "thoughtful-release": "^0.3.0",
+    "trace-and-clarify-if-possible": "^1.0.0"
+  },
+  "peerDependencies": {
+    "bootprint": "^1.0.0"
   },
   "config": {
     "ghooks": {
-      "pre-commit": "standard"
+      "pre-push": "thoughtful precommit && standard"
     }
   },
   "files": [
