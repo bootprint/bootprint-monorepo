@@ -1,6 +1,10 @@
 # Release notes
 
 <a name="current-release"></a>
+# Version 1.0.0 (Fri, 23 Dec 2016 21:44:49 GMT)
+
+* [79e2e95](https://github.com/bootprint/bootprint-base/commit/79e2e95) Prepare for 1.0 release - Nils Knappmeier
+
 # Version 0.8.0 (Sun, 18 Dec 2016 14:09:55 GMT)
 
 * [915eef1](https://github.com/bootprint/bootprint-base/commit/915eef1) Use "uglify" to add the jQuery and Bootstrap JavaScript files. - Nils Knappmeier
