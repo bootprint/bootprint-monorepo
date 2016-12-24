@@ -41,13 +41,13 @@ module.exports = {
   /**
    *
    * @param range a json-schema object with minimum, maximum, exclusiveMinimum, exclusiveMaximum
-   * @param {number} [range.minimum]
-   * @param {number} [range.maximum]
+   * @param {number=} [range.minimum]
+   * @param {number=} [range.maximum]
+   * @param {string} [range.type] the json-type (integer, or number)
    * @param {boolean} [range.minimumExclusive]
    * @param {boolean} [range.maximumExclusive]
-   * @param {Handlebars} engine the current handlebars engine
    */
-  'json-schema--range': function (range, options, bootprint) {
+  'json-schema--range': function (range) {
     var hasMinimum = range.minimum || range.minimum === 0
     var hasMaximum = range.maximum || range.maximum === 0
 
@@ -99,14 +99,7 @@ function dataType (value) {
     return 'object'
   }
   if (value.type === 'array') {
-    if (!value.items) {
-      return 'array'
-    }
-    if (value.items.type) {
-      return dataType(value.items) + '[]'
-    } else {
-      return 'object[]'
-    }
+    return dataType(value.items || {}) + '[]'
   }
   return value.type
 }
