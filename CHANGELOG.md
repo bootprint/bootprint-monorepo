@@ -3,6 +3,11 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 1.1.0 (Fri, 13 Jan 2017 12:59:22 GMT)
+
+* [ee6dc38](https://github.com/bootprint/customize-write-files/commit/ee6dc38) More tests to increase code coverage (#3) - Nils Knappmeier
+* [1ddb27f](https://github.com/bootprint/customize-write-files/commit/1ddb27f) `module.exports.changed`-function: Checks whether running the write function would change anything (#2) - Nils Knappmeier
+
 # Version 1.0.1 (Tue, 20 Dec 2016 14:56:43 GMT)
 
 * [5bae91f](https://github.com/bootprint/customize-write-files/commit/5bae91f) README fix - Nils Knappmeier
