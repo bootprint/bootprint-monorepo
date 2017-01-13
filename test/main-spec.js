@@ -17,7 +17,9 @@ var path = require('path')
 // var Buffer = require('buffer')
 var stream = require('stream')
 var fs = require('fs')
-var expect = require('chai').expect
+var chai = require('chai')
+chai.use(require('chai-as-promised'))
+var expect = chai.expect
 var qfs = require('m-io/fs')
 var customizeWriteFiles = require('../')
 
@@ -71,6 +73,37 @@ function run (filename, contents) {
 
 describe('customize-write-files:', function () {
   describe('The main function (module.exports)', function () {
+    it('must throw an error, if two engine each have a file of the same name', function () {
+      return expect(function () {
+        customizeWriteFiles(tmpDir)({
+          engine1: {
+            'buffer.txt': createBuffer('buffer-test\n')
+          },
+          engine2: {
+            'buffer.txt': createBuffer('buffer-test\n')
+          }
+        })
+      }).to.throw(/buffer\.txt.*engine1.*engine2/)
+    })
+
+    it('must throw an error, if a files contents is not a string, buffer or readble stream', function () {
+      return expect(function () {
+        customizeWriteFiles(tmpDir)({
+          engine1: {
+            'buffer.txt': {}
+          }
+        })
+      }).to.throw(/test-output\/buffer\.txt/)
+    })
+
+    it('should ignore undefined file contents ', function () {
+      return run('stream.txt', undefined)
+        .then(function (result) {
+          expect(result).to.deep.equal([undefined])
+          expect(fs.existsSync('test-output/stream.txt')).to.be.false
+        })
+    })
+
     it('should write a stream correctly', function () {
       return run('stream.txt', createStream('abc'))
         .then(function (result) {
@@ -130,7 +163,6 @@ describe('customize-write-files:', function () {
             'buffer.txt': createBuffer('bad buffer-test\n')
           }
         }).then(function (result) {
-          console.log(result)
           return expect(result).to.deep.equal({
             changed: true,
             files: { 'buffer.txt': true }
@@ -217,6 +249,29 @@ describe('customize-write-files:', function () {
           })
         })
       })
+
+      it('a buffer has the same size but different contents than the file (coverage)', function () {
+        return customizeWriteFiles.changed('test/fixtures/compare')({
+          engine1: {
+            'buffer.txt': createBuffer('badfer-test\n')
+          }
+        }).then(function (result) {
+          expect(result).to.deep.equal({
+            changed: true,
+            files: { 'buffer.txt': true }
+          })
+        })
+      })
+    })
+
+    it('should return a rejected promise, there was another error than a missing file', function () {
+      fs.mkdirSync('test-output/tmpdir')
+      return expect(customizeWriteFiles.changed('test-output')({
+        engine1: {
+          // Directory prohibits file read
+          'tmpdir': 'abc'
+        }
+      })).to.be.rejected
     })
   })
 })
