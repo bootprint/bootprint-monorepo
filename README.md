@@ -67,6 +67,19 @@ This will generate the following output
 
 ##  API-reference
 
+## Functions
+
+<dl>
+<dt><a href="#write">write(targetDir)</a> ⇒ <code>function</code></dt>
+<dd><p>Creates a function that writes the result of the <code>customize#run()</code> method to a
+local target directory.</p>
+</dd>
+<dt><a href="#changed">changed(targetDir)</a> ⇒ <code>function</code></dt>
+<dd><p>Creates a function that asserts that the result of the <code>customize#run()</code> method to produces the same
+contents as found on the disk. The returned promise is rejected, if this is not the case.s</p>
+</dd>
+</dl>
+
 <a name="write"></a>
 
 ## write(targetDir) ⇒ <code>function</code>
@@ -77,6 +90,22 @@ local target directory.
 **Returns**: <code>function</code> - return a function that writes a customize-result to the targetDir.
  The function takes a customize-result as first parameter and returns a promise for a list of filenames.
  (i.e. the files that were actually written)  
+**Access:** public  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| targetDir | <code>string</code> | path to the target directory |
+
+<a name="changed"></a>
+
+## changed(targetDir) ⇒ <code>function</code>
+Creates a function that asserts that the result of the `customize#run()` method to produces the same
+contents as found on the disk. The returned promise is rejected, if this is not the case.s
+
+**Kind**: global function  
+**Returns**: <code>function</code> - return a function that writes a customize-result to the targetDir.
+ The function takes a customize-result as first parameter and returns a promise for a list of filenames.
+ (i.e. the files that were checked)  
 **Access:** public  
 
 | Param | Type | Description |
