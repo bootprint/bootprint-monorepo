@@ -55,3 +55,5 @@ npm-debug.log
 .directory
 ._*
 *.iml
+/examples/test-output/
+/test-output/

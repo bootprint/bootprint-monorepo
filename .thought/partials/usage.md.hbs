@@ -1,0 +1,14 @@
+## Usage
+
+Using the following module 
+
+{{{dirTree 'test/fixtures/'}}}
+
+A test can be written like this: 
+
+{{example 'examples/example.js'}}
+
+The test will run bootprint with the given module and verify the generated HTML 
+using the {{npm "cheerio"}} library.
+
+{{{exec '../node_modules/.bin/mocha example.js' cwd='examples/'}}}

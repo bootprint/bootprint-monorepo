@@ -6,14 +6,23 @@
  */
 
 /* global describe */
-// /* global it */
-// /* global xdescribe */
+/* global it */
+/* global before */
 // /* global xit */
 
 'use strict'
 
-var bootprintUnitTesting = require('../')
+var expect = require('chai').expect
+var core = require('../')(require('./fixtures/module.js'), __dirname)
 
-describe('bootprint-unit-testing:', function () {
-  // body
+describe('The bootprint-unit-testing module', function () {
+  this.timeout(10000)
+  var context = {}
+  before(function () {
+    return core.run({ name: 'Nils' }, context)
+  })
+
+  it('should pass a cheerio-elements as `context.$`', function () {
+    expect(context.$('p').html()).to.contain('Nils')
+  })
 })

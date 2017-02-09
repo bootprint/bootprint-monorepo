@@ -28,8 +28,13 @@
     "version": "thoughtful changelog -o -a && npm run thought",
     "preversion": "npm run thoughtcheck"
   },
-  "dependencies": {},
+  "dependencies": {
+    "bootprint": "^1.0.0",
+    "cheerio": "^0.22.0",
+    "m-io": "^0.3.1"
+  },
   "devDependencies": {
+    "chai": "^3.5.0",
     "ghooks": "^1.0.3",
     "mocha": "^2.3.3",
     "thoughtful-release": "^0.3.0",
@@ -50,5 +55,5 @@
       "pre-commit": "standard"
     }
   },
-  "keywords": [  ]
+  "keywords": []
 }
