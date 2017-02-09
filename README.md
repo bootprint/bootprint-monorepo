@@ -16,14 +16,14 @@ npm install bootprint-unit-testing
 
 ## Usage
 
-Using the following module 
+Consider a bootprint-module that uses the following Handlebarse-template as `index.html.hbs`
 
-<pre><code>
+```hbs
+<body>
+<p>name: {{name}}</p>
+</body>
+```
 
-├── module.js
-└─┬ templates
-  └── index.html.hbs
-</code></pre>
 
 A test can be written like this: 
 
@@ -66,7 +66,7 @@ The bootprint-unit-testing module
     ✓ The output should contain the name in a <p>-tag
 
 
-  1 passing (376ms)
+  1 passing (371ms)
 ```
 
 
