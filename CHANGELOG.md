@@ -2,6 +2,10 @@
 
 
 <a name="current-release"></a>
+# Version 1.1.0 (Mon, 13 Feb 2017 21:33:41 GMT)
+
+* [c83458c](https://github.com/bootprint/bootprint-json-schema/commit/c83458c) Add string pattern (#10) - Alex Collins
+
 # Version 1.0.0 (Sat, 24 Dec 2016 20:43:54 GMT)
 
 * [bb00a2e](https://github.com/bootprint/bootprint-json-schema/commit/bb00a2e) Prepare for 1.0 release (#9) - Nils Knappmeier
