@@ -52,7 +52,10 @@ module.exports = {
     }).join('\n')
     return less.render(lessSource, {
       paths: config.paths,
-      sourceMap: {},
+      sourceMap: {
+        sourceMapURL: 'main.css.map',
+        outputSourceFiles: true
+      },
       filename: 'customize-bundle.less',
       compress: true
     }).then(function (lessResult) {

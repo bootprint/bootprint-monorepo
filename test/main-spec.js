@@ -33,9 +33,8 @@ describe('customize-engine-handlebars', function () {
 
     return expect(result).to.eventually.deep.equal({
       less: {
-        'main.css': 'body{color:#f00;font:sans}',
-        // TODO: The source map doesn't look right. Why is there no reference to main.less
-        'main.css.map': '{"version":3,"sources":["test/fixtures/include/lib1.less"],"names":[],"mappings":"AAAA,KACE,UAAA,CACA"}'
+        'main.css': 'body{color:#f00;font:sans}/*# sourceMappingURL=main.css.map */',
+        'main.css.map': '{"version":3,"sources":["test/fixtures/include/lib1.less"],"names":[],"mappings":"AAAA,KACE,UAAA,CACA","sourcesContent":["body {\\n  color: @bgcolor;\\n  font: @font;\\n}"]}'
       }
     })
   })
@@ -58,9 +57,8 @@ describe('customize-engine-handlebars', function () {
 
     return expect(result).to.eventually.deep.equal({
       less: {
-        'main.css': 'body{color:#0a0;font:sans}',
-        // TODO: The source map doesn't look right. Why is there no reference to main.less and main2.less
-        'main.css.map': '{"version":3,"sources":["test/fixtures/include/lib1.less"],"names":[],"mappings":"AAAA,KACE,UAAA,CACA"}'
+        'main.css': 'body{color:#0a0;font:sans}/*# sourceMappingURL=main.css.map */',
+        'main.css.map': '{"version":3,"sources":["test/fixtures/include/lib1.less"],"names":[],"mappings":"AAAA,KACE,UAAA,CACA","sourcesContent":["body {\\n  color: @bgcolor;\\n  font: @font;\\n}"]}'
       }
     })
   })
