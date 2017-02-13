@@ -3,6 +3,10 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 1.0.1 (Mon, 13 Feb 2017 22:49:04 GMT)
+
+* [30c364c](https://github.com/bootprint/customize-engine-less/commit/30c364c) Generate source-map reference into css-files - Nils Knappmeier
+
 # Version 1.0.0 (Tue, 20 Dec 2016 14:13:40 GMT)
 
 * [f3ac701](https://github.com/bootprint/customize-engine-less/commit/f3ac701) Update node versions in TravisCI configuration - Nils Knappmeier

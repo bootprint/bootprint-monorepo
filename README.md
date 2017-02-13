@@ -45,8 +45,8 @@ This will generate the following output
 
 ```
 { less: 
-   { 'main.css': 'div{color:red;background-color:green}',
-     'main.css.map': '{"version":3,"sources":["/home/nknappmeier/projects/bootprint/customize-engine-less/examples/main.less"],"names":[],"mappings":"AAGA,IACE,SAAA,CACA"}' } }
+   { 'main.css': 'div{color:red;background-color:green}/*# sourceMappingURL=main.css.map */',
+     'main.css.map': '{"version":3,"sources":["/home/nknappmeier/projects/bootprint/customize-engine-less/examples/main.less"],"names":[],"mappings":"AAGA,IACE,SAAA,CACA","sourcesContent":["@textcolor: blue;\\n@bgcolor: green;\\n\\ndiv {\\n  color: @textcolor;\\n  background-color: @bgcolor;  \\n}\\n\\n\\n\\n"]}' } }
 ```
 
 ##  API-reference
