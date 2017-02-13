@@ -100,6 +100,17 @@
   .named-label(@msg-json-read-only)
 }
 
+.json-property-pattern {
+  font-weight: lighter;
+  font-size: small;
+}
+
+.json-schema--regex {
+  &:before, &:after {
+    color: lighten(@text-color, 30%);
+    content: '/';
+  }
+}
 
 .json-property-type {
   font-style: italic;

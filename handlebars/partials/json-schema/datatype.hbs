@@ -6,6 +6,7 @@
 
     @param {boolean} discriminator true, this property is a swagger-discriminator (in which case enums are rendered as links)
 }}
+
 <span class="json-property-type">
     {{~#if $ref}}
         {{~>json-schema/reference $ref}}
@@ -62,4 +63,7 @@
             (up to {{maxLength}} chars)
         </span>
     {{/if}}
+{{/if}}
+{{#if pattern}}
+    <span class="json-property-pattern" title="String pattern">, must match <span class="json-schema--regex">{{pattern}}</span>
 {{/if}}
