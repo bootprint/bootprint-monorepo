@@ -1,7 +1,7 @@
 /*!
- * ride-over <https://github.com/nknapp/ride-over>
+ * customize-watch <https://github.com/nknapp/ride-over>
  *
- * Copyright (c) 2015 Nils Knappmeier.
+ * Copyright (c) 2017 Nils Knappmeier.
  * Released under the MIT license.
  */
 

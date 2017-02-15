@@ -1,14 +1,9 @@
-var _ = require('lodash')
 var files = require('../helpers-io').files
-var leaf = require('../').leaf
 var Q = require('q')
 
 module.exports = {
   defaultConfig: {
-    files: {},
-    objects: {},
-    leafs: {},
-    array: []
+    files: {}
   },
 
   defaultWatched: [],
@@ -27,10 +22,7 @@ module.exports = {
    */
   preprocessConfig: function (config) {
     return {
-      files: files(config.files),
-      objects: config.objects,
-      leafs: _.mapValues(config.leafs, leaf),
-      array: config.array
+      files: files(config.files)
     }
   },
 
@@ -39,7 +31,7 @@ module.exports = {
    * @param config
    * @returns {*}
    */
-  run: function testEngine (config) {
+  run: function filesEngine (config) {
     return Q(config)
   }
 }
