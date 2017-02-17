@@ -26,9 +26,9 @@ var deep = require('deep-aplus')(Q.Promise)
 
 describe('The custom overrider', function () {
   it('should concatenate arrays', function () {
-    expect(_.merge({a: [1, 2]}, {a: [3, 4]}, overrider).a).to.deep.equal([1, 2, 3, 4])
+    expect(_.mergeWith({a: [1, 2]}, {a: [3, 4]}, overrider).a).to.deep.equal([1, 2, 3, 4])
   })
   it('should concatenate arrays within promises', function () {
-    expect(deep(_.merge({a: Q([1, Q(2)])}, {a: [3, 4]}, overrider).a)).to.eventually.deep.equal([1, 2, 3, 4])
+    expect(deep(_.mergeWith({a: Q([1, Q(2)])}, {a: [3, 4]}, overrider).a)).to.eventually.deep.equal([1, 2, 3, 4])
   })
 })

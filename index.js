@@ -79,7 +79,7 @@ function customize () {
  * @constructor
  */
 function Customize (config, parentConfig, engines) {
-  var _config = _.merge({}, parentConfig, config, customOverrider)
+  var _config = _.mergeWith({}, parentConfig, config, customOverrider)
 
   // Debug logging
   if (debugState.enabled) {
@@ -354,9 +354,8 @@ function customOverrider (a, b, propertyName) {
   if (Q.isPromiseAlike(a) || Q.isPromiseAlike(b)) {
     return Q.all([a, b]).spread(function (_a, _b) {
       // Merge the promise results
-      return _.merge({}, {x: _a}, {x: _b}, customOverrider).x
+      return _.mergeWith({}, {x: _a}, {x: _b}, customOverrider).x
     })
   }
-
-// Non of these options apply. Implicit "undefined" return value to invoke default overrider.
+  // None of these options apply. Implicit "undefined" return value to invoke default overrider.
 }

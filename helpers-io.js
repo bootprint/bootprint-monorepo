@@ -55,7 +55,7 @@ function readFiles (directoryPath, options) {
             }
           }))
         ]
-      }).zipObject().value()
+      }).fromPairs().value()
     })
   result.watch = directoryPath
   return result

@@ -17,9 +17,25 @@ describe('the files-function', function () {
   var x
 
   it('should resolve to the contents of all contained files', function () {
+    files('test/fixtures/testPartials1')
+      .then(function (result) {
+        expect(result).to.deep.equal({
+          'eins.hbs': {
+            path: 'test/fixtures/testPartials1/eins.hbs',
+            contents: 'testPartials1/eins {{eins}}'
+          },
+          'zwei.hbs': {
+            path: 'test/fixtures/testPartials2/zwei.hbs',
+            contents: 'testPartials2/zwei {{zwei}}'
+          }
+        })
+      })
+  })
+
+  it('should create mergeable filesfiles', function () {
     var x = files('test/fixtures/testPartials1')
     return deep(
-      _.merge(
+      _.mergeWith(
         { dir: x },
         { dir: files('test/fixtures/testPartials2') },
         overrider)
@@ -52,7 +68,7 @@ describe('the files-function', function () {
   it('should work correctly with globs', function () {
     x = files('test/fixtures/testPartials1', { glob: '*ei.hbs' })
     return deep(
-      _.merge(
+      _.mergeWith(
         { dir: x },
         { dir: files('test/fixtures/testPartials2', { glob: '*ei.hbs' }) },
         overrider)
@@ -84,7 +100,7 @@ describe('the readFiles-function', function () {
   it('should resolve to the contents of all contained files', function () {
     var x = readFiles('test/fixtures/testPartials1', { encoding: 'utf-8' })
     return deep(
-      _.merge(
+      _.mergeWith(
         { dir: x },
         { dir: files('test/fixtures/testPartials2') },
         overrider)
@@ -117,7 +133,7 @@ describe('the readFiles-function', function () {
   it('should work correctly with globs', function () {
     x = readFiles('test/fixtures/testPartials1', { glob: '*ei.hbs', encoding: 'utf-8' })
     return deep(
-      _.merge(
+      _.mergeWith(
         { dir: x },
         { dir: files('test/fixtures/testPartials2', { glob: '*ei.hbs', encoding: 'utf-8' }) },
         overrider)
