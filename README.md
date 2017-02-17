@@ -1,5 +1,7 @@
 # customize-engine-less 
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/bootprint/customize-engine-less.svg)](https://greenkeeper.io/)
+
 [![NPM version](https://badge.fury.io/js/customize-engine-less.svg)](http://badge.fury.io/js/customize-engine-less)
 [![Travis Build Status](https://travis-ci.org/bootprint/customize-engine-less.svg?branch=master)](https://travis-ci.org/bootprint/customize-engine-less)
 [![Coverage Status](https://img.shields.io/coveralls/bootprint/customize-engine-less.svg)](https://coveralls.io/r/bootprint/customize-engine-less)
