@@ -2,8 +2,8 @@ Customize is an abstraction of [bootprint's](https://github.com/nknapp/bootprint
 It allows you to create your own projects and engines (other than Less and Handlebars) and create 
 overridable configurations for those.
 
-At its core, it uses [lodash#merge](https://lodash.com/docs#merge) to merge configurations, 
-but it uses a customizer-function that also supports promises and custom overrider functions 
+At its core, it uses [lodash#mergeWith](https://lodash.com/docs#mergeWith) to merge configurations.
+It uses a customizer-function that supports promises and custom overrider functions 
 attached to the object.
 
 ## Engines
