@@ -29,15 +29,15 @@
   },
   "dependencies": {
     "less": "^2.7.1",
-    "lodash": "^3.10.1",
+    "lodash": "^4.17.4",
     "q": "^1.4.1"
   },
   "devDependencies": {
     "chai": "^3.2.0",
     "chai-as-promised": "^6.0.0",
     "customize": "^1.0.0",
-    "ghooks": "^1.0.3",
-    "mocha": "^2.4.5",
+    "ghooks": "^2.0.0",
+    "mocha": "^3.2.0",
     "thoughtful-release": "^0.3.0",
     "trace-and-clarify-if-possible": "^1.0.0"
   },
