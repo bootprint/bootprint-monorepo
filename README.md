@@ -1,5 +1,7 @@
 # bootprint-json-schema 
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/bootprint/bootprint-json-schema.svg)](https://greenkeeper.io/)
+
 [![NPM version](https://badge.fury.io/js/bootprint-json-schema.svg)](http://badge.fury.io/js/bootprint-json-schema)
 [![Travis Build Status](https://travis-ci.org/bootprint/bootprint-json-schema.svg?branch=master)](https://travis-ci.org/bootprint/bootprint-json-schema)
 [![Coverage Status](https://img.shields.io/coveralls/bootprint/bootprint-json-schema.svg)](https://coveralls.io/r/bootprint/bootprint-json-schema)
