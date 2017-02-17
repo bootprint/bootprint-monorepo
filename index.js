@@ -146,7 +146,9 @@ module.exports = {
         debug('Data after preprocessing:', data)
         // We use the `promised-handlebars` module to
         // support helpers returning promises
-        var hbs = promisedHandlebars(Handlebars)
+        var hbs = promisedHandlebars(Handlebars, {
+          Promise: Q.Promise
+        })
 
         var partials = _.mapValues(contents(config.partials), config.partialWrapper)
         hbs.registerPartial(partials)
