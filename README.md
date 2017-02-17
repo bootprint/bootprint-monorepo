@@ -1,5 +1,7 @@
 # customize-write-files 
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/bootprint/customize-write-files.svg)](https://greenkeeper.io/)
+
 [![NPM version](https://badge.fury.io/js/customize-write-files.svg)](http://badge.fury.io/js/customize-write-files)
 [![Travis Build Status](https://travis-ci.org/bootprint/customize-write-files.svg?branch=master)](https://travis-ci.org/bootprint/customize-write-files)
 [![Coverage Status](https://img.shields.io/coveralls/bootprint/customize-write-files.svg)](https://coveralls.io/r/bootprint/customize-write-files)
