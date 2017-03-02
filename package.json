@@ -36,7 +36,7 @@
     "deep-aplus": "^1.0.4",
     "m-io": "^0.5.0",
     "q": "^1.4.1",
-    "stream-equal": "^0.1.12"
+    "stream-equal": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",
