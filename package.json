@@ -43,6 +43,7 @@
     "chai-as-promised": "^6.0.0",
     "customize": "^1.0.0",
     "customize-engine-less": "^1.0.0",
+    "dirty-chai": "^1.2.2",
     "ghooks": "^2.0.0",
     "mocha": "^3.2.0",
     "thoughtful-release": "^0.3.1",

@@ -18,6 +18,7 @@ var path = require('path')
 var stream = require('stream')
 var fs = require('fs')
 var chai = require('chai')
+chai.use(require('dirty-chai'))
 chai.use(require('chai-as-promised'))
 var expect = chai.expect
 var qfs = require('m-io/fs')
@@ -100,7 +101,7 @@ describe('customize-write-files:', function () {
       return run('stream.txt', undefined)
         .then(function (result) {
           expect(result).to.deep.equal([undefined])
-          expect(fs.existsSync('test-output/stream.txt')).to.be.false
+          expect(fs.existsSync('test-output/stream.txt')).to.be.false()
         })
     })
 

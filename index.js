@@ -154,4 +154,3 @@ function execute (filename, contents, executors) {
     throw new Error('Invalid data type for contents of file "' + filename + '": ' + contents)
   }
 }
-
