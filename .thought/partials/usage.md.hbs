@@ -63,7 +63,7 @@ In a similar fashion, we could replace other parts of the configuration, like te
 and the pre-processor. If we would provide a new preprocessor, it could call the old one,
 by calling `this.parent(args)`
 
-### Which partial generates what?
+### Which partial generates what? (Method 1)
 
 When we want to overriding parts of the output, we are looking for the correct partial to do so. 
 For this purpose, the engine allows to specify a "wrapper function" for partials. This function
@@ -75,6 +75,27 @@ to override in order to modify a given part of the output.
 {{{example 'examples/example-partial-names.js'}}}
 
 {{{exec 'node example-partial-names.js' cwd='examples/'}}}
+
+### Which partial generates what? (Method 2)
+
+Another method for gathering information about the source of parts of the output are source-locators. 
+The engine incoorporates the library {{npm 'handlebars-source-locators'}} to integrate a kind of 
+"source-map for the poor" into the output. Source-locators are activated by setting the option
+`addSourceLocators` to `true`:
+
+{{{example 'examples/example-source-locators.js'}}}
+
+The output contain tags that contain location-information of the succeeding text:
+
+* `<sl line="1" col="12" file="templates/text1.txt.hbs"></sl>text...` for text the originate from a template file
+* `<sl line="1" col="0" partial="footer" file="partials2/footer.hbs"></sl>text...` for text the originate from a partial
+
+Example output:
+
+{{{exec 'node example-source-locators.js' cwd='examples/'}}}
+
+
+
 
 ### Accessing engine and configuration helpers
 

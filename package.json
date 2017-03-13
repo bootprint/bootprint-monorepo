@@ -30,6 +30,7 @@
   "dependencies": {
     "debug": "^2.2.0",
     "handlebars": "^4.0.6",
+    "handlebars-source-locators": "^1.0.0",
     "lodash": "^4.17.4",
     "m-io": "^0.5.0",
     "promised-handlebars": "^2.0.1",

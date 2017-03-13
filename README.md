@@ -25,6 +25,7 @@ The following example demonstrates how to use this module:
 ├── config-module.js
 ├── example-merge.js
 ├── example-partial-names.js
+├── example-source-locators.js
 ├── example.js
 ├── hb-helpers.js
 ├── hb-preprocessor.js
@@ -131,8 +132,8 @@ The output of this example is:
 ```
 https://api.github.com/users/nknapp
 { handlebars: 
-   { 'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n------\nGithub-Name: Nils Knappmeier',
-     'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n------\nGithub-Name: Nils Knappmeier' } }
+   { 'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n------\nGithub-Name: Nils Knappmeier',
+     'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n------\nGithub-Name: Nils Knappmeier' } }
 ```
 
 
@@ -170,15 +171,15 @@ The output of this example is
 ```
 https://api.github.com/users/nknapp
 { handlebars: 
-   { 'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n------\nBlog: http://www.knappmeier.de',
-     'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n------\nBlog: http://www.knappmeier.de' } }
+   { 'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n------\nBlog: https://blog.knappi.org',
+     'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n------\nBlog: https://blog.knappi.org' } }
 ```
 
 In a similar fashion, we could replace other parts of the configuration, like templates, helpers
 and the pre-processor. If we would provide a new preprocessor, it could call the old one,
 by calling `this.parent(args)`
 
-### Which partial generates what?
+### Which partial generates what? (Method 1)
 
 When we want to overriding parts of the output, we are looking for the correct partial to do so. 
 For this purpose, the engine allows to specify a "wrapper function" for partials. This function
@@ -207,9 +208,48 @@ customize()
 ```
 https://api.github.com/users/nknapp
 { handlebars: 
-   { 'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n[BEGIN footer]\n------\nBlog: http://www.knappmeier.de[END footer]',
-     'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n[BEGIN footer]\n------\nBlog: http://www.knappmeier.de[END footer]' } }
+   { 'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n[BEGIN footer]\n------\nBlog: https://blog.knappi.org[END footer]',
+     'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n[BEGIN footer]\n------\nBlog: https://blog.knappi.org[END footer]' } }
 ```
+
+### Which partial generates what? (Method 2)
+
+Another method for gathering information about the source of parts of the output are source-locators. 
+The engine incoorporates the library [handlebars-source-locators](https://npmjs.com/package/handlebars-source-locators) to integrate a kind of 
+"source-map for the poor" into the output. Source-locators are activated by setting the option
+`addSourceLocators` to `true`:
+
+```js
+var customize = require('customize')
+customize()
+  .registerEngine('handlebars', require('customize-engine-handlebars'))
+  .load(require('./config-module.js'))
+  .merge({
+    handlebars: {
+      partials: 'partials2',
+      addSourceLocators: true
+    }
+  })
+  .run()
+  .done(console.log)
+```
+
+The output contain tags that contain location-information of the succeeding text:
+
+* `<sl line="1" col="12" file="templates/text1.txt.hbs"></sl>text...` for text the originate from a template file
+* `<sl line="1" col="0" partial="footer" file="partials2/footer.hbs"></sl>text...` for text the originate from a partial
+
+Example output:
+
+```
+https://api.github.com/users/nknapp
+{ handlebars: 
+   { 'text1.txt': '<sl line="1" col="0" file="templates/text1.txt.hbs"></sl>I\'m <sl line="1" col="4" file="templates/text1.txt.hbs"></sl>nknapp<sl line="1" col="12" file="templates/text1.txt.hbs"></sl>\n\nI\'m living in <sl line="3" col="14" file="templates/text1.txt.hbs"></sl>Darmstadt<sl line="3" col="22" file="templates/text1.txt.hbs"></sl>.\n\n<sl line="5" col="0" file="templates/text1.txt.hbs"></sl><sl line="1" col="0" partial="footer" file="partials2/footer.hbs"></sl>------\nBlog: <sl line="2" col="6" partial="footer" file="partials2/footer.hbs"></sl>https://blog.knappi.org',
+     'text2.txt': '<sl line="1" col="0" file="templates/text2.txt.hbs"></sl>I\'m <sl line="1" col="4" file="templates/text2.txt.hbs"></sl>nknapp<sl line="1" col="12" file="templates/text2.txt.hbs"></sl>\n\nI\'m living in <sl line="3" col="14" file="templates/text2.txt.hbs"></sl>DARMSTADT<sl line="3" col="28" file="templates/text2.txt.hbs"></sl>.\n\n<sl line="5" col="0" file="templates/text2.txt.hbs"></sl><sl line="1" col="0" partial="footer" file="partials2/footer.hbs"></sl>------\nBlog: <sl line="2" col="6" partial="footer" file="partials2/footer.hbs"></sl>https://blog.knappi.org' } }
+```
+
+
+
 
 ### Accessing engine and configuration helpers
 
@@ -283,6 +323,7 @@ The default configuration for the handlebars engine
 | data | <code>string</code> &#124; <code>object</code> &#124; <code>function</code> | a javascript-object to use as input for handlebars. Same as with the `helpers`,   it is also acceptable to specify the path to a module exporting the data and a function computing   the data. |
 | preprocessor | <code>function</code> &#124; <code>string</code> | a function that takes the input data as first parameter and   transforms it into another object or the promise for an object. It the input data is a promise itself,   is resolved before calling this function. If the preprocessor is overridden, the parent   preprocessor is available with `this.parent(data)` |
 | hbsOptions | <code>object</code> | options to pass to `Handlebars.compile`. |
+| addSourceLocators | <code>boolean</code> | add [handlebars-source-locators](https://github.com/nknapp/handlebars-source-locators)   to the output of each template |
 
 
 

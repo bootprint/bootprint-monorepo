@@ -46,6 +46,8 @@ var contents = function (partials) {
  *   is resolved before calling this function. If the preprocessor is overridden, the parent
  *   preprocessor is available with `this.parent(data)`
  * @property {object} hbsOptions options to pass to `Handlebars.compile`.
+ * @property {boolean} addSourceLocators add [handlebars-source-locators](https://github.com/nknapp/handlebars-source-locators)
+ *   to the output of each template
  * @api public
  */
 
@@ -60,6 +62,8 @@ var contents = function (partials) {
  * @property {function(object): (object|Promise<object>)} preprocessor
  *    preprocessor for the handlebars data
  * @property {object} hbsOptions options to pass to `Handlebars.compile`.
+ * @property {boolean} addSourceLocators add [handlebars-source-locators](https://github.com/nknapp/handlebars-source-locators)
+ *   to the output of each template
  * @private
  */
 
@@ -71,7 +75,9 @@ module.exports = {
 
   defaultConfig: {
     partials: {},
-    partialWrapper: function (contents, name) { return contents },
+    partialWrapper: function (contents, name) {
+      return contents
+    },
     helpers: {},
     templates: {},
     data: {},
@@ -105,7 +111,8 @@ module.exports = {
       templates: files(config.templates),
       data: data,
       preprocessor: preprocessor && customize.withParent(preprocessor),
-      hbsOptions: config.hbsOptions
+      hbsOptions: config.hbsOptions,
+      addSourceLocators: config.addSourceLocators
     }
   },
 
@@ -139,7 +146,7 @@ module.exports = {
   run: function run (config) {
     // Run the preprocessor
     return Q(config.preprocessor(config.data))
-      // Resolve any new promises
+    // Resolve any new promises
       .then(deep)
       // Process the result with Handlebars
       .then(function (data) {
@@ -149,19 +156,44 @@ module.exports = {
         var hbs = promisedHandlebars(Handlebars, {
           Promise: Q.Promise
         })
+        if (config.addSourceLocators) {
+          require('handlebars-source-locators')(hbs)
+        }
 
         var partials = _.mapValues(contents(config.partials), config.partialWrapper)
         hbs.registerPartial(partials)
         hbs.registerHelper(addEngine(config.helpers, hbs, config))
         var templates = contents(config.templates)
 
-        return _.mapValues(templates, function (template) {
+        var result = _.mapValues(templates, function (template) {
           var fn = hbs.compile(template, config.hbsOptions)
           debug('hbs-data', data)
           var result = fn(data)
-          debug('fn(data) =' + data)
+          debug('fn(data) =' + result)
           return result
         })
+
+        if (config.addSourceLocators) {
+          // Lookup-tables for partial-/template-name to the source-file
+          // (which contains the original path to the actual file)
+          var partialToSourceFile = _.mapKeys(config.partials, stripHandlebarsExt)
+          var templateToSourceFile = _.mapKeys(config.templates, stripHandlebarsExt)
+          result = _.mapValues(result, function (contents, filename) {
+            // Post-process locator-tags to include file-paths
+            return contents.then((resolvedContents) => resolvedContents.replace(
+              /(<sl line="\d+" col="\d+")( partial="(.+?)")?(><\/sl>)/g,
+              function (match, head, partialPart, partialName, tail) {
+                if (partialName) {
+                  return head + partialPart + ' file="' + partialToSourceFile[partialName].path + '"' + tail
+                } else {
+                  return head + ' file="' + templateToSourceFile[filename].path + '"' + tail
+                }
+              }
+            ))
+          })
+        }
+
+        return result
       })
   }
 }

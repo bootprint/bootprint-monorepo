@@ -55,6 +55,10 @@ module.exports = {
     },
     'hbsOptions': {
       description: 'Options passed to Handlebars#compile()'
+    },
+    'addSourceLocator': {
+      type: 'boolean',
+      description: 'If set to true, tags of the form `<sl line="1" col="0" file="test/fixtures/templates/a.md.hbs"></sl>` and `<sl line="1" col="0" partial="eins" file="test/fixtures/testPartials1/eins.hbs">` will be inserted into the output to provide source-coordinates.'
     }
   }
 }

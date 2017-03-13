@@ -97,4 +97,18 @@ describe('customize-engine-handlebars', function () {
       }
     })
   })
+
+  it('should add source-locators if the "addSourceLocator"-option is enabled"', function () {
+    var hb2 = hb.merge({
+      handlebars: {
+        addSourceLocators: true
+      }
+    })
+    return expect(hb2.run()).to.eventually.deep.equal({
+      handlebars: {
+        'a.md': '<sl line="1" col="0" file="test/fixtures/templates/a.md.hbs"></sl>a.md <sl line="1" col="5" file="test/fixtures/templates/a.md.hbs"></sl><sl line="1" col="0" partial="eins" file="test/fixtures/testPartials1/eins.hbs"></sl>testPartials1/eins <sl line="1" col="19" partial="eins" file="test/fixtures/testPartials1/eins.hbs"></sl>->one<-',
+        'b.md': '<sl line="1" col="0" file="test/fixtures/templates/b.md.hbs"></sl>b.md <sl line="1" col="5" file="test/fixtures/templates/b.md.hbs"></sl><sl line="1" col="0" partial="zwei" file="test/fixtures/testPartials1/zwei.hbs"></sl>testPartials1/zwei <sl line="1" col="19" partial="zwei" file="test/fixtures/testPartials1/zwei.hbs"></sl>->two<-<sl line="1" col="14" file="test/fixtures/templates/b.md.hbs"></sl> <sl line="1" col="15" file="test/fixtures/templates/b.md.hbs"></sl>helper1(->two<-)'
+      }
+    })
+  })
 })
