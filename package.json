@@ -43,7 +43,9 @@
     "customize": "^1.0.0",
     "get-promise": "^1.4.0",
     "ghooks": "^2.0.0",
+    "json-stable-stringify": "^1.0.1",
     "mocha": "^3.2.0",
+    "standard": "^9.0.1",
     "thoughtful-release": "^0.3.0",
     "trace-and-clarify-if-possible": "^1.0.0"
   },
@@ -61,7 +63,7 @@
   ],
   "config": {
     "ghooks": {
-      "pre-push": "thoughtful precommit && standard"
+      "pre-commit": "thoughtful precommit && standard --fix"
     }
   },
   "keywords": []

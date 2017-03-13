@@ -1,16 +1,24 @@
 sudo: false
+cache:
+  directories:
+    - node_modules
 language: "node_js"
 node_js:
-  - "0.10"
-  - "0.12"
-  - "iojs"
-  - "4"
   - "6"
   - "7"
-before_script:
-  - npm install standard
-  - standard
+matrix: 
+  include:
+    - node_js: "6"
+      env: STATIC_CHECKS=true
 script:
+  - |
+    if [ "${STATIC_CHECKS}" = "true" ]; then
+      # Just perform static checks and exit
+      standard || exit 1
+      npm install thought 
+      thought -d up-to-date || exit 1
+      exit 0
+    fi
   - npm install istanbul
   - istanbul cover ./node_modules/.bin/_mocha --report lcovonly
 after_script:

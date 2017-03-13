@@ -1,6 +1,6 @@
 ## Usage
 
-The following example demonstrates how to use this module:
+The following examples demonstrate how to use this module. The following files are involved:
 
 {{{dirTree 'examples/' }}}
 
@@ -11,11 +11,11 @@ of the Handlebars-engine:
 
 {{{example 'examples/example.js'}}}
 
-This example loads its configuration from the module `config-module.js`
+This example loads its configuration from the module `config-module.js`:
 
 {{{include 'examples/config-module.js'}}}
 
-*A quick note: If your are really creating a configuration-module, you should always
+*A quick note: If your are creating a real configuration-module, you should always
 use `require.resolve` or `__dirname` to determine the correct path to referenced files.*
 
 All the templates in the `templates` directory are called with the provided `data` (name and city).
@@ -39,7 +39,7 @@ the `footer.hbs` partial.
 
 The output of this example is:
 
-{{{exec 'node example.js' cwd='examples/'}}}
+{{{exec 'node -r "../.thought/stable-console" example.js' cwd='examples/'}}}
 
 
 ### Customizing configurations
@@ -57,7 +57,7 @@ The new `footer.hbs` writes only the current temperature, instead of the weather
 
 The output of this example is
 
-{{{exec 'node example-merge.js' cwd='examples/'}}}
+{{{exec 'node -r "../.thought/stable-console" example-merge.js' cwd='examples/'}}}
 
 In a similar fashion, we could replace other parts of the configuration, like templates, helpers
 and the pre-processor. If we would provide a new preprocessor, it could call the old one,
@@ -74,7 +74,7 @@ to override in order to modify a given part of the output.
 
 {{{example 'examples/example-partial-names.js'}}}
 
-{{{exec 'node example-partial-names.js' cwd='examples/'}}}
+{{{exec 'node -r "../.thought/stable-console" example-partial-names.js' cwd='examples/'}}}
 
 ### Which partial generates what? (Method 2)
 
@@ -92,7 +92,7 @@ The output contain tags that contain location-information of the succeeding text
 
 Example output:
 
-{{{exec 'node example-source-locators.js' cwd='examples/'}}}
+{{{exec 'node -r "../.thought/stable-console" example-source-locators.js' cwd='examples/'}}}
 
 
 

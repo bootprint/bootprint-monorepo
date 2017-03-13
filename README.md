@@ -1,7 +1,5 @@
 # customize-engine-handlebars 
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/bootprint/customize-engine-handlebars.svg)](https://greenkeeper.io/)
-
 [![NPM version](https://badge.fury.io/js/customize-engine-handlebars.svg)](http://badge.fury.io/js/customize-engine-handlebars)
 [![Travis Build Status](https://travis-ci.org/bootprint/customize-engine-handlebars.svg?branch=master)](https://travis-ci.org/bootprint/customize-engine-handlebars)
 [![Coverage Status](https://img.shields.io/coveralls/bootprint/customize-engine-handlebars.svg)](https://coveralls.io/r/bootprint/customize-engine-handlebars)
@@ -18,7 +16,7 @@ npm install customize-engine-handlebars
 
 ## Usage
 
-The following example demonstrates how to use this module:
+The following examples demonstrate how to use this module. The following files are involved:
 
 <pre><code>
 
@@ -52,7 +50,7 @@ customize()
   .done(console.log)
 ```
 
-This example loads its configuration from the module `config-module.js`
+This example loads its configuration from the module `config-module.js`:
 
 ```js
 module.exports = function (customize) {
@@ -78,7 +76,7 @@ module.exports = function (customize) {
 ```
 
 
-*A quick note: If your are really creating a configuration-module, you should always
+*A quick note: If your are creating a real configuration-module, you should always
 use `require.resolve` or `__dirname` to determine the correct path to referenced files.*
 
 All the templates in the `templates` directory are called with the provided `data` (name and city).
