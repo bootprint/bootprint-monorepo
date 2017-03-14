@@ -51,12 +51,47 @@ describe('customize-engine-handlebars', function () {
     })
   })
 
-  it('should throw an exception if loading an existing helpers module fails', function () {
+  it('should load helpers and data from a function', function () {
+    var hb2 = hb.merge({
+      handlebars: {
+        helpers: function () {
+          return {
+            helper1: function (value) {
+              return `helper1[${value}]`
+            }
+          }
+        },
+        data: function () {
+          return ['eins', 'zwei', 'drei', 'view'].reduce((result, key) => {
+            result[key] = key.split('').reverse().join('')
+            return result
+          }, {})
+        }
+      }
+    })
+    return expect(hb2.run()).to.eventually.deep.equal({
+      handlebars: {
+        'a.md': 'a.md testPartials1/eins ->snie<-',
+        'b.md': 'b.md testPartials1/zwei ->iewz<- helper1[->iewz<-]'
+      }
+    })
+  })
+
+  it('should throw an exception if loading an existing helpers-module fails', function () {
     return expect(hb.merge({
       handlebars: {
         helpers: 'test/fixtures/helpers-error.js'
       }
     }).run()).to.be.rejected
+  })
+
+  it('should throw no exception if a helper- or preprocessor-module does not exist', function () {
+    return expect(hb.merge({
+      handlebars: {
+        helpers: 'test/fixtures/non-existing-helper.js',
+        preprocessor: 'test/fixtures/non-existing-preprocessor.js'
+      }
+    }).run()).not.to.be.rejected
   })
 
   it('should apply the partial wrapper', function () {
