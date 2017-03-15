@@ -3,6 +3,13 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 2.0.0-alpha.0 (Wed, 15 Mar 2017 21:09:52 GMT)
+
+* [f7ce66d](https://github.com/bootprint/customize-engine-handlebars/commit/f7ce66d) BREAKING: Support only node 6 and 7. Updated CI config - Nils Knappmeier
+* [f8e1559](https://github.com/bootprint/customize-engine-handlebars/commit/f8e1559) Update depedency versions - Nils Knappmeier
+* [3a76089](https://github.com/bootprint/customize-engine-handlebars/commit/3a76089) Add tests to increase coverage - Nils Knappmeier
+* [ff8b107](https://github.com/bootprint/customize-engine-handlebars/commit/ff8b107) Add support for source-locators - Nils Knappmeier
+
 # Version 1.0.1 (Tue, 20 Dec 2016 13:26:01 GMT)
 
 * [14a9fa7](https://github.com/bootprint/customize-engine-handlebars/commit/14a9fa7) Travis CI Setup for current node versions - Nils Knappmeier
