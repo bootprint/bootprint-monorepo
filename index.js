@@ -8,7 +8,7 @@
 'use strict'
 
 var Handlebars = require('handlebars')
-var _ = require('lodash')
+var _ = require('./lib/utils')
 var files = require('customize/helpers-io').files
 var customize = require('customize')
 var Q = require('q')
@@ -18,7 +18,7 @@ var path = require('path')
 var promisedHandlebars = require('promised-handlebars')
 
 var contents = function (partials) {
-  return _(partials).mapKeys(stripHandlebarsExt).mapValues(_.property('contents')).value()
+  return _.mapObject(partials, stripHandlebarsExt, (value) => value.contents)
 }
 
 /**
@@ -258,10 +258,14 @@ function addEngine (helpers, hbs, hbsOptions) {
   hbs.logger.level = 0
   // Provide the engine as last parameter to all helpers in order to
   // enable things like calling partials from a helper.
-  hbs.registerHelper(_.mapValues(helpers, function (helper) {
-    return _.partialRight(helper, {
-      engine: hbs,
-      config: hbsOptions
+  hbs.registerHelper(_.mapValues(helpers, (helper) =>
+    function wrappedHelper () {
+      var options = arguments[arguments.length - 1]
+      options.customize = {
+        engine: hbs,
+        config: hbsOptions
+      }
+      return helper.apply(this, arguments)
     })
-  }))
+  )
 }

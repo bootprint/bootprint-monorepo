@@ -30,7 +30,6 @@
     "debug": "^2.6.3",
     "handlebars": "^4.0.6",
     "handlebars-source-locators": "^1.0.0",
-    "lodash": "^4.17.4",
     "m-io": "^0.5.0",
     "promised-handlebars": "^2.0.1",
     "q": "^1.4.1",
@@ -59,6 +58,7 @@
   },
   "files": [
     "index.js",
+    "lib",
     "schema.js"
   ],
   "config": {
