@@ -3,7 +3,7 @@
 [![NPM version](https://badge.fury.io/js/customize-engine-handlebars.svg)](http://badge.fury.io/js/customize-engine-handlebars)
 [![Travis Build Status](https://travis-ci.org/bootprint/customize-engine-handlebars.svg?branch=master)](https://travis-ci.org/bootprint/customize-engine-handlebars)
 [![Coverage Status](https://img.shields.io/coveralls/bootprint/customize-engine-handlebars.svg)](https://coveralls.io/r/bootprint/customize-engine-handlebars)
-
+[![Greenkeeper badge](https://badges.greenkeeper.io/bootprint/customize-engine-handlebars.svg)](https://greenkeeper.io/)
 
 > Use handlebars as engine for customize
 
@@ -19,7 +19,6 @@ npm install customize-engine-handlebars
 The following examples demonstrate how to use this module. The following files are involved:
 
 <pre><code>
-
 ├── config-module.js
 ├── example-merge.js
 ├── example-partial-names.js
@@ -27,11 +26,11 @@ The following examples demonstrate how to use this module. The following files a
 ├── example.js
 ├── hb-helpers.js
 ├── hb-preprocessor.js
-├─┬ partials
+├─┬ partials/
 │ └── footer.hbs
-├─┬ partials2
+├─┬ partials2/
 │ └── footer.hbs
-└─┬ templates
+└─┬ templates/
   ├── text1.txt.hbs
   └── text2.txt.hbs
 </code></pre>
@@ -270,7 +269,7 @@ It allows helpers to return promises instead of real values.
 
 
 
-##  API-reference
+# API reference
 
 ## Functions
 
@@ -316,10 +315,10 @@ The default configuration for the handlebars engine
 | --- | --- | --- |
 | partials | <code>string</code> | path to a partials directory. Each `.hbs`-file in the directory (or in the tree)   is registered as partial by its name (or relative path), without the `.hbs`-extension. |
 | partialWrapper | <code>function</code> | a function that can modify partials   just before they are registered with the Handlebars engine. It receives the partial contents as   first parameter and the partial name as second parameter and must return the new content (or a promise for   the content. The parameter was introduced mainly for debugging purposes (i.e. to surround each   partial with a string containing the name of the partial). When this function is overridden, the   parent function is available throught `this.parent`. |
-| helpers | <code>string</code> &#124; <code>object</code> &#124; <code>function</code> | if this is an object it is assumed to be a list of helper functions,   if this is function it is assumed to return an object of helper functions, if this is a string,   it is assumed to be the path to a module returning either an object of a function as above. |
+| helpers | <code>string</code> \| <code>object</code> \| <code>function</code> | if this is an object it is assumed to be a list of helper functions,   if this is function it is assumed to return an object of helper functions, if this is a string,   it is assumed to be the path to a module returning either an object of a function as above. |
 | templates | <code>string</code> | path to a directory containing templates. Handlebars is called with each `.hbs`-file   as template. The result of the engine consists of an object with a property for each template and the   Handlebars result for this template as value. |
-| data | <code>string</code> &#124; <code>object</code> &#124; <code>function</code> | a javascript-object to use as input for handlebars. Same as with the `helpers`,   it is also acceptable to specify the path to a module exporting the data and a function computing   the data. |
-| preprocessor | <code>function</code> &#124; <code>string</code> | a function that takes the input data as first parameter and   transforms it into another object or the promise for an object. It the input data is a promise itself,   is resolved before calling this function. If the preprocessor is overridden, the parent   preprocessor is available with `this.parent(data)` |
+| data | <code>string</code> \| <code>object</code> \| <code>function</code> | a javascript-object to use as input for handlebars. Same as with the `helpers`,   it is also acceptable to specify the path to a module exporting the data and a function computing   the data. |
+| preprocessor | <code>function</code> \| <code>string</code> | a function that takes the input data as first parameter and   transforms it into another object or the promise for an object. It the input data is a promise itself,   is resolved before calling this function. If the preprocessor is overridden, the parent   preprocessor is available with `this.parent(data)` |
 | hbsOptions | <code>object</code> | options to pass to `Handlebars.compile`. |
 | addSourceLocators | <code>boolean</code> | add [handlebars-source-locators](https://github.com/nknapp/handlebars-source-locators)   to the output of each template |
 
@@ -328,8 +327,10 @@ The default configuration for the handlebars engine
 
 ## License
 
-`customize-engine-handlebars` is published under the MIT-license. 
+`customize-engine-handlebars` is published under the MIT-license.
+
 See [LICENSE.md](LICENSE.md) for details.
+
 
 ## Release-Notes
  
