@@ -268,6 +268,18 @@ In `bootprint` the user can create packages with Handlebars-partials and Less-de
 partials and definitions from other packages.
 
 
+### Troubleshooting
+
+Customize uses the [debug](https://npmjs.com/package/debug) module for debug logging. You can use the following channels to enable debugging:
+
+* `DEBUG=customize:versions` logs versions of loaded modules (like it was the default in version 1.x)
+* `DEBUG=customize:state` logs the resolved state after a merge
+* `DEBUG=customize:base` logs errors and status changes
+
+
+
+
+
 
 
 
