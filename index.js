@@ -28,6 +28,7 @@ var constant = util.constant
  * function-validator of `jsonschema-extra` because configurations
  * usually include functions
  *  from https://gitlab.com/jksdua/jsonschema-extra/blob/master/types.js#L16
+ * @private
  */
 var jsonschema = require('jsonschema')
 var validator = new jsonschema.Validator()

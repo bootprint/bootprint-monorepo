@@ -3,6 +3,11 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 2.0.0-alpha1 (Fri, 24 Mar 2017 15:31:27 GMT)
+
+* [56c95c0](https://github.com/bootprint/customize/commit/56c95c0) BREAKING: Remove support for js-quantities in configuration schemas - Nils Knappmeier
+* [3042778](https://github.com/bootprint/customize/commit/3042778) Remove lodash dependency - Nils Knappmeier
+
 # Version 1.1.0 (Thu, 22 Dec 2016 21:43:36 GMT)
 
 * [6761bff](https://github.com/bootprint/customize/commit/6761bff) IO-Helper "readFiles" for returning the contents of files as stream or Buffer (#1) - Nils Knappmeier

@@ -3,7 +3,7 @@
 [![NPM version](https://badge.fury.io/js/customize.svg)](http://badge.fury.io/js/customize)
 [![Travis Build Status](https://travis-ci.org/bootprint/customize.svg?branch=master)](https://travis-ci.org/bootprint/customize)
 [![Coverage Status](https://img.shields.io/coveralls/bootprint/customize.svg)](https://coveralls.io/r/bootprint/customize)
-
+[![Greenkeeper badge](https://badges.greenkeeper.io/bootprint/customize.svg)](https://greenkeeper.io/)
 
 > A simple framework to create customizable engines
 
@@ -39,11 +39,10 @@ The following example should demonstrate the usage of Customize and the `files`
 io-helper. Consider the following file tree
 
 <pre><code>
-
-├─┬ dir1
+├─┬ dir1/
 │ ├── a.md
 │ └── b.md
-├─┬ dir2
+├─┬ dir2/
 │ └── a.md
 ├── engine-concat-files.js
 ├── example-buildConfig.js
@@ -155,8 +154,8 @@ config. This example prints the following result.
 
 ```js
 { files: 
-   { 'b.md': { path: 'dir1/b.md', contents: 'Second file (from dir1)' },
-     'a.md': { path: 'dir1/a.md', contents: 'First file (from dir1)' } } }
+   { 'a.md': { path: 'dir1/a.md', contents: 'First file (from dir1)' },
+     'b.md': { path: 'dir1/b.md', contents: 'Second file (from dir1)' } } }
 ```
 
 We can see that the `files`-call of the preprocessor converted the directory path into 
@@ -202,11 +201,10 @@ We can do this, by merging another configuration, but let's have a look at the d
 tree before doing this:
 
 <pre><code>
-
-├─┬ dir1
+├─┬ dir1/
 │ ├── a.md
 │ └── b.md
-├─┬ dir2
+├─┬ dir2/
 │ └── a.md
 ├── engine-concat-files.js
 ├── example-buildConfig.js
@@ -281,25 +279,6 @@ partials and definitions from other packages.
 
 The exported module is a function that creates a new empty Customize-instance.
 
-## Modules
-
-<dl>
-<dt><a href="#module_customize">customize</a></dt>
-<dd><p>Create a new Customize object with an empty configuration</p>
-</dd>
-</dl>
-
-## Members
-
-<dl>
-<dt><a href="#jsonschema">jsonschema</a></dt>
-<dd><p>The configuration file is defined (and validated) by a JSON-schema
-(see <a href="./config-schema.js">the config-schema file</a>) for details.
-We use the <code>jsonschema</code> module for validation, along the the
-<code>jsonschema-extra</code>-module, because the JSON can contain functions.</p>
-</dd>
-</dl>
-
 <a name="module_customize"></a>
 
 ## customize
@@ -372,7 +351,7 @@ That means, that the overrider is not resolving this promise when overriding val
 Promised object values will not be merged but replaced.
 
 **Kind**: static property of <code>[customize](#module_customize)</code>  
-**Access:** public  
+**Access**: public  
 **Read only**: true  
 
 | Param | Type | Description |
@@ -414,7 +393,7 @@ this module
 Register an engine
 
 **Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -460,7 +439,7 @@ with the configuration of the module.
 
 **Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
 **Returns**: <code>Customize</code> - the Customize instance returned by the module  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -475,7 +454,7 @@ This functions is only needed to inspect intermediate configuration results
 
 **Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
 **Returns**: <code>Promise.&lt;object&gt;</code> - a promise for the whole configuration  
-**Access:** public  
+**Access**: public  
 <a name="module_customize..Customize+watched"></a>
 
 #### customize.watched() ⇒ <code>Promise.&lt;object.&lt;Array.&lt;string&gt;&gt;&gt;</code>
@@ -484,7 +463,7 @@ indexed by engine.
 
 **Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
 **Returns**: <code>Promise.&lt;object.&lt;Array.&lt;string&gt;&gt;&gt;</code> - a promise for the files to be watched.  
-**Access:** public  
+**Access**: public  
 <a name="module_customize..Customize+run"></a>
 
 #### customize.run([options]) ⇒ <code>Promise.&lt;object&gt;</code>
@@ -493,7 +472,7 @@ Run each engine with its part of the config.
 **Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
 **Returns**: <code>Promise.&lt;object&gt;</code> - an object containing on property per registered engine
  (the key is the engine-id) containing the result of each engine  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -505,15 +484,6 @@ Run each engine with its part of the config.
 ### customize~customize() ⇒ <code>Customize</code>
 **Kind**: inner method of <code>[customize](#module_customize)</code>  
 **Api**: public  
-<a name="jsonschema"></a>
-
-## jsonschema
-The configuration file is defined (and validated) by a JSON-schema
-(see [the config-schema file](./config-schema.js)) for details.
-We use the `jsonschema` module for validation, along the the
-`jsonschema-extra`-module, because the JSON can contain functions.
-
-**Kind**: global variable  
 
 
 ## IO/Helpers
@@ -545,7 +515,7 @@ Returns an undefined value if the directory path is undefined.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| directoryPath | <code>string</code> &#124; <code>null</code> &#124; <code>undefined</code> | the path to the directory |
+| directoryPath | <code>string</code> \| <code>null</code> \| <code>undefined</code> | the path to the directory |
 | [options] | <code>object</code> |  |
 | [options.glob] | <code>string</code> | an optional glob pattern for filtering files |
 | [options.stream] | <code>boolean</code> | if set to true, the contents of a file will be a readable stream   instead of the actual data. |
@@ -566,7 +536,7 @@ The contents of each file is a UTF-8 encoded string.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| directoryPath | <code>string</code> &#124; <code>null</code> &#124; <code>undefined</code> | the path to the directory |
+| directoryPath | <code>string</code> \| <code>null</code> \| <code>undefined</code> | the path to the directory |
 | [options] | <code>object</code> |  |
 | [options.glob] | <code>string</code> | an optional glob pattern for filtering files |
 
@@ -576,8 +546,10 @@ The contents of each file is a UTF-8 encoded string.
 
 ## License
 
-`customize` is published under the MIT-license. 
+`customize` is published under the MIT-license.
+
 See [LICENSE.md](LICENSE.md) for details.
+
 
 ## Release-Notes
  
