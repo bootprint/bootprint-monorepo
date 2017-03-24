@@ -24,13 +24,17 @@ var constant = util.constant
 /**
  * The configuration file is defined (and validated) by a JSON-schema
  * (see [the config-schema file](./config-schema.js)) for details.
- * We use the `jsonschema` module for validation, along the the
- * `jsonschema-extra`-module, because the JSON can contain functions.
+ * We use the `jsonschema` module for validation, and add the
+ * function-validator of `jsonschema-extra` because configurations
+ * usually include functions
+ *  from https://gitlab.com/jksdua/jsonschema-extra/blob/master/types.js#L16
  */
 var jsonschema = require('jsonschema')
-var extra = require('jsonschema-extra')
 var validator = new jsonschema.Validator()
-extra(validator)
+validator.types = Object.create(validator.types)
+validator.types.function = function testFunction (fn) {
+  return typeof fn === 'function'
+}
 
 /**
  * Create a new Customize object with an empty configuration

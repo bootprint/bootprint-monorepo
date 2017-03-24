@@ -231,6 +231,28 @@ describe('the "merge"-method', function () {
       .buildConfig()).to.be.rejectedWith(Error, /Error while validating Customize configuration/)
   })
 
+  it('should throw an error if the merge-configuration does not match the schema (number instead of function)', function () {
+    return expect(customize()
+      .registerEngine('test', require('./testEngine.js'))
+      .merge({
+        test: {
+          withParent: 123
+        }
+      })
+      .buildConfig()).to.be.rejectedWith(Error, /Error while validating Customize configuration/)
+  })
+
+  it('should throw an error if the merge-configuration does not match the schema (function instead of object)', function () {
+    return expect(customize()
+      .registerEngine('test', require('./testEngine.js'))
+      .merge({
+        test: {
+          files: function () {}
+        }
+      })
+      .buildConfig()).to.be.rejectedWith(Error, /Error while validating Customize configuration/)
+  })
+
   it('should handle a missing "preprocessConfig" and "schema" gracefully', function () {
     return expect(customize().registerEngine('test', minimalEngine).merge({
       test: {
