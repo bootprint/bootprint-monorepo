@@ -69,7 +69,6 @@
     "stream-to-string": "^1.1.0",
     "thought-plugin-jsdoc": "^1.0.0",
     "thoughtful-release": "^0.3.0",
-    "trace": "^2.3.0",
     "trace-and-clarify-if-possible": "^1.0.0"
   }
 }
