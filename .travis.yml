@@ -8,7 +8,6 @@ node_js:
   - "6"
   - "7"
 before_script:
-  - npm install standard
   - standard
 script:
   - npm install istanbul

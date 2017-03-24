@@ -7,7 +7,6 @@
 
 'use strict'
 
-var _ = require('lodash')
 var lazy = require('./lib/lazy')
 var path = require('path')
 var leaf = require('./lib/leaf')
@@ -35,27 +34,26 @@ module.exports = {
  *    the relative file-path from the directoryPath as key and the file-path and the file-contents as value
  */
 function readFiles (directoryPath, options) {
-  if (_.isUndefined(directoryPath)) {
+  if (directoryPath == null) {
     return undefined
   }
   var _options = options || {}
   var result = qfs.listTree(directoryPath, isFileMatching(directoryPath, _options.glob))
     .then(function (filePaths) {
-      return _(filePaths).map(function (filePath) {
-        return [
-          // key
-          path.relative(directoryPath, filePath).split(path.sep).join('/'),
-          // value
-          leaf(lazy(function () {
-            return {
-              path: path.relative(process.cwd(), filePath),
-              contents: _options.stream
-                ? fs.createReadStream(filePath, { encoding: _options.encoding })
-                : Q.ninvoke(fs, 'readFile', filePath, {encoding: _options.encoding})
-            }
-          }))
-        ]
-      }).zipObject().value()
+      return filePaths.reduce(function (result, filePath) {
+        var key = path.relative(directoryPath, filePath).split(path.sep).join('/')
+        var value = leaf(lazy(function () {
+          return {
+            path: path.relative(process.cwd(), filePath),
+            contents: _options.stream
+              ? fs.createReadStream(filePath, {encoding: _options.encoding})
+              : Q.ninvoke(fs, 'readFile', filePath, {encoding: _options.encoding})
+          }
+        }))
+
+        result[key] = value
+        return result
+      }, {})
     })
   result.watch = directoryPath
   return result

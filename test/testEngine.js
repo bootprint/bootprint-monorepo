@@ -1,7 +1,7 @@
-var _ = require('lodash')
 var files = require('../helpers-io').files
 var leaf = require('../').leaf
 var withParent = require('../').withParent
+var mapValues = require('../lib/util').mapValues
 
 var Q = require('q')
 
@@ -23,7 +23,7 @@ module.exports = {
     return {
       files: files(config.files),
       objects: config.objects,
-      leafs: _.mapValues(config.leafs, leaf),
+      leafs: mapValues(config.leafs, leaf),
       array: config.array,
       withParent: withParent(config.withParent)
     }
