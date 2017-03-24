@@ -12,6 +12,7 @@
  */
 var debug = require('debug')('customize:base')
 var debugState = require('debug')('customize:state')
+var debugVersions = require('debug')('customize:versions')
 var Q = require('q')
 var deep = require('deep-aplus')(Q.Promise)
 var mergeWith = require('lodash.mergewith')
@@ -97,7 +98,7 @@ function Customize (config, parentConfig, engines) {
       debugState('New configuration', config)
     }, /* istanbul ignore next */
       function (e) {
-        console.error('Error while debug-logging the built configuration ' + e.stack)
+        console.error('Error while debug-logging the built configuration ' + e.stack) // eslint-disable-line no-console
       })
   }
 
@@ -241,7 +242,7 @@ function Customize (config, parentConfig, engines) {
       }
     }
     if (customizeModule.package) {
-      console.log('Loading', customizeModule.package.name, customizeModule.package.version)
+      debugVersions('Loading', customizeModule.package.name, customizeModule.package.version)
       _metadata.config.modules.push(customizeModule.package)
     }
 

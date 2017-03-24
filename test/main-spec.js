@@ -410,7 +410,7 @@ describe('Debug output', function () {
     customize.debug.enabled = true
   })
   it('should not disturb normal operation', function () {
-    console.log('custom', require('debug')('customize:state').enabled)
+    console.log('custom', require('debug')('customize:state').enabled) // eslint-disable-line no-console
     return expect(testee
       .load(require('./fixtures/module/index.js'))
       .run()
