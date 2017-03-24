@@ -3,7 +3,7 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
-# Version 2.0.0-alpha1 (Fri, 24 Mar 2017 15:31:27 GMT)
+# Version 2.0.0-alpha1 (Fri, 24 Mar 2017 15:36:34 GMT)
 
 * [56c95c0](https://github.com/bootprint/customize/commit/56c95c0) BREAKING: Remove support for js-quantities in configuration schemas - Nils Knappmeier
 * [3042778](https://github.com/bootprint/customize/commit/3042778) Remove lodash dependency - Nils Knappmeier
