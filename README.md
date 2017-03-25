@@ -255,8 +255,8 @@ The configuration and the engine itself is passed as additional parameter into e
 ```
 module.exports = {
     function(value, options, customizeConfig) {
-        console.log("handlebars", custOptions.engine)
-        console.log("customizeConfig", custOptions.config)
+        console.log("handlebars", customizeConfig.engine)
+        console.log("customizeConfig", customizeConfig.config)
     }
 }
 ```

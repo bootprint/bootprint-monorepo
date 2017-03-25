@@ -3,6 +3,10 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 2.0.0-alpha.1 (Fri, 24 Mar 2017 23:59:41 GMT)
+
+* [1532ef6](https://github.com/bootprint/customize-engine-handlebars/commit/1532ef6) Remove dependency to lodash (reduce size) - Nils Knappmeier
+
 # Version 2.0.0-alpha.0 (Wed, 15 Mar 2017 21:09:52 GMT)
 
 * [f7ce66d](https://github.com/bootprint/customize-engine-handlebars/commit/f7ce66d) BREAKING: Support only node 6 and 7. Updated CI config - Nils Knappmeier
