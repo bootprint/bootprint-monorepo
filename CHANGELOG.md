@@ -3,6 +3,10 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 2.0.0-alpha.2 (Wed, 05 Apr 2017 21:27:20 GMT)
+
+* [80cf788](https://github.com/bootprint/customize-engine-handlebars/commit/80cf788) Pass name of the targetFile to each helper - Nils Knappmeier
+
 # Version 2.0.0-alpha.1 (Fri, 24 Mar 2017 23:59:41 GMT)
 
 * [1532ef6](https://github.com/bootprint/customize-engine-handlebars/commit/1532ef6) Remove dependency to lodash (reduce size) - Nils Knappmeier
