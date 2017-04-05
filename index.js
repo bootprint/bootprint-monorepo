@@ -56,7 +56,7 @@ var contents = function (partials) {
  *   is passed into the merge function.
  * @property {object<{path:string,contents:string}>} partials the Handlebars partials that should be registered
  * @property {function(string,string): (string|Promise<string>)} partialWrapper the partial wrapper function.
- * @property {object<function> helpers the Handlebars helpers that should be registered
+ * @property {object<function>} helpers the Handlebars helpers that should be registered
  * @property {object<{path:string,contents:string}>} templates
  * @property {object} data the data object to render with Handlebars
  * @property {function(object): (object|Promise<object>)} preprocessor
