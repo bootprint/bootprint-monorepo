@@ -165,10 +165,10 @@ module.exports = {
         hbs.registerHelper(addEngine(config.helpers, hbs, config))
         var templates = contents(config.templates)
 
-        var result = _.mapValues(templates, function (template) {
+        var result = _.mapValues(templates, function (template, key) {
           var fn = hbs.compile(template, config.hbsOptions)
           debug('hbs-data', data)
-          var result = fn(data)
+          var result = fn(Object.assign({__customize_target_file__: key}, data))
           debug('fn(data) =' + result)
           return result
         })
@@ -253,19 +253,21 @@ function moduleIfString (pathOrObject, type) {
  * @param {object<function>} helpers the helpers object
  * @param {Handlebars} hbs the current handlebars engine
  * @param {object} hbsOptions the options of the Handlebars engine
+ * @return {object<function>} the wrapped helpers
  */
 function addEngine (helpers, hbs, hbsOptions) {
   hbs.logger.level = 0
   // Provide the engine as last parameter to all helpers in order to
   // enable things like calling partials from a helper.
-  hbs.registerHelper(_.mapValues(helpers, (helper) =>
+  return _.mapValues(helpers, (helper) =>
     function wrappedHelper () {
       var options = arguments[arguments.length - 1]
       options.customize = {
         engine: hbs,
-        config: hbsOptions
+        config: hbsOptions,
+        targetFile: options.data.root.__customize_target_file__
       }
       return helper.apply(this, arguments)
-    })
+    }
   )
 }

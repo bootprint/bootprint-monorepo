@@ -23,14 +23,19 @@ The following examples demonstrate how to use this module. The following files a
 ├── example-merge.js
 ├── example-partial-names.js
 ├── example-source-locators.js
+├── example-targetFile.js
 ├── example.js
 ├── hb-helpers.js
 ├── hb-preprocessor.js
+├─┬ partials-targetFile/
+│ └── footer.hbs
 ├─┬ partials/
 │ └── footer.hbs
 ├─┬ partials2/
 │ └── footer.hbs
 └─┬ templates/
+  ├─┬ subdir/
+  │ └── text3.txt.hbs
   ├── text1.txt.hbs
   └── text2.txt.hbs
 </code></pre>
@@ -129,10 +134,10 @@ The output of this example is:
 ```
 https://api.github.com/users/nknapp
 { handlebars: 
-   { 'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n------\nGithub-Name: Nils Knappmeier',
+   { 'subdir/text3.txt': '------\nGithub-Name: Nils Knappmeier',
+     'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n------\nGithub-Name: Nils Knappmeier',
      'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n------\nGithub-Name: Nils Knappmeier' } }
 ```
-
 
 ### Customizing configurations
 
@@ -160,6 +165,7 @@ The new `footer.hbs` writes only the current temperature, instead of the weather
 ```hbs
 ------
 Blog: {{{github.blog}}}
+
 ```
 
 
@@ -168,13 +174,76 @@ The output of this example is
 ```
 https://api.github.com/users/nknapp
 { handlebars: 
-   { 'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n------\nBlog: https://blog.knappi.org',
-     'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n------\nBlog: https://blog.knappi.org' } }
+   { 'subdir/text3.txt': '------\nBlog: https://blog.knappi.org\n',
+     'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n------\nBlog: https://blog.knappi.org\n',
+     'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n------\nBlog: https://blog.knappi.org\n' } }
 ```
 
 In a similar fashion, we could replace other parts of the configuration, like templates, helpers
 and the pre-processor. If we would provide a new preprocessor, it could call the old one,
 by calling `this.parent(args)`
+
+### Name of the current target-file
+
+In some cases, we need to know which file we are actually rendering at the moment.
+If we are rendering the template `some/template.txt.hbs`, the file `some/template.txt`
+will be written (at least if [customize-write-files](https://npmjs.com/package/customize-write-files) is used. If we want to
+create relative links from this file, we need this information within helpers.
+The parameter `options.customize.targetFile` that is passed to each helper, contains this information.
+The following configuration registers a helper that return the targetFile:
+
+```js
+var customize = require('customize')
+customize()
+  .registerEngine('handlebars', require('customize-engine-handlebars'))
+  .load(require('./config-module.js'))
+  .merge({
+    handlebars: {
+      templates: 'templates',
+      partials: 'partials-targetFile',
+      helpers: {
+        // Helper that returns the targetFile
+        targetFile: function(options) {
+          return options.customize.targetFile
+        }
+      }
+    }
+  })
+  .run()
+  .done(console.log)
+```
+
+Each template includes the `{{>footer}}`-partial, which calls the `{{targetFile}}`-helper
+to include the name of the current file.
+
+```hbs
+------
+File: {{targetFile}}
+```
+
+
+The output of this configuration is
+
+```
+https://api.github.com/users/nknapp
+{ handlebars: 
+   { 'subdir/text3.txt': '------\nFile: subdir/text3.txt',
+     'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n------\nFile: text1.txt',
+     'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n------\nFile: text2.txt' } }
+```
+
+### Accessing engine and configuration helpers
+
+The configuration and the engine itself is passed as additional option into each helper call:
+
+```
+module.exports = {
+    function(value, options) {
+        console.log("handlebars", options.customize.engine)
+        console.log("customizeConfig", options.customize.config)
+    }
+}
+```
 
 ### Which partial generates what? (Method 1)
 
@@ -205,8 +274,9 @@ customize()
 ```
 https://api.github.com/users/nknapp
 { handlebars: 
-   { 'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n[BEGIN footer]\n------\nBlog: https://blog.knappi.org[END footer]',
-     'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n[BEGIN footer]\n------\nBlog: https://blog.knappi.org[END footer]' } }
+   { 'subdir/text3.txt': '[BEGIN footer]\n------\nBlog: https://blog.knappi.org\n[END footer]',
+     'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n[BEGIN footer]\n------\nBlog: https://blog.knappi.org\n[END footer]',
+     'text2.txt': 'I\'m nknapp\n\nI\'m living in DARMSTADT.\n\n[BEGIN footer]\n------\nBlog: https://blog.knappi.org\n[END footer]' } }
 ```
 
 ### Which partial generates what? (Method 2)
@@ -241,24 +311,9 @@ Example output:
 ```
 https://api.github.com/users/nknapp
 { handlebars: 
-   { 'text1.txt': '<sl line="1" col="0" file="templates/text1.txt.hbs"></sl>I\'m <sl line="1" col="4" file="templates/text1.txt.hbs"></sl>nknapp<sl line="1" col="12" file="templates/text1.txt.hbs"></sl>\n\nI\'m living in <sl line="3" col="14" file="templates/text1.txt.hbs"></sl>Darmstadt<sl line="3" col="22" file="templates/text1.txt.hbs"></sl>.\n\n<sl line="5" col="0" file="templates/text1.txt.hbs"></sl><sl line="1" col="0" partial="footer" file="partials2/footer.hbs"></sl>------\nBlog: <sl line="2" col="6" partial="footer" file="partials2/footer.hbs"></sl>https://blog.knappi.org',
-     'text2.txt': '<sl line="1" col="0" file="templates/text2.txt.hbs"></sl>I\'m <sl line="1" col="4" file="templates/text2.txt.hbs"></sl>nknapp<sl line="1" col="12" file="templates/text2.txt.hbs"></sl>\n\nI\'m living in <sl line="3" col="14" file="templates/text2.txt.hbs"></sl>DARMSTADT<sl line="3" col="28" file="templates/text2.txt.hbs"></sl>.\n\n<sl line="5" col="0" file="templates/text2.txt.hbs"></sl><sl line="1" col="0" partial="footer" file="partials2/footer.hbs"></sl>------\nBlog: <sl line="2" col="6" partial="footer" file="partials2/footer.hbs"></sl>https://blog.knappi.org' } }
-```
-
-
-
-
-### Accessing engine and configuration helpers
-
-The configuration and the engine itself is passed as additional parameter into each helper call:
-
-```
-module.exports = {
-    function(value, options, customizeConfig) {
-        console.log("handlebars", customizeConfig.engine)
-        console.log("customizeConfig", customizeConfig.config)
-    }
-}
+   { 'subdir/text3.txt': '<sl line="1" col="0" partial="footer" file="partials2/footer.hbs"></sl>------\nBlog: <sl line="2" col="6" partial="footer" file="partials2/footer.hbs"></sl>https://blog.knappi.org<sl line="2" col="23" partial="footer" file="partials2/footer.hbs"></sl>\n<sl line="3" col="0" partial="footer" file="partials2/footer.hbs"></sl>',
+     'text1.txt': '<sl line="1" col="0" file="templates/text1.txt.hbs"></sl>I\'m <sl line="1" col="4" file="templates/text1.txt.hbs"></sl>nknapp<sl line="1" col="12" file="templates/text1.txt.hbs"></sl>\n\nI\'m living in <sl line="3" col="14" file="templates/text1.txt.hbs"></sl>Darmstadt<sl line="3" col="22" file="templates/text1.txt.hbs"></sl>.\n\n<sl line="5" col="0" file="templates/text1.txt.hbs"></sl><sl line="1" col="0" partial="footer" file="partials2/footer.hbs"></sl>------\nBlog: <sl line="2" col="6" partial="footer" file="partials2/footer.hbs"></sl>https://blog.knappi.org<sl line="2" col="23" partial="footer" file="partials2/footer.hbs"></sl>\n<sl line="3" col="0" partial="footer" file="partials2/footer.hbs"></sl>',
+     'text2.txt': '<sl line="1" col="0" file="templates/text2.txt.hbs"></sl>I\'m <sl line="1" col="4" file="templates/text2.txt.hbs"></sl>nknapp<sl line="1" col="12" file="templates/text2.txt.hbs"></sl>\n\nI\'m living in <sl line="3" col="14" file="templates/text2.txt.hbs"></sl>DARMSTADT<sl line="3" col="28" file="templates/text2.txt.hbs"></sl>.\n\n<sl line="5" col="0" file="templates/text2.txt.hbs"></sl><sl line="1" col="0" partial="footer" file="partials2/footer.hbs"></sl>------\nBlog: <sl line="2" col="6" partial="footer" file="partials2/footer.hbs"></sl>https://blog.knappi.org<sl line="2" col="23" partial="footer" file="partials2/footer.hbs"></sl>\n<sl line="3" col="0" partial="footer" file="partials2/footer.hbs"></sl>' } }
 ```
 
 ### Asynchronous helpers
@@ -274,7 +329,7 @@ It allows helpers to return promises instead of real values.
 ## Functions
 
 <dl>
-<dt><a href="#addEngine">addEngine(helpers, hbs, hbsOptions)</a></dt>
+<dt><a href="#addEngine">addEngine(helpers, hbs, hbsOptions)</a> ⇒ <code>object.&lt;function()&gt;</code></dt>
 <dd><p>Wraps helpers with a function that provides
 and object {engine, config} as additional parameter</p>
 </dd>
@@ -290,11 +345,12 @@ and object {engine, config} as additional parameter</p>
 
 <a name="addEngine"></a>
 
-## addEngine(helpers, hbs, hbsOptions)
+## addEngine(helpers, hbs, hbsOptions) ⇒ <code>object.&lt;function()&gt;</code>
 Wraps helpers with a function that provides
 and object {engine, config} as additional parameter
 
 **Kind**: global function  
+**Returns**: <code>object.&lt;function()&gt;</code> - the wrapped helpers  
 
 | Param | Type | Description |
 | --- | --- | --- |

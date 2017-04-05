@@ -214,4 +214,20 @@ describe('customize-engine-handlebars', function () {
       }
     })
   })
+
+  it('should provide the name of the output-file as `options.targetFile` to helpers', function () {
+    var hb2 = emptyEngine
+      .merge({
+        handlebars: {
+          helpers: 'test/fixtures/helpers.js',
+          templates: 'test/fixtures/templates-targetFile'
+        }
+      })
+    return expect(hb2.run()).to.eventually.deep.equal({
+      handlebars: {
+        'a.md': 'targetFile: a.md',
+        'subdir/b.md': 'targetFile: subdir/b.md'
+      }
+    })
+  })
 })

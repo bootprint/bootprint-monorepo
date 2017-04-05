@@ -4,5 +4,8 @@ module.exports = {
   },
   thisOptionsHelper: function (abc, options) {
     return this.name + abc
+  },
+  targetFile: function (options) {
+    return options.customize.targetFile
   }
 }
