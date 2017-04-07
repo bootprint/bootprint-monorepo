@@ -3,6 +3,10 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 2.0.0-alpha.3 (Fri, 07 Apr 2017 07:07:37 GMT)
+
+* [7842c50](https://github.com/bootprint/customize-engine-handlebars/commit/7842c50) Fix: Make __customize_target_file__-property non-enumerable - Nils Knappmeier
+
 # Version 2.0.0-alpha.2 (Wed, 05 Apr 2017 21:27:20 GMT)
 
 * [80cf788](https://github.com/bootprint/customize-engine-handlebars/commit/80cf788) Pass name of the targetFile to each helper - Nils Knappmeier
