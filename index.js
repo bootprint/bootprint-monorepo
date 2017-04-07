@@ -168,7 +168,15 @@ module.exports = {
         var result = _.mapValues(templates, function (template, key) {
           var fn = hbs.compile(template, config.hbsOptions)
           debug('hbs-data', data)
-          var result = fn(Object.assign({__customize_target_file__: key}, data))
+
+          // Prepare input data with non-enumerable target-file-property
+          var rootObject = {}
+          Object.defineProperty(rootObject, '__customize_target_file__', {
+            enumerable: false,
+            value: key
+          })
+
+          var result = fn(Object.assign(rootObject, data))
           debug('fn(data) =' + result)
           return result
         })

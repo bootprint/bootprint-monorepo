@@ -230,4 +230,21 @@ describe('customize-engine-handlebars', function () {
       }
     })
   })
+
+  it('should not pollute the input object with enumerable properties', function () {
+    var hb2 = emptyEngine
+      .merge({
+        handlebars: {
+          templates: 'test/fixtures/templates-cleanInput',
+          data: {
+            'a': 'b'
+          }
+        }
+      })
+    return expect(hb2.run()).to.eventually.deep.equal({
+      handlebars: {
+        'a.md': 'a=b'
+      }
+    })
+  })
 })
