@@ -1,4 +1,7 @@
 {
+  "publishConfig": {
+    "tag": "next"
+  },
   "name": "customize-engine-handlebars",
   "version": "2.0.0-alpha.2",
   "description": "Use handlebars as engine for customize",
