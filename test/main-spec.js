@@ -414,8 +414,7 @@ describe('Debug output', function () {
     return expect(testee
       .load(require('./fixtures/module/index.js'))
       .run()
-      .get('test')
-      .get('files')
+      .then(result => result.test.files)
     ).to.eventually.deep.equal({
       'eins.hbs': {
         path: 'test/fixtures/testPartials1/eins.hbs',

@@ -13,8 +13,7 @@
 var debug = require('debug')('customize:base')
 var debugState = require('debug')('customize:state')
 var debugVersions = require('debug')('customize:versions')
-var Q = require('q')
-var deep = require('deep-aplus')(Q.Promise)
+var deep = require('deep-aplus')(Promise)
 var mergeWith = require('lodash.mergewith')
 
 let util = require('./lib/util')
@@ -94,7 +93,7 @@ function Customize (config, parentConfig, engines) {
 
   // Debug logging
   if (debugState.enabled) {
-    deep(_config).done(function (config) {
+    deep(_config).then(function (config) {
       debugState('New configuration', config)
     }, /* istanbul ignore next */
       function (e) {
@@ -191,7 +190,7 @@ function Customize (config, parentConfig, engines) {
       // Watch no files by default (constant [])
       var watched = engine.watched || constant([])
 
-      return Q(engineConf).then(function (engineConf) {
+      return Promise.resolve(engineConf).then(function (engineConf) {
         if (engine.schema) {
           debug('Validating schema for ', engineName)
           /**
@@ -362,11 +361,21 @@ function customOverrider (a, b, propertyName) {
   }
 
   // Merge values resolving promises, if they are not leaf-promises
-  if (Q.isPromiseAlike(a) || Q.isPromiseAlike(b)) {
-    return Q.all([a, b]).spread(function (_a, _b) {
+  if (isPromiseAlike(a) || isPromiseAlike(b)) {
+    return Promise.all([a, b]).then(function ([_a, _b]) {
       // Merge the promise results
       return mergeWith({}, {x: _a}, {x: _b}, customOverrider).x
     })
   }
   // None of these options apply. Implicit "undefined" return value to invoke default overrider.
+}
+
+/**
+ * Check if this is something like a promise (taken from the Q-module)
+ * @param {*} obj the object to check for being a promise
+ * @returns {boolean} true, if the object is a promise
+ * @private
+ */
+function isPromiseAlike (obj) {
+  return obj === Object(obj) && typeof obj.then === 'function'
 }

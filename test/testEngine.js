@@ -3,8 +3,6 @@ var leaf = require('../').leaf
 var withParent = require('../').withParent
 var mapValues = require('../lib/util').mapValues
 
-var Q = require('q')
-
 module.exports = {
   defaultConfig: {
     files: {},
@@ -66,6 +64,6 @@ module.exports = {
    * @returns {*}
    */
   run: function testEngine (config) {
-    return Q(config)
+    return Promise.resolve(config)
   }
 }

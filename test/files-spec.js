@@ -2,17 +2,17 @@ var mergeWith = require('lodash.mergewith')
 
 var files = require('../helpers-io').files
 var readFiles = require('../helpers-io').readFiles
-var deep = require('deep-aplus')(require('q').Promise)
+var deep = require('deep-aplus')(Promise)
 var overrider = require('../').overrider
 var expect = require('chai').expect
 var stream = require('stream')
-
 var toString = require('stream-to-string')
 
-/* global describe */
-/* global it */
-// /* global xit */
+// see https://github.com/massimocode/es6-promise-inspect/blob/master/lib/inspect.ts
+var Debug = require('vm').runInDebugContext('Debug')
+var promiseState = (promise) => Debug.MakeMirror(promise, true).status()
 
+/* eslint-env mocha */
 describe('the files-function', function () {
   var x
 
@@ -59,9 +59,9 @@ describe('the files-function', function () {
         })
 
         // Do this before the promise is resolved
-        expect(x.valueOf()['eins.hbs'].inspect().state).to.equal('fulfilled')
+        expect(promiseState(x.valueOf()['eins.hbs'])).to.equal('resolved')
         // zwei.hbs is taken from 'testPartials2' and should not be loaded from 'testPartials1'
-        expect(x.valueOf()['zwei.hbs'].inspect().state).to.equal('pending')
+        expect(promiseState(x.valueOf()['zwei.hbs'])).to.equal('pending')
       })
   })
 
@@ -124,9 +124,9 @@ describe('the readFiles-function', function () {
         })
 
         // Do this before the promise is resolved
-        expect(x.valueOf()['eins.hbs'].inspect().state).to.equal('fulfilled')
+        expect(promiseState(x.valueOf()['eins.hbs'])).to.equal('resolved')
         // zwei.hbs is taken from 'testPartials2' and should not be loaded from 'testPartials1'
-        expect(x.valueOf()['zwei.hbs'].inspect().state).to.equal('pending')
+        expect(promiseState(x.valueOf()['zwei.hbs'])).to.equal('pending')
       })
   })
 
