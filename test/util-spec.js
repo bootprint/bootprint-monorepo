@@ -2,6 +2,7 @@ var util = require('../lib/util')
 
 var chai = require('chai')
 chai.use(require('dirty-chai'))
+chai.use(require('chai-as-promised'))
 var expect = chai.expect
 
 /* eslint-env mocha */
@@ -33,5 +34,15 @@ describe('the mapValues-function', function () {
     expect(function () {
       util.mapValues({a: 1, b: 2, c: 3}, 2)
     }).to.throw(Error)
+  })
+})
+
+describe('the asPromise-function', function () {
+  it('should return a promise that resolves to the result value of the callback', function () {
+    expect(util.asPromise((cb) => cb(null, 2))).to.eventually.equal(2)
+  })
+
+  it('should return a promise that resolves to the result value of the callback', function () {
+    expect(util.asPromise((cb) => cb(new Error('abc')))).to.be.rejectedWith(/abc/)
   })
 })

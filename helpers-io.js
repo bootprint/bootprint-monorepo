@@ -11,7 +11,7 @@ var lazy = require('./lib/lazy')
 var path = require('path')
 var leaf = require('./lib/leaf')
 var fs = require('fs')
-var Q = require('q')
+var asPromise = require('./lib/util').asPromise
 var qfs = require('m-io/fs')
 
 module.exports = {
@@ -47,10 +47,9 @@ function readFiles (directoryPath, options) {
             path: path.relative(process.cwd(), filePath),
             contents: _options.stream
               ? fs.createReadStream(filePath, {encoding: _options.encoding})
-              : Q.ninvoke(fs, 'readFile', filePath, {encoding: _options.encoding})
+              : asPromise((cb) => fs.readFile(filePath, {encoding: _options.encoding}, cb))
           }
         }))
-
         result[key] = value
         return result
       }, {})
