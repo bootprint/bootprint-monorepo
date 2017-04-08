@@ -7,4 +7,4 @@ customize()
     files: 'dir1'
   })
   .buildConfig()
-  .done(console.log)
+  .then((result) => console.log(result.files))

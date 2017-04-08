@@ -20,15 +20,14 @@ var chaiAsPromised = require('chai-as-promised')
 chai.use(chaiAsPromised)
 
 var overrider = require('../').overrider
-var Q = require('q')
-var _ = require('lodash')
-var deep = require('deep-aplus')(Q.Promise)
+var mergeWith = require('lodash.mergewith')
+var deep = require('deep-aplus')(Promise)
 
 describe('The custom overrider', function () {
   it('should concatenate arrays', function () {
-    expect(_.mergeWith({a: [1, 2]}, {a: [3, 4]}, overrider).a).to.deep.equal([1, 2, 3, 4])
+    expect(mergeWith({a: [1, 2]}, {a: [3, 4]}, overrider).a).to.deep.equal([1, 2, 3, 4])
   })
   it('should concatenate arrays within promises', function () {
-    expect(deep(_.mergeWith({a: Q([1, Q(2)])}, {a: [3, 4]}, overrider).a)).to.eventually.deep.equal([1, 2, 3, 4])
+    expect(deep(mergeWith({a: Promise.resolve([1, Promise.resolve(2)])}, {a: [3, 4]}, overrider).a)).to.eventually.deep.equal([1, 2, 3, 4])
   })
 })

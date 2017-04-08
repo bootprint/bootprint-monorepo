@@ -1,9 +1,7 @@
-var _ = require('lodash')
 var files = require('../helpers-io').files
 var leaf = require('../').leaf
 var withParent = require('../').withParent
-
-var Q = require('q')
+var mapValues = require('../lib/util').mapValues
 
 module.exports = {
   defaultConfig: {
@@ -23,7 +21,7 @@ module.exports = {
     return {
       files: files(config.files),
       objects: config.objects,
-      leafs: _.mapValues(config.leafs, leaf),
+      leafs: mapValues(config.leafs, leaf),
       array: config.array,
       withParent: withParent(config.withParent)
     }
@@ -66,6 +64,6 @@ module.exports = {
    * @returns {*}
    */
   run: function testEngine (config) {
-    return Q(config)
+    return Promise.resolve(config)
   }
 }

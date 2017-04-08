@@ -5,7 +5,7 @@
 [![NPM version](https://badge.fury.io/js/customize.svg)](http://badge.fury.io/js/customize)
 [![Travis Build Status](https://travis-ci.org/bootprint/customize.svg?branch=master)](https://travis-ci.org/bootprint/customize)
 [![Coverage Status](https://img.shields.io/coveralls/bootprint/customize.svg)](https://coveralls.io/r/bootprint/customize)
-
+[![Greenkeeper badge](https://badges.greenkeeper.io/bootprint/customize.svg)](https://greenkeeper.io/)
 
 > A simple framework to create customizable engines
 
@@ -41,23 +41,22 @@ The following example should demonstrate the usage of Customize and the `files`
 io-helper. Consider the following file tree
 
 <pre><code>
-
-├─┬ dir1
-│ ├── a.md
-│ └── b.md
-├─┬ dir2
-│ └── a.md
-├── engine-concat-files.js
-├── example-buildConfig.js
-├── example1.js
-└── example2.js
+├─┬ <a href="examples/file-example/dir1">dir1/</a>
+│ ├── <a href="examples/file-example/dir1/a.md">a.md</a>
+│ └── <a href="examples/file-example/dir1/b.md">b.md</a>
+├─┬ <a href="examples/file-example/dir2">dir2/</a>
+│ └── <a href="examples/file-example/dir2/a.md">a.md</a>
+├── <a href="examples/file-example/engine-concat-files.js">engine-concat-files.js</a>
+├── <a href="examples/file-example/example-buildConfig.js">example-buildConfig.js</a>
+├── <a href="examples/file-example/example1.js">example1.js</a>
+└── <a href="examples/file-example/example2.js">example2.js</a>
 </code></pre>
 
 ### Creating an engine
 
 The first thing we need, is an engine. For now, we create an engine that just
 concatenates the contents of all files in a directory. We put this engine into
-the file `engine-concat-files.js` 
+the file `engine-concat-files.js`
 
 ```js
 var files = require('customize/helpers-io').files
@@ -128,7 +127,7 @@ module.exports = {
 
   output file. The module [customize-write-files](https://npmjs.com/package/customize-write-files) can be used to 
   write such files to disk in a node environment. In order to this to work, 
-  the contents must either be a string, a buffer or a [raadable stream](https://nodejs.org/api/stream.html#stream_class_stream_readable).
+  the contents must either be a string, a buffer or a [readable stream](https://nodejs.org/api/stream.html#stream_class_stream_readable).
   Strings will be stored in `utf-8` encoding.
 
 ### Loading a configuration
@@ -146,7 +145,7 @@ customize()
     files: 'dir1'
   })
   .buildConfig()
-  .done(console.log)
+  .then((result) => console.log(result.files))
 ```
 
 The example creates a new Customize-instances, registers our engine under the name 
@@ -156,9 +155,8 @@ The example creates a new Customize-instances, registers our engine under the na
 config. This example prints the following result.
 
 ```js
-{ files: 
-   { 'b.md': { path: 'dir1/b.md', contents: 'Second file (from dir1)' },
-     'a.md': { path: 'dir1/a.md', contents: 'First file (from dir1)' } } }
+{ 'a.md': { contents: 'First file (from dir1)', path: 'dir1/a.md' },
+  'b.md': { contents: 'Second file (from dir1)', path: 'dir1/b.md' } }
 ```
 
 We can see that the `files`-call of the preprocessor converted the directory path into 
@@ -179,8 +177,7 @@ customize()
     files: 'dir1'
   })
   .run()
-  .get('files')
-  .done(console.log)
+  .then((result) => console.log(result.files))
 ```
 
 The engines `run()`-method will now be executed with the resolved configuration,
@@ -204,16 +201,15 @@ We can do this, by merging another configuration, but let's have a look at the d
 tree before doing this:
 
 <pre><code>
-
-├─┬ dir1
-│ ├── a.md
-│ └── b.md
-├─┬ dir2
-│ └── a.md
-├── engine-concat-files.js
-├── example-buildConfig.js
-├── example1.js
-└── example2.js
+├─┬ <a href="examples/file-example/dir1">dir1/</a>
+│ ├── <a href="examples/file-example/dir1/a.md">a.md</a>
+│ └── <a href="examples/file-example/dir1/b.md">b.md</a>
+├─┬ <a href="examples/file-example/dir2">dir2/</a>
+│ └── <a href="examples/file-example/dir2/a.md">a.md</a>
+├── <a href="examples/file-example/engine-concat-files.js">engine-concat-files.js</a>
+├── <a href="examples/file-example/example-buildConfig.js">example-buildConfig.js</a>
+├── <a href="examples/file-example/example1.js">example1.js</a>
+└── <a href="examples/file-example/example2.js">example2.js</a>
 </code></pre>
 
 You can see that the second directory contains a file `a.md`. We will use this file to
@@ -232,13 +228,12 @@ customize()
     files: 'dir2'
   })
   .run()
-  .get('files')
-  .done(console.log)
+  .then((result) => console.log(result.files))
 ```
 
 There is an additional call to `.merge` in this code. Its input is also passed to the 
 engine's preprocessor, so now we get two objects containing files and their contents 
-and those are merged by the [`.merge`-function of the lodash library](https://lodash.com/docs#merge),
+and those are merged by the [`.mergeWith`-function of the lodash library](https://lodash.com/docs#mergeWith),
 so that in the above example, the property `a.md` is replace by the value in the 
 second configuration. So the output of this example is
 
@@ -272,6 +267,18 @@ In `bootprint` the user can create packages with Handlebars-partials and Less-de
 partials and definitions from other packages.
 
 
+### Troubleshooting
+
+Customize uses the [debug](https://npmjs.com/package/debug) module for debug logging. You can use the following channels to enable debugging:
+
+* `DEBUG=customize:versions` logs versions of loaded modules (like it was the default in version 1.x)
+* `DEBUG=customize:state` logs the resolved state after a merge
+* `DEBUG=customize:base` logs errors and status changes
+
+
+
+
+
 
 
 
@@ -282,25 +289,6 @@ partials and definitions from other packages.
 ##  API-reference
 
 The exported module is a function that creates a new empty Customize-instance.
-
-## Modules
-
-<dl>
-<dt><a href="#module_customize">customize</a></dt>
-<dd><p>Create a new Customize object with an empty configuration</p>
-</dd>
-</dl>
-
-## Members
-
-<dl>
-<dt><a href="#jsonschema">jsonschema</a></dt>
-<dd><p>The configuration file is defined (and validated) by a JSON-schema
-(see <a href="./config-schema.js">the config-schema file</a>) for details.
-We use the <code>jsonschema</code> module for validation, along the the
-<code>jsonschema-extra</code>-module, because the JSON can contain functions.</p>
-</dd>
-</dl>
 
 <a name="module_customize"></a>
 
@@ -374,7 +362,7 @@ That means, that the overrider is not resolving this promise when overriding val
 Promised object values will not be merged but replaced.
 
 **Kind**: static property of <code>[customize](#module_customize)</code>  
-**Access:** public  
+**Access**: public  
 **Read only**: true  
 
 | Param | Type | Description |
@@ -416,7 +404,7 @@ this module
 Register an engine
 
 **Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -462,7 +450,7 @@ with the configuration of the module.
 
 **Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
 **Returns**: <code>Customize</code> - the Customize instance returned by the module  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -477,7 +465,7 @@ This functions is only needed to inspect intermediate configuration results
 
 **Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
 **Returns**: <code>Promise.&lt;object&gt;</code> - a promise for the whole configuration  
-**Access:** public  
+**Access**: public  
 <a name="module_customize..Customize+watched"></a>
 
 #### customize.watched() ⇒ <code>Promise.&lt;object.&lt;Array.&lt;string&gt;&gt;&gt;</code>
@@ -486,7 +474,7 @@ indexed by engine.
 
 **Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
 **Returns**: <code>Promise.&lt;object.&lt;Array.&lt;string&gt;&gt;&gt;</code> - a promise for the files to be watched.  
-**Access:** public  
+**Access**: public  
 <a name="module_customize..Customize+run"></a>
 
 #### customize.run([options]) ⇒ <code>Promise.&lt;object&gt;</code>
@@ -495,27 +483,18 @@ Run each engine with its part of the config.
 **Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
 **Returns**: <code>Promise.&lt;object&gt;</code> - an object containing on property per registered engine
  (the key is the engine-id) containing the result of each engine  
-**Access:** public  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | [options] | <code>object</code> | optional paramters |
-| [options.onlyEngine] | <code>string</code> | optionally the name of an engine, if only a single engine should  be executed |
+| [options.onlyEngine] | <code>string</code> | the name of an engine if only a single engine should  be executed |
 
 <a name="module_customize..customize"></a>
 
 ### customize~customize() ⇒ <code>Customize</code>
 **Kind**: inner method of <code>[customize](#module_customize)</code>  
 **Api**: public  
-<a name="jsonschema"></a>
-
-## jsonschema
-The configuration file is defined (and validated) by a JSON-schema
-(see [the config-schema file](./config-schema.js)) for details.
-We use the `jsonschema` module for validation, along the the
-`jsonschema-extra`-module, because the JSON can contain functions.
-
-**Kind**: global variable  
 
 
 ## IO/Helpers
@@ -547,7 +526,7 @@ Returns an undefined value if the directory path is undefined.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| directoryPath | <code>string</code> &#124; <code>null</code> &#124; <code>undefined</code> | the path to the directory |
+| directoryPath | <code>string</code> \| <code>null</code> \| <code>undefined</code> | the path to the directory |
 | [options] | <code>object</code> |  |
 | [options.glob] | <code>string</code> | an optional glob pattern for filtering files |
 | [options.stream] | <code>boolean</code> | if set to true, the contents of a file will be a readable stream   instead of the actual data. |
@@ -568,7 +547,7 @@ The contents of each file is a UTF-8 encoded string.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| directoryPath | <code>string</code> &#124; <code>null</code> &#124; <code>undefined</code> | the path to the directory |
+| directoryPath | <code>string</code> \| <code>null</code> \| <code>undefined</code> | the path to the directory |
 | [options] | <code>object</code> |  |
 | [options.glob] | <code>string</code> | an optional glob pattern for filtering files |
 
@@ -576,15 +555,17 @@ The contents of each file is a UTF-8 encoded string.
 
 
 
-## License
+# License
 
-`customize` is published under the MIT-license. 
+`customize` is published under the MIT-license.
+
 See [LICENSE.md](LICENSE.md) for details.
 
-## Release-Notes
+
+# Release-Notes
  
 For release notes, see [CHANGELOG.md](CHANGELOG.md)
  
-## Contributing guidelines
+# Contributing guidelines
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).

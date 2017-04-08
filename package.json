@@ -1,6 +1,6 @@
 {
   "name": "customize",
-  "version": "1.1.0",
+  "version": "2.0.0-alpha1",
   "description": "A simple framework to create customizable engines",
   "repository": {
     "type": "git",
@@ -17,25 +17,21 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "pretest": "standard --version || npm -g install standard",
-    "test": "mocha && standard",
-    "preformat": "standard --version || npm -g install standard",
-    "format": "standard --format",
+    "lint": "eslint --fix .",
+    "test": "mocha && npm run lint",
+    "coverage": "istanbul cover ./node_modules/.bin/_mocha",
+    "postcoverage": "istanbul check-coverage coverage/coverage.json --statements 100",
+    "prethought": "thought --version || npm -g install thought",
     "thought": "thought run -a",
-    "prethoughtcheck": "thought --version || npm -g install thought",
-    "thoughtcheck": "thought check-engines",
-    "version": "thoughtful changelog -o -a && npm run thought",
-    "preversion": "npm run thoughtcheck"
+    "preversion": "thought --version || npm -g install thought",
+    "version": "thoughtful changelog -o -a && npm run thought"
   },
   "dependencies": {
     "debug": "^2.2.0",
     "deep-aplus": "^1.0.4",
+    "glob": "^7.1.1",
     "jsonschema": "^1.0.2",
-    "jsonschema-extra": "^1.2.0",
-    "lodash": "^4.17.4",
-    "m-io": "^0.5.0",
-    "minimatch": "^3.0.0",
-    "q": "^1.4.1"
+    "lodash.mergewith": "^4.6.0"
   },
   "standard": {
     "ignore": [
@@ -48,20 +44,24 @@
     "helpers-io.js"
   ],
   "keywords": [],
-  "config": {
-    "ghooks": {
-      "pre-commit": "standard"
-    }
-  },
   "devDependencies": {
     "chai": "^3.3.0",
     "chai-as-promised": "^6.0.0",
     "clarify": "^2.0.0",
-    "ghooks": "^2.0.0",
+    "dirty-chai": "^1.2.2",
+    "eslint": "^3.17.1",
+    "eslint-config-standard": "^7.0.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-mocha": "^4.8.0",
+    "eslint-plugin-node": "^4.2.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^2.1.1",
+    "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "stream-to-string": "^1.1.0",
+    "thought": "^1.1.0",
+    "thought-plugin-jsdoc": "^1.0.0",
     "thoughtful-release": "^0.3.0",
-    "trace": "^2.3.0",
     "trace-and-clarify-if-possible": "^1.0.0"
   }
 }
