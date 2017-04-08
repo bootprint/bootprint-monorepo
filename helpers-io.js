@@ -39,17 +39,22 @@ function readFiles (directoryPath, options) {
   }
   var _options = options || {}
   // Collect all files
-  var result = util.asPromise((cb) => glob(_options.glob || '**', {cwd: directoryPath}, cb))
+  var result = util.asPromise((cb) => glob(_options.glob || '**', {cwd: directoryPath, mark: true}, cb))
     .then(function (relativePaths) {
-      // Convert to a set based on relative paths (i.e. {'dir/file.txt': 'dir/file.txt'}
-      var set = relativePaths.reduce((set, relativePath) => {
-        set[relativePath] = relativePath
-        return set
-      }, {})
+      var set = relativePaths
+        // Ignore directories
+        .filter((relativePath) => !relativePath.match(/\/$/))
+        // Convert to a set based on relative paths
+        // (i.e. {'dir/file.txt': 'dir/file.txt'}
+        .reduce((set, relativePath) => {
+          set[relativePath] = relativePath
+          return set
+        }, {})
+
+      // Create lazy promises (only resolve when .then() is called) acting
+      // as leafs (do not dive inside when merging)
       return util.mapValues(set, (relativePath) => {
         var fullPath = path.resolve(directoryPath, relativePath)
-        // Return a leaf (do not dive inside when merging) and a lazy Promise
-        // (only resolve when .then() is called)
         return leaf(lazy(() => {
           return {
             path: path.relative(process.cwd(), fullPath),

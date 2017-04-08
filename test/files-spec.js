@@ -36,6 +36,23 @@ describe('the files-function', function () {
       })
   })
 
+  it('should not return and read directories', function () {
+    return files('test/fixtures/recursiveFiles')
+      .then(deep)
+      .then(function (result) {
+        return expect(result).to.deep.equal({
+          'file1.txt': {
+            'contents': 'file1\n',
+            'path': 'test/fixtures/recursiveFiles/file1.txt'
+          },
+          'subdir/file2.txt': {
+            'contents': 'file2\n',
+            'path': 'test/fixtures/recursiveFiles/subdir/file2.txt'
+          }
+        })
+      })
+  })
+
   it('should create mergeable files', function () {
     var x = files('test/fixtures/testPartials1')
     return Promise.all([
