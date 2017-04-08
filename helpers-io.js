@@ -1,7 +1,7 @@
 /*!
- * customize <https://github.com/nknapp/ride-over>
+ * customize <https://github.com/bootprint/customize>
  *
- * Copyright (c) 2015 Nils Knappmeier.
+ * Copyright (c) 2017 Nils Knappmeier.
  * Released under the MIT license.
  */
 
@@ -11,8 +11,8 @@ var lazy = require('./lib/lazy')
 var path = require('path')
 var leaf = require('./lib/leaf')
 var fs = require('fs')
-var asPromise = require('./lib/util').asPromise
-var qfs = require('m-io/fs')
+var util = require('./lib/util')
+var glob = require('glob')
 
 module.exports = {
   files: files,
@@ -38,21 +38,27 @@ function readFiles (directoryPath, options) {
     return undefined
   }
   var _options = options || {}
-  var result = qfs.listTree(directoryPath, isFileMatching(directoryPath, _options.glob))
-    .then(function (filePaths) {
-      return filePaths.reduce(function (result, filePath) {
-        var key = path.relative(directoryPath, filePath).split(path.sep).join('/')
-        var value = leaf(lazy(function () {
+  // Collect all files
+  var result = util.asPromise((cb) => glob(_options.glob || '**', {cwd: directoryPath}, cb))
+    .then(function (relativePaths) {
+      // Convert to a set based on relative paths (i.e. {'dir/file.txt': 'dir/file.txt'}
+      var set = relativePaths.reduce((set, relativePath) => {
+        set[relativePath] = relativePath
+        return set
+      }, {})
+      return util.mapValues(set, (relativePath) => {
+        var fullPath = path.resolve(directoryPath, relativePath)
+        // Return a leaf (do not dive inside when merging) and a lazy Promise
+        // (only resolve when .then() is called)
+        return leaf(lazy(() => {
           return {
-            path: path.relative(process.cwd(), filePath),
+            path: path.relative(process.cwd(), fullPath),
             contents: _options.stream
-              ? fs.createReadStream(filePath, {encoding: _options.encoding})
-              : asPromise((cb) => fs.readFile(filePath, {encoding: _options.encoding}, cb))
+              ? fs.createReadStream(fullPath, {encoding: _options.encoding})
+              : util.asPromise((cb) => fs.readFile(fullPath, {encoding: _options.encoding}, cb))
           }
         }))
-        result[key] = value
-        return result
-      }, {})
+      })
     })
   result.watch = directoryPath
   return result
@@ -75,29 +81,4 @@ function files (directoryPath, options) {
     stream: false,
     encoding: 'utf-8'
   })
-}
-
-/**
- * Returns a guard function for list tree, that checks whether a file is a real file (not a directory)
- * and whether the path relative to a root-dir matches a glob pattern
- * @param glob
- * @param rootDir
- * @returns {Function}
- * @private
- */
-function isFileMatching (rootDir, glob) {
-  var mm = null
-  if (glob) {
-    // Save minimatch class, if glob is provided
-    var Minimatch = require('minimatch').Minimatch
-    mm = new Minimatch(glob)
-  }
-  return function (filePath, stat) {
-    if (!stat.isFile()) {
-      return false
-    }
-
-    // Must match the glob, if provided
-    return !mm || mm.match(path.relative(rootDir, filePath))
-  }
 }
