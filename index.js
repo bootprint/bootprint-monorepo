@@ -284,7 +284,7 @@ function Customize (config, parentConfig, engines) {
    * Run each engine with its part of the config.
    *
    * @param {object=} options optional paramters
-   * @param {string=} options.onlyEngine optionally the name of an engine, if only a single engine should
+   * @param {string=} options.onlyEngine the name of an engine if only a single engine should
    *  be executed
    * @return {Promise<object>} an object containing on property per registered engine
    *  (the key is the engine-id) containing the result of each engine

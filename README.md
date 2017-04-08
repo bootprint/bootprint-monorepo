@@ -39,22 +39,22 @@ The following example should demonstrate the usage of Customize and the `files`
 io-helper. Consider the following file tree
 
 <pre><code>
-├─┬ dir1/
-│ ├── a.md
-│ └── b.md
-├─┬ dir2/
-│ └── a.md
-├── engine-concat-files.js
-├── example-buildConfig.js
-├── example1.js
-└── example2.js
+├─┬ <a href="examples/file-example/dir1">dir1/</a>
+│ ├── <a href="examples/file-example/dir1/a.md">a.md</a>
+│ └── <a href="examples/file-example/dir1/b.md">b.md</a>
+├─┬ <a href="examples/file-example/dir2">dir2/</a>
+│ └── <a href="examples/file-example/dir2/a.md">a.md</a>
+├── <a href="examples/file-example/engine-concat-files.js">engine-concat-files.js</a>
+├── <a href="examples/file-example/example-buildConfig.js">example-buildConfig.js</a>
+├── <a href="examples/file-example/example1.js">example1.js</a>
+└── <a href="examples/file-example/example2.js">example2.js</a>
 </code></pre>
 
 ### Creating an engine
 
 The first thing we need, is an engine. For now, we create an engine that just
 concatenates the contents of all files in a directory. We put this engine into
-the file `engine-concat-files.js` 
+the file `engine-concat-files.js`
 
 ```js
 var files = require('customize/helpers-io').files
@@ -125,7 +125,7 @@ module.exports = {
 
   output file. The module [customize-write-files](https://npmjs.com/package/customize-write-files) can be used to 
   write such files to disk in a node environment. In order to this to work, 
-  the contents must either be a string, a buffer or a [raadable stream](https://nodejs.org/api/stream.html#stream_class_stream_readable).
+  the contents must either be a string, a buffer or a [readable stream](https://nodejs.org/api/stream.html#stream_class_stream_readable).
   Strings will be stored in `utf-8` encoding.
 
 ### Loading a configuration
@@ -143,7 +143,7 @@ customize()
     files: 'dir1'
   })
   .buildConfig()
-  .done(console.log)
+  .then((result) => console.log(result.files))
 ```
 
 The example creates a new Customize-instances, registers our engine under the name 
@@ -153,9 +153,8 @@ The example creates a new Customize-instances, registers our engine under the na
 config. This example prints the following result.
 
 ```js
-{ files: 
-   { 'a.md': { path: 'dir1/a.md', contents: 'First file (from dir1)' },
-     'b.md': { path: 'dir1/b.md', contents: 'Second file (from dir1)' } } }
+{ 'a.md': { contents: 'First file (from dir1)', path: 'dir1/a.md' },
+  'b.md': { contents: 'Second file (from dir1)', path: 'dir1/b.md' } }
 ```
 
 We can see that the `files`-call of the preprocessor converted the directory path into 
@@ -176,8 +175,7 @@ customize()
     files: 'dir1'
   })
   .run()
-  .get('files')
-  .done(console.log)
+  .then((result) => console.log(result.files))
 ```
 
 The engines `run()`-method will now be executed with the resolved configuration,
@@ -201,15 +199,15 @@ We can do this, by merging another configuration, but let's have a look at the d
 tree before doing this:
 
 <pre><code>
-├─┬ dir1/
-│ ├── a.md
-│ └── b.md
-├─┬ dir2/
-│ └── a.md
-├── engine-concat-files.js
-├── example-buildConfig.js
-├── example1.js
-└── example2.js
+├─┬ <a href="examples/file-example/dir1">dir1/</a>
+│ ├── <a href="examples/file-example/dir1/a.md">a.md</a>
+│ └── <a href="examples/file-example/dir1/b.md">b.md</a>
+├─┬ <a href="examples/file-example/dir2">dir2/</a>
+│ └── <a href="examples/file-example/dir2/a.md">a.md</a>
+├── <a href="examples/file-example/engine-concat-files.js">engine-concat-files.js</a>
+├── <a href="examples/file-example/example-buildConfig.js">example-buildConfig.js</a>
+├── <a href="examples/file-example/example1.js">example1.js</a>
+└── <a href="examples/file-example/example2.js">example2.js</a>
 </code></pre>
 
 You can see that the second directory contains a file `a.md`. We will use this file to
@@ -228,13 +226,12 @@ customize()
     files: 'dir2'
   })
   .run()
-  .get('files')
-  .done(console.log)
+  .then((result) => console.log(result.files))
 ```
 
 There is an additional call to `.merge` in this code. Its input is also passed to the 
 engine's preprocessor, so now we get two objects containing files and their contents 
-and those are merged by the [`.merge`-function of the lodash library](https://lodash.com/docs#merge),
+and those are merged by the [`.mergeWith`-function of the lodash library](https://lodash.com/docs#mergeWith),
 so that in the above example, the property `a.md` is replace by the value in the 
 second configuration. So the output of this example is
 
@@ -489,7 +486,7 @@ Run each engine with its part of the config.
 | Param | Type | Description |
 | --- | --- | --- |
 | [options] | <code>object</code> | optional paramters |
-| [options.onlyEngine] | <code>string</code> | optionally the name of an engine, if only a single engine should  be executed |
+| [options.onlyEngine] | <code>string</code> | the name of an engine if only a single engine should  be executed |
 
 <a name="module_customize..customize"></a>
 
@@ -556,17 +553,17 @@ The contents of each file is a UTF-8 encoded string.
 
 
 
-## License
+# License
 
 `customize` is published under the MIT-license.
 
 See [LICENSE.md](LICENSE.md) for details.
 
 
-## Release-Notes
+# Release-Notes
  
 For release notes, see [CHANGELOG.md](CHANGELOG.md)
  
-## Contributing guidelines
+# Contributing guidelines
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).

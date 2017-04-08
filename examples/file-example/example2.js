@@ -10,5 +10,4 @@ customize()
     files: 'dir2'
   })
   .run()
-  .get('files')
-  .done(console.log)
+  .then((result) => console.log(result.files))

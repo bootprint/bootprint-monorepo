@@ -3,13 +3,13 @@
 The following example should demonstrate the usage of Customize and the `files` 
 io-helper. Consider the following file tree
 
-{{{dirTree 'examples/file-example' }}}
+{{{dirTree 'examples/file-example' links=true}}}
 
 ### Creating an engine
 
 The first thing we need, is an engine. For now, we create an engine that just
 concatenates the contents of all files in a directory. We put this engine into
-the file `engine-concat-files.js` 
+the file `engine-concat-files.js`
 
 {{{example 'examples/file-example/engine-concat-files.js'}}}
 
@@ -27,7 +27,7 @@ the file `engine-concat-files.js`
 
   output file. The module {{npm 'customize-write-files'}} can be used to 
   write such files to disk in a node environment. In order to this to work, 
-  the contents must either be a string, a buffer or a [raadable stream](https://nodejs.org/api/stream.html#stream_class_stream_readable).
+  the contents must either be a string, a buffer or a [readable stream](https://nodejs.org/api/stream.html#stream_class_stream_readable).
   Strings will be stored in `utf-8` encoding.
 
 ### Loading a configuration
@@ -43,7 +43,7 @@ The example creates a new Customize-instances, registers our engine under the na
 `.buildConfig()` function convert all nested promises to a single promise for the whole
 config. This example prints the following result.
 
-{{{exec 'node example-buildConfig.js' cwd='examples/file-example/' lang='js'}}}
+{{{exec 'node -r "../.thought/stable-console"  example-buildConfig.js' cwd='examples/file-example/' lang='js'}}}
 
 We can see that the `files`-call of the preprocessor converted the directory path into 
 an object containing a one property for each file in the directory.
@@ -58,7 +58,7 @@ So far, we have loaded and displayed the preprocessed configuration. Now replace
 The engines `run()`-method will now be executed with the resolved configuration,
 which yields the following output:
 
-{{{exec 'node example1.js' cwd='examples/file-example/'}}}
+{{{exec 'node  -r "../.thought/stable-console" example1.js' cwd='examples/file-example/'}}}
 
 ### Merging another configuration
 
@@ -73,7 +73,7 @@ company's style-guide.
 We can do this, by merging another configuration, but let's have a look at the directory
 tree before doing this:
 
-{{{dirTree 'examples/file-example' }}}
+{{{dirTree 'examples/file-example' links=true}}}
 
 You can see that the second directory contains a file `a.md`. We will use this file to
 replace the file of the first directory.
@@ -82,11 +82,11 @@ replace the file of the first directory.
 
 There is an additional call to `.merge` in this code. Its input is also passed to the 
 engine's preprocessor, so now we get two objects containing files and their contents 
-and those are merged by the [`.merge`-function of the lodash library](https://lodash.com/docs#merge),
+and those are merged by the [`.mergeWith`-function of the lodash library](https://lodash.com/docs#mergeWith),
 so that in the above example, the property `a.md` is replace by the value in the 
 second configuration. So the output of this example is
 
-{{{exec 'node example2.js' cwd='examples/file-example/'}}}
+{{{exec 'node -r "../.thought/stable-console" example2.js' cwd='examples/file-example/'}}}
 
 ### Advanced usage
 
