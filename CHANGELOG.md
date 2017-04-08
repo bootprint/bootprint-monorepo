@@ -3,6 +3,10 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 2.0.1 (Sat, 08 Apr 2017 21:27:05 GMT)
+
+* [0eea4eb](https://github.com/bootprint/customize/commit/0eea4eb) Fix files-helpers for directories with subdirectories - Nils Knappmeier
+
 # Version 2.0.0 (Sat, 08 Apr 2017 20:58:34 GMT)
 
 Breaking changes:
