@@ -1,6 +1,9 @@
 {
+  "publishConfig": {
+    "tag": "next"
+  },
   "name": "customize-engine-handlebars",
-  "version": "1.0.1",
+  "version": "2.0.0-alpha.3",
   "description": "Use handlebars as engine for customize",
   "repository": {
     "type": "git",
@@ -17,54 +20,46 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "pretest": "standard --version || npm -g install standard",
-    "test": "mocha && standard",
-    "preformat": "standard --version || npm -g install standard",
-    "format": "standard --fix",
+    "lint": "eslint --fix .",
+    "test": "mocha && npm run lint",
+    "coverage": "istanbul cover ./node_modules/.bin/_mocha",
+    "postcoverage": "istanbul check-coverage coverage/coverage.json --statements 100",
     "thought": "thought run -a",
-    "prethoughtcheck": "thought --version || npm -g install thought",
-    "thoughtcheck": "thought check-engines",
-    "version": "thoughtful changelog -o -a && npm run thought",
-    "preversion": "npm run thoughtcheck"
+    "version": "thoughtful changelog -o -a && npm run thought"
   },
   "dependencies": {
-    "debug": "^2.2.0",
+    "debug": "^2.6.3",
+    "deep-aplus": "^1.0.4",
     "handlebars": "^4.0.6",
     "handlebars-source-locators": "^1.0.0",
-    "lodash": "^4.17.4",
-    "m-io": "^0.5.0",
-    "promised-handlebars": "^2.0.1",
-    "q": "^1.4.1",
-    "q-deep": "^1.0.1"
+    "promised-handlebars": "^2.0.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
-    "customize": "^1.0.0",
+    "customize": "^2.0.1",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
     "get-promise": "^1.4.0",
-    "ghooks": "^2.0.0",
+    "istanbul": "^0.4.5",
     "json-stable-stringify": "^1.0.1",
     "mocha": "^3.2.0",
-    "standard": "^10.0.0",
-    "thoughtful-release": "^0.3.0",
+    "thought": "^1.1.1",
+    "thought-plugin-jsdoc": "^1.0.0",
+    "thoughtful-release": "^0.3.1",
     "trace-and-clarify-if-possible": "^1.0.0"
   },
   "peerDependencies": {
-    "customize": "^1.0.0"
-  },
-  "standard": {
-    "ignore": [
-      "test/fixtures/**"
-    ]
+    "customize": "^2.0.1"
   },
   "files": [
     "index.js",
+    "lib",
     "schema.js"
   ],
-  "config": {
-    "ghooks": {
-      "pre-commit": "thoughtful precommit && standard --fix"
-    }
-  },
   "keywords": []
 }

@@ -2,7 +2,7 @@
 
 The following examples demonstrate how to use this module. The following files are involved:
 
-{{{dirTree 'examples/' }}}
+{{{dirTree 'examples/'}}}
 
 ### Configuration
 
@@ -41,7 +41,6 @@ The output of this example is:
 
 {{{exec 'node -r "../.thought/stable-console" example.js' cwd='examples/'}}}
 
-
 ### Customizing configurations
 
 We can use the mechanism of {{npm 'customize'}} to adapt the configuration.
@@ -62,6 +61,39 @@ The output of this example is
 In a similar fashion, we could replace other parts of the configuration, like templates, helpers
 and the pre-processor. If we would provide a new preprocessor, it could call the old one,
 by calling `this.parent(args)`
+
+### Name of the current target-file
+
+In some cases, we need to know which file we are actually rendering at the moment.
+If we are rendering the template `some/template.txt.hbs`, the file `some/template.txt`
+will be written (at least if {{npm 'customize-write-files'}} is used. If we want to
+create relative links from this file, we need this information within helpers.
+The parameter `options.customize.targetFile` that is passed to each helper, contains this information.
+The following configuration registers a helper that return the targetFile:
+
+{{example 'examples/example-targetFile.js'}}
+
+Each template includes the `\{{>footer}}`-partial, which calls the `\{{targetFile}}`-helper
+to include the name of the current file.
+
+{{include 'examples/partials-targetFile/footer.hbs'}}
+
+The output of this configuration is
+
+{{{exec 'node -r "../.thought/stable-console" example-targetFile.js' cwd='examples/'}}}
+
+### Accessing engine and configuration helpers
+
+The configuration and the engine itself is passed as additional option into each helper call:
+
+```
+module.exports = {
+    function(value, options) {
+        console.log("handlebars", options.customize.engine)
+        console.log("customizeConfig", options.customize.config)
+    }
+}
+```
 
 ### Which partial generates what? (Method 1)
 
@@ -93,22 +125,6 @@ The output contain tags that contain location-information of the succeeding text
 Example output:
 
 {{{exec 'node -r "../.thought/stable-console" example-source-locators.js' cwd='examples/'}}}
-
-
-
-
-### Accessing engine and configuration helpers
-
-The configuration and the engine itself is passed as additional parameter into each helper call:
-
-```
-module.exports = {
-    function(value, options, customizeConfig) {
-        console.log("handlebars", custOptions.engine)
-        console.log("customizeConfig", custOptions.config)
-    }
-}
-```
 
 ### Asynchronous helpers
 

@@ -3,6 +3,25 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 2.0.0-alpha.3 (Fri, 07 Apr 2017 07:07:37 GMT)
+
+* [7842c50](https://github.com/bootprint/customize-engine-handlebars/commit/7842c50) Fix: Make __customize_target_file__-property non-enumerable - Nils Knappmeier
+
+# Version 2.0.0-alpha.2 (Wed, 05 Apr 2017 21:27:20 GMT)
+
+* [80cf788](https://github.com/bootprint/customize-engine-handlebars/commit/80cf788) Pass name of the targetFile to each helper - Nils Knappmeier
+
+# Version 2.0.0-alpha.1 (Fri, 24 Mar 2017 23:59:41 GMT)
+
+* [1532ef6](https://github.com/bootprint/customize-engine-handlebars/commit/1532ef6) Remove dependency to lodash (reduce size) - Nils Knappmeier
+
+# Version 2.0.0-alpha.0 (Wed, 15 Mar 2017 21:09:52 GMT)
+
+* [f7ce66d](https://github.com/bootprint/customize-engine-handlebars/commit/f7ce66d) BREAKING: Support only node 6 and 7. Updated CI config - Nils Knappmeier
+* [f8e1559](https://github.com/bootprint/customize-engine-handlebars/commit/f8e1559) Update depedency versions - Nils Knappmeier
+* [3a76089](https://github.com/bootprint/customize-engine-handlebars/commit/3a76089) Add tests to increase coverage - Nils Knappmeier
+* [ff8b107](https://github.com/bootprint/customize-engine-handlebars/commit/ff8b107) Add support for source-locators - Nils Knappmeier
+
 # Version 1.0.1 (Tue, 20 Dec 2016 13:26:01 GMT)
 
 * [14a9fa7](https://github.com/bootprint/customize-engine-handlebars/commit/14a9fa7) Travis CI Setup for current node versions - Nils Knappmeier

@@ -8,17 +8,16 @@
 'use strict'
 
 var Handlebars = require('handlebars')
-var _ = require('lodash')
+var _ = require('./lib/utils')
 var files = require('customize/helpers-io').files
 var customize = require('customize')
-var Q = require('q')
-var deep = require('q-deep')
+var deep = require('deep-aplus')(Promise)
 var debug = require('debug')('customize-engine-handlebars:index')
 var path = require('path')
 var promisedHandlebars = require('promised-handlebars')
 
 var contents = function (partials) {
-  return _(partials).mapKeys(stripHandlebarsExt).mapValues(_.property('contents')).value()
+  return _.mapObject(partials, stripHandlebarsExt, (value) => value.contents)
 }
 
 /**
@@ -56,7 +55,7 @@ var contents = function (partials) {
  *   is passed into the merge function.
  * @property {object<{path:string,contents:string}>} partials the Handlebars partials that should be registered
  * @property {function(string,string): (string|Promise<string>)} partialWrapper the partial wrapper function.
- * @property {object<function> helpers the Handlebars helpers that should be registered
+ * @property {object<function>} helpers the Handlebars helpers that should be registered
  * @property {object<{path:string,contents:string}>} templates
  * @property {object} data the data object to render with Handlebars
  * @property {function(object): (object|Promise<object>)} preprocessor
@@ -145,7 +144,7 @@ module.exports = {
    */
   run: function run (config) {
     // Run the preprocessor
-    return Q(config.preprocessor(config.data))
+    return Promise.resolve(config.preprocessor(config.data))
     // Resolve any new promises
       .then(deep)
       // Process the result with Handlebars
@@ -153,9 +152,7 @@ module.exports = {
         debug('Data after preprocessing:', data)
         // We use the `promised-handlebars` module to
         // support helpers returning promises
-        var hbs = promisedHandlebars(Handlebars, {
-          Promise: Q.Promise
-        })
+        var hbs = promisedHandlebars(Handlebars)
         if (config.addSourceLocators) {
           require('handlebars-source-locators')(hbs)
         }
@@ -165,10 +162,18 @@ module.exports = {
         hbs.registerHelper(addEngine(config.helpers, hbs, config))
         var templates = contents(config.templates)
 
-        var result = _.mapValues(templates, function (template) {
+        var result = _.mapValues(templates, function (template, key) {
           var fn = hbs.compile(template, config.hbsOptions)
           debug('hbs-data', data)
-          var result = fn(data)
+
+          // Prepare input data with non-enumerable target-file-property
+          var rootObject = {}
+          Object.defineProperty(rootObject, '__customize_target_file__', {
+            enumerable: false,
+            value: key
+          })
+
+          var result = fn(Object.assign(rootObject, data))
           debug('fn(data) =' + result)
           return result
         })
@@ -203,7 +208,7 @@ module.exports = {
  * @param {*} value ignored
  * @param {string} key the original filename
  * @returns {string} the filename without .hbs
- * @private
+ * @access private
  */
 function stripHandlebarsExt (value, key) {
   return key.replace(/\.(handlebars|hbs)$/, '')
@@ -220,7 +225,7 @@ function stripHandlebarsExt (value, key) {
  * @param {string|*} pathOrObject path to the file or configuration
  * @param {string} type additional information that can displayed in case the module is not found.
  * @returns {*}
- * @private
+ * @access private
  */
 function moduleIfString (pathOrObject, type) {
   // If this is a string, treat if as module to be required
@@ -253,15 +258,22 @@ function moduleIfString (pathOrObject, type) {
  * @param {object<function>} helpers the helpers object
  * @param {Handlebars} hbs the current handlebars engine
  * @param {object} hbsOptions the options of the Handlebars engine
+ * @return {object<function>} the wrapped helpers
+ * @access private
  */
 function addEngine (helpers, hbs, hbsOptions) {
   hbs.logger.level = 0
   // Provide the engine as last parameter to all helpers in order to
   // enable things like calling partials from a helper.
-  hbs.registerHelper(_.mapValues(helpers, function (helper) {
-    return _.partialRight(helper, {
-      engine: hbs,
-      config: hbsOptions
-    })
-  }))
+  return _.mapValues(helpers, (helper) =>
+    function wrappedHelper () {
+      var options = arguments[arguments.length - 1]
+      options.customize = {
+        engine: hbs,
+        config: hbsOptions,
+        targetFile: options.data.root.__customize_target_file__
+      }
+      return helper.apply(this, arguments)
+    }
+  )
 }
