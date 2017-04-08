@@ -1,7 +1,5 @@
 # customize 
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/bootprint/customize.svg)](https://greenkeeper.io/)
-
 [![NPM version](https://badge.fury.io/js/customize.svg)](http://badge.fury.io/js/customize)
 [![Travis Build Status](https://travis-ci.org/bootprint/customize.svg?branch=master)](https://travis-ci.org/bootprint/customize)
 [![Coverage Status](https://img.shields.io/coveralls/bootprint/customize.svg)](https://coveralls.io/r/bootprint/customize)
@@ -13,8 +11,8 @@ Customize is an abstraction of [bootprint's](https://github.com/nknapp/bootprint
 It allows you to create your own projects and engines (other than Less and Handlebars) and create 
 overridable configurations for those.
 
-At its core, it uses [lodash#merge](https://lodash.com/docs#merge) to merge configurations, 
-but it uses a customizer-function that also supports promises and custom overrider functions 
+At its core, it uses [lodash#mergeWith](https://lodash.com/docs#mergeWith) to merge configurations.
+It uses a customizer-function that supports promises and custom overrider functions 
 attached to the object.
 
 ## Engines

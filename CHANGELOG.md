@@ -3,6 +3,23 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 2.0.0 (Sat, 08 Apr 2017 20:58:34 GMT)
+
+Breaking changes:
+
+* Support for node version below 6 has been dropped.
+
+Other changes:
+
+* [09331ce](https://github.com/bootprint/customize/commit/09331ce) Update documentation - Nils Knappmeier
+* [69cbd21](https://github.com/bootprint/customize/commit/69cbd21) Remove obsolete precommit-hook (and husky) - Nils Knappmeier
+* [7f7e1d4](https://github.com/bootprint/customize/commit/7f7e1d4) Fix tests, remove dependency on "m-io" in favour of "glob" - Nils Knappmeier
+* [94a8038](https://github.com/bootprint/customize/commit/94a8038) Remove dependency on "q" (now completely) - Nils Knappmeier
+* [631ec00](https://github.com/bootprint/customize/commit/631ec00) Remove obsolete "trace" from dev-dependencies - Nils Knappmeier
+* [2f91605](https://github.com/bootprint/customize/commit/2f91605) Customize now uses .mergeWith, not .merge - Nils Knappmeier
+* [a5c5e13](https://github.com/bootprint/customize/commit/a5c5e13) docs(readme): add Greenkeeper badge - greenkeeper[bot]
+* [18c137a](https://github.com/bootprint/customize/commit/18c137a) chore(package): update dependencies - greenkeeper[bot]
+
 # Version 2.0.0-alpha1 (Fri, 24 Mar 2017 15:36:34 GMT)
 
 * [56c95c0](https://github.com/bootprint/customize/commit/56c95c0) BREAKING: Remove support for js-quantities in configuration schemas - Nils Knappmeier
