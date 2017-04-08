@@ -3,6 +3,12 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 2.0.0 (Sat, 08 Apr 2017 22:35:52 GMT)
+
+* [e8c1816](https://github.com/bootprint/customize-engine-handlebars/commit/e8c1816) Update-dependencies - Nils Knappmeier
+* [84ad41e](https://github.com/bootprint/customize-engine-handlebars/commit/84ad41e) Fix travis.yml: Static checks are now run with eslint - Nils Knappmeier
+* [c68bbb5](https://github.com/bootprint/customize-engine-handlebars/commit/c68bbb5) chore(package): update standard to version 10.0.0 - greenkeeper[bot]
+
 # Version 2.0.0-alpha.3 (Fri, 07 Apr 2017 07:07:37 GMT)
 
 * [7842c50](https://github.com/bootprint/customize-engine-handlebars/commit/7842c50) Fix: Make __customize_target_file__-property non-enumerable - Nils Knappmeier

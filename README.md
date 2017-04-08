@@ -319,38 +319,6 @@ It allows helpers to return promises instead of real values.
 
 # API reference
 
-## Functions
-
-<dl>
-<dt><a href="#addEngine">addEngine(helpers, hbs, hbsOptions)</a> ⇒ <code>object.&lt;function()&gt;</code></dt>
-<dd><p>Wraps helpers with a function that provides
-and object {engine, config} as additional parameter</p>
-</dd>
-</dl>
-
-## Typedefs
-
-<dl>
-<dt><a href="#CustomizeHandlebarsConfig">CustomizeHandlebarsConfig</a> : <code>object</code></dt>
-<dd><p>The default configuration for the handlebars engine</p>
-</dd>
-</dl>
-
-<a name="addEngine"></a>
-
-## addEngine(helpers, hbs, hbsOptions) ⇒ <code>object.&lt;function()&gt;</code>
-Wraps helpers with a function that provides
-and object {engine, config} as additional parameter
-
-**Kind**: global function  
-**Returns**: <code>object.&lt;function()&gt;</code> - the wrapped helpers  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| helpers | <code>object.&lt;function()&gt;</code> | the helpers object |
-| hbs | <code>Handlebars</code> | the current handlebars engine |
-| hbsOptions | <code>object</code> | the options of the Handlebars engine |
-
 <a name="CustomizeHandlebarsConfig"></a>
 
 ## CustomizeHandlebarsConfig : <code>object</code>

@@ -3,7 +3,7 @@
     "tag": "next"
   },
   "name": "customize-engine-handlebars",
-  "version": "2.0.0-alpha.3",
+  "version": "2.0.0",
   "description": "Use handlebars as engine for customize",
   "repository": {
     "type": "git",
