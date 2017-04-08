@@ -44,11 +44,6 @@
     "helpers-io.js"
   ],
   "keywords": [],
-  "config": {
-    "ghooks": {
-      "pre-commit": "standard"
-    }
-  },
   "devDependencies": {
     "chai": "^3.3.0",
     "chai-as-promised": "^6.0.0",
@@ -61,7 +56,6 @@
     "eslint-plugin-node": "^4.2.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^2.1.1",
-    "husky": "^0.13.2",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "stream-to-string": "^1.1.0",
