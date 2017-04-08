@@ -1,6 +1,4 @@
 module.exports = function (data) {
-  var url = 'https://api.github.com/users/' + data.name
-  console.log(url)
   return {
     name: data.name,
     city: data.city,

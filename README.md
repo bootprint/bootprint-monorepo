@@ -51,7 +51,7 @@ customize()
   .registerEngine('handlebars', require('customize-engine-handlebars'))
   .load(require('./config-module.js'))
   .run()
-  .done(console.log)
+  .then(console.log)
 ```
 
 This example loads its configuration from the module `config-module.js`:
@@ -104,8 +104,6 @@ to retrieve information about the user.
 
 ```js
 module.exports = function (data) {
-  var url = 'https://api.github.com/users/' + data.name
-  console.log(url)
   return {
     name: data.name,
     city: data.city,
@@ -132,7 +130,6 @@ Github-Name: {{{github.name}}}
 The output of this example is:
 
 ```
-https://api.github.com/users/nknapp
 { handlebars: 
    { 'subdir/text3.txt': '------\nGithub-Name: Nils Knappmeier',
      'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n------\nGithub-Name: Nils Knappmeier',
@@ -157,7 +154,7 @@ customize()
     }
   })
   .run()
-  .done(console.log)
+  .then(console.log)
 ```
 
 The new `footer.hbs` writes only the current temperature, instead of the weather description
@@ -172,7 +169,6 @@ Blog: {{{github.blog}}}
 The output of this example is
 
 ```
-https://api.github.com/users/nknapp
 { handlebars: 
    { 'subdir/text3.txt': '------\nBlog: https://blog.knappi.org\n',
      'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n------\nBlog: https://blog.knappi.org\n',
@@ -210,7 +206,7 @@ customize()
     }
   })
   .run()
-  .done(console.log)
+  .then(console.log)
 ```
 
 Each template includes the `{{>footer}}`-partial, which calls the `{{targetFile}}`-helper
@@ -225,7 +221,6 @@ File: {{targetFile}}
 The output of this configuration is
 
 ```
-https://api.github.com/users/nknapp
 { handlebars: 
    { 'subdir/text3.txt': '------\nFile: subdir/text3.txt',
      'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n------\nFile: text1.txt',
@@ -268,11 +263,10 @@ customize()
     }
   })
   .run()
-  .done(console.log)
+  .then(console.log)
 ```
 
 ```
-https://api.github.com/users/nknapp
 { handlebars: 
    { 'subdir/text3.txt': '[BEGIN footer]\n------\nBlog: https://blog.knappi.org\n[END footer]',
      'text1.txt': 'I\'m nknapp\n\nI\'m living in Darmstadt.\n\n[BEGIN footer]\n------\nBlog: https://blog.knappi.org\n[END footer]',
@@ -298,7 +292,7 @@ customize()
     }
   })
   .run()
-  .done(console.log)
+  .then(console.log)
 ```
 
 The output contain tags that contain location-information of the succeeding text:
@@ -309,7 +303,6 @@ The output contain tags that contain location-information of the succeeding text
 Example output:
 
 ```
-https://api.github.com/users/nknapp
 { handlebars: 
    { 'subdir/text3.txt': '<sl line="1" col="0" partial="footer" file="partials2/footer.hbs"></sl>------\nBlog: <sl line="2" col="6" partial="footer" file="partials2/footer.hbs"></sl>https://blog.knappi.org<sl line="2" col="23" partial="footer" file="partials2/footer.hbs"></sl>\n<sl line="3" col="0" partial="footer" file="partials2/footer.hbs"></sl>',
      'text1.txt': '<sl line="1" col="0" file="templates/text1.txt.hbs"></sl>I\'m <sl line="1" col="4" file="templates/text1.txt.hbs"></sl>nknapp<sl line="1" col="12" file="templates/text1.txt.hbs"></sl>\n\nI\'m living in <sl line="3" col="14" file="templates/text1.txt.hbs"></sl>Darmstadt<sl line="3" col="22" file="templates/text1.txt.hbs"></sl>.\n\n<sl line="5" col="0" file="templates/text1.txt.hbs"></sl><sl line="1" col="0" partial="footer" file="partials2/footer.hbs"></sl>------\nBlog: <sl line="2" col="6" partial="footer" file="partials2/footer.hbs"></sl>https://blog.knappi.org<sl line="2" col="23" partial="footer" file="partials2/footer.hbs"></sl>\n<sl line="3" col="0" partial="footer" file="partials2/footer.hbs"></sl>',
@@ -381,17 +374,17 @@ The default configuration for the handlebars engine
 
 
 
-## License
+# License
 
 `customize-engine-handlebars` is published under the MIT-license.
 
 See [LICENSE.md](LICENSE.md) for details.
 
 
-## Release-Notes
+# Release-Notes
  
 For release notes, see [CHANGELOG.md](CHANGELOG.md)
  
-## Contributing guidelines
+# Contributing guidelines
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).

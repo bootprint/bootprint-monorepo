@@ -11,4 +11,4 @@ customize()
     }
   })
   .run()
-  .done(console.log)
+  .then(console.log)

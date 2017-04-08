@@ -11,8 +11,7 @@ var Handlebars = require('handlebars')
 var _ = require('./lib/utils')
 var files = require('customize/helpers-io').files
 var customize = require('customize')
-var Q = require('q')
-var deep = require('q-deep')
+var deep = require('deep-aplus')(Promise)
 var debug = require('debug')('customize-engine-handlebars:index')
 var path = require('path')
 var promisedHandlebars = require('promised-handlebars')
@@ -145,7 +144,7 @@ module.exports = {
    */
   run: function run (config) {
     // Run the preprocessor
-    return Q(config.preprocessor(config.data))
+    return Promise.resolve(config.preprocessor(config.data))
     // Resolve any new promises
       .then(deep)
       // Process the result with Handlebars
@@ -153,9 +152,7 @@ module.exports = {
         debug('Data after preprocessing:', data)
         // We use the `promised-handlebars` module to
         // support helpers returning promises
-        var hbs = promisedHandlebars(Handlebars, {
-          Promise: Q.Promise
-        })
+        var hbs = promisedHandlebars(Handlebars)
         if (config.addSourceLocators) {
           require('handlebars-source-locators')(hbs)
         }
@@ -211,7 +208,7 @@ module.exports = {
  * @param {*} value ignored
  * @param {string} key the original filename
  * @returns {string} the filename without .hbs
- * @private
+ * @access private
  */
 function stripHandlebarsExt (value, key) {
   return key.replace(/\.(handlebars|hbs)$/, '')
@@ -228,7 +225,7 @@ function stripHandlebarsExt (value, key) {
  * @param {string|*} pathOrObject path to the file or configuration
  * @param {string} type additional information that can displayed in case the module is not found.
  * @returns {*}
- * @private
+ * @access private
  */
 function moduleIfString (pathOrObject, type) {
   // If this is a string, treat if as module to be required
@@ -262,6 +259,7 @@ function moduleIfString (pathOrObject, type) {
  * @param {Handlebars} hbs the current handlebars engine
  * @param {object} hbsOptions the options of the Handlebars engine
  * @return {object<function>} the wrapped helpers
+ * @access private
  */
 function addEngine (helpers, hbs, hbsOptions) {
   hbs.logger.level = 0
