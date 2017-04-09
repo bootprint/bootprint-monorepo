@@ -21,15 +21,17 @@ var chai = require('chai')
 chai.use(require('dirty-chai'))
 chai.use(require('chai-as-promised'))
 var expect = chai.expect
-var qfs = require('m-io/fs')
+var pify = require('pify')
+var removeTree = pify(require('rimraf'))
+var makeTree = pify(require('mkdirp'))
 var customizeWriteFiles = require('../')
 
 var tmpDir = 'test-output'
 
 beforeEach(function () {
-  return qfs.removeTree(tmpDir)
+  return removeTree(tmpDir)
     .then(function () {
-      return qfs.makeTree(tmpDir)
+      return makeTree(tmpDir)
     })
 })
 
@@ -49,7 +51,7 @@ function createStream (contents) {
 }
 
 function createBuffer (contents) {
-  return Buffer.from ? Buffer.from(contents) : new Buffer(contents)
+  return Buffer.from(contents)
 }
 
 /**
@@ -177,7 +179,7 @@ describe('customize-write-files:', function () {
             'stream.txt': createStream('bad stream-test\n')
           }
         }).then(function (result) {
-          expect(result).to.deep.equal({
+          return expect(result).to.deep.equal({
             changed: true,
             files: { 'stream.txt': true }
           })
@@ -192,7 +194,7 @@ describe('customize-write-files:', function () {
             'does-not-exist3.txt': 'abc'
           }
         }).then(function (result) {
-          expect(result).to.deep.equal({
+          return expect(result).to.deep.equal({
             changed: true,
             files: {
               'does-not-exist1.txt': true,
@@ -209,7 +211,7 @@ describe('customize-write-files:', function () {
             'string.txt': 'bad string-test'
           }
         }).then(function (result) {
-          expect(result).to.deep.equal({
+          return expect(result).to.deep.equal({
             changed: true,
             files: { 'string.txt': true }
           })
@@ -226,7 +228,6 @@ describe('customize-write-files:', function () {
             'string.txt': 'string-test\n'
           }
         }).then(function (result) {
-          console.log(result)
           return expect(result).to.deep.equal({
             changed: true,
             files: { 'buffer.txt': true, 'stream.txt': false, 'string.txt': false }
@@ -272,7 +273,7 @@ describe('customize-write-files:', function () {
           // Directory prohibits file read
           'tmpdir': 'abc'
         }
-      })).to.be.rejected
+      })).to.be.rejectedWith(/EISDIR/)
     })
   })
 })

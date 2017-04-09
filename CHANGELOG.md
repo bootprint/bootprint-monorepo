@@ -3,6 +3,17 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 2.0.0 (Sun, 09 Apr 2017 20:20:51 GMT)
+
+* [019b3b4](https://github.com/bootprint/customize-write-files/commit/019b3b4) Remove dependency on "q" and "m-io" - Nils Knappmeier
+* [167ddac](https://github.com/bootprint/customize-write-files/commit/167ddac) Bump dependencies to current versions - Nils Knappmeier
+* [55e36ae](https://github.com/bootprint/customize-write-files/commit/55e36ae) BREAKING: Drop support for node before version 6 + a lot of chore - Nils Knappmeier
+* [05ac7ec](https://github.com/bootprint/customize-write-files/commit/05ac7ec) Fix code style - Nils Knappmeier
+* [6aa51dd](https://github.com/bootprint/customize-write-files/commit/6aa51dd) fix(package): update stream-equal to version 1.0.0 - greenkeeper[bot]
+* [17efa53](https://github.com/bootprint/customize-write-files/commit/17efa53) Update dependencies to enable Greenkeeper 🌴 (#5) - greenkeeper[bot]
+
+
+
 # Version 1.1.0 (Fri, 13 Jan 2017 12:59:22 GMT)
 
 * [ee6dc38](https://github.com/bootprint/customize-write-files/commit/ee6dc38) More tests to increase code coverage (#3) - Nils Knappmeier

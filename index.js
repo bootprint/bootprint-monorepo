@@ -7,10 +7,9 @@
 
 'use strict'
 
-var Q = require('q')
 var path = require('path')
 var util = require('util')
-var deep = require('deep-aplus')(Q.Promise)
+var deep = require('deep-aplus')(Promise)
 
 module.exports = write
 module.exports.changed = changed
