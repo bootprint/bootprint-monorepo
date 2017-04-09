@@ -6,7 +6,6 @@
  */
 'use strict'
 
-var _ = require('lodash')
 var less = require('less')
 var path = require('path')
 
@@ -70,11 +69,11 @@ module.exports = {
 /**
  * If `objOrArray` exists and is a non-array, it is replaced by
  * an array with the property as single object.
- * @param {object} objOrArray the object or an array
- * @return objOrArray, if it is an array or an array containing `objOrArray` (if it is no array)
+ * @param {object|object[]} objOrArray the object or an array
+ * @return {object[]} objOrArray, if it is an array or an array containing `objOrArray` (if it is no array)
  */
 function coerceToArray (objOrArray) {
-  if (!_.isUndefined(objOrArray) && !_.isArray(objOrArray)) {
+  if (objOrArray !== undefined && !Array.isArray(objOrArray)) {
     return [ objOrArray ]
   }
   return objOrArray
