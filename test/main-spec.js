@@ -62,4 +62,22 @@ describe('customize-engine-handlebars', function () {
       }
     })
   })
+
+  it('should be able to load css-files', function () {
+    var result = customize()
+      .registerEngine('less', require('../'))
+      .merge({
+        less: {
+          main: './test/fixtures/main3.css'
+        }
+      })
+      .run()
+
+    return expect(result).to.eventually.deep.equal({
+      'less': {
+        'main.css': 'body {\n  color: red;\n  background: black;\n}/*# sourceMappingURL=main.css.map */',
+        'main.css.map': '{"version":3,"sources":["./test/fixtures/main3.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA","sourcesContent":["body {\\n  color: red;\\n  background: black;\\n}"]}'
+      }
+    })
+  })
 })
