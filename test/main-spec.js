@@ -49,7 +49,7 @@ function createStream (contents) {
 }
 
 function createBuffer (contents) {
-  return Buffer.from ? Buffer.from(contents) : new Buffer(contents)
+  return Buffer.from(contents)
 }
 
 /**
@@ -226,7 +226,6 @@ describe('customize-write-files:', function () {
             'string.txt': 'string-test\n'
           }
         }).then(function (result) {
-          console.log(result)
           return expect(result).to.deep.equal({
             changed: true,
             files: { 'buffer.txt': true, 'stream.txt': false, 'string.txt': false }

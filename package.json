@@ -17,15 +17,13 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "pretest": "standard --version || npm -g install standard",
-    "test": "mocha && standard",
-    "preformat": "standard --version || npm -g install standard",
-    "format": "standard --fix",
+    "lint": "eslint --fix .",
+    "test": "mocha && npm run lint",
+    "coverage": "istanbul cover ./node_modules/.bin/_mocha",
+    "postcoverage": "istanbul check-coverage coverage/coverage.json --statements 100",
     "thought": "thought run -a",
-    "prethoughtcheck": "thought --version || npm -g install thought",
-    "thoughtcheck": "thought check-engines",
-    "version": "thoughtful changelog -o -a && npm run thought",
-    "preversion": "npm run thoughtcheck"
+    "preversion": "thought --version || npm -g install thought",
+    "version": "thoughtful changelog -o -a && npm run thought"
   },
   "files": [
     "index.js",
@@ -43,21 +41,18 @@
     "chai-as-promised": "^6.0.0",
     "customize": "^1.0.0",
     "customize-engine-less": "^1.0.0",
-    "dirty-chai": "^1.2.2",
-    "ghooks": "^2.0.0",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
+    "thought": "^1.1.2",
     "thoughtful-release": "^0.3.1",
+    "dirty-chai": "^1.2.2",
     "trace-and-clarify-if-possible": "^1.0.0"
-  },
-  "standard": {
-    "ignore": [
-      "test/fixtures/**"
-    ]
-  },
-  "config": {
-    "ghooks": {
-      "pre-push": "thoughtful precommit && standard"
-    }
   },
   "keywords": []
 }
