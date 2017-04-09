@@ -14,4 +14,4 @@ customize()
   // Write contents to the "target"-directory
   .then(write('target'))
   // Output the names of the files being written
-  .done(console.log)
+  .then(console.log)

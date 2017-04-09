@@ -1,11 +1,9 @@
 # customize-write-files 
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/bootprint/customize-write-files.svg)](https://greenkeeper.io/)
-
 [![NPM version](https://badge.fury.io/js/customize-write-files.svg)](http://badge.fury.io/js/customize-write-files)
 [![Travis Build Status](https://travis-ci.org/bootprint/customize-write-files.svg?branch=master)](https://travis-ci.org/bootprint/customize-write-files)
 [![Coverage Status](https://img.shields.io/coveralls/bootprint/customize-write-files.svg)](https://coveralls.io/r/bootprint/customize-write-files)
-
+[![Greenkeeper badge](https://badges.greenkeeper.io/bootprint/customize-write-files.svg)](https://greenkeeper.io/)
 
 > Post-processor that stores the result of a customize-run in a local directory
 
@@ -37,7 +35,7 @@ npm install customize-write-files
 ```
 
  
-## Usage
+# Usage
 
 The following example demonstrates how to use this module:
 
@@ -58,7 +56,7 @@ customize()
   // Write contents to the "target"-directory
   .then(write('target'))
   // Output the names of the files being written
-  .done(console.log)
+  .then(console.log)
 ```
 
 This will generate the following output
@@ -67,65 +65,19 @@ This will generate the following output
 [ 'target/main.css', 'target/main.css.map' ]
 ```
 
-##  API-reference
-
-## Functions
-
-<dl>
-<dt><a href="#write">write(targetDir)</a> ⇒ <code>function</code></dt>
-<dd><p>Creates a function that writes the result of the <code>customize#run()</code> method to a
-local target directory.</p>
-</dd>
-<dt><a href="#changed">changed(targetDir)</a> ⇒ <code>function</code></dt>
-<dd><p>Creates a function that asserts that the result of the <code>customize#run()</code> method to produces the same
-contents as found on the disk. The returned promise is rejected, if this is not the case.s</p>
-</dd>
-</dl>
-
-<a name="write"></a>
-
-## write(targetDir) ⇒ <code>function</code>
-Creates a function that writes the result of the `customize#run()` method to a
-local target directory.
-
-**Kind**: global function  
-**Returns**: <code>function</code> - return a function that writes a customize-result to the targetDir.
- The function takes a customize-result as first parameter and returns a promise for a list of filenames.
- (i.e. the files that were actually written)  
-**Access:** public  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| targetDir | <code>string</code> | path to the target directory |
-
-<a name="changed"></a>
-
-## changed(targetDir) ⇒ <code>function</code>
-Creates a function that asserts that the result of the `customize#run()` method to produces the same
-contents as found on the disk. The returned promise is rejected, if this is not the case.s
-
-**Kind**: global function  
-**Returns**: <code>function</code> - return a function that writes a customize-result to the targetDir.
- The function takes a customize-result as first parameter and returns a promise for a list of filenames.
- (i.e. the files that were checked)  
-**Access:** public  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| targetDir | <code>string</code> | path to the target directory |
 
 
+# License
 
+`customize-write-files` is published under the MIT-license.
 
-## License
-
-`customize-write-files` is published under the MIT-license. 
 See [LICENSE.md](LICENSE.md) for details.
 
-## Release-Notes
+
+# Release-Notes
  
 For release notes, see [CHANGELOG.md](CHANGELOG.md)
  
-## Contributing guidelines
+# Contributing guidelines
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
