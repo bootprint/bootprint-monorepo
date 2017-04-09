@@ -21,7 +21,6 @@
     "test": "mocha && npm run lint",
     "coverage": "istanbul cover ./node_modules/.bin/_mocha",
     "postcoverage": "istanbul check-coverage coverage/coverage.json --statements 100",
-    "prethought": "thought --version || npm -g install thought",
     "thought": "thought run -a",
     "preversion": "thought --version || npm -g install thought",
     "version": "thoughtful changelog -o -a && npm run thought"
