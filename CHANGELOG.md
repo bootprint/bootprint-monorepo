@@ -3,6 +3,17 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 2.0.0 (Sun, 09 Apr 2017 09:00:42 GMT)
+
+* [8b97629](https://github.com/bootprint/customize-engine-less/commit/8b97629) Bump devDepenency to thought@1.1.2 - Nils Knappmeier
+* [183d199](https://github.com/bootprint/customize-engine-less/commit/183d199) Remove obsolete "npm install istanbul" in travis.yml - Nils Knappmeier
+* [1833ce5](https://github.com/bootprint/customize-engine-less/commit/1833ce5) Add test for including raw css files - Nils Knappmeier
+* [19b4e3b](https://github.com/bootprint/customize-engine-less/commit/19b4e3b) Remove dependency on 'q' and 'lodash' - Nils Knappmeier
+* [54b1545](https://github.com/bootprint/customize-engine-less/commit/54b1545) BREAKING: Drop support for nodejs before 6 + much chore - Nils Knappmeier
+* [5752078](https://github.com/bootprint/customize-engine-less/commit/5752078) docs(readme): add Greenkeeper badge - greenkeeper[bot]
+* [96ce5bb](https://github.com/bootprint/customize-engine-less/commit/96ce5bb) chore(package): update dependencies - greenkeeper[bot]
+
+
 # Version 1.0.1 (Mon, 13 Feb 2017 22:49:04 GMT)
 
 * [30c364c](https://github.com/bootprint/customize-engine-less/commit/30c364c) Generate source-map reference into css-files - Nils Knappmeier
