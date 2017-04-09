@@ -1,11 +1,9 @@
 # customize-engine-less 
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/bootprint/customize-engine-less.svg)](https://greenkeeper.io/)
-
 [![NPM version](https://badge.fury.io/js/customize-engine-less.svg)](http://badge.fury.io/js/customize-engine-less)
 [![Travis Build Status](https://travis-ci.org/bootprint/customize-engine-less.svg?branch=master)](https://travis-ci.org/bootprint/customize-engine-less)
 [![Coverage Status](https://img.shields.io/coveralls/bootprint/customize-engine-less.svg)](https://coveralls.io/r/bootprint/customize-engine-less)
-
+[![Greenkeeper badge](https://badges.greenkeeper.io/bootprint/customize-engine-less.svg)](https://greenkeeper.io/)
 
 > A less-engine for customize
 
@@ -17,7 +15,7 @@ npm install customize-engine-less
 ```
 
  
-## Usage
+# Usage
 
 The following example demonstrates how to use this module:
 
@@ -40,7 +38,7 @@ customize()
     }
   })
   .run()
-  .done(console.log)
+  .then(console.log)
 ```
 
 This will generate the following output
@@ -51,64 +49,19 @@ This will generate the following output
      'main.css.map': '{"version":3,"sources":["/home/nknappmeier/projects/bootprint/customize-engine-less/examples/main.less"],"names":[],"mappings":"AAGA,IACE,SAAA,CACA","sourcesContent":["@textcolor: blue;\\n@bgcolor: green;\\n\\ndiv {\\n  color: @textcolor;\\n  background-color: @bgcolor;  \\n}\\n\\n\\n\\n"]}' } }
 ```
 
-##  API-reference
-
-## Functions
-
-<dl>
-<dt><a href="#coerceToArray">coerceToArray(objOrArray)</a> ⇒</dt>
-<dd><p>If <code>objOrArray</code> exists and is a non-array, it is replaced by
-an array with the property as single object.</p>
-</dd>
-</dl>
-
-## Typedefs
-
-<dl>
-<dt><a href="#CustomizeLessConfig">CustomizeLessConfig</a> : <code>object</code></dt>
-<dd><p>Configuration for the customize less-engine</p>
-</dd>
-</dl>
-
-<a name="coerceToArray"></a>
-
-## coerceToArray(objOrArray) ⇒
-If `objOrArray` exists and is a non-array, it is replaced by
-an array with the property as single object.
-
-**Kind**: global function  
-**Returns**: objOrArray, if it is an array or an array containing `objOrArray` (if it is no array)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| objOrArray | <code>object</code> | the object or an array |
-
-<a name="CustomizeLessConfig"></a>
-
-## CustomizeLessConfig : <code>object</code>
-Configuration for the customize less-engine
-
-**Kind**: global typedef  
-**Api**: public  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| main | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> | absolute path to a lesscss-file or a list of absolute paths to less files |
-| paths | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> | absolute path (or a list of those) to paths to use as import path |
 
 
+# License
 
+`customize-engine-less` is published under the MIT-license.
 
-## License
-
-`customize-engine-less` is published under the MIT-license. 
 See [LICENSE.md](LICENSE.md) for details.
 
-## Release-Notes
+
+# Release-Notes
  
 For release notes, see [CHANGELOG.md](CHANGELOG.md)
  
-## Contributing guidelines
+# Contributing guidelines
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
