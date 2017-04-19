@@ -218,7 +218,7 @@ function stripHandlebarsExt (value, key) {
  * Internal function that returns `require`s a module if the parameter is a string.
  *
  * If parameter is a string (path) and a file with that path exists, load it as module
- * If the parameter is not a string, juet return it.
+ * If the parameter is not a string, just return it.
  * If the parameter is a string, but the file does not exist, return `undefined`
  *
  *
