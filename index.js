@@ -115,16 +115,18 @@ function mergeEngineResults (customizeResult) {
   var result = {}
   Object.keys(customizeResult).forEach(function (engineName) {
     var files = customizeResult[engineName]
-    Object.keys(files).forEach(function (filename) {
-      // Existing file in different engine
-      var existingFile = result[filename]
-      if (existingFile) {
-        throw new Error(
-          util.format('File "%s" occurs in two engines: "%s" and "%s"', filename, existingFile.engine, engineName)
-        )
-      }
-      result[filename] = { engine: engineName, contents: files[filename] }
-    })
+    if (files) {
+      Object.keys(files).forEach(function (filename) {
+        // Existing file in different engine
+        var existingFile = result[filename]
+        if (existingFile) {
+          throw new Error(
+            util.format('File "%s" occurs in two engines: "%s" and "%s"', filename, existingFile.engine, engineName)
+          )
+        }
+        result[filename] = { engine: engineName, contents: files[filename] }
+      })
+    }
   })
   return result
 }
