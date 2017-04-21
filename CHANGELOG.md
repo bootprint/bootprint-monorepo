@@ -3,6 +3,10 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 2.0.1 (Fri, 21 Apr 2017 08:20:48 GMT)
+
+* [729a95d](https://github.com/bootprint/customize-write-files/commit/729a95d) Handle undefined engine results gracefully - Nils Knappmeier
+
 # Version 2.0.0 (Sun, 09 Apr 2017 20:20:51 GMT)
 
 * [019b3b4](https://github.com/bootprint/customize-write-files/commit/019b3b4) Remove dependency on "q" and "m-io" - Nils Knappmeier
