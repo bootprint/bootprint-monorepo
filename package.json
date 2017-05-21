@@ -27,19 +27,26 @@
     "preversion": "thought --version || npm -g install thought",
     "version": "thoughtful changelog -o -a && npm run thought"
   },
-  "dependencies": {},
+  "dependencies": {
+    "bootprint": "^2.0.0",
+    "customize": "^2.0.1",
+    "customize-engine-handlebars": "^2.0.0",
+    "customize-engine-less": "^2.0.0",
+    "tree-from-paths": "^1.0.0"
+  },
   "devDependencies": {
     "chai": "^3.5.0",
     "dirty-chai": "^1.2.2",
-    "eslint": "^3.17.1",
-    "eslint-config-standard": "^7.0.1",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-node": "^4.2.1",
+    "eslint-plugin-node": "^4.2.2",
     "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^2.1.1",
-    "husky": "^0.13.2",
+    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.13.3",
     "istanbul": "^0.4.5",
-    "mocha": "^3.2.0",
+    "mocha": "^3.4.1",
+    "thought-plugin-thought-plugin": "^0.1.3",
     "thoughtful-release": "^0.3.1",
     "trace-and-clarify-if-possible": "^1.0.0"
   },

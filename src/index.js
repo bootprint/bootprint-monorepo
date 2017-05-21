@@ -1,17 +1,26 @@
 /*!
- * thought-plugin-bootprint <https://github.com/bootprint/thought-plugin-bootprint>
+ * thought-plugin-bootprint <https://github.com/nknapp/thought-plugin-bootprint>
  *
  * Copyright (c) 2017 Nils Knappmeier.
  * Released under the MIT license.
  */
 
-'use strict'
+const path = require('path')
 
-module.exports = thoughtPluginBootprint
 /**
  * Describe your module here
  * @public
  */
-function thoughtPluginBootprint () {
-  return "my name is thoughtPluginBootprint"
+module.exports = function thoughtPluginBootprint (customize) {
+  return customize
+    .load(require('thought-plugin-jsdoc'))
+    .merge({
+      handlebars: {
+        helpers: require.resolve('./helpers.js'),
+        partials: path.join(__dirname, 'partials'),
+        templates: path.join(__dirname, 'templates')
+      }
+    })
 }
+
+module.exports.package = require('../package')
