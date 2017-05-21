@@ -1,8 +1,18 @@
 ## Usage
 
-
-asdasd
 {{#if (exists 'examples')}}
+
+After installing {{npm 'bootprint'}} and this package globally, you can run bootprint with the command
+
+```bash
+bootprint {{name}} example.json target
+```
+
+where `example.json` has the contents
+
+{{include 'examples/example.json'}}
+
+Bootprint will then generate the following files (look inside by clicking on them).
 
 {{runBootprint '.' './examples/example.json' 'examples/target'}} 
 

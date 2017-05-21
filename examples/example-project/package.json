@@ -1,12 +1,9 @@
 {
   "name": "example-project",
   "version": "1.0.0",
-  "description": "",
+  "description": "Example to demonstrate the thought-plugin-bootprint",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [],
-  "author": "",
+  "author": "Nils Knappmeier",
   "license": "ISC"
 }
