@@ -5,5 +5,12 @@
   "main": "index.js",
   "keywords": [],
   "author": "Nils Knappmeier",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "thought": "^1.1.4"
+  },
+  "scripts": {
+    "thought": "thought run -a",
+    "version": "npm run thought"
+  }
 }
