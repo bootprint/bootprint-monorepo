@@ -71,7 +71,7 @@ var contents = function (partials) {
  */
 module.exports = {
   schema: require('./schema.js'),
-
+  docEngine: require('./lib/doc-engine'),
   defaultConfig: {
     partials: {},
     partialWrapper: function (contents, name) {

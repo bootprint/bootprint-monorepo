@@ -4,8 +4,6 @@ var stringify = require('json-stable-stringify')
 
 console.log = function () {
   consoleLog.apply(this, Array.prototype.map.call(
-    arguments, (arg) => JSON.parse(stringify(arg, { space: 2 }))
+    arguments, (arg) => stringify(arg, { space: 2 })
   ))
 }
-
-
