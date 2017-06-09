@@ -3,6 +3,12 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 2.1.0 (Fri, 09 Jun 2017 20:38:41 GMT)
+
+* [1e32be2](https://github.com/bootprint/customize-engine-handlebars/commit/1e32be2) Update dependencies (except chai) - Nils Knappmeier
+* [0e16813](https://github.com/bootprint/customize-engine-handlebars/commit/0e16813) Added "docEngine" to generate JSON for documenting configurations - Nils Knappmeier
+* [92ca5a9](https://github.com/bootprint/customize-engine-handlebars/commit/92ca5a9) Remove dist-tag from this version (this is now "latest") - Nils Knappmeier
+
 # Version 2.0.0 (Sat, 08 Apr 2017 22:35:52 GMT)
 
 * [e8c1816](https://github.com/bootprint/customize-engine-handlebars/commit/e8c1816) Update-dependencies - Nils Knappmeier
