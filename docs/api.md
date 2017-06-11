@@ -7,33 +7,117 @@ This plugin applies the following configuration
 
 ### Templates
 
+#### [docs/api.md.hbs](src/templates/docs/api.md.hbs)
+
+```hbs
+{{#moduleConfig}}
+{{json .}}
+
+# Templates
+
+{{#each handlebars.templates}}
+{{>thought-plugin-bootprint/hbs-file.md name=@key}}
+{{/each}}
+
+# Partials
+
+{{#each handlebars.partials}}
+{{>thought-plugin-bootprint/hbs-file.md name=@key}}    
+{{/each}}
+     
+{{#each handlebars.helpers}}
+
+{{#if .}}
+# Helpers 
+
+(from {{#withPackageOf .}}[{{@package.name}}@{{@package.version}}/{{@relativePath}}]({{@url}}){{/withPackageOf}})
+
+{{jsdoc .}}
+{{else}}
+# Inlined helpers 
+    
+*Some helpers are defined directly in the configuration and not via path-reference to a module.
+The docs for these helpers cannot be generated and are missing on this page.
+If you are the author of this package, please consider putting the helpers into a distinct file
+and adding only the path to the configuration.*
+    
+{{/if}}
+
+{{/each}}
+
+# LESS files
+
+{{#each less.main}}
+* {{#withPackageOf .}}[{{@package.name}}@{{@package.version}}/{{@relativePath}}]({{@url}}){{/withPackageOf}}  
+{{/each}}
+    
+# LESS include paths
+
+{{#each less.paths}}
+{{#withPackageOf .}}[{{@package.name}}@{{@package.version}}/{{@relativePath}}]({{@url}}){{/withPackageOf}}
+{{/each}}
+
+
+{{/moduleConfig}}
+```    
 
 
 ### Partials
 
-#### [api.md.hbs](node_modules/thought-plugin-jsdoc/src/partials/api.md.hbs)
+#### [api.md.hbs](src/partials/api.md.hbs)
 
 ```hbs
-{{#if package.main}}
-# API reference
+# API
 
-{{{jsdoc package.main}}}
-{{/if}}
+see [docs/api.md](docs/api.md)
+
+```
+#### [thought-plugin-bootprint/hbs-file.md.hbs](src/partials/thought-plugin-bootprint/hbs-file.md.hbs)
+
+```hbs
+{{!-- 
+   Partial for including bootprint Handlebars-files into the documentation
+   @param {string} name the filename
+   @param {string} path the full path to the file
+   @param {string} contents the file's contents
+--}}
+### {{name}}
+
+{{#withPackageOf path~}}
+    (<a href="{{@url}}">
+        jump to source in <code>{{@package.name}}@{{@package.version}}</code>
+    </a>)
+{{~/withPackageOf}}
+
+{{#codeBlock lang='hbs'}}
+{{contents}}
+{{/codeBlock}}
+
 
 ```
 #### [usage.md.hbs](src/partials/usage.md.hbs)
 
-```hbs
+````hbs
 ## Usage
 
-
-asdasd
 {{#if (exists 'examples')}}
 
-{{runBootprint '.' './examples/example.json' './examples/target'}} 
+After installing {{npm 'bootprint'}} and this package globally, you can run bootprint with the command
+
+```bash
+bootprint {{name}} example.json target
+```
+
+where `example.json` has the contents
+
+{{include 'examples/example.json'}}
+
+Bootprint will then generate the following files (look inside by clicking on them).
+
+{{runBootprint '.' './examples/example.json' 'examples/target'}} 
 
 {{/if}}
-```
+````
 
 
 ### Helpers
@@ -70,7 +154,7 @@ This block-helper creates enough and at least three.
 **Returns**: <code>Promise.&lt;string&gt;</code> - the string containing the  
 **Example**  
 ```js
-{{#codeBlock}}hbs
+{{#codeBlock lang='hbs'}}
 Some markdown hbs template
 {{/codeBlock}}
 ```

@@ -1,0 +1,18 @@
+{{!-- 
+   Partial for including bootprint Handlebars-files into the documentation
+   @param {string} name the filename
+   @param {string} path the full path to the file
+   @param {string} contents the file's contents
+--}}
+### {{name}}
+
+{{#withPackageOf path~}}
+    (<a href="{{@url}}">
+        jump to source in <code>{{@package.name}}@{{@package.version}}</code>
+    </a>)
+{{~/withPackageOf}}
+
+{{#codeBlock lang='hbs'}}
+{{contents}}
+{{/codeBlock}}
+

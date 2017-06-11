@@ -3,7 +3,7 @@
 [![NPM version](https://badge.fury.io/js/example-project.svg)](http://badge.fury.io/js/example-project)
 
 
-> 
+> Example to demonstrate the thought-plugin-bootprint
 
 
 # Installation
@@ -15,7 +15,7 @@ npm install example-project
 ## Usage
 
 
-After installing [bootpring](https://npmjs.com/package/bootpring) and this package globally, you can run bootprint with the command
+After installing [bootprint](https://npmjs.com/package/bootprint) and this package globally, you can run bootprint with the command
 
 ```bash
 bootprint  example.json target

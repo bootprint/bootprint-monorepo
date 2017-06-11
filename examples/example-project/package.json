@@ -7,7 +7,7 @@
   "author": "Nils Knappmeier",
   "license": "ISC",
   "devDependencies": {
-    "thought": "^1.1.4"
+    "thought": "^1.3.0"
   },
   "scripts": {
     "thought": "thought run -a",

@@ -1,0 +1,49 @@
+{{#moduleConfig}}
+{{json .}}
+
+# Templates
+
+{{#each handlebars.templates}}
+{{>thought-plugin-bootprint/hbs-file.md name=@key}}
+{{/each}}
+
+# Partials
+
+{{#each handlebars.partials}}
+{{>thought-plugin-bootprint/hbs-file.md name=@key}}    
+{{/each}}
+     
+{{#each handlebars.helpers}}
+
+{{#if .}}
+# Helpers 
+
+(from {{#withPackageOf .}}[{{@package.name}}@{{@package.version}}/{{@relativePath}}]({{@url}}){{/withPackageOf}})
+
+{{jsdoc .}}
+{{else}}
+# Inlined helpers 
+    
+*Some helpers are defined directly in the configuration and not via path-reference to a module.
+The docs for these helpers cannot be generated and are missing on this page.
+If you are the author of this package, please consider putting the helpers into a distinct file
+and adding only the path to the configuration.*
+    
+{{/if}}
+
+{{/each}}
+
+# LESS files
+
+{{#each less.main}}
+* {{#withPackageOf .}}[{{@package.name}}@{{@package.version}}/{{@relativePath}}]({{@url}}){{/withPackageOf}}  
+{{/each}}
+    
+# LESS include paths
+
+{{#each less.paths}}
+{{#withPackageOf .}}[{{@package.name}}@{{@package.version}}/{{@relativePath}}]({{@url}}){{/withPackageOf}}
+{{/each}}
+
+
+{{/moduleConfig}}

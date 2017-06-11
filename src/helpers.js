@@ -15,17 +15,26 @@ module.exports = {
  *
  * @return {Promise<string>} the string containing the
  * @example
- * {{#codeBlock}}hbs
+ * {{#codeBlock lang='hbs'}}
  * Some markdown hbs template
  * {{/codeBlock}}
  */
 function codeBlock (options) {
+  var lang = (options.hash && options.hash.lang) || ''
   return Promise.resolve(options.fn(this))
     .then(contents => {
+      // Get all backticks (like ['```','`````','`'])
       var backticks = contents.match(/`+/g) || []
+      var maxNrTicks = backticks
+        .map((ticks) => ticks.length)
+        .reduce(Math.max, 0)
       // Minimum of three ticks, but more than the ticks in contents
-      var maxTicks = backticks.reduce((max, next) => max.length > next.length ? max : '`' + next, '```')
-      return `${maxTicks}${contents}${maxTicks}`
+      var maxTicks = '`'.repeat(Math.max(maxNrTicks + 1, 3))
+
+      // Prefix content with newline if nesseary
+      contents = contents.replace(/^\n?/, '\n')
+
+      return `${maxTicks}${lang}${contents}${maxTicks}`
     })
 }
 
@@ -44,7 +53,7 @@ function moduleConfig (options) {
   // the root-directory of the plugin
   var plugin = require(process.cwd())
   return require('customize')()
-    .registerEngine('handlebars', require('customize-engine-handlebars'))
+    .registerEngine('handlebars', require('customize-engine-handlebars').docEngine)
     .registerEngine('less', require('customize-engine-less'))
     .load(plugin)
     .buildConfig()
