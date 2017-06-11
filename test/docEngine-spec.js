@@ -42,104 +42,147 @@ describe('the docEngine', function () {
       })
   })
 
-  it('should load partials and templates and return one result per template', function () {
-    return expect(hb.run()).to.eventually.deep.equal({
-      'handlebars': {
-        'data': {
-          'drei': 'three',
-          'eins': 'one',
-          'vier': 'four',
-          'zwei': 'two'
-        },
-        'hbsOptions': {},
+  it('should load the path to helper files', function () {
+    return expect(hb.run().then((c) => ({helpers: c.handlebars.helpers})))
+      .to.eventually.deep.equal({
         'helpers': [
           'test/fixtures/helpers.js'
-        ],
-        'partialWrapper': [],
+        ]
+      })
+  })
+
+  it('should load partials and templates augment them with callers, callees extracted comments', function () {
+    return expect(hb.run().then((c) => ({partials: c.handlebars.partials, templates: c.handlebars.templates})))
+      .to.eventually.deep.equal({
         'partials': {
-          'eins.hbs': {
+          'eins': {
+            'calledBy': [
+              {
+                'line': 1,
+                'name': 'a.md',
+                'path': 'test/fixtures/templates/a.md.hbs',
+                'type': 'template'
+              }
+            ],
+            'callsPartial': [],
+            'comments': [],
             'contents': 'testPartials1/eins {{{eins}}}',
             'path': 'test/fixtures/testPartials1/eins.hbs'
           },
-          'zwei.hbs': {
+          'zwei': {
+            'calledBy': [
+              {
+                'line': 1,
+                'name': 'b.md',
+                'path': 'test/fixtures/templates/b.md.hbs',
+                'type': 'template'
+              }
+            ],
+            'callsPartial': [],
+            'comments': [],
             'contents': 'testPartials1/zwei {{{zwei}}}',
             'path': 'test/fixtures/testPartials1/zwei.hbs'
           }
         },
-        'preprocessor': [
-          null
-        ],
         'templates': {
-          'a.md.hbs': {
+          'a.md': {
+            'callsPartial': [
+              {
+                'line': 1,
+                'name': 'eins'
+              }
+            ],
+            'comments': [],
             'contents': 'a.md {{>eins}}',
             'path': 'test/fixtures/templates/a.md.hbs'
           },
-          'b.md.hbs': {
+          'b.md': {
+            'callsPartial': [
+              {
+                'line': 1,
+                'name': 'zwei'
+              }
+            ],
+            'comments': [],
             'contents': 'b.md {{>zwei}} {{{helper1 zwei}}}',
             'path': 'test/fixtures/templates/b.md.hbs'
           }
         }
-      }
-    })
+      })
   })
 
-  it('should collect multple helper-files and merge templates and partials', function () {
+  it('should load the path to multiple helper files', function () {
     return expect(hb.merge({
       handlebars: {
-        partials: 'test/fixtures/testPartials2',
-        helpers: 'test/fixtures/helpers2.js',
-        templates: 'test/fixtures/templates-cleanInput',
-        data: {
-          eins: 'eins',
-          zwei: 'zwei'
-        },
-        preprocessor: 'test/fixtures/preprocessor1.js'
+        helpers: 'test/fixtures/helpers2.js'
       }
-
-    }).run()).to.eventually.deep.equal({
-      'handlebars': {
-        'data': {
-          'drei': 'three',
-          'eins': 'eins',
-          'vier': 'four',
-          'zwei': 'zwei'
-        },
-        'hbsOptions': {},
+    }).run().then((c) => ({helpers: c.handlebars.helpers})))
+      .to.eventually.deep.equal({
         'helpers': [
           'test/fixtures/helpers.js',
           'test/fixtures/helpers2.js'
-        ],
-        'partialWrapper': [],
+        ]
+      })
+  })
+
+  it('should load merged templates and partials', function () {
+    return expect(hb.merge({
+      handlebars: {
+        partials: 'test/fixtures/testPartials2',
+        templates: 'test/fixtures/templates-cleanInput'
+      }
+    }).run().then((c) => ({partials: c.handlebars.partials, templates: c.handlebars.templates})))
+      .to.eventually.deep.equal({
         'partials': {
-          'drei.hbs': {
+          'drei': {
+            'calledBy': [],
+            'callsPartial': [],
+            'comments': [],
             'contents': 'testPartials2/drei {{{drei}}}',
             'path': 'test/fixtures/testPartials2/drei.hbs'
           },
-          'eins.hbs': {
+          'eins': {
+            'calledBy': [],
+            'callsPartial': [],
+            'comments': [],
             'contents': 'testPartials1/eins {{{eins}}}',
             'path': 'test/fixtures/testPartials1/eins.hbs'
           },
-          'zwei.hbs': {
+          'zwei': {
+            'calledBy': [
+              {
+                'line': 1,
+                'name': 'b.md',
+                'path': 'test/fixtures/templates/b.md.hbs',
+                'type': 'template'
+              }
+            ],
+            'callsPartial': [],
+            'comments': [],
             'contents': 'testPartials2/zwei {{{zwei}}}',
             'path': 'test/fixtures/testPartials2/zwei.hbs'
           }
         },
-        'preprocessor': [
-          null,
-          'test/fixtures/preprocessor1.js'
-        ],
         'templates': {
-          'a.md.hbs': {
+          'a.md': {
+            'callsPartial': [],
+            'comments': [],
             'contents': '{{#each .}}{{@key}}={{.}}{{/each}}',
             'path': 'test/fixtures/templates-cleanInput/a.md.hbs'
           },
-          'b.md.hbs': {
+          'b.md': {
+            'callsPartial': [
+              {
+                'line': 1,
+                'name': 'zwei'
+              }
+            ],
+            'comments': [],
             'contents': 'b.md {{>zwei}} {{{helper1 zwei}}}',
             'path': 'test/fixtures/templates/b.md.hbs'
           }
         }
-      }
-    })
+      })
   })
 
   it('should use "null" as placeholder for helpers that are defined in a function', function () {
@@ -217,5 +260,44 @@ describe('the docEngine', function () {
       }
     })
     return expect(hb2.run().then(x => x.handlebars.addSourceLocators)).to.eventually.equal(true)
+  })
+
+  it('should include the call-hierarchy', function () {
+    return expect(hb.run().then(x => x.handlebars.callHierarchy)).to.eventually.deep.equal({
+      'children': [
+        {
+          'name': 'a.md',
+          'comments': [],
+          'path': 'test/fixtures/templates/a.md.hbs',
+          'type': 'template',
+          'children': [
+            {
+              'children': [],
+              'comments': [],
+              'cycleFound': undefined,
+              'name': 'eins',
+              'path': 'test/fixtures/testPartials1/eins.hbs',
+              'type': 'partial'
+            }
+          ]
+        },
+        {
+          'comments': [],
+          'name': 'b.md',
+          'path': 'test/fixtures/templates/b.md.hbs',
+          'type': 'template',
+          'children': [
+            {
+              'children': [],
+              'comments': [],
+              'cycleFound': undefined,
+              'name': 'zwei',
+              'path': 'test/fixtures/testPartials1/zwei.hbs',
+              'type': 'partial'
+            }
+          ]
+        }
+      ]
+    })
   })
 })

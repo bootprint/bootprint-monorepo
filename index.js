@@ -17,7 +17,7 @@ var path = require('path')
 var promisedHandlebars = require('promised-handlebars')
 
 var contents = function (partials) {
-  return _.mapObject(partials, stripHandlebarsExt, (value) => value.contents)
+  return _.mapObject(partials, _.stripHandlebarsExt, (value) => value.contents)
 }
 
 /**
@@ -181,8 +181,8 @@ module.exports = {
         if (config.addSourceLocators) {
           // Lookup-tables for partial-/template-name to the source-file
           // (which contains the original path to the actual file)
-          var partialToSourceFile = _.mapKeys(config.partials, stripHandlebarsExt)
-          var templateToSourceFile = _.mapKeys(config.templates, stripHandlebarsExt)
+          var partialToSourceFile = _.mapKeys(config.partials, _.stripHandlebarsExt)
+          var templateToSourceFile = _.mapKeys(config.templates, _.stripHandlebarsExt)
           result = _.mapValues(result, function (contents, filename) {
             // Post-process locator-tags to include file-paths
             return contents.then((resolvedContents) => resolvedContents.replace(
@@ -201,17 +201,6 @@ module.exports = {
         return result
       })
   }
-}
-
-/**
- * Used in _.mapKeys to remove the hbs extension
- * @param {*} value ignored
- * @param {string} key the original filename
- * @returns {string} the filename without .hbs
- * @access private
- */
-function stripHandlebarsExt (value, key) {
-  return key.replace(/\.(handlebars|hbs)$/, '')
 }
 
 /**

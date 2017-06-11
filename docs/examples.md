@@ -215,6 +215,64 @@ helpers are not loaded, but the path to the file is collected into an array.
 ```
 {
   "handlebars": {
+    "callHierarchy": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+              ],
+              "comments": [
+              ],
+              "name": "footer",
+              "path": "partials2/footer.hbs",
+              "type": "partial"
+            }
+          ],
+          "comments": [
+          ],
+          "name": "subdir/text3.txt",
+          "path": "templates/subdir/text3.txt.hbs",
+          "type": "template"
+        },
+        {
+          "children": [
+            {
+              "children": [
+              ],
+              "comments": [
+              ],
+              "name": "footer",
+              "path": "partials2/footer.hbs",
+              "type": "partial"
+            }
+          ],
+          "comments": [
+          ],
+          "name": "text1.txt",
+          "path": "templates/text1.txt.hbs",
+          "type": "template"
+        },
+        {
+          "children": [
+            {
+              "children": [
+              ],
+              "comments": [
+              ],
+              "name": "footer",
+              "path": "partials2/footer.hbs",
+              "type": "partial"
+            }
+          ],
+          "comments": [
+          ],
+          "name": "text2.txt",
+          "path": "templates/text2.txt.hbs",
+          "type": "template"
+        }
+      ]
+    },
     "data": {
       "city": "Darmstadt",
       "name": "nknapp"
@@ -227,7 +285,31 @@ helpers are not loaded, but the path to the file is collected into an array.
     "partialWrapper": [
     ],
     "partials": {
-      "footer.hbs": {
+      "footer": {
+        "calledBy": [
+          {
+            "line": 1,
+            "name": "subdir/text3.txt",
+            "path": "templates/subdir/text3.txt.hbs",
+            "type": "template"
+          },
+          {
+            "line": 5,
+            "name": "text1.txt",
+            "path": "templates/text1.txt.hbs",
+            "type": "template"
+          },
+          {
+            "line": 5,
+            "name": "text2.txt",
+            "path": "templates/text2.txt.hbs",
+            "type": "template"
+          }
+        ],
+        "callsPartial": [
+        ],
+        "comments": [
+        ],
         "contents": "------\nBlog: {{{github.blog}}}\n",
         "path": "partials2/footer.hbs"
       }
@@ -236,15 +318,39 @@ helpers are not loaded, but the path to the file is collected into an array.
       "hb-preprocessor.js"
     ],
     "templates": {
-      "subdir/text3.txt.hbs": {
+      "subdir/text3.txt": {
+        "callsPartial": [
+          {
+            "line": 1,
+            "name": "footer"
+          }
+        ],
+        "comments": [
+        ],
         "contents": "{{>footer}}",
         "path": "templates/subdir/text3.txt.hbs"
       },
-      "text1.txt.hbs": {
+      "text1.txt": {
+        "callsPartial": [
+          {
+            "line": 5,
+            "name": "footer"
+          }
+        ],
+        "comments": [
+        ],
         "contents": "I'm {{name}}\n\nI'm living in {{city}}.\n\n{{>footer}}",
         "path": "templates/text1.txt.hbs"
       },
-      "text2.txt.hbs": {
+      "text2.txt": {
+        "callsPartial": [
+          {
+            "line": 5,
+            "name": "footer"
+          }
+        ],
+        "comments": [
+        ],
         "contents": "I'm {{name}}\n\nI'm living in {{shout city}}.\n\n{{>footer}}",
         "path": "templates/text2.txt.hbs"
       }
