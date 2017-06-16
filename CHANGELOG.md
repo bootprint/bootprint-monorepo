@@ -3,6 +3,13 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 2.2.0 (Fri, 16 Jun 2017 21:28:48 GMT)
+
+* [57d1ce2](https://github.com/bootprint/customize-engine-handlebars/commit/57d1ce2) More sophisticated Bootprint module analysis in the "docEngine" - Nils Knappmeier
+* [74528a0](https://github.com/bootprint/customize-engine-handlebars/commit/74528a0) Doc-Typo, re-add missing "require" on Handlebars for docEngine - Nils Knappmeier
+
+
+
 # Version 2.1.0 (Fri, 09 Jun 2017 20:38:41 GMT)
 
 * [1e32be2](https://github.com/bootprint/customize-engine-handlebars/commit/1e32be2) Update dependencies (except chai) - Nils Knappmeier
