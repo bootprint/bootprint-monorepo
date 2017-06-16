@@ -1,96 +1,127 @@
-```json
-{
-  "handlebars": {
-    "partials": {
-      "dir/drei.hbs": {
-        "path": "handlebars/partials/dir/drei.hbs",
-        "contents": "trois"
-      },
-      "eins.hbs": {
-        "path": "handlebars/partials/eins.hbs",
-        "contents": "one"
-      },
-      "zwei.hbs": {
-        "path": "handlebars/partials/zwei.hbs",
-        "contents": "two {{>dir/drei}} "
-      }
-    },
-    "templates": {
-      "index.html.hbs": {
-        "path": "handlebars/templates/index.html.hbs",
-        "contents": "<html>\n<body>\n<h1>{{title}}</h1>\n\n{{> eins}}\n<hr>\n{{> zwei}}\n\n</body>\n</html>"
-      }
-    },
-    "data": {},
-    "hbsOptions": {},
-    "partialWrapper": [],
-    "helpers": [
-      "/home/nknappmeier/projects/bootprint/thought-plugin-bootprint/examples/example-project/handlebars/helpers.js",
-      null
-    ],
-    "preprocessor": []
-  },
-  "less": {
-    "main": [
-      "/home/nknappmeier/projects/bootprint/thought-plugin-bootprint/examples/example-project/less/main.less"
-    ],
-    "paths": [
-      "/home/nknappmeier/projects/bootprint/thought-plugin-bootprint/examples/example-project/less/imports"
-    ]
-  },
-  "_metadata": {
-    "modules": []
-  }
-}
-```
 
+# API-Documentation
 
+This page describes the API of this Bootprint-module
+
+* [Templates](#templates)
+  * [Partials](#partials)
+* [Handlebars Helpers](#helpers)
+* [LessCSS](#lesscss)
+    
 # Templates
 
-### index.html.hbs
+    
+<a name="template-indexhtml"></a>
+### index.html
 
-(<a href="">
-        jump to source in <code>example-project@1.0.0</code>
-    </a>)
-```hbs
-<html>
-<body>
-<h1>{{title}}</h1>
+<table>
+    <tr>
+        <th>Source file</th>
+        <td>
+<a href="">example-project @ 1.0.0 / handlebars/templates/index.html.hbs</a>        </td>
+    </tr>
+        <tr>
+            <th>Structure</th>
+            <td>
+<pre><code>
+<a href="#template-indexhtml">index.html</a>
+├── <a href="#partial-eins">eins</a>
+│   <i>This partial writes "one"</i>
+└─┬ <a href="#partial-zwei">zwei</a>
+  │ <i>This partial calls another partial.</i>
+  └─┬ <a href="#partial-dirdrei">dir/drei</a>
+    │ <i>Calls "eins"... never... to demonstrate a cycle in...</i>
+    └── <a href="#partial-zwei">zwei</a>
+        <span title="cycle detected"><i>(&#x1F501; cycle detected)</i> </span>
+</code></pre>    
 
-{{> eins}}
-<hr>
-{{> zwei}}
 
-</body>
-</html>
+</td>
+        </tr>
+</table>
+
+
+
+    
+
+## Partials
+
+<a name="partial-dirdrei"></a>
+### dir/drei
+
+<table>
+    <tr>
+        <th>Source file</th>
+        <td>
+<a href="">example-project @ 1.0.0 / handlebars/partials/dir/drei.hbs</a>        </td>
+    </tr>
+        <tr>
+            <th>Uses partials</th>
+            <td>
+                    <a href="#partial-zwei">zwei</a>
+            </td>
+        </tr>
+        <tr>
+            <th>Used by</th>
+            <td>
+                    <a href="#partial-zwei">zwei</a>
+            </td>
+        </tr>
+</table>
+
+```txt
+Calls "eins"... never... to demonstrate a cycle in the hierarcy tree
 ```
 
-# Partials
+<a name="partial-eins"></a>
+### eins
 
-### dir/drei.hbs
+<table>
+    <tr>
+        <th>Source file</th>
+        <td>
+<a href="">example-project @ 1.0.0 / handlebars/partials/eins.hbs</a>        </td>
+    </tr>
+        <tr>
+            <th>Used by</th>
+            <td>
+                    <a href="#template-indexhtml">index.html</a>
+            </td>
+        </tr>
+</table>
 
-(<a href="">
-        jump to source in <code>example-project@1.0.0</code>
-    </a>)
-```hbs
-trois
+```txt
+This partial writes "one"
 ```
-### eins.hbs
 
-(<a href="">
-        jump to source in <code>example-project@1.0.0</code>
-    </a>)
-```hbs
-one
-```
-### zwei.hbs
+<a name="partial-zwei"></a>
+### zwei
 
-(<a href="">
-        jump to source in <code>example-project@1.0.0</code>
-    </a>)
-```hbs
-two {{>dir/drei}} 
+<table>
+    <tr>
+        <th>Source file</th>
+        <td>
+<a href="">example-project @ 1.0.0 / handlebars/partials/zwei.hbs</a>        </td>
+    </tr>
+        <tr>
+            <th>Uses partials</th>
+            <td>
+                    <a href="#partial-dirdrei">dir/drei</a>
+            </td>
+        </tr>
+        <tr>
+            <th>Used by</th>
+            <td>
+                    <a href="#template-indexhtml">index.html</a>, 
+                    <a href="#partial-dirdrei">dir/drei</a>
+            </td>
+        </tr>
+</table>
+
+```txt
+This partial calls another partial.
 ```
+
      
 
 # Helpers 
@@ -113,7 +144,7 @@ Make a string louder uppercase
 
 
 
-# Inlined helpers 
+## Inlined helpers 
     
 *Some helpers are defined directly in the configuration and not via path-reference to a module.
 The docs for these helpers cannot be generated and are missing on this page.
@@ -122,12 +153,14 @@ and adding only the path to the configuration.*
     
 
 
-# LESS files
+# LessCSS 
+
+## Main LessCSS-files
 
 * [example-project@1.0.0/less/main.less]()  
     
-# LESS include paths
+## LessCSS include paths
 
-[example-project@1.0.0/less/imports]()
+* [example-project@1.0.0/less/imports]()
 
 

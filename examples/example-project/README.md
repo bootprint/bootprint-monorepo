@@ -39,9 +39,9 @@ Bootprint will then generate the following files (look inside by clicking on the
 </code></pre> 
 
 
-# API reference
+# API
 
-
+see [docs/api.md](docs/api.md)
 
 
 # License

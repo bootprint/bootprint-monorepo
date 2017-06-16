@@ -12,5 +12,10 @@
   "scripts": {
     "thought": "thought run -a",
     "version": "npm run thought"
-  }
+  },
+  "directories": {
+    "doc": "docs",
+    "example": "examples"
+  },
+  "dependencies": {}
 }

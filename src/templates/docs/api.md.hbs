@@ -1,16 +1,26 @@
 {{#moduleConfig}}
-{{json .}}
 
+# API-Documentation
+
+This page describes the API of this Bootprint-module
+
+* [Templates](#templates)
+  * [Partials](#partials)
+* [Handlebars Helpers](#helpers)
+* [LessCSS](#lesscss)
+    
 # Templates
 
-{{#each handlebars.templates}}
-{{>thought-plugin-bootprint/hbs-file.md name=@key}}
+{{#each handlebars.callHierarchy.children}}
+    
+{{>thought-plugin-bootprint/hbs-file.md .}}
+    
 {{/each}}
 
-# Partials
+## Partials
 
 {{#each handlebars.partials}}
-{{>thought-plugin-bootprint/hbs-file.md name=@key}}    
+{{>thought-plugin-bootprint/hbs-file.md name=@key type='partial'}}    
 {{/each}}
      
 {{#each handlebars.helpers}}
@@ -22,7 +32,7 @@
 
 {{jsdoc .}}
 {{else}}
-# Inlined helpers 
+## Inlined helpers 
     
 *Some helpers are defined directly in the configuration and not via path-reference to a module.
 The docs for these helpers cannot be generated and are missing on this page.
@@ -33,16 +43,18 @@ and adding only the path to the configuration.*
 
 {{/each}}
 
-# LESS files
+# LessCSS 
+
+## Main LessCSS-files
 
 {{#each less.main}}
 * {{#withPackageOf .}}[{{@package.name}}@{{@package.version}}/{{@relativePath}}]({{@url}}){{/withPackageOf}}  
 {{/each}}
     
-# LESS include paths
+## LessCSS include paths
 
 {{#each less.paths}}
-{{#withPackageOf .}}[{{@package.name}}@{{@package.version}}/{{@relativePath}}]({{@url}}){{/withPackageOf}}
+* {{#withPackageOf .}}[{{@package.name}}@{{@package.version}}/{{@relativePath}}]({{@url}}){{/withPackageOf}}
 {{/each}}
 
 

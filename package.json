@@ -22,13 +22,13 @@
     "test": "mocha && npm run lint",
     "coverage": "istanbul cover ./node_modules/.bin/_mocha --report lcovonly",
     "postcoverage": "istanbul check-coverage coverage/coverage.json --statements 100",
-    "thought": "thought run -a",
+    "thought": "thought run -a && cd examples/example-project && thought run -a",
     "version": "thoughtful changelog -o -a && npm run thought"
   },
   "dependencies": {
     "bootprint": "^2.0.0",
     "customize": "^2.0.1",
-    "customize-engine-handlebars": "^2.1.0",
+    "customize-engine-handlebars": "^2.2.0",
     "customize-engine-less": "^2.0.0",
     "tree-from-paths": "^1.0.0"
   },

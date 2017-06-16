@@ -3,7 +3,8 @@ var {Bootprint} = require('bootprint')
 module.exports = {
   moduleConfig,
   runBootprint,
-  codeBlock
+  codeBlock,
+  abbrev
 }
 
 /**
@@ -52,14 +53,37 @@ function moduleConfig (options) {
   // Load from current working directsory. The cwd should be
   // the root-directory of the plugin
   var plugin = require(process.cwd())
+  let lessDocEngine = Object.assign(
+    {},
+    require('customize-engine-less'),
+    {
+      run: function (config) {
+        return config
+      }
+    })
   return require('customize')()
     .registerEngine('handlebars', require('customize-engine-handlebars').docEngine)
-    .registerEngine('less', require('customize-engine-less'))
+    .registerEngine('less', lessDocEngine)
     .load(plugin)
-    .buildConfig()
+    .run()
     .then((config) => {
       return options.fn(config)
     })
+}
+
+/**
+ * Abbreviate a text to be no longer than a given limit.
+ * @param {string} text the text
+ * @param {number} limit the maximum length (excluding the '...' that is added if the text was limited)
+ */
+function abbrev (text, limit) {
+  if (!text) {
+    return ''
+  }
+  if (text.length < limit) {
+    return text
+  }
+  return text.substr(0, limit) + '...'
 }
 
 /**
