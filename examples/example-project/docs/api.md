@@ -69,7 +69,7 @@ This page describes the API of this Bootprint-module
         </tr>
 </table>
 
-```txt
+```
 Calls "eins"... never... to demonstrate a cycle in the hierarcy tree
 ```
 
@@ -90,7 +90,7 @@ Calls "eins"... never... to demonstrate a cycle in the hierarcy tree
         </tr>
 </table>
 
-```txt
+```
 This partial writes "one"
 ```
 
@@ -118,7 +118,7 @@ This partial writes "one"
         </tr>
 </table>
 
-```txt
+```
 This partial calls another partial.
 ```
 
