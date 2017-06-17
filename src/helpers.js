@@ -26,9 +26,8 @@ function codeBlock (options) {
     .then(contents => {
       // Get all backticks (like ['```','`````','`'])
       var backticks = contents.match(/`+/g) || []
-      var maxNrTicks = backticks
-        .map((ticks) => ticks.length)
-        .reduce(Math.max, 0)
+      var backtickLengths = backticks.map((ticks) => ticks.length)
+      var maxNrTicks = Math.max.apply(null, backtickLengths)
       // Minimum of three ticks, but more than the ticks in contents
       var maxTicks = '`'.repeat(Math.max(maxNrTicks + 1, 3))
 
