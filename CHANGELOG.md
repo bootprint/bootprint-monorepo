@@ -1,6 +1,12 @@
 # Release notes for `thought-plugin-bootprint`
 
 <a name="current-release"></a>
+# Version 0.2.3 (Sat, 17 Jun 2017 11:55:47 GMT)
+
+* [8fc5c7d](https://github.com/bootprint/thought-plugin-bootprint/commit/8fc5c7d) Fix codeBlock helper for multiple existing backtick-groups in the block - Nils Knappmeier
+
+
+
 # Version 0.2.2 (Sat, 17 Jun 2017 10:58:08 GMT)
 
 * [15594d7](https://github.com/bootprint/thought-plugin-bootprint/commit/15594d7) Remove language-indicator from partial-comment fences - Nils Knappmeier
