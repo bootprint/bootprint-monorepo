@@ -30,6 +30,7 @@
     "customize": "^2.0.1",
     "customize-engine-handlebars": "^2.2.0",
     "customize-engine-less": "^2.0.0",
+    "thought-plugin-jsdoc": "^1.0.0",
     "tree-from-paths": "^1.0.0"
   },
   "devDependencies": {
