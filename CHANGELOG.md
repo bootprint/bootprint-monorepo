@@ -1,6 +1,12 @@
 # Release notes for `thought-plugin-bootprint`
 
 <a name="current-release"></a>
+# Version 0.2.1 (Sat, 17 Jun 2017 09:03:39 GMT)
+
+* [5fac806](https://github.com/bootprint/thought-plugin-bootprint/commit/5fac806) Add missing dependency to "thought-plugin-jsdoc" - Nils Knappmeier
+
+
+
 # Version 0.2.0 (Sat, 17 Jun 2017 08:28:14 GMT)
 
 * [94123fd](https://github.com/bootprint/thought-plugin-bootprint/commit/94123fd) Refactorings, added call-hierarchy and more partial details - Nils Knappmeier
