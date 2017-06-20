@@ -337,7 +337,114 @@ describe('partial-details:', function () {
                   'children': undefined
                 }]
               }]
+            }]
+          }
+        ]
+      })
+    })
 
+    it('should break cycles when a partial is called twice in the cycle', function () {
+      expect(hierarchy({
+        templates: {
+          'dir/a.txt': {
+            path: 'src/dir/a.txt.hbs',
+            contents: 'a {{>p1}} a'
+          }
+        },
+        partials: {
+          'p1': {
+            path: 'src/prt/p1.hbs',
+            contents: 'p1 {{>p1}} {{>p1}} p1'
+          }
+        }
+      })).to.deep.equal({
+        children: [
+          {
+            'name': 'dir/a.txt',
+            'path': 'src/dir/a.txt.hbs',
+            'type': 'template',
+            'comments': [],
+            'children': [{
+              'name': 'p1',
+              'path': 'src/prt/p1.hbs',
+              'type': 'partial',
+              'comments': [],
+              'cycleFound': undefined,
+              'children': [{
+                'name': 'p1',
+                'path': 'src/prt/p1.hbs',
+                'type': 'partial',
+                'comments': [],
+                'cycleFound': true,
+                'children': undefined
+              }]
+            }]
+          }
+        ]
+      })
+    })
+
+    it('should allow calling the same partial twice', function () {
+      expect(hierarchy({
+        templates: {
+          'dir/a.txt': {
+            path: 'src/dir/a.txt.hbs',
+            contents: 'a {{>p1}} {{>p1}} a'
+          }
+        },
+        partials: {
+          'p1': {
+            path: 'src/prt/p1.hbs',
+            contents: 'p1'
+          }
+        }
+      })).to.deep.equal({
+        children: [
+          {
+            'name': 'dir/a.txt',
+            'path': 'src/dir/a.txt.hbs',
+            'type': 'template',
+            'comments': [],
+            'children': [{
+              'name': 'p1',
+              'path': 'src/prt/p1.hbs',
+              'type': 'partial',
+              'comments': [],
+              'cycleFound': undefined,
+              'children': []
+            }]
+          }
+        ]
+      })
+    })
+    it('should allow calling the same partial twice', function () {
+      expect(hierarchy({
+        templates: {
+          'dir/a.txt': {
+            path: 'src/dir/a.txt.hbs',
+            contents: 'a {{>p1}} {{>p1}} a'
+          }
+        },
+        partials: {
+          'p1': {
+            path: 'src/prt/p1.hbs',
+            contents: 'p1'
+          }
+        }
+      })).to.deep.equal({
+        children: [
+          {
+            'name': 'dir/a.txt',
+            'path': 'src/dir/a.txt.hbs',
+            'type': 'template',
+            'comments': [],
+            'children': [{
+              'name': 'p1',
+              'path': 'src/prt/p1.hbs',
+              'type': 'partial',
+              'comments': [],
+              'cycleFound': undefined,
+              'children': []
             }]
           }
         ]
