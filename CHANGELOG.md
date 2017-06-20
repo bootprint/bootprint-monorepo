@@ -1,6 +1,12 @@
 # Release notes for `thought-plugin-bootprint`
 
 <a name="current-release"></a>
+# Version 0.2.4 (Tue, 20 Jun 2017 21:57:38 GMT)
+
+* [4405790](https://github.com/bootprint/thought-plugin-bootprint/commit/4405790) Update to current dependency-versions - Nils Knappmeier
+
+
+
 # Version 0.2.3 (Sat, 17 Jun 2017 11:55:47 GMT)
 
 * [8fc5c7d](https://github.com/bootprint/thought-plugin-bootprint/commit/8fc5c7d) Fix codeBlock helper for multiple existing backtick-groups in the block - Nils Knappmeier
