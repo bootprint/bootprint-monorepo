@@ -1,35 +1,29 @@
 # Release notes for `thought-plugin-bootprint`
 
 <a name="current-release"></a>
+# Version 1.0.0 (Sat, 24 Jun 2017 21:53:39 GMT)
+
+* [bb8a617](https://github.com/bootprint/thought-plugin-bootprint/commit/bb8a617) Various updates and added features - Nils Knappmeier
+
 # Version 0.2.4 (Tue, 20 Jun 2017 21:57:38 GMT)
 
 * [4405790](https://github.com/bootprint/thought-plugin-bootprint/commit/4405790) Update to current dependency-versions - Nils Knappmeier
-
-
 
 # Version 0.2.3 (Sat, 17 Jun 2017 11:55:47 GMT)
 
 * [8fc5c7d](https://github.com/bootprint/thought-plugin-bootprint/commit/8fc5c7d) Fix codeBlock helper for multiple existing backtick-groups in the block - Nils Knappmeier
 
-
-
 # Version 0.2.2 (Sat, 17 Jun 2017 10:58:08 GMT)
 
 * [15594d7](https://github.com/bootprint/thought-plugin-bootprint/commit/15594d7) Remove language-indicator from partial-comment fences - Nils Knappmeier
-
-
 
 # Version 0.2.1 (Sat, 17 Jun 2017 09:03:39 GMT)
 
 * [5fac806](https://github.com/bootprint/thought-plugin-bootprint/commit/5fac806) Add missing dependency to "thought-plugin-jsdoc" - Nils Knappmeier
 
-
-
 # Version 0.2.0 (Sat, 17 Jun 2017 08:28:14 GMT)
 
 * [94123fd](https://github.com/bootprint/thought-plugin-bootprint/commit/94123fd) Refactorings, added call-hierarchy and more partial details - Nils Knappmeier
-
-
 
 # Version 0.1.0 (Sun, 11 Jun 2017 08:21:53 GMT)
 
