@@ -13,14 +13,14 @@ This page describes the API of this Bootprint-module
 
 {{#each handlebars.callHierarchy.children}}
     
-{{>thought-plugin-bootprint/hbs-file.md .}}
+{{>bootprint/hbs-file.md .}}
     
 {{/each}}
 
 ## Partials
 
 {{#each handlebars.partials}}
-{{>thought-plugin-bootprint/hbs-file.md name=@key type='partial'}}    
+{{>bootprint/hbs-file.md name=@key type='partial'}}    
 {{/each}}
      
 {{#each handlebars.helpers}}

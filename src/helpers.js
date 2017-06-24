@@ -4,7 +4,8 @@ module.exports = {
   moduleConfig,
   runBootprint,
   codeBlock,
-  abbrev
+  abbrev,
+  shortModuleName
 }
 
 /**
@@ -96,11 +97,21 @@ function runBootprint (module, input, target) {
   return new Bootprint(module, {})
     .run(input, target)
     .then((files) => {
-      require('child_process').execFileSync('git', ['add'].concat(files))
       let tree = require('tree-from-paths').render(
         files,
         '',
-        (parent, file, explicit) => `<a href='${parent}${file}'>${file}</a>`)
+        (parent, file, explicit) => `${file}`)
       return `<pre><code>${tree}</code></pre>`
     })
+}
+
+/**
+ * Returns the stripped module name (remove the "bootprint-"-prefix if applicable
+ * @param {string} name the module name
+ */
+function shortModuleName (name) {
+  if (name.lastIndexOf('bootprint-', 0) === 0) {
+    return name.substr('bootprint-'.length)
+  }
+  return name
 }

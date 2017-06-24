@@ -6,38 +6,52 @@
 > Example to demonstrate the thought-plugin-bootprint
 
 
+
 # Installation
 
 ```
-npm install example-project
+npm -g install bootprint
+npm -g install example-project
 ```
 
 ## Usage
 
 
-After installing [bootprint](https://npmjs.com/package/bootprint) and this package globally, you can run bootprint with the command
+After installing the package globally, you can run bootprint with the command
 
 ```bash
-bootprint  example.json target
+bootprint example-project  target
 ```
 
-where `example.json` has the contents
+`example.json` can be found in [examples/example.json](examples/example.json) in this project.
 
-```json
-{
-  "title": "MyTitle"
-}
-```
+Bootprint will then generate the following files:
 
-
-Bootprint will then generate the following files (look inside by clicking on them).
-
-<pre><code><a href='examples/'>examples/</a><a href='examples/target/'>target/</a>
-├── <a href='examples/target/index.html'>index.html</a>
-├── <a href='examples/target/main.css'>main.css</a>
-└── <a href='examples/target/main.css.map'>main.css.map</a>
+<pre><code>examples/target/
+├── index.html
+├── main.css
+└── main.css.map
 </code></pre> 
 
+
+## Customizing
+
+You can write your own module that customizes the partials and helpers in this module
+(see [the bootprint documentation](https://github.com/bootprint/bootprint/blob/master/doc/modules.md)) for details.
+
+The entrypoint JavaScript-file of such a module would look like.
+
+```js
+module.exports = function (customize) {
+  return customize
+    .load(require('example-project'))
+    .merge({
+      // You customizations here
+    })
+
+// Add "package" metadata. This can be evaluated by documentation generators
+module.exports.package = require('./package')
+```
 
 # API
 

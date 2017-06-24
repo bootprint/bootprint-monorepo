@@ -50,4 +50,16 @@ describe('the handlebars-helpers:', function () {
         .then((result) => expect(result).to.equal('```\n`abc`\n```'))
     })
   })
+
+  describe('the removeStart-helper', function () {
+    it('should remove the bootprint-prefix', function () {
+      return run(`{{shortModuleName name}}`, {name: 'bootprint-json-schema'})
+        .then((result) => expect(result).to.equals('json-schema'))
+    })
+
+    it('should leave the name as is, if it does not start with bootprint', function () {
+      return run(`{{shortModuleName name}}`, {name: 'howdy-good-fella'})
+        .then((result) => expect(result).to.equals('howdy-good-fella'))
+    })
+  })
 })
