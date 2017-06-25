@@ -252,80 +252,72 @@ module.exports.package = require('./package')
 
 ### Helpers
 
-## Functions
+<a name="helpers"></a>
 
-<dl>
-<dt><a href="#codeBlock">codeBlock()</a> ⇒ <code>Promise.&lt;string&gt;</code></dt>
-<dd><p>Create a <a href="http://daringfireball.net/projects/markdown/syntax#code">markdown code-block</a> with enough backticks</p>
-<p>The surrounding fences of a code-block must have more backticks than the maximum number of
-consecutive backticks in the contents (escaping backticks <a href="https://github.com/github/markup/issues/363">https://github.com/github/markup/issues/363</a>).
-This block-helper creates enough and at least three.</p>
-</dd>
-<dt><a href="#moduleConfig">moduleConfig(options)</a> ⇒ <code>Promise</code></dt>
-<dd><p>Continue with the thought-configuration of the current plugin</p>
-<p>The helper loads the thought-configuration from the plugin in the current
-working directory and passed the resulting JSON as context to
-the content-block.</p>
-</dd>
-<dt><a href="#abbrev">abbrev(text, limit)</a></dt>
-<dd><p>Abbreviate a text to be no longer than a given limit.</p>
-</dd>
-<dt><a href="#runBootprint">runBootprint(module, input, target)</a> ⇒ <code>*</code></dt>
-<dd></dd>
-<dt><a href="#shortModuleName">shortModuleName(name)</a></dt>
-<dd><p>Returns the stripped module name (remove the &quot;bootprint-&quot;-prefix if applicable</p>
-</dd>
-</dl>
+## helpers
+Default Handlebars-helpers for Thought
 
-<a name="codeBlock"></a>
+**Kind**: global variable  
 
-## codeBlock() ⇒ <code>Promise.&lt;string&gt;</code>
+* [helpers](#helpers)
+    * [.codeBlock()](#helpers.codeBlock) ⇒ <code>Promise.&lt;string&gt;</code>
+    * [.moduleConfig(options)](#helpers.moduleConfig) ⇒ <code>Promise</code>
+    * [.abbrev(text, limit)](#helpers.abbrev)
+    * [.runBootprint(module, input, target)](#helpers.runBootprint) ⇒ <code>\*</code>
+    * [.shortModuleName(name)](#helpers.shortModuleName)
+
+<a name="helpers.codeBlock"></a>
+
+### helpers.codeBlock() ⇒ <code>Promise.&lt;string&gt;</code>
 Create a [markdown code-block](http://daringfireball.net/projects/markdown/syntax#code) with enough backticks
 
 The surrounding fences of a code-block must have more backticks than the maximum number of
 consecutive backticks in the contents (escaping backticks https://github.com/github/markup/issues/363).
 This block-helper creates enough and at least three.
 
-**Kind**: global function  
+**Kind**: static method of [<code>helpers</code>](#helpers)  
 **Returns**: <code>Promise.&lt;string&gt;</code> - the string containing the  
+**Access**: public  
 **Example**  
 ```js
 {{#codeBlock lang='hbs'}}
 Some markdown hbs template
 {{/codeBlock}}
 ```
-<a name="moduleConfig"></a>
+<a name="helpers.moduleConfig"></a>
 
-## moduleConfig(options) ⇒ <code>Promise</code>
+### helpers.moduleConfig(options) ⇒ <code>Promise</code>
 Continue with the thought-configuration of the current plugin
 
 The helper loads the thought-configuration from the plugin in the current
 working directory and passed the resulting JSON as context to
 the content-block.
 
-**Kind**: global function  
+**Kind**: static method of [<code>helpers</code>](#helpers)  
 **Access**: public  
 
 | Param |
 | --- |
 | options | 
 
-<a name="abbrev"></a>
+<a name="helpers.abbrev"></a>
 
-## abbrev(text, limit)
+### helpers.abbrev(text, limit)
 Abbreviate a text to be no longer than a given limit.
 
-**Kind**: global function  
+**Kind**: static method of [<code>helpers</code>](#helpers)  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | text | <code>string</code> | the text |
 | limit | <code>number</code> | the maximum length (excluding the '...' that is added if the text was limited) |
 
-<a name="runBootprint"></a>
+<a name="helpers.runBootprint"></a>
 
-## runBootprint(module, input, target) ⇒ <code>\*</code>
-**Kind**: global function  
+### helpers.runBootprint(module, input, target) ⇒ <code>\*</code>
+**Kind**: static method of [<code>helpers</code>](#helpers)  
+**Access**: public  
 
 | Param |
 | --- |
@@ -333,12 +325,13 @@ Abbreviate a text to be no longer than a given limit.
 | input | 
 | target | 
 
-<a name="shortModuleName"></a>
+<a name="helpers.shortModuleName"></a>
 
-## shortModuleName(name)
+### helpers.shortModuleName(name)
 Returns the stripped module name (remove the "bootprint-"-prefix if applicable
 
-**Kind**: global function  
+**Kind**: static method of [<code>helpers</code>](#helpers)  
+**Access**: public  
 
 | Param | Type | Description |
 | --- | --- | --- |

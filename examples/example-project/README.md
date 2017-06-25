@@ -2,7 +2,6 @@
 
 [![NPM version](https://badge.fury.io/js/example-project.svg)](http://badge.fury.io/js/example-project)
 
-
 > Example to demonstrate the thought-plugin-bootprint
 
 

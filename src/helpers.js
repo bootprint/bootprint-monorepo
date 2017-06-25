@@ -1,5 +1,9 @@
 var {Bootprint} = require('bootprint')
 
+/**
+ * Default Handlebars-helpers for Thought
+ * @name helpers
+ */
 module.exports = {
   moduleConfig,
   runBootprint,
@@ -20,6 +24,9 @@ module.exports = {
  * {{#codeBlock lang='hbs'}}
  * Some markdown hbs template
  * {{/codeBlock}}
+ *
+ * @access public
+ * @memberOf helpers
  */
 function codeBlock (options) {
   var lang = (options.hash && options.hash.lang) || ''
@@ -48,6 +55,7 @@ function codeBlock (options) {
  * @param options
  * @returns {Promise}
  * @access public
+ * @memberOf helpers
  */
 function moduleConfig (options) {
   // Load from current working directsory. The cwd should be
@@ -75,6 +83,8 @@ function moduleConfig (options) {
  * Abbreviate a text to be no longer than a given limit.
  * @param {string} text the text
  * @param {number} limit the maximum length (excluding the '...' that is added if the text was limited)
+ * @access public
+ * @memberOf helpers
  */
 function abbrev (text, limit) {
   if (!text) {
@@ -92,6 +102,8 @@ function abbrev (text, limit) {
  * @param input
  * @param target
  * @returns {*}
+ * @access public
+ * @memberOf helpers
  */
 function runBootprint (module, input, target) {
   return new Bootprint(module, {})
@@ -108,6 +120,8 @@ function runBootprint (module, input, target) {
 /**
  * Returns the stripped module name (remove the "bootprint-"-prefix if applicable
  * @param {string} name the module name
+ * @access public
+ * @memberOf helpers
  */
 function shortModuleName (name) {
   if (name.lastIndexOf('bootprint-', 0) === 0) {
