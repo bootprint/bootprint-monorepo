@@ -217,7 +217,7 @@ npm -g install {{package.name}}
 After installing the package globally, you can run bootprint with the command
 
 ```bash
-bootprint {{package.name}} {{#withPackageOf 'examples/example.json'}}{{@rawUrl}}{{/withPackageOf}} target
+bootprint {{shortModuleName package.name}} {{#withPackageOf 'examples/example.json'}}{{@rawUrl}}{{/withPackageOf}} target
 ```
 
 {{>bootprint/example-description.md}}
