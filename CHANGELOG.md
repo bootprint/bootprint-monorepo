@@ -1,6 +1,10 @@
 # Release notes for `thought-plugin-bootprint`
 
 <a name="current-release"></a>
+# Version 1.1.0 (Sat, 05 Aug 2017 22:19:15 GMT)
+
+* [257f00a](https://github.com/bootprint/thought-plugin-bootprint/commit/257f00a),[ca729cc](https://github.com/bootprint/thought-plugin-bootprint/commit/ca729cc) Add table of contents for included helper-files from different modules - Nils Knappmeier
+
 # Version 1.0.2 (Sat, 05 Aug 2017 21:22:42 GMT)
 
 * [c449422](https://github.com/bootprint/thought-plugin-bootprint/commit/c449422) Show short-module-name in "usage"-section without "bootprint-"-prefix - Nils Knappmeier
