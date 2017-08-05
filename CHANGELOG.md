@@ -1,6 +1,10 @@
 # Release notes for `thought-plugin-bootprint`
 
 <a name="current-release"></a>
+# Version 1.0.2 (Sat, 05 Aug 2017 21:22:42 GMT)
+
+* [c449422](https://github.com/bootprint/thought-plugin-bootprint/commit/c449422) Show short-module-name in "usage"-section without "bootprint-"-prefix - Nils Knappmeier
+
 # Version 1.0.1 (Sat, 05 Aug 2017 17:11:34 GMT)
 
 * [3bde203](https://github.com/bootprint/thought-plugin-bootprint/commit/3bde203) Bump customize-engine-handlebars to 2.2.2 - Nils Knappmeier

@@ -1,6 +1,6 @@
 {
   "name": "thought-plugin-bootprint",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A thought-plugin for Bootprint modules",
   "repository": {
     "type": "git",
