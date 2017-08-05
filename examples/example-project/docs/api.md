@@ -46,6 +46,25 @@ This page describes the API of this Bootprint-module
 
 ## Partials
 
+<a name="partial-block-partial"></a>
+### block-partial
+
+<table>
+    <tr>
+        <th>Source file</th>
+        <td>
+<a href="">example-project @ 1.0.0 / handlebars/partials/block-partial.hbs</a>        </td>
+    </tr>
+        <tr>
+            <th>Uses partials</th>
+            <td>
+                    <a href="#partial-partial-block">@partial-block</a>
+            </td>
+        </tr>
+</table>
+
+
+
 <a name="partial-dirdrei"></a>
 ### dir/drei
 

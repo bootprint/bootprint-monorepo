@@ -1,6 +1,6 @@
 # example-project 
 
-[![NPM version](https://badge.fury.io/js/example-project.svg)](http://badge.fury.io/js/example-project)
+[![NPM version](https://img.shields.io/npm/v/example-project.svg)](https://npmjs.com/package/example-project)
 
 > Example to demonstrate the thought-plugin-bootprint
 

@@ -19,7 +19,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint --fix .",
-    "test": "mocha && npm run lint",
+    "test": "mocha && npm run lint && npm run thought",
     "coverage": "istanbul cover ./node_modules/.bin/_mocha --report lcovonly",
     "postcoverage": "istanbul check-coverage coverage/coverage.json --statements 100",
     "thought": "thought run -a && cd examples/example-project && thought run -a",
@@ -28,7 +28,7 @@
   "dependencies": {
     "bootprint": "^2.0.0",
     "customize": "^2.0.1",
-    "customize-engine-handlebars": "^2.2.1",
+    "customize-engine-handlebars": "^2.2.2",
     "customize-engine-less": "^2.0.0",
     "thought-plugin-jsdoc": "^1.0.1",
     "tree-from-paths": "^1.0.0"

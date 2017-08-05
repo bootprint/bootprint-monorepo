@@ -1,6 +1,6 @@
 # thought-plugin-bootprint 
 
-[![NPM version](https://badge.fury.io/js/thought-plugin-bootprint.svg)](http://badge.fury.io/js/thought-plugin-bootprint)
+[![NPM version](https://img.shields.io/npm/v/thought-plugin-bootprint.svg)](https://npmjs.com/package/thought-plugin-bootprint)
 [![Travis Build Status](https://travis-ci.org/bootprint/thought-plugin-bootprint.svg?branch=master)](https://travis-ci.org/bootprint/thought-plugin-bootprint)
 [![Coverage Status](https://img.shields.io/coveralls/bootprint/thought-plugin-bootprint.svg)](https://coveralls.io/r/bootprint/thought-plugin-bootprint)
 [![Greenkeeper badge](https://badges.greenkeeper.io/bootprint/thought-plugin-bootprint.svg)](https://greenkeeper.io/)
