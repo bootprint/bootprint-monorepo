@@ -1,6 +1,11 @@
 # Release notes for `thought-plugin-bootprint`
 
 <a name="current-release"></a>
+# Version 1.0.1 (Sat, 05 Aug 2017 17:11:34 GMT)
+
+* [3bde203](https://github.com/bootprint/thought-plugin-bootprint/commit/3bde203) Bump customize-engine-handlebars to 2.2.2 - Nils Knappmeier
+* [79eb624](https://github.com/bootprint/thought-plugin-bootprint/commit/79eb624) Chore: Remove doc-structure of helpers-apidocs - Nils Knappmeier
+
 # Version 1.0.0 (Sat, 24 Jun 2017 21:53:39 GMT)
 
 * [bb8a617](https://github.com/bootprint/thought-plugin-bootprint/commit/bb8a617) Various updates and added features - Nils Knappmeier
