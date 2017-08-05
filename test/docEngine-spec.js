@@ -253,6 +253,20 @@ describe('the docEngine', function () {
     ])
   })
 
+  it('should not break on (i.e. ignore) calls to @partial-block', function () {
+    var hb2 = emptyEngine.merge({
+      handlebars: {
+        partials: 'test/fixtures/withPartialBlock',
+        templates: 'test/fixtures/templates'
+      }
+    })
+
+    // Check template -> partial "a" -> partial "eins" -> @partial-block
+    // Partial-block must be ignored, so "eins" may not have children)
+    return expect(hb2.run().then(x => x.handlebars.callHierarchy.children[0].children[0].children))
+      .to.eventually.deep.equal([])
+  })
+
   it('should include the source-locators property', function () {
     var hb2 = hb.merge({
       handlebars: {
