@@ -8,7 +8,11 @@ This page describes the API of this Bootprint-module
   * [Partials](#partials)
 * [Handlebars Helpers](#helpers)
 {{#each handlebars.helpers}}
-  * from {{#withPackageOf .}}[{{@package.name}}@{{@package.version}}](#helpers-{{htmlId @package.name}}){{/withPackageOf}}
+{{#if .}} 
+{{#withPackageOf .}}
+  * from [{{@package.name}}@{{@package.version}}](#helpers-{{htmlId @package.name}})
+{{/withPackageOf}}
+{{/if}}
 {{/each}}
 * [LessCSS](#lesscss)
     

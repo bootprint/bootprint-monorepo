@@ -6,6 +6,7 @@ This page describes the API of this Bootprint-module
 * [Templates](#templates)
   * [Partials](#partials)
 * [Handlebars Helpers](#helpers)
+  * from [example-project@1.0.0](#helpers-example-project)
 * [LessCSS](#lesscss)
     
 # Templates
@@ -143,9 +144,12 @@ This partial calls another partial.
 
      
 
-# Helpers 
 
-(from [example-project@1.0.0/handlebars/helpers.js]())
+<a name="helpers-example-project"></a>
+# Helpers (example-project)
+
+(from [example-project@1.0.0/handlebars/helpers.js]()
+)
 
 <a name="shout"></a>
 

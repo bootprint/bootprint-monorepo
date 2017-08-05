@@ -19,6 +19,13 @@ This page describes the API of this Bootprint-module
 * [Templates](#templates)
   * [Partials](#partials)
 * [Handlebars Helpers](#helpers)
+{{#each handlebars.helpers}}
+{{#if .}} 
+{{#withPackageOf .}}
+  * from [{{@package.name}}@{{@package.version}}](#helpers-{{htmlId @package.name}})
+{{/withPackageOf}}
+{{/if}}
+{{/each}}
 * [LessCSS](#lesscss)
     
 # Templates
@@ -35,12 +42,17 @@ This page describes the API of this Bootprint-module
 {{>bootprint/hbs-file.md name=@key type='partial'}}    
 {{/each}}
      
+{{!-- ##### Handlebars Helpers ##### --}}
 {{#each handlebars.helpers}}
 
 {{#if .}}
-# Helpers 
 
-(from {{#withPackageOf .}}[{{@package.name}}@{{@package.version}}/{{@relativePath}}]({{@url}}){{/withPackageOf}})
+{{#withPackageOf .}}
+<a name="helpers-{{htmlId @package.name}}"></a>
+# Helpers ({{@package.name}})
+
+(from [{{@package.name}}@{{@package.version}}/{{@relativePath}}]({{@url}})
+{{/withPackageOf}})
 
 {{jsdoc .}}
 {{else}}
