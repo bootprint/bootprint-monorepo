@@ -9,7 +9,9 @@
 /* global it */
 /* global before */
 
-var expect = require('chai').expect
+var chai = require('chai')
+chai.use(require('dirty-chai'))
+var expect = chai.expect
 var path = require('path')
 var qfs = require('m-io/fs')
 var fs = require('fs')
@@ -28,7 +30,7 @@ function outputFile (filename) {
 }
 
 describe('The bootprint-base module', function () {
-  this.timeout(10000)
+  this.timeout(20000)
 
   it('should include the bootstrap javascript in the output', function () {
     return require('bootprint')
@@ -53,7 +55,7 @@ describe('The bootprint-base module', function () {
 
               var jqueryIndex = bundle.indexOf('jQuery requires a window with a document')
               var bootstrapIndex = bundle.indexOf("Bootstrap's JavaScript requires jQuery")
-              expect(jqueryIndex < bootstrapIndex, 'jQuery must be included before Bootstrap').to.be.true
+              expect(jqueryIndex < bootstrapIndex, 'jQuery must be included before Bootstrap').to.be.true()
             })
   })
 })
