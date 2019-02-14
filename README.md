@@ -122,6 +122,9 @@ The output of this example is:
 see [docs/examples.md](docs/examples.md) for more examples
 ## API-documentation
 
+This package will always support the latest version of NodeJS and as well as the current LTS version.
+In the future, it will not be considered a breaking change to drop support of a pre-LTS version of NodeJS.
+
 see [docs/api.md](docs/api.md)
 
 # License
