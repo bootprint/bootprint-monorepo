@@ -43,7 +43,7 @@ describe('the docEngine', function () {
   })
 
   it('should load the path to helper files', function () {
-    return expect(hb.run().then((c) => ({helpers: c.handlebars.helpers})))
+    return expect(hb.run().then((c) => ({ helpers: c.handlebars.helpers })))
       .to.eventually.deep.equal({
         'helpers': [
           'test/fixtures/helpers.js'
@@ -52,7 +52,7 @@ describe('the docEngine', function () {
   })
 
   it('should load partials and templates augment them with callers, callees extracted comments', function () {
-    return expect(hb.run().then((c) => ({partials: c.handlebars.partials, templates: c.handlebars.templates})))
+    return expect(hb.run().then((c) => ({ partials: c.handlebars.partials, templates: c.handlebars.templates })))
       .to.eventually.deep.equal({
         'partials': {
           'eins': {
@@ -116,7 +116,7 @@ describe('the docEngine', function () {
       handlebars: {
         helpers: 'test/fixtures/helpers2.js'
       }
-    }).run().then((c) => ({helpers: c.handlebars.helpers})))
+    }).run().then((c) => ({ helpers: c.handlebars.helpers })))
       .to.eventually.deep.equal({
         'helpers': [
           'test/fixtures/helpers.js',
@@ -131,7 +131,7 @@ describe('the docEngine', function () {
         partials: 'test/fixtures/testPartials2',
         templates: 'test/fixtures/templates-cleanInput'
       }
-    }).run().then((c) => ({partials: c.handlebars.partials, templates: c.handlebars.templates})))
+    }).run().then((c) => ({ partials: c.handlebars.partials, templates: c.handlebars.templates })))
       .to.eventually.deep.equal({
         'partials': {
           'drei': {

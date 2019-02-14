@@ -127,7 +127,7 @@ describe('customize-engine-handlebars', function () {
           }
         },
         data: {
-          context: {a: '123'},
+          context: { a: '123' },
           arg: '456'
         }
       }
@@ -142,7 +142,7 @@ describe('customize-engine-handlebars', function () {
         helpers: {
           helper: (abc, options) => options.customize.config.preprocessor ? 'yes' : 'no'
         },
-        data: {context: {}}
+        data: { context: {} }
       }
     })
     return expect(hb2.run().then(x => x.handlebars.singleArgument)).to.eventually.equal('yes')
@@ -155,7 +155,7 @@ describe('customize-engine-handlebars', function () {
         helpers: {
           helper: (abc, options) => options.customize.engine.constructor.name
         },
-        data: {context: {}}
+        data: { context: {} }
       }
     })
     return expect(hb2.run().then(x => x.handlebars.singleArgument)).to.eventually.equal('HandlebarsEnvironment')

@@ -11,7 +11,7 @@
 var chai = require('chai')
 
 var expect = chai.expect
-var {augmentSingleFile, augment, hierarchy} = require('../lib/partial-details')
+var { augmentSingleFile, augment, hierarchy } = require('../lib/partial-details')
 
 describe('partial-details:', function () {
   describe('the augmentSingleFile-function', function () {
@@ -23,7 +23,7 @@ describe('partial-details:', function () {
         path: 'path/to/file.hbs',
         contents: '{{>a}}{{#if abc}}123\n{{>b}}456{{/if}}{{> c}}',
         comments: [],
-        callsPartial: [{name: 'a', line: 1}, {name: 'b', line: 2}, {name: 'c', line: 2}]
+        callsPartial: [{ name: 'a', line: 1 }, { name: 'b', line: 2 }, { name: 'c', line: 2 }]
       })
     })
 

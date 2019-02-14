@@ -74,7 +74,7 @@ module.exports = {
   docEngine: require('./lib/doc-engine'),
   defaultConfig: {
     partials: {},
-    partialWrapper: function (contents, name) {
+    partialWrapper (contents, name) {
       return contents
     },
     helpers: {},
@@ -90,7 +90,7 @@ module.exports = {
    * @return {InternalHbsConfig} the configuration that is passed into the merging process
    *    later expected as parameter to the main function of the engine
    */
-  preprocessConfig: function preprocessConfig (config) {
+  preprocessConfig (config) {
     var helpers = moduleIfString(config.helpers, 'helpers')
     // The helpers file may export an object or a promise for an object.
     // Or a function returning an object or a promise for an object.
@@ -121,7 +121,7 @@ module.exports = {
    * @param config
    * @returns {string[]}
    */
-  watched: function (config) {
+  watched (config) {
     return _.flatten([
       config.partials,
       config.templates,
@@ -142,64 +142,59 @@ module.exports = {
    * Runs Handlebars with the data object
    * @param {InternalHbsConfig} config the configuration
    */
-  run: function run (config) {
+  async run (config) {
     // Run the preprocessor
-    return Promise.resolve(config.preprocessor(config.data))
     // Resolve any new promises
-      .then(deep)
-      // Process the result with Handlebars
-      .then(function (data) {
-        debug('Data after preprocessing:', data)
-        // We use the `promised-handlebars` module to
-        // support helpers returning promises
-        var hbs = promisedHandlebars(Handlebars)
-        if (config.addSourceLocators) {
-          require('handlebars-source-locators')(hbs)
-        }
+    const data = await deep(config.preprocessor(config.data))
 
-        var partials = _.mapValues(contents(config.partials), config.partialWrapper)
-        hbs.registerPartial(partials)
-        hbs.registerHelper(addEngine(config.helpers, hbs, config))
-        var templates = contents(config.templates)
+    debug('Data after preprocessing:', data)
+    // Process the result with Handlebars
+    // We use the `promised-handlebars` module to
+    // support helpers returning promises
+    const hbs = promisedHandlebars(Handlebars)
+    if (config.addSourceLocators) {
+      require('handlebars-source-locators')(hbs)
+    }
+    const partials = _.mapValues(contents(config.partials), config.partialWrapper)
+    hbs.registerPartial(partials)
+    hbs.registerHelper(addEngine(config.helpers, hbs, config))
+    const templates = contents(config.templates)
 
-        var result = _.mapValues(templates, function (template, key) {
-          var fn = hbs.compile(template, config.hbsOptions)
-          debug('hbs-data', data)
-
-          // Prepare input data with non-enumerable target-file-property
-          var rootObject = {}
-          Object.defineProperty(rootObject, '__customize_target_file__', {
-            enumerable: false,
-            value: key
-          })
-
-          var result = fn(Object.assign(rootObject, data))
-          debug('fn(data) =' + result)
-          return result
-        })
-
-        if (config.addSourceLocators) {
-          // Lookup-tables for partial-/template-name to the source-file
-          // (which contains the original path to the actual file)
-          var partialToSourceFile = _.mapKeys(config.partials, _.stripHandlebarsExt)
-          var templateToSourceFile = _.mapKeys(config.templates, _.stripHandlebarsExt)
-          result = _.mapValues(result, function (contents, filename) {
-            // Post-process locator-tags to include file-paths
-            return contents.then((resolvedContents) => resolvedContents.replace(
-              /(<sl line="\d+" col="\d+")( partial="(.+?)")?(><\/sl>)/g,
-              function (match, head, partialPart, partialName, tail) {
-                if (partialName) {
-                  return head + partialPart + ' file="' + partialToSourceFile[partialName].path + '"' + tail
-                } else {
-                  return head + ' file="' + templateToSourceFile[filename].path + '"' + tail
-                }
-              }
-            ))
-          })
-        }
-
-        return result
+    // Compile and execute templates
+    let result = await deep(_.mapValues(templates, function (template, key) {
+      // Prepare input data with non-enumerable target-file-property
+      var rootObject = {}
+      Object.defineProperty(rootObject, '__customize_target_file__', {
+        enumerable: false,
+        value: key
       })
+
+      var compiledTemplate = hbs.compile(template, config.hbsOptions)
+      var templateResult = compiledTemplate(Object.assign(rootObject, data))
+      debug(`${key}(data) = ${templateResult}`)
+      return templateResult
+    }))
+
+    if (config.addSourceLocators) {
+      // Lookup-tables for partial-/template-name to the source-file
+      // (which contains the original path to the actual file)
+      var partialToSourceFile = _.mapKeys(config.partials, _.stripHandlebarsExt)
+      var templateToSourceFile = _.mapKeys(config.templates, _.stripHandlebarsExt)
+      result = _.mapValues(result, async function (contents, filename) {
+        // Post-process locator-tags to include file-paths
+        return (await contents).replace(
+          /(<sl line="\d+" col="\d+")( partial="(.+?)")?(><\/sl>)/g,
+          function (match, head, partialPart, partialName, tail) {
+            if (partialName) {
+              return head + partialPart + ' file="' + partialToSourceFile[partialName].path + '"' + tail
+            } else {
+              return head + ' file="' + templateToSourceFile[filename].path + '"' + tail
+            }
+          }
+        )
+      })
+    }
+    return result
   }
 }
 
