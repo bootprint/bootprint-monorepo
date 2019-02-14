@@ -96,9 +96,9 @@ function Customize (config, parentConfig, engines) {
     deep(_config).then(function (config) {
       debugState('New configuration', config)
     }, /* istanbul ignore next */
-      function (e) {
-        console.error('Error while debug-logging the built configuration ' + e.stack) // eslint-disable-line no-console
-      })
+    function (e) {
+      console.error('Error while debug-logging the built configuration ' + e.stack) // eslint-disable-line no-console
+    })
   }
 
   /**
@@ -245,7 +245,7 @@ function Customize (config, parentConfig, engines) {
       _metadata.config.modules.push(customizeModule.package)
     }
 
-    return customizeModule(new Customize({_metadata: _metadata}, _config, engines))
+    return customizeModule(new Customize({ _metadata: _metadata }, _config, engines))
   }
 
   /**
@@ -364,7 +364,7 @@ function customOverrider (a, b, propertyName) {
   if (isPromiseAlike(a) || isPromiseAlike(b)) {
     return Promise.all([a, b]).then(function ([_a, _b]) {
       // Merge the promise results
-      return mergeWith({}, {x: _a}, {x: _b}, customOverrider).x
+      return mergeWith({}, { x: _a }, { x: _b }, customOverrider).x
     })
   }
   // None of these options apply. Implicit "undefined" return value to invoke default overrider.

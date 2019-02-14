@@ -30,12 +30,12 @@ var testee = customize()
     test: {
       files: 'test/fixtures/testPartials1',
       objects: {
-        a: {x: 'x1', y: 'y1'},
-        b: {x: 'x1', y: 'y1'}
+        a: { x: 'x1', y: 'y1' },
+        b: { x: 'x1', y: 'y1' }
       },
       leafs: {
-        a: {x: 'x1', y: 'y1'},
-        b: {x: 'x1', y: 'y1'}
+        a: { x: 'x1', y: 'y1' },
+        b: { x: 'x1', y: 'y1' }
       },
       array: ['item1'],
       withParent: function (value) {
@@ -69,14 +69,14 @@ describe('After loading a config', function () {
   })
   it('the object values should exist', function () {
     expect(testResult.test.objects).to.eql({
-      a: {x: 'x1', y: 'y1'},
-      b: {x: 'x1', y: 'y1'}
+      a: { x: 'x1', y: 'y1' },
+      b: { x: 'x1', y: 'y1' }
     })
   })
   it('the leaf values should exist', function () {
     expect(testResult.test.leafs).to.eql({
-      a: {x: 'x1', y: 'y1'},
-      b: {x: 'x1', y: 'y1'}
+      a: { x: 'x1', y: 'y1' },
+      b: { x: 'x1', y: 'y1' }
     })
   })
   it('the array values should exist', function () {
@@ -134,14 +134,14 @@ describe('After merging another config', function () {
   })
   it('object values should be deep merged', function () {
     expect(testResult.test.objects).to.eql({
-      a: {x: 'x1', y: 'y1'},
-      b: {x: 'x1', y: 'y2'}
+      a: { x: 'x1', y: 'y1' },
+      b: { x: 'x1', y: 'y2' }
     })
   })
   it('leaf values should be replaced', function () {
     expect(testResult.test.leafs).to.eql({
-      a: {x: 'x1', y: 'y1'},
-      b: {y: 'y2'}
+      a: { x: 'x1', y: 'y1' },
+      b: { y: 'y2' }
     })
   })
   it('array values should exist', function () {
@@ -178,14 +178,14 @@ describe('after loading a module', function () {
   })
   it('object values should be deep merged', function () {
     return expect(testResult.test.objects).to.eql({
-      a: {x: 'x1', y: 'y1'},
-      b: {x: 'x1', y: 'y2'}
+      a: { x: 'x1', y: 'y1' },
+      b: { x: 'x1', y: 'y2' }
     })
   })
   it('leaf values should be replaced', function () {
     return expect(testResult.test.leafs).to.eql({
-      a: {x: 'x1', y: 'y1'},
-      b: {y: 'y2'}
+      a: { x: 'x1', y: 'y1' },
+      b: { y: 'y2' }
     })
   })
   it('array values should exist', function () {
@@ -207,7 +207,7 @@ describe('the "merge"-method', function () {
 
   it('should throw an error if the config data for an engine that is not registered', function () {
     return expect(function () {
-      return testee.merge({test2: {}})
+      return testee.merge({ test2: {} })
     }).to.throw(Error)
   })
 
@@ -295,7 +295,7 @@ describe('The "registerEngine"-method', function () {
   })
 
   it('should use an empty default config if none is provided', function () {
-    return expect(customize().registerEngine('test', minimalEngine).run()).to.eventually.deep.equal({test: {}})
+    return expect(customize().registerEngine('test', minimalEngine).run()).to.eventually.deep.equal({ test: {} })
   })
 })
 
@@ -364,7 +364,7 @@ describe('the "run"-method', function () {
     })
 
   it('should only run a single engine, if the "onlyEngine"-option is set', function () {
-    return expect(twoEngines.run({onlyEngine: 'test1'})).to.eventually.deep.equal({
+    return expect(twoEngines.run({ onlyEngine: 'test1' })).to.eventually.deep.equal({
       'test1': 'result1',
       'test2': undefined
     })

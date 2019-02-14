@@ -39,7 +39,7 @@ function readFiles (directoryPath, options) {
   }
   var _options = options || {}
   // Collect all files
-  var result = util.asPromise((cb) => glob(_options.glob || '**', {cwd: directoryPath, mark: true}, cb))
+  var result = util.asPromise((cb) => glob(_options.glob || '**', { cwd: directoryPath, mark: true }, cb))
     .then(function (relativePaths) {
       var set = relativePaths
         // Ignore directories
@@ -59,8 +59,8 @@ function readFiles (directoryPath, options) {
           return {
             path: path.relative(process.cwd(), fullPath),
             contents: _options.stream
-              ? fs.createReadStream(fullPath, {encoding: _options.encoding})
-              : util.asPromise((cb) => fs.readFile(fullPath, {encoding: _options.encoding}, cb))
+              ? fs.createReadStream(fullPath, { encoding: _options.encoding })
+              : util.asPromise((cb) => fs.readFile(fullPath, { encoding: _options.encoding }, cb))
           }
         }))
       })
