@@ -1,6 +1,6 @@
 # customize 
 
-[![NPM version](https://badge.fury.io/js/customize.svg)](http://badge.fury.io/js/customize)
+[![NPM version](https://img.shields.io/npm/v/customize.svg)](https://npmjs.com/package/customize)
 [![Travis Build Status](https://travis-ci.org/bootprint/customize.svg?branch=master)](https://travis-ci.org/bootprint/customize)
 [![Coverage Status](https://img.shields.io/coveralls/bootprint/customize.svg)](https://coveralls.io/r/bootprint/customize)
 [![Greenkeeper badge](https://badges.greenkeeper.io/bootprint/customize.svg)](https://greenkeeper.io/)
@@ -286,6 +286,9 @@ Customize uses the [debug](https://npmjs.com/package/debug) module for debug log
 
 ##  API-reference
 
+This package will always support the latest version of NodeJS and as well as the current LTS version.
+In the future, it will not be considered a breaking change to drop support of a pre-LTS version of NodeJS.
+
 The exported module is a function that creates a new empty Customize-instance.
 
 <a name="module_customize"></a>
@@ -319,32 +322,32 @@ Create a new Customize object with an empty configuration
 ### customize.debugState
 For coverage testing: Expose the debugState object so it can be enabled an disabled in testcases
 
-**Kind**: static property of <code>[customize](#module_customize)</code>  
+**Kind**: static property of [<code>customize</code>](#module_customize)  
 <a name="module_customize.debug"></a>
 
 ### customize.debug
 For coverage testing: Expose the debug object so it can be enabled an disabled in testcases
 
-**Kind**: static property of <code>[customize](#module_customize)</code>  
+**Kind**: static property of [<code>customize</code>](#module_customize)  
 <a name="module_customize.Customize"></a>
 
 ### customize.Customize : <code>customize</code>
 Exposes the constructor of the `customize` object
 
-**Kind**: static property of <code>[customize](#module_customize)</code>  
+**Kind**: static property of [<code>customize</code>](#module_customize)  
 <a name="module_customize.overrider"></a>
 
 ### customize.overrider : <code>customOverrider</code>
 Custom overrider-function (that is used as `customizer` in (lodash#merge)[https://lodash.com/docs#merge]
 
-**Kind**: static property of <code>[customize](#module_customize)</code>  
+**Kind**: static property of [<code>customize</code>](#module_customize)  
 <a name="module_customize.withParent"></a>
 
 ### customize.withParent
 Wrap a function so that if it overrides another function, that function will
 be available as `this.parent`
 
-**Kind**: static property of <code>[customize](#module_customize)</code>  
+**Kind**: static property of [<code>customize</code>](#module_customize)  
 **Read only**: true  
 **Api**: public  
 
@@ -359,7 +362,7 @@ Create a promise that is regarded as leaf in the configuration tree.
 That means, that the overrider is not resolving this promise when overriding values.
 Promised object values will not be merged but replaced.
 
-**Kind**: static property of <code>[customize](#module_customize)</code>  
+**Kind**: static property of [<code>customize</code>](#module_customize)  
 **Access**: public  
 **Read only**: true  
 
@@ -370,7 +373,7 @@ Promised object values will not be merged but replaced.
 <a name="module_customize..Customize"></a>
 
 ### customize~Customize
-**Kind**: inner class of <code>[customize](#module_customize)</code>  
+**Kind**: inner class of [<code>customize</code>](#module_customize)  
 
 * [~Customize](#module_customize..Customize)
     * [new Customize()](#new_module_customize..Customize_new)
@@ -401,7 +404,7 @@ this module
 #### customize.registerEngine(id, engine)
 Register an engine
 
-**Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
+**Kind**: instance method of [<code>Customize</code>](#module_customize..Customize)  
 **Access**: public  
 
 | Param | Type | Description |
@@ -420,14 +423,14 @@ Register an engine
 Returns the JSON-schema that configuration objects must match for this
 configuration. The schema does not contain main description property
 
-**Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
+**Kind**: instance method of [<code>Customize</code>](#module_customize..Customize)  
 <a name="module_customize..Customize+merge"></a>
 
 #### customize.merge(config) ⇒ <code>Customize</code>
 Creates a new instance of Customize. The configuration values of the current Customize
 are used as default values and are overridden by the configuration provided as parameter.
 
-**Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
+**Kind**: instance method of [<code>Customize</code>](#module_customize..Customize)  
 **Returns**: <code>Customize</code> - the new Customize instance  
 **Api**: public  
 
@@ -446,7 +449,7 @@ This function needs to be passed in here.
 A new Customize will be returned that overrides the current configuration
 with the configuration of the module.
 
-**Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
+**Kind**: instance method of [<code>Customize</code>](#module_customize..Customize)  
 **Returns**: <code>Customize</code> - the Customize instance returned by the module  
 **Access**: public  
 
@@ -461,7 +464,7 @@ Return a promise for the merged configuration.
 This functions is only needed to inspect intermediate configuration results
 (i.e. for testing and documentation purposes)
 
-**Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
+**Kind**: instance method of [<code>Customize</code>](#module_customize..Customize)  
 **Returns**: <code>Promise.&lt;object&gt;</code> - a promise for the whole configuration  
 **Access**: public  
 <a name="module_customize..Customize+watched"></a>
@@ -470,7 +473,7 @@ This functions is only needed to inspect intermediate configuration results
 Return a promise for the files needing to be watched in watch-mode,
 indexed by engine.
 
-**Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
+**Kind**: instance method of [<code>Customize</code>](#module_customize..Customize)  
 **Returns**: <code>Promise.&lt;object.&lt;Array.&lt;string&gt;&gt;&gt;</code> - a promise for the files to be watched.  
 **Access**: public  
 <a name="module_customize..Customize+run"></a>
@@ -478,7 +481,7 @@ indexed by engine.
 #### customize.run([options]) ⇒ <code>Promise.&lt;object&gt;</code>
 Run each engine with its part of the config.
 
-**Kind**: instance method of <code>[Customize](#module_customize..Customize)</code>  
+**Kind**: instance method of [<code>Customize</code>](#module_customize..Customize)  
 **Returns**: <code>Promise.&lt;object&gt;</code> - an object containing on property per registered engine
  (the key is the engine-id) containing the result of each engine  
 **Access**: public  
@@ -491,7 +494,7 @@ Run each engine with its part of the config.
 <a name="module_customize..customize"></a>
 
 ### customize~customize() ⇒ <code>Customize</code>
-**Kind**: inner method of <code>[customize](#module_customize)</code>  
+**Kind**: inner method of [<code>customize</code>](#module_customize)  
 **Api**: public  
 
 
