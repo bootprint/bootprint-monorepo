@@ -3,6 +3,17 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 3.0.0 (Thu, 14 Feb 2019 21:28:03 GMT)
+
+* [29b9dc9](https://github.com/bootprint/customize/commit/29b9dc9) chore: drop support for Node pre LTS - Nils Knappmeier
+* [629e43b](https://github.com/bootprint/customize/commit/629e43b) chore: bump dependency-versions and node 10 - Nils Knappmeier
+* [488d9d8](https://github.com/bootprint/customize/commit/488d9d8) chore(package): update mocha to version 4.0.0 - greenkeeper[bot]
+* [ef35f88](https://github.com/bootprint/customize/commit/ef35f88) Remove obsolete comment - Nils Knappmeier
+* [8b7298a](https://github.com/bootprint/customize/commit/8b7298a) Remove "preversion"-script as "thought" is now a devDependency - Nils Knappmeier
+* [67a0fae](https://github.com/bootprint/customize/commit/67a0fae) Remove "prethought"-script from package.json - Nils Knappmeier
+
+
+
 # Version 2.0.1 (Sat, 08 Apr 2017 21:27:05 GMT)
 
 * [0eea4eb](https://github.com/bootprint/customize/commit/0eea4eb) Fix files-helpers for directories with subdirectories - Nils Knappmeier
