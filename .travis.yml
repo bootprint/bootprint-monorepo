@@ -2,7 +2,7 @@ sudo: false
 language: "node_js"
 node_js:
   - "node"
-  - "lts"
+  - "lts/*"
 script:
   - npm install
   - npm run coverage
