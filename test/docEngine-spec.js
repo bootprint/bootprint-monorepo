@@ -209,15 +209,6 @@ describe('the docEngine', function () {
     ])
   })
 
-  it('should not include helper- or preprocessor-modules that do not exist', function () {
-    return expect(emptyEngine.merge({
-      handlebars: {
-        helpers: 'test/fixtures/non-existing-helper.js',
-        preprocessor: 'test/fixtures/non-existing-preprocessor.js'
-      }
-    }).run()).to.deep.equal({})
-  })
-
   it('should include the source-code of the partial wrapper', function () {
     var hb2 = emptyEngine.merge({
       handlebars: {
