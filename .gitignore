@@ -57,3 +57,4 @@ npm-debug.log
 *.iml
 /test-output/
 /examples/target/
+.nyc_output
