@@ -3,6 +3,13 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 3.0.0 (Fri, 15 Feb 2019 20:58:44 GMT)
+
+* [7475438](https://github.com/bootprint/customize-engine-less/commit/7475438) chore: drop support for pre-LTS versions of NodeJS (BREAKING) - Nils Knappmeier
+* [41a8eb6](https://github.com/bootprint/customize-engine-less/commit/41a8eb6) chore: bump dependency versions - Nils Knappmeier
+
+
+
 # Version 2.0.0 (Sun, 09 Apr 2017 09:00:42 GMT)
 
 * [8b97629](https://github.com/bootprint/customize-engine-less/commit/8b97629) Bump devDepenency to thought@1.1.2 - Nils Knappmeier
