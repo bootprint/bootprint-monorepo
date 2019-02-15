@@ -3,6 +3,16 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 3.0.0 (Fri, 15 Feb 2019 20:25:52 GMT)
+
+* [e31345a](https://github.com/bootprint/customize-engine-handlebars/commit/e31345a) chore: replace get-promise by got - Nils Knappmeier
+* [e845bc5](https://github.com/bootprint/customize-engine-handlebars/commit/e845bc5) test: remove errornous test - Nils Knappmeier
+* [d9de82c](https://github.com/bootprint/customize-engine-handlebars/commit/d9de82c) refactor/style/chore:  bump dependencies, apply new standard-style, refactor some code to use es6 - Nils Knappmeier
+* [ae65ed6](https://github.com/bootprint/customize-engine-handlebars/commit/ae65ed6) chore: drop support for pre-LTS NodeJS versions (BREAKING) - Nils Knappmeier
+* [6b28a11](https://github.com/bootprint/customize-engine-handlebars/commit/6b28a11) Update README.md - Nils Knappmeier
+
+
+
 # Version 2.2.2 (Sat, 05 Aug 2017 17:05:36 GMT)
 
 * [e91e402](https://github.com/bootprint/customize-engine-handlebars/commit/e91e402) doc-engine should not break if partials call @partial-block - Nils Knappmeier
