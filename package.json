@@ -19,8 +19,8 @@
   "scripts": {
     "lint": "eslint --fix .",
     "test": "mocha && npm run lint",
-    "coverage": "istanbul cover ./node_modules/.bin/_mocha",
-    "postcoverage": "istanbul check-coverage coverage/coverage.json --statements 100",
+    "coverage": "nyc mocha",
+    "postcoverage": "nyc check-coverage coverage/coverage.json --statements 100",
     "thought": "thought run -a",
     "version": "thoughtful changelog -o -a && npm run thought"
   },
@@ -54,9 +54,9 @@
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "istanbul": "^0.4.5",
     "json-stable-stringify": "^1.0.1",
     "mocha": "^5.2.0",
+    "nyc": "^13.3.0",
     "stream-to-string": "^1.1.0",
     "thought": "^1.1.0",
     "thought-plugin-jsdoc": "^1.0.0",
