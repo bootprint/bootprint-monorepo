@@ -3,6 +3,13 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 3.0.0 (Fri, 15 Feb 2019 21:09:50 GMT)
+
+* [c859460](https://github.com/bootprint/customize-write-files/commit/c859460) chore: bump dependency versions, use nyc instead of istanbul - Nils Knappmeier
+* [d2836a3](https://github.com/bootprint/customize-write-files/commit/d2836a3) chore: drop support for pre-LTS versions of NodeJS (BREAKING) - Nils Knappmeier
+
+
+
 # Version 2.0.1 (Fri, 21 Apr 2017 08:20:48 GMT)
 
 * [729a95d](https://github.com/bootprint/customize-write-files/commit/729a95d) Handle undefined engine results gracefully - Nils Knappmeier
