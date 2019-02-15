@@ -55,3 +55,4 @@ npm-debug.log
 .directory
 ._*
 *.iml
+.nyc_output

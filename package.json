@@ -19,33 +19,32 @@
   "scripts": {
     "lint": "eslint --fix .",
     "test": "mocha && npm run lint",
-    "coverage": "istanbul cover ./node_modules/.bin/_mocha",
-    "postcoverage": "istanbul check-coverage coverage/coverage.json --statements 100",
+    "coverage": "nyc mocha",
+    "postcoverage": "nyc check-coverage coverage/coverage.json --statements 100",
     "thought": "thought run -a",
-    "preversion": "thought --version || npm -g install thought",
     "version": "thoughtful changelog -o -a && npm run thought"
   },
   "dependencies": {
-    "less": "^2.7.2"
+    "less": "^3.9.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "chai-as-promised": "^6.0.0",
-    "customize": "^2.0.1",
-    "eslint": "^3.19.0",
-    "eslint-config-standard": "^10.2.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-node": "^4.2.2",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "istanbul": "^0.4.5",
-    "mocha": "^3.2.0",
-    "thought": "^1.1.2",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "customize": "^3.0.0",
+    "eslint": "^5.14.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.3.0",
+    "thought": "^1.5.2",
     "thoughtful-release": "^0.3.1",
-    "trace-and-clarify-if-possible": "^1.0.0"
+    "trace-and-clarify-if-possible": "^1.0.3"
   },
   "peerDependencies": {
-    "customize": "^2.0.1"
+    "customize": "^3.0.0"
   },
   "files": [
     "index.js",
