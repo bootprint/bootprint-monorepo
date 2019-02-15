@@ -1,9 +1,8 @@
 # customize-write-files 
 
-[![NPM version](https://badge.fury.io/js/customize-write-files.svg)](http://badge.fury.io/js/customize-write-files)
+[![NPM version](https://img.shields.io/npm/v/customize-write-files.svg)](https://npmjs.com/package/customize-write-files)
 [![Travis Build Status](https://travis-ci.org/bootprint/customize-write-files.svg?branch=master)](https://travis-ci.org/bootprint/customize-write-files)
 [![Coverage Status](https://img.shields.io/coveralls/bootprint/customize-write-files.svg)](https://coveralls.io/r/bootprint/customize-write-files)
-[![Greenkeeper badge](https://badges.greenkeeper.io/bootprint/customize-write-files.svg)](https://greenkeeper.io/)
 
 > Post-processor that stores the result of a customize-run in a local directory
 
@@ -28,6 +27,11 @@ The contents of the file may be one of the following
 The goal of `customize-write-files` is to act as an NodeJS-adapter for customize 
 and store the result of `customize` in a local directory structure.
  
+## NodeJS compatibility notes
+
+This package will always support the latest version of NodeJS and as well as the current LTS version.
+In the future, it will not be considered a breaking change to drop support of a pre-LTS version of NodeJS.
+
 # Installation
 
 ```
