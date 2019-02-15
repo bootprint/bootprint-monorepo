@@ -1,9 +1,8 @@
 # customize-engine-less 
 
-[![NPM version](https://badge.fury.io/js/customize-engine-less.svg)](http://badge.fury.io/js/customize-engine-less)
+[![NPM version](https://img.shields.io/npm/v/customize-engine-less.svg)](https://npmjs.com/package/customize-engine-less)
 [![Travis Build Status](https://travis-ci.org/bootprint/customize-engine-less.svg?branch=master)](https://travis-ci.org/bootprint/customize-engine-less)
 [![Coverage Status](https://img.shields.io/coveralls/bootprint/customize-engine-less.svg)](https://coveralls.io/r/bootprint/customize-engine-less)
-[![Greenkeeper badge](https://badges.greenkeeper.io/bootprint/customize-engine-less.svg)](https://greenkeeper.io/)
 
 > A less-engine for customize
 
@@ -44,10 +43,18 @@ customize()
 This will generate the following output
 
 ```
-{ less: 
-   { 'main.css': 'div{color:red;background-color:green}/*# sourceMappingURL=main.css.map */',
-     'main.css.map': '{"version":3,"sources":["/home/nknappmeier/projects/bootprint/customize-engine-less/examples/main.less"],"names":[],"mappings":"AAGA,IACE,SAAA,CACA","sourcesContent":["@textcolor: blue;\\n@bgcolor: green;\\n\\ndiv {\\n  color: @textcolor;\\n  background-color: @bgcolor;  \\n}\\n\\n\\n\\n"]}' } }
+{ less:
+   { 'main.css':
+      'div{color:red;background-color:green}/*# sourceMappingURL=main.css.map */',
+     'main.css.map':
+      '{"version":3,"sources":["/home/nknappmeier/projects/bootprint/customize-engine-less/examples/main.less"],"names":[],"mappings":"AAGA,IACE,SAAA,CACA","sourcesContent":["@textcolor: blue;\\n@bgcolor: green;\\n\\ndiv {\\n  color: @textcolor;\\n  background-color: @bgcolor;  \\n}\\n\\n\\n\\n"]}' } }
 ```
+
+## NodeJS compatibility notes 
+
+This package will always support the latest version of NodeJS and as well as the current LTS version.
+In the future, it will not be considered a breaking change to drop support of a pre-LTS version of NodeJS.
+
 
 
 
