@@ -3,6 +3,10 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 3.0.1 (Tue, 19 Feb 2019 15:20:42 GMT)
+
+* [b9b17b0](https://github.com/bootprint/customize-engine-handlebars/commit/b9b17b0) chore: bump customize to version 3.0.0 - Nils Knappmeier
+
 # Version 3.0.0 (Fri, 15 Feb 2019 20:25:52 GMT)
 
 * [e31345a](https://github.com/bootprint/customize-engine-handlebars/commit/e31345a) chore: replace get-promise by got - Nils Knappmeier
