@@ -33,7 +33,7 @@
     "deep-aplus": "^1.0.4",
     "mkdirp": "^0.5.1",
     "pify": "^4.0.1",
-    "stream-equal": "^1.1.1"
+    "stream-compare": "^2.0.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",

@@ -60,7 +60,7 @@ function createBuffer (contents) {
  */
 function read (filename) {
   var fullPath = path.join(tmpDir, filename)
-  return fs.readFileSync(fullPath, {encoding: 'utf-8'})
+  return fs.readFileSync(fullPath, { encoding: 'utf-8' })
 }
 
 /**
@@ -167,7 +167,7 @@ describe('customize-write-files:', function () {
         .then(function (result) {
           return expect(result).to.deep.equal({
             changed: false,
-            files: {'buffer.txt': false, 'stream.txt': false, 'string.txt': false}
+            files: { 'buffer.txt': false, 'stream.txt': false, 'string.txt': false }
           })
         })
     })
@@ -181,7 +181,7 @@ describe('customize-write-files:', function () {
         }).then(function (result) {
           return expect(result).to.deep.equal({
             changed: true,
-            files: {'buffer.txt': true}
+            files: { 'buffer.txt': true }
           })
         })
       })
@@ -194,7 +194,7 @@ describe('customize-write-files:', function () {
         }).then(function (result) {
           return expect(result).to.deep.equal({
             changed: true,
-            files: {'stream.txt': true}
+            files: { 'stream.txt': true }
           })
         })
       })
@@ -226,7 +226,7 @@ describe('customize-write-files:', function () {
         }).then(function (result) {
           return expect(result).to.deep.equal({
             changed: true,
-            files: {'string.txt': true}
+            files: { 'string.txt': true }
           })
         })
       })
@@ -243,7 +243,7 @@ describe('customize-write-files:', function () {
         }).then(function (result) {
           return expect(result).to.deep.equal({
             changed: true,
-            files: {'buffer.txt': true, 'stream.txt': false, 'string.txt': false}
+            files: { 'buffer.txt': true, 'stream.txt': false, 'string.txt': false }
           })
         })
       })
@@ -260,7 +260,7 @@ describe('customize-write-files:', function () {
         }).then(function (result) {
           expect(result).to.deep.equal({
             changed: true,
-            files: {'buffer.txt': true, 'stream.txt': false, 'string.txt': true}
+            files: { 'buffer.txt': true, 'stream.txt': false, 'string.txt': true }
           })
         })
       })
@@ -273,7 +273,7 @@ describe('customize-write-files:', function () {
         }).then(function (result) {
           expect(result).to.deep.equal({
             changed: true,
-            files: {'buffer.txt': true}
+            files: { 'buffer.txt': true }
           })
         })
       })
