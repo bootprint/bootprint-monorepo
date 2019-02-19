@@ -3,6 +3,14 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 3.0.1 (Tue, 19 Feb 2019 23:12:04 GMT)
+
+* [897c263](https://github.com/bootprint/customize-write-files/commit/897c263) chore: add node 8 to travis-config - Nils Knappmeier
+* [7faee02](https://github.com/bootprint/customize-write-files/commit/7faee02) refactor: use async/await, simplify code - Nils Knappmeier
+* [3d2f571](https://github.com/bootprint/customize-write-files/commit/3d2f571) refactor: replace mkdirp, pify, rimraf  by fs-extra - Nils Knappmeier
+* [be3dfd0](https://github.com/bootprint/customize-write-files/commit/be3dfd0) refactor: replace stream-equal by stream-compare - Nils Knappmeier
+
+
 # Version 3.0.0 (Fri, 15 Feb 2019 21:09:50 GMT)
 
 * [c859460](https://github.com/bootprint/customize-write-files/commit/c859460) chore: bump dependency versions, use nyc instead of istanbul - Nils Knappmeier
