@@ -16,22 +16,19 @@
 var path = require('path')
 // var Buffer = require('buffer')
 var stream = require('stream')
-var fs = require('fs')
+var fs = require('fs-extra')
 var chai = require('chai')
 chai.use(require('dirty-chai'))
 chai.use(require('chai-as-promised'))
 var expect = chai.expect
-var pify = require('pify')
-var removeTree = pify(require('rimraf'))
-var makeTree = pify(require('mkdirp'))
 var customizeWriteFiles = require('../')
 
 var tmpDir = 'test-output'
 
 beforeEach(function () {
-  return removeTree(tmpDir)
+  return fs.remove(tmpDir)
     .then(function () {
-      return makeTree(tmpDir)
+      return fs.mkdirp(tmpDir)
     })
 })
 
