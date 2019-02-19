@@ -1,7 +1,7 @@
 /*!
  * customize-write-files <https://github.com/nknapp/customize-write-files>
  *
- * Copyright (c) 2015 Nils Knappmeier.
+ * Copyright (c) 2019 Nils Knappmeier.
  * Released under the MIT license.
  */
 
@@ -20,17 +20,15 @@ module.exports.changed = changed
  *
  * @function
  * @param {string} targetDir path to the target directory
- * @returns {function(object):string[]} return a function that writes a customize-result to the targetDir.
+ * @returns {function(object):Promise<string[]>} return a function that writes a customize-result to the targetDir.
  *  The function takes a customize-result as first parameter and returns a promise for a list of filenames.
  *  (i.e. the files that were actually written)
  * @public
  */
 function write (targetDir) {
-  return function writer (customizeResult) {
-    return runExecutors(customizeResult, targetDir, require('./lib/write'))
-      .then(function (result) {
-        return values(result)
-      })
+  return async function writeResult (customizeResult) {
+    const result = await mapFiles(customizeResult, targetDir, require('./lib/write'))
+    return values(result)
   }
 }
 
@@ -40,48 +38,38 @@ function write (targetDir) {
  *
  * @function
  * @param {string} targetDir path to the target directory
- * @returns {function(object):{unchanged:boolean, files: string[]}} return a function that writes a customize-result to the targetDir.
+ * @returns {function(object):Promise<{unchanged:boolean, files: string[]}>} return a function that writes a customize-result to the targetDir.
  *  The function takes a customize-result as first parameter and returns a promise for a list of filenames.
  *  (i.e. the files that were checked)
  * @public
  */
 function changed (targetDir) {
-  return function changeTester (customizeResult) {
-    return runExecutors(customizeResult, targetDir, require('./lib/changed'))
-      .then(function (result) {
-        return {
-          changed: values(result).indexOf(true) >= 0,
-          files: result
-        }
-      })
+  return async function changeTester (customizeResult) {
+    const result = await deep(mapFiles(customizeResult, targetDir, require('./lib/changed')))
+    return {
+      changed: values(result).indexOf(true) >= 0,
+      files: result
+    }
   }
 }
 
 /**
- * Writes the results of a customize run into a directory in the local file-system
- * @param customizeResult
- * @param targetDir
- * @param executors
- * @private
+ * Map the merged files in the customize-result onto a function a promised object of values.
+ *
+ * The type T is the return value of the callback (promised)
+ *
+ * @param {object<object<string|Buffer|Readable|undefined>>} customizeResult
+ * @param {function(fullpath: string, contents: (string|Buffer|Readable|undefined)):Promise<T>} callback functions that is called for each file
+ * @return {Promise<object<T>>}
  */
-function runExecutors (customizeResult, targetDir, executors) {
-  var files = mergeEngineResults(customizeResult)
-  return deep(mapValues(files, function (file, filename) {
-    var fullPath = path.join(targetDir, filename)
-    return execute(fullPath, file.contents, executors)
-  }))
-}
-
-/**
- * Return the values of an object
- * @param {object<any>} obj
- * @returns {Array<any>}
- * @private
- */
-function values (obj) {
-  return Object.keys(obj).map(function (key) {
-    return obj[key]
+async function mapFiles (customizeResult, targetDir, callback) {
+  const files = mergeEngineResults(customizeResult)
+  const results = mapValues(files, (file, filename) => {
+    // Write each file
+    const fullpath = path.join(targetDir, filename)
+    return callback(fullpath, file.contents)
   })
+  return deep(results)
 }
 
 /**
@@ -99,6 +87,18 @@ function mapValues (obj, fn) {
 }
 
 /**
+ * Return the values of an object
+ * @param {object<any>} obj
+ * @returns {Array<any>}
+ * @private
+ */
+function values (obj) {
+  return Object.keys(obj).map(function (key) {
+    return obj[key]
+  })
+}
+
+/**
  * Merge the per-engine structure (`{engine1: { file1: contents1 }, {engine2: { file2: contents2 } }`
  * into a single object
   *
@@ -107,8 +107,8 @@ function mapValues (obj, fn) {
  *   file1: { engine: 'engine1', contents: contents1 },
  *   file2: { engine: 'engine2', contents: contents2 }`
  * }
- * @param {object<object<string>>} customizeResult
- * @return {object<{engine: string, contents: string}>}
+ * @param {object<object<string|Buffer|Readable|undefined>>} customizeResult
+ * @return {object<{engine: string, contents: (string|Buffer|Readable|undefined)}>}
  * @private
  */
 function mergeEngineResults (customizeResult) {
@@ -129,29 +129,4 @@ function mergeEngineResults (customizeResult) {
     }
   })
   return result
-}
-
-/**
- * Write a stream, buffer or string to a file and return a promised for the finished operation
- *
- * @param {string} filename the filename
- * @param {Buffer|string|Stream.Readable} contents
- * @param executors
- * @returns {Promise<string|boolean>|undefined} a Promise for the filename
- * @private
- */
-function execute (filename, contents, executors) {
-  // Ignore undefined contents (intentional "double equals")
-  if (contents == null) {
-    return undefined
-  }
-  if (typeof contents === 'string') {
-    return executors.string(filename, contents)
-  } else if (Buffer.isBuffer(contents)) {
-    return executors.buffer(filename, contents)
-  } else if (typeof contents.pipe === 'function') {
-    return executors.stream(filename, contents)
-  } else {
-    throw new Error('Invalid data type for contents of file "' + filename + '": ' + contents)
-  }
 }
