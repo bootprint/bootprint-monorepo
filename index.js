@@ -16,7 +16,7 @@ var debugVersions = require('debug')('customize:versions')
 var deep = require('deep-aplus')(Promise)
 var mergeWith = require('lodash.mergewith')
 
-let util = require('./lib/util')
+const util = require('./lib/util')
 var mapValues = util.mapValues
 var isString = util.isString
 var constant = util.constant
@@ -123,7 +123,7 @@ function Customize (config, parentConfig, engines) {
     if (id.substr(0, 1) === '_') {
       throw new Error('Engine-id may not start with an underscore ("_"), but is ' + id)
     }
-    if (engine['run'] == null) {
+    if (engine.run == null) {
       throw new Error('Engine ' + id + ' needs a run method')
     }
 
@@ -151,10 +151,10 @@ function Customize (config, parentConfig, engines) {
    */
   this.configSchema = function () {
     return {
-      'id': 'http://json-schema.org/draft-04/schema#',
-      '$schema': 'http://json-schema.org/draft-04/schema#',
-      'type': 'object',
-      'properties': mapValues(engines, function (engine) {
+      id: 'http://json-schema.org/draft-04/schema#',
+      $schema: 'http://json-schema.org/draft-04/schema#',
+      type: 'object',
+      properties: mapValues(engines, function (engine) {
         return engine.schema || {
           type: 'object',
           description: 'No expicit schema has been provided for this engine'
