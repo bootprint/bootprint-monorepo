@@ -3,6 +3,12 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 3.0.2 (Thu, 07 Nov 2019 20:13:48 GMT)
+
+* [1094e39](https://github.com/bootprint/customize/commit/1094e39) remove "11" from dependencies (why was it there?) - Nils Knappmeier
+
+
+
 # Version 3.0.1 (Thu, 07 Nov 2019 20:10:45 GMT)
 
 * [d377070](https://github.com/bootprint/customize/commit/d377070) Update dependencies, fix style with eslint - Nils Knappmeier
