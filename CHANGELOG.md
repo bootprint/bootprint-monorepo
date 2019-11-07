@@ -3,6 +3,13 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 1.0.1 (Thu, 07 Nov 2019 20:54:07 GMT)
+
+* [3ccab07](https://github.com/bootprint/customize-watch/commit/3ccab07) fix styling (standard-js) - Nils Knappmeier
+* [61135b5](https://github.com/bootprint/customize-watch/commit/61135b5) Tests for the file-watcher (#2) - Nils Knappmeier
+
+
+
 # Version 1.0.0 (Tue, 20 Dec 2016 15:27:42 GMT)
 
 * [6200a82](https://github.com/bootprint/customize-watch/commit/6200a82) Preparations for version 1.0. - Nils Knappmeier
