@@ -3,6 +3,18 @@
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
+# Version 3.0.1 (Thu, 07 Nov 2019 20:10:45 GMT)
+
+* [d377070](https://github.com/bootprint/customize/commit/d377070) Update dependencies, fix style with eslint - Nils Knappmeier
+* [0ea0c2c](https://github.com/bootprint/customize/commit/0ea0c2c) test: use `--require=trace...` is mocha.opts - Nils Knappmeier
+* [46f7fb3](https://github.com/bootprint/customize/commit/46f7fb3) chore: revert to mocha 5.x - Nils Knappmeier
+* [b2a9297](https://github.com/bootprint/customize/commit/b2a9297) chore: update package-lock.json - Nils Knappmeier
+* [714d265](https://github.com/bootprint/customize/commit/714d265) chore: bump dependencies - Nils Knappmeier
+* [d1eb6b1](https://github.com/bootprint/customize/commit/d1eb6b1) chore: switch from istanbul to nyc - Nils Knappmeier
+* [5d4c639](https://github.com/bootprint/customize/commit/5d4c639) chore: fix travis config for node lts - Nils Knappmeier
+
+
+
 # Version 3.0.0 (Thu, 14 Feb 2019 21:28:03 GMT)
 
 * [29b9dc9](https://github.com/bootprint/customize/commit/29b9dc9) chore: drop support for Node pre LTS - Nils Knappmeier
