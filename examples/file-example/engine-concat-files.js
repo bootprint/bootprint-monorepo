@@ -26,11 +26,9 @@ module.exports = {
   // The config contains no Promises anymore.
   run: function (config) {
     var result = ''
-    for (var filename in config) {
-      if (config.hasOwnProperty(filename)) {
-        result += config[filename].contents + '\n'
-      }
-    }
+    Object.keys(config).forEach(filename => {
+      result += config[filename].contents + '\n'
+    })
     return {
       // Return a file called "concat.txt"
       'concat.txt': result

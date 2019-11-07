@@ -23,12 +23,12 @@ var ro1 = customize()
     test: {
       files: 'test/fixtures/testPartials1',
       objects: {
-        a: {x: 'x1', y: 'y1'},
-        b: {x: 'x1', y: 'y1'}
+        a: { x: 'x1', y: 'y1' },
+        b: { x: 'x1', y: 'y1' }
       },
       leafs: {
-        a: {x: 'x1', y: 'y1'},
-        b: {x: 'x1', y: 'y1'}
+        a: { x: 'x1', y: 'y1' },
+        b: { x: 'x1', y: 'y1' }
       },
       array: ['item1']
     // TODO: Tests for promises and functions
@@ -59,14 +59,14 @@ describe('After loading a config', function () {
   })
   it('object values should exist', function () {
     expect(testResult.test.objects).to.eql({
-      a: {x: 'x1', y: 'y1'},
-      b: {x: 'x1', y: 'y1'}
+      a: { x: 'x1', y: 'y1' },
+      b: { x: 'x1', y: 'y1' }
     })
   })
   it('leaf values should exist', function () {
     expect(testResult.test.leafs).to.eql({
-      a: {x: 'x1', y: 'y1'},
-      b: {x: 'x1', y: 'y1'}
+      a: { x: 'x1', y: 'y1' },
+      b: { x: 'x1', y: 'y1' }
     })
   })
   it('array values should exist', function () {
@@ -118,14 +118,14 @@ describe('After merging another config', function () {
   })
   it('object values should be deep merged', function () {
     expect(testResult.test.objects).to.eql({
-      a: {x: 'x1', y: 'y1'},
-      b: {x: 'x1', y: 'y2'}
+      a: { x: 'x1', y: 'y1' },
+      b: { x: 'x1', y: 'y2' }
     })
   })
   it('leaf values should be replaced', function () {
     expect(testResult.test.leafs).to.eql({
-      a: {x: 'x1', y: 'y1'},
-      b: {y: 'y2'}
+      a: { x: 'x1', y: 'y1' },
+      b: { y: 'y2' }
     })
   })
   it('array values should exist', function () {
@@ -159,14 +159,14 @@ describe('after loading a module', function () {
   })
   it('object values should be deep merged', function () {
     expect(testResult.test.objects).to.eql({
-      a: {x: 'x1', y: 'y1'},
-      b: {x: 'x1', y: 'y2'}
+      a: { x: 'x1', y: 'y1' },
+      b: { x: 'x1', y: 'y2' }
     })
   })
   it('leaf values should be replaced', function () {
     expect(testResult.test.leafs).to.eql({
-      a: {x: 'x1', y: 'y1'},
-      b: {y: 'y2'}
+      a: { x: 'x1', y: 'y1' },
+      b: { y: 'y2' }
     })
   })
   it('array values should exist', function () {

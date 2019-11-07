@@ -13,12 +13,9 @@ module.exports = function watcher () {
   return new Recustomize(customize)
 }
 
-var key
-for (key in customize) {
-  if (customize.hasOwnProperty(key)) {
-    module.exports[key] = customize[key]
-  }
-}
+Object.keys(customize).forEach(key => {
+  module.exports[key] = customize[key]
+})
 
 module.exports.Customize = Recustomize
 

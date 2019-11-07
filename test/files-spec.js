@@ -14,8 +14,8 @@ describe('the files-function', function () {
     var x = files('test/fixtures/testPartials1')
     return deep(
       _.merge(
-        {dir: x},
-        {dir: files('test/fixtures/testPartials2')},
+        { dir: x },
+        { dir: files('test/fixtures/testPartials2') },
         overrider)
     )
       .then(function (result) {
@@ -47,8 +47,8 @@ describe('the files-function', function () {
     var x = files('test/fixtures/testPartials1', { glob: '*ei.hbs' })
     return deep(
       _.merge(
-        {dir: x},
-        {dir: files('test/fixtures/testPartials2', { glob: '*ei.hbs' })},
+        { dir: x },
+        { dir: files('test/fixtures/testPartials2', { glob: '*ei.hbs' }) },
         overrider)
     )
       .then(function (result) {

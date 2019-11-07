@@ -37,19 +37,19 @@ describe('the watcher', function () {
   it('prerequisite check for expected result in normal run', function () {
     return cu.run().then(function (result) {
       expect(result).to.deep.equal({
-        'test': {
-          'files': {
+        test: {
+          files: {
             'drei.hbs': {
-              'contents': 'testPartials2/drei {{drei}}',
-              'path': 'test-tmp/testPartials2/drei.hbs'
+              contents: 'testPartials2/drei {{drei}}',
+              path: 'test-tmp/testPartials2/drei.hbs'
             },
             'eins.hbs': {
-              'contents': 'testPartials1/eins {{eins}}',
-              'path': 'test-tmp/testPartials1/eins.hbs'
+              contents: 'testPartials1/eins {{eins}}',
+              path: 'test-tmp/testPartials1/eins.hbs'
             },
             'zwei.hbs': {
-              'contents': 'testPartials2/zwei {{zwei}}',
-              'path': 'test-tmp/testPartials2/zwei.hbs'
+              contents: 'testPartials2/zwei {{zwei}}',
+              path: 'test-tmp/testPartials2/zwei.hbs'
             }
           }
         }
@@ -83,55 +83,55 @@ describe('the watcher', function () {
         // Checking the result of all actions
         expect(results).to.deep.equal([
           {
-            'test': {
-              'files': {
+            test: {
+              files: {
                 'drei.hbs': {
-                  'contents': 'testPartials2/drei {{drei}}',
-                  'path': 'test-tmp/testPartials2/drei.hbs'
+                  contents: 'testPartials2/drei {{drei}}',
+                  path: 'test-tmp/testPartials2/drei.hbs'
                 },
                 'eins.hbs': {
-                  'contents': 'abc',
-                  'path': 'test-tmp/testPartials1/eins.hbs'
+                  contents: 'abc',
+                  path: 'test-tmp/testPartials1/eins.hbs'
                 },
                 'zwei.hbs': {
-                  'contents': 'testPartials2/zwei {{zwei}}',
-                  'path': 'test-tmp/testPartials2/zwei.hbs'
+                  contents: 'testPartials2/zwei {{zwei}}',
+                  path: 'test-tmp/testPartials2/zwei.hbs'
                 }
               }
             }
           },
           {
-            'test': {
-              'files': {
+            test: {
+              files: {
                 'drei.hbs': {
-                  'contents': 'testPartials2/drei {{drei}}',
-                  'path': 'test-tmp/testPartials2/drei.hbs'
+                  contents: 'testPartials2/drei {{drei}}',
+                  path: 'test-tmp/testPartials2/drei.hbs'
                 },
                 'eins.hbs': {
-                  'contents': 'abc',
-                  'path': 'test-tmp/testPartials1/eins.hbs'
+                  contents: 'abc',
+                  path: 'test-tmp/testPartials1/eins.hbs'
                 },
                 'zwei.hbs': {
-                  'contents': 'abc',
-                  'path': 'test-tmp/testPartials2/zwei.hbs'
+                  contents: 'abc',
+                  path: 'test-tmp/testPartials2/zwei.hbs'
                 }
               }
             }
           },
           {
-            'test': {
-              'files': {
+            test: {
+              files: {
                 'drei.hbs': {
-                  'contents': 'testPartials2/drei {{drei}}',
-                  'path': 'test-tmp/testPartials2/drei.hbs'
+                  contents: 'testPartials2/drei {{drei}}',
+                  path: 'test-tmp/testPartials2/drei.hbs'
                 },
                 'eins.hbs': {
-                  'contents': 'cde',
-                  'path': 'test-tmp/testPartials2/eins.hbs'
+                  contents: 'cde',
+                  path: 'test-tmp/testPartials2/eins.hbs'
                 },
                 'zwei.hbs': {
-                  'contents': 'abc',
-                  'path': 'test-tmp/testPartials2/zwei.hbs'
+                  contents: 'abc',
+                  path: 'test-tmp/testPartials2/zwei.hbs'
                 }
               }
             }
