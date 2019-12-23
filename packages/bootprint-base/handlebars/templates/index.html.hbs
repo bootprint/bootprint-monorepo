@@ -1,0 +1,25 @@
+{{!--
+    Default template for rendering the HTML-page.
+    It can be replaced by another template if needed. However, in the average case,
+    it should be left unmodified since it calls partials that can be overridden instead.
+
+    The template includes the result of the Less-compiler (`main.css`)
+    and places the other partials (`base/header`, `base/body` and `base/footer`)
+    above, within and below a `div.container`-element.
+
+    @public
+--}}
+<!DOCTYPE html>
+<html>
+<head>
+    {{>base/html-head}}
+</head>
+<body>
+{{>base/header}}
+<div class="container">
+    {{>base/body}}
+</div>
+{{>base/footer}}
+{{>base/javascript-libs}}
+</body>
+</html>
