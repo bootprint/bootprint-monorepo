@@ -1,0 +1,57 @@
+{{!-- 
+   Partial for including bootprint Handlebars-files into the documentation
+   @param {string} name the filename
+   @param {string} path the full path to the file
+   @param {string} contents the file's contents
+   @param {string[]} comments an array of extracted comments
+   @param {string} type 'partial' or 'template'
+--}}
+<a name="{{type}}-{{htmlId name}}"></a>
+### {{name}}
+
+<table>
+    <tr>
+        <th>Source file</th>
+        <td>
+            {{#withPackageOf path~}}
+                <a href="{{@url}}">{{@package.name}} @ {{@package.version}} / {{@relativePath}}</a>
+            {{~/withPackageOf}}
+        </td>
+    </tr>
+    {{#if callsPartial.length}}
+        <tr>
+            <th>Uses partials</th>
+            <td>
+                {{#each callsPartial}}
+                    <a href="#partial-{{htmlId name}}">{{name}}</a>
+                    {{~#unless @last}}, {{/unless}}
+                {{/each}}
+            </td>
+        </tr>
+    {{/if}}
+    {{#if calledBy.length}}
+        <tr>
+            <th>Used by</th>
+            <td>
+                {{#each calledBy}}
+                    <a href="#{{type}}-{{htmlId name}}">{{name}}</a>
+                    {{~#unless @last}}, {{/unless}}
+                {{/each}}
+            </td>
+        </tr>
+    {{/if}}
+    {{#if children}}
+        <tr>
+            <th>Structure</th>
+            <td>{{>bootprint/call-hierarchy.md tree=.}}</td>
+        </tr>
+    {{/if}}
+</table>
+
+{{#if comments.[0]}}
+{{#codeBlock}}
+{{comments.[0]}}
+{{/codeBlock}}
+{{/if}}
+
+
