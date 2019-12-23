@@ -2,27 +2,17 @@
   "name": "customize",
   "version": "3.0.2",
   "description": "A simple framework to create customizable engines",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bootprint/customize.git"
-  },
   "author": {
     "name": "Nils Knappmeier",
     "email": "npm@knappi.org",
     "url": "https://github.com/nknapp"
   },
-  "bugs": {
-    "url": "https://github.com/bootprint/customize/issues"
-  },
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint --fix .",
-    "test": "mocha && npm run lint",
-    "coverage": "nyc mocha",
-    "postcoverage": "nyc check-coverage coverage/coverage.json --statements 100",
+    "test": "mocha",
     "thought": "thought run -a",
-    "version": "thoughtful changelog -o -a && npm run thought"
+    "version": "npm run thought"
   },
   "dependencies": {
     "debug": "^4.1.1",
@@ -43,24 +33,7 @@
   ],
   "keywords": [],
   "devDependencies": {
-    "chai": "^4.2.0",
-    "chai-as-promised": "^7.1.1",
-    "clarify": "^2.1.0",
-    "dirty-chai": "^2.0.1",
-    "eslint": "^6.6.0",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-mocha": "^6.2.1",
-    "eslint-plugin-node": "^10.0.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1",
     "json-stable-stringify": "^1.0.1",
-    "mocha": "^6.2.2",
-    "nyc": "^14.1.1",
-    "stream-to-string": "^1.2.0",
-    "thought": "^2.0.0",
-    "thought-plugin-jsdoc": "^1.1.0",
-    "thoughtful-release": "^1.0.0",
-    "trace-and-clarify-if-possible": "^1.0.5"
+    "stream-to-string": "^1.2.0"
   }
 }

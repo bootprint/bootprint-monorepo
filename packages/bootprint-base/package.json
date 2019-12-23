@@ -4,26 +4,12 @@
   "description": "The base configuration used by other Bootprint modules",
   "main": "index.js",
   "scripts": {
-    "pretest": "standard --version || npm -g install standard",
-    "test": "mocha && standard",
-    "preformat": "standard --version || npm -g install standard",
-    "format": "standard --fix",
+    "test": "mocha",
     "thought": "thought run -a",
-    "prethoughtcheck": "thought --version || npm -g install thought",
-    "thoughtcheck": "thought check-engines",
-    "version": "thoughtful changelog -o -a && npm run thought",
-    "preversion": "npm run thoughtcheck"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bootprint/bootprint-base.git"
+    "version": "npm run thought"
   },
   "author": "Nils Knappmeier",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/bootprint/bootprint-base/issues"
-  },
-  "homepage": "https://github.com/bootprint/bootprint-base",
   "dependencies": {
     "bootstrap": "^3.3.2",
     "cheerio": "^0.22.0",
@@ -45,11 +31,6 @@
   },
   "peerDependencies": {
     "bootprint": "^1.0.0"
-  },
-  "config": {
-    "ghooks": {
-      "pre-push": "thoughtful precommit && standard"
-    }
   },
   "files": [
     "handlebars",

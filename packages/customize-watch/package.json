@@ -17,15 +17,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "pretest": "standard --version || npm -g install standard",
-    "test": "mocha && standard",
-    "preformat": "standard --version || npm -g install standard",
-    "format": "standard --fix",
+    "test": "mocha --recursive",
     "thought": "thought run -a",
-    "prethoughtcheck": "thought --version || npm -g install thought",
-    "thoughtcheck": "thought check-engines",
-    "version": "thoughtful changelog -o -a && npm run thought",
-    "preversion": "npm run thoughtcheck"
+    "version": "npm run thought"
   },
   "dependencies": {
     "chokidar": "^1.2.0",
@@ -37,10 +31,6 @@
     "q": "^1.4.1"
   },
   "devDependencies": {
-    "chai": "^3.2.0",
-    "ghooks": "^1.0.3",
-    "mocha": "^2.2.5",
-    "thoughtful-release": "^0.3.0"
   },
   "standard": {
     "ignore": [

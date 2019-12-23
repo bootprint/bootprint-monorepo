@@ -7,12 +7,13 @@
   "author": "Nils Knappmeier",
   "license": "MIT",
   "scripts": {
-    "preformat": "standard --version || npm -g install standard",
-    "format": "standard --fix",
-    "pretest": "standard --version || npm -g install standard",
-    "test": "mocha --recursive && standard",
+    "test": "mocha --recursive",
     "thought": "thought run -a",
-    "version": "thoughtful changelog -o -a && npm run thought"
+    "version": "npm run thought"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bootprint/bootprint-monorepo.git"
   },
   "dependencies": {
     "bootprint-json-schema": "^1.0.0",
@@ -21,14 +22,9 @@
     "lodash": "^3.9.3",
     "m-io": "^0.3.1"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bootprint/bootprint-openapi"
-  },
   "bugs": {
     "url": "https://github.com/bootprint/bootprint-openapi/issues"
   },
-  "homepage": "https://github.com/bootprint/bootprint-openapi",
   "peerDependencies": {
     "bootprint": "^1.0.0"
   },

@@ -2,6 +2,22 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "lerna": "^3.19.0"
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "clarify": "^2.1.0",
+    "dirty-chai": "^2.0.1",
+    "eslint": "^6.8.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "lerna": "^3.19.0",
+    "lint-staged": "^9.5.0",
+    "mocha": "^6.2.2",
+    "nyc": "^15.0.0",
+    "prettier": "^1.19.1",
+    "thought": "^2.0.0",
+    "thoughtful-release": "^1.0.0",
+    "trace": "^3.1.1"
+  },
+  "dependencies": {
+    "thought-plugin-jsdoc": "^1.1.0"
   }
 }

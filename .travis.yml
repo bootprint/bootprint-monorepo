@@ -1,0 +1,8 @@
+sudo: false
+language: "node_js"
+node_js:
+  - "lts/*"
+  - node
+script:
+  - echo  "Travis not yet configured"
+  - exit 1
