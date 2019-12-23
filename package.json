@@ -21,6 +21,8 @@
     "thought-plugin-jsdoc": "^1.1.0"
   },
   "scripts": {
-    "test": "lerna run test --stream"
+    "test": "lerna run test --stream",
+    "thought": "thought run -a",
+    "version": "npm run thought"
   }
 }
