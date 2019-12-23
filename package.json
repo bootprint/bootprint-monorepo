@@ -19,5 +19,8 @@
   },
   "dependencies": {
     "thought-plugin-jsdoc": "^1.1.0"
+  },
+  "scripts": {
+    "test": "lerna run test --stream"
   }
 }

@@ -1,6 +1,16 @@
 {
   "packages": [
-    "packages/*"
+    "packages/customize",
+    "packages/customize-engine-handlebars",
+    "packages/customize-engine-less",
+    "packages/customize-watch",
+    "packages/customize-write-files",
+    "packages/thought-plugin-bootprint",
+    "packages/bootprint",
+    "packages/bootprint-unit-testing",
+    "packages/bootprint-base",
+    "packages/bootprint-json-schema",
+    "packages/bootprint-openapi"
   ],
   "version": "0.0.0"
 }

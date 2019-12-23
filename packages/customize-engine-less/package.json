@@ -10,7 +10,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "mocha --recursive",
+    "test": "mocha",
     "thought": "thought run -a",
     "version": "npm run thought"
   },

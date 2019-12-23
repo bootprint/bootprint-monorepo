@@ -17,7 +17,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "mocha --recursive",
+    "test": "mocha --recursive test/**/*-spec.js",
     "thought": "thought run -a",
     "version": "npm run thought"
   },
@@ -31,7 +31,7 @@
   "devDependencies": {
     "customize": "^3.0.0",
     "got": "^9.6.0",
-    "json-stable-stringify": "^1.0.1",
+    "json-stable-stringify": "^1.0.1"
   },
   "peerDependencies": {
     "customize": "^3.0.0"
