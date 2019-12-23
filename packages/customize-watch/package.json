@@ -1,0 +1,60 @@
+{
+  "name": "customize-watch",
+  "version": "1.0.1",
+  "description": "A file watcher for customize",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bootprint/customize-watch.git"
+  },
+  "author": {
+    "name": "Nils Knappmeier",
+    "email": "npm@knappi.org",
+    "url": "https://github.com/nknapp"
+  },
+  "bugs": {
+    "url": "https://github.com/bootprint/customize-watch/issues"
+  },
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "pretest": "standard --version || npm -g install standard",
+    "test": "mocha && standard",
+    "preformat": "standard --version || npm -g install standard",
+    "format": "standard --fix",
+    "thought": "thought run -a",
+    "prethoughtcheck": "thought --version || npm -g install thought",
+    "thoughtcheck": "thought check-engines",
+    "version": "thoughtful changelog -o -a && npm run thought",
+    "preversion": "npm run thoughtcheck"
+  },
+  "dependencies": {
+    "chokidar": "^1.2.0",
+    "customize": "^1.0.0",
+    "debug": "^2.2.0",
+    "deep-aplus": "^1.0.4",
+    "lodash": "^3.10.1",
+    "m-io": "^0.5.0",
+    "q": "^1.4.1"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "ghooks": "^1.0.3",
+    "mocha": "^2.2.5",
+    "thoughtful-release": "^0.3.0"
+  },
+  "standard": {
+    "ignore": [
+      "spec/fixtures/**"
+    ]
+  },
+  "files": [
+    "lib",
+    "index.js"
+  ],
+  "config": {
+    "ghooks": {
+      "pre-push": "thoughtful precommit && standard"
+    }
+  },
+  "keywords": []
+}
