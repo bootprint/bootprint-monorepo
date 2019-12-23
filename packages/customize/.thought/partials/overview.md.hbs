@@ -1,0 +1,19 @@
+Customize is an abstraction of [bootprint's](https://github.com/nknapp/bootprint) the merging-behaviour. 
+It allows you to create your own projects and engines (other than Less and Handlebars) and create 
+overridable configurations for those.
+
+At its core, it uses [lodash#mergeWith](https://lodash.com/docs#mergeWith) to merge configurations.
+It uses a customizer-function that supports promises and custom overrider functions 
+attached to the object.
+
+## Engines
+
+* {{npm 'customize-engine-handlebars'}}
+* {{npm 'customize-engine-less'}}
+* {{npm 'customize-engine-uglify'}}
+
+## Used by
+
+* {{npm 'thought'}}
+* {{npm 'bootprint'}}
+
