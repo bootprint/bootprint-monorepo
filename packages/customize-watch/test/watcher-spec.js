@@ -73,7 +73,9 @@ describe('the watcher', function () {
 
     // Run first action
     actions.shift()()
-    cu.watch().on('update', function (result) {
+    let watcher = cu.watch();
+    setTimeout(() => watcher.stopWatching(), 2000);
+    watcher.on('update', function (result) {
       console.log('update received', result)
       results.push(JSON.parse(JSON.stringify(result)))
       if (actions.length > 0) {
@@ -137,6 +139,7 @@ describe('the watcher', function () {
             }
           }
         ])
+        watcher.stopWatching()
         done()
       }
     })

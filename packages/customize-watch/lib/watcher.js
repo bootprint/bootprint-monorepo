@@ -64,8 +64,13 @@ module.exports = function (recustomize) {
             })
           }
           // Register watchers with chokidar
-          watch(dirs, false, runEngine)
-          watch(files, true, runEngine)
+          var dirWatcher = watch(dirs, false, runEngine)
+          var fileWatcher = watch(files, true, runEngine)
+
+          emitter.stopWatching = function () {
+            unwatch(dirWatcher)
+            unwatch(fileWatcher)
+          }
 
           // Compute initial result
           recustomize.run().done(function (initialResult) {
@@ -90,4 +95,9 @@ var watch = function (paths, usePolling, callback) {
   })
   var fn = _.debounce(callback, 250)
   watcher.on('change', fn).on('add', fn).on('unlink', fn)
+  return watcher;
+}
+
+var unwatch = function(watcher) {
+  watcher.close()
 }

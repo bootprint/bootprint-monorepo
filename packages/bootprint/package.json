@@ -18,7 +18,6 @@
     "commander": "^2.6.0",
     "customize-engine-handlebars": "^1.0.0",
     "customize-engine-less": "^1.0.1",
-    "customize-engine-uglify": "^1.0.0",
     "customize-watch": "^1.0.0",
     "customize-write-files": "^1.0.0",
     "debug": "^2.1.2",

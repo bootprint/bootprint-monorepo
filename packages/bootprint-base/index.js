@@ -28,15 +28,6 @@ module.exports = function (builder) {
       paths: [
         path.dirname(bootstrapLess)
       ]
-    },
-    uglify: {
-      files: {
-        'bootprint-base/bootstrap.js': require.resolve('bootstrap/dist/js/bootstrap.js'),
-        'bootprint-base/jquery.js': require.resolve('jquery/dist/jquery.js')
-      },
-      dependencies: {
-        'bootprint-base/bootstrap.js': [ 'bootprint-base/jquery.js' ]
-      }
     }
   })
 }
