@@ -1,0 +1,152 @@
+.panel-definition {
+  .panel-variant(@definition-panel-border-color, @definition-panel-header-text-color, @definition-panel-header-bg-color, @definition-panel-border-color);
+}
+
+// Named sections
+.named-section(@title) {
+  &:before {
+    font-weight: bold;
+    color: @named-section-text-color;
+    text-transform: uppercase;
+    content: @title;
+    padding-bottom: 0.5em;
+    display: block;
+  }
+  &:not(:last-child) {
+    padding-bottom: 1.5em;
+  }
+}
+
+.json-schema-description {
+  .named-section(@msg-json-section-description);
+}
+
+.json-schema-properties {
+  .named-section(@msg-json-section-properties);
+
+  dd:not(:last-child) {
+    padding-bottom: 1em;
+  }
+
+  dl {
+    margin: 0;
+  }
+}
+
+.json-schema-example {
+  .named-section(@msg-json-section-example);
+}
+
+.json-schema-array-items {
+  .named-section(@msg-json-section-items);
+}
+
+.json-schema-allOf-inherited {
+  .named-section(@msg-json-section-inherited);
+  ul {
+    .list-unstyled();
+  }
+}
+
+.json-schema-anyOf {
+  > dl {
+    border-left: 2px solid @definition-panel-inner-border-color;
+    padding-left: 1em;
+
+    dt:not(:first-child):before {
+      content: "or ";
+    }
+
+    dt:first-child:before {
+      content: "either ";
+    }
+
+  }
+}
+
+.json-schema-additionalProperties {
+  .named-section(@msg-json-section-additionalProperties);
+}
+
+.json-inner-schema {
+  .json-schema-properties,
+  .json-schema-array-items,
+  .json-schema-description,
+  .json-schema-example {
+    padding-left: 1em;
+    margin-top: 0.5em;
+    padding-bottom: 0.5em;
+    border-left: 2px solid @definition-panel-inner-border-color;
+  }
+}
+
+.named-label(@name) {
+  &:before {
+    .label();
+    .label-default();
+    content: @name;
+  }
+}
+
+.json-property-discriminator {
+  .named-label(@msg-json-discriminator)
+}
+
+.json-property-required {
+  .named-label(@msg-json-required)
+}
+
+.json-property-read-only {
+  .named-label(@msg-json-read-only)
+}
+
+.json-property-pattern {
+  font-weight: lighter;
+  font-size: small;
+}
+
+.json-schema--regex {
+  &:before, &:after {
+    color: lighten(@text-color, 30%);
+    content: '/';
+  }
+  &:extend(code);
+}
+
+.json-property-type {
+  font-style: italic;
+  font-weight: 100;
+}
+
+.json-property-format {
+  font-size: smaller;
+}
+
+.json-property-enum {
+  font-weight: lighter;
+  font-size: small;
+}
+
+.json-property-default-value {
+  font-weight: lighter;
+  font-size: small;
+  &:before {
+    content: '(default: "';
+  }
+  &:after {
+    content: '")';
+  }
+}
+
+.json-property-enum-item {
+  &:before, &:after {
+    content: "\""
+  }
+  font-weight: lighter;
+  font-size: small;
+
+}
+
+.json-schema--reference {
+  font-size: 90%;
+}

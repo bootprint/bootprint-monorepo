@@ -1,0 +1,54 @@
+{
+  "name": "bootprint-json-schema",
+  "version": "1.1.0",
+  "description": "Converts a json-schema into a static html page",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "standard --version || npm -g install standard",
+    "test": "mocha --recursive && standard",
+    "preformat": "standard --version || npm -g install standard",
+    "format": "standard --fix",
+    "thought": "thought run -a",
+    "prethoughtcheck": "thought --version || npm -g install thought",
+    "thoughtcheck": "thought check-engines",
+    "version": "thoughtful changelog -o -a && npm run thought",
+    "preversion": "npm run thoughtcheck"
+  },
+  "preferGlobal": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bootprint/bootprint-json-schema.git"
+  },
+  "author": "Nils Knappmeier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bootprint/bootprint-json-schema/issues"
+  },
+  "homepage": "https://github.com/bootprint/bootprint-json-schema",
+  "dependencies": {
+    "bootprint-base": "^1.0.0",
+    "lodash": "^4.17.2"
+  },
+  "peerDependencies": {
+    "bootprint": "^1.0.0"
+  },
+  "files": [
+    "handlebars",
+    "less",
+    "index.js"
+  ],
+  "config": {
+    "ghooks": {
+      "pre-push": "standard && thoughtful precommit"
+    }
+  },
+  "devDependencies": {
+    "bootprint-unit-testing": "^1.0.0",
+    "chai": "^3.5.0",
+    "ghooks": "^2.0.0",
+    "handlebars": "^4.0.6",
+    "mocha": "^3.2.0",
+    "thoughtful-release": "^0.3.0",
+    "trace-and-clarify-if-possible": "^1.0.0"
+  }
+}

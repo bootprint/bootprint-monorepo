@@ -1,0 +1,11 @@
+{{!--
+   Renders the main-schema as panel and the sub-schemas below.
+   This partial can be overridden if json-schema is only part of
+   what should be displayed.
+   @public
+--}}
+{{>json-schema/main-panel}}
+{{#if definitions}}
+    <h2>Definitions</h2>
+    {{>json-schema/definitions}}
+{{/if}}
