@@ -1,0 +1,45 @@
+{{!--
+    Renders details about a single response
+    @param {Response} response a swagger response-object
+--}}
+{{! If global is set, attach an id to the table row }}
+<div class="row">
+    <div class="col-md-12">
+        {{md response.description}}
+    </div>
+</div>
+<div class="row">
+    {{#each response.examples}}
+        <div class="col-md-6 sw-response-examples">
+            <div class="label label-default">Example for {{@key}}</div>
+            {{swagger--example . @key}}
+        </div>
+    {{/each}}
+    
+    <div class="col-md-6 sw-response-model">{{>swagger/model model=response.schema}}</div>
+
+    {{#if response.headers}}
+        <div class="col-md-12">
+            <section class="sw-response-headers">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="sw-response-header-name"></th>
+                        <th class="sw-response-header-description"></th>
+                        <th class="sw-response-header-data-type"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each response.headers}}
+                        {{#if $ref}}
+                            {{> swagger/responseHeaderRow header=(json-schema--resolve-ref $ref) name=@key}}
+                        {{else}}
+                            {{> swagger/responseHeaderRow header=. name=@key}}
+                        {{/if}}
+                    {{/each}}
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    {{/if}}
+</div>

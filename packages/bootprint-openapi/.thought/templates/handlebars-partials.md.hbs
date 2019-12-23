@@ -1,0 +1,29 @@
+# Template structure
+
+{{#renderTree partialTree}}
+{{! Display each node as link to the anchor with the same name.}}
+<b><a href="#{{{htmlId name}}}">{{{label}}}</a></b>
+{{#if summary}}<i>{{{summary}}}</i>{{/if}}
+{{/renderTree}}
+
+# Partial reference
+
+{{#each partials}}
+## {{name}}
+
+{{#withPackageOf path}}
+(<a href="{{@url}}">jump to source in <code>{{@package.name}}@{{@package.version}}</code></a>)
+{{/withPackageOf}}
+
+{{#each apidocs}}
+{{{markdown}}}
+{{/each}}
+
+{{#if children}}
+Uses the following partials:
+{{#each children}}
+* [{{.}}](#{{htmlId .}})
+{{/each}}
+{{/if}}
+
+{{/each}}

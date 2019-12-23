@@ -1,0 +1,34 @@
+## Usage
+
+```
+bootprint openapi http://petstore.swagger.io/v2/swagger.json target
+```
+
+The directory "target" should now contain a file `index.html` and `main.css` which contain a readable
+form of the [Swagger-Petstore-Example](http://petstore.swagger.io/).
+
+For details about command line parameters, please refer to the
+[documentation of Bootprint](https://github.com/nknapp/bootprint)
+
+`bootprint-openapi` is just a template-module for `bootprint`. That means, it contains
+[LessCss-file](less), [Handlebars-partials](handlebars/partials) and a
+[preprocessor](lib/preprocessor.js) that converts
+[an OpenAPI-Specification](http://openapis.org) into the JSON actually needed by the templates.
+
+### Create a single file.
+
+If you want to have a single HTML-file, not one HTML and one CSS, you can use substack's [html-inline](https://github.com/substack/html-inline)
+package to generate a self-cotnained file:
+
+```
+npm -g install html-inline
+html-inline target/index.html
+```
+
+
+
+### Javascript-Usage
+
+The does essentially the same, just in a the above command line, just in JavaScript (i.e. `node`)
+
+{{{example 'examples/example.js'}}}
