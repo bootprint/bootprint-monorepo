@@ -1,6 +1,5 @@
 module.exports = {
-  extends: 'standard',
-  plugins: ['standard', 'promise'],
+  extends: '../../../.eslintrc.js',
   rules: {
     'no-console': 'off'
   }
