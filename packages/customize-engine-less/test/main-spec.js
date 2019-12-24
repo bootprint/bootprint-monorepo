@@ -7,16 +7,16 @@
 
 'use strict'
 
-var customize = require('customize')
-var chai = require('chai')
-var chaiAsPromised = require('chai-as-promised')
+const customize = require('customize')
+const chai = require('chai')
+const chaiAsPromised = require('chai-as-promised')
 chai.use(chaiAsPromised)
 
-var expect = chai.expect
+const expect = chai.expect
 
 describe('customize-engine-handlebars', function() {
   it('should load less-files and specify inlude paths', function() {
-    var result = customize()
+    const result = customize()
       .registerEngine('less', require('../'))
       .merge({
         less: {
@@ -36,7 +36,7 @@ describe('customize-engine-handlebars', function() {
   })
 
   it('should load override definitions from merged less-files', function() {
-    var result = customize()
+    const result = customize()
       .registerEngine('less', require('../'))
       .merge({
         less: {
@@ -61,7 +61,7 @@ describe('customize-engine-handlebars', function() {
   })
 
   it('should be able to load css-files', function() {
-    var result = customize()
+    const result = customize()
       .registerEngine('less', require('../'))
       .merge({
         less: {

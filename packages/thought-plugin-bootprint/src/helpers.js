@@ -1,4 +1,4 @@
-var { Bootprint } = require('bootprint')
+const { Bootprint } = require('bootprint')
 
 /**
  * Default Handlebars-helpers for Thought
@@ -29,14 +29,14 @@ module.exports = {
  * @memberOf helpers
  */
 function codeBlock(options) {
-  var lang = (options.hash && options.hash.lang) || ''
+  const lang = (options.hash && options.hash.lang) || ''
   return Promise.resolve(options.fn(this)).then(contents => {
     // Get all backticks (like ['```','`````','`'])
-    var backticks = contents.match(/`+/g) || []
-    var backtickLengths = backticks.map(ticks => ticks.length)
-    var maxNrTicks = Math.max.apply(null, backtickLengths)
+    const backticks = contents.match(/`+/g) || []
+    const backtickLengths = backticks.map(ticks => ticks.length)
+    const maxNrTicks = Math.max.apply(null, backtickLengths)
     // Minimum of three ticks, but more than the ticks in contents
-    var maxTicks = '`'.repeat(Math.max(maxNrTicks + 1, 3))
+    const maxTicks = '`'.repeat(Math.max(maxNrTicks + 1, 3))
 
     // Prefix content with newline if nesseary
     contents = contents.replace(/^\n?/, '\n')
@@ -59,7 +59,7 @@ function codeBlock(options) {
 function moduleConfig(options) {
   // Load from current working directsory. The cwd should be
   // the root-directory of the plugin
-  var plugin = require(process.cwd())
+  const plugin = require(process.cwd())
   const lessDocEngine = Object.assign({}, require('customize-engine-less'), {
     run: function(config) {
       return config

@@ -1,7 +1,7 @@
-var files = require('../helpers-io').files
-var leaf = require('../').leaf
-var withParent = require('../').withParent
-var mapValues = require('../lib/util').mapValues
+const files = require('../helpers-io').files
+const leaf = require('../').leaf
+const withParent = require('../').withParent
+const mapValues = require('../lib/util').mapValues
 
 module.exports = {
   defaultConfig: {

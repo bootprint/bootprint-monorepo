@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-var program = require('commander')
-var path = require('path')
-var debug = require('debug')('bootprint:cli')
-var _package = require('../package')
+const program = require('commander')
+const path = require('path')
+const debug = require('debug')('bootprint:cli')
+const _package = require('../package')
 
 program
   .version(_package.version)
@@ -27,21 +27,21 @@ if (program.args.length !== 3) {
 }
 
 // Options from commander
-var templateModule = program.args[0]
-var jsonFile = program.args[1]
-var targetDir = program.args[2]
-var options = program.configFile // Coerced by commander via fn-parameter
+const templateModule = program.args[0]
+const jsonFile = program.args[1]
+const targetDir = program.args[2]
+const options = program.configFile // Coerced by commander via fn-parameter
 
 // Load and configure bootprint
-var bootprint = require('../index.js')
+const bootprint = require('../index.js')
   .load(requireTemplateModule(templateModule))
   .merge(options)
   .build(jsonFile, targetDir)
 
 if (program.developmentMode) {
   bootprint.watch()
-  var liveServer = require('live-server')
-  var params = {
+  const liveServer = require('live-server')
+  const params = {
     port: 8181,
     host: '127.0.0.1',
     root: targetDir,
@@ -66,7 +66,7 @@ if (program.developmentMode) {
  * @return {function} the builder-function of the loaded module
  */
 function requireTemplateModule(moduleName) {
-  var templateModule = null
+  let templateModule = null
   try {
     templateModule = require('bootprint-' + moduleName)
     debug('loaded template-module: ', 'bootprint-' + moduleName)

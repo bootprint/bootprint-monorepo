@@ -1,4 +1,4 @@
-var customize = require('customize')
+const customize = require('customize')
 customize()
   .registerEngine('handlebars', require('../').docEngine)
   .load(require('./config-module.js'))

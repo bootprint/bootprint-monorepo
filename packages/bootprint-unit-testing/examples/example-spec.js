@@ -12,12 +12,12 @@
 
 'use strict'
 
-var expect = require('chai').expect
-var core = require('../')(require('./module.js'), __dirname)
+const expect = require('chai').expect
+const core = require('../')(require('./module.js'), __dirname)
 
 describe('The bootprint-unit-testing module', function() {
   this.timeout(10000)
-  var context = {}
+  const context = {}
   before(function() {
     return core.run({ name: 'Nils' }, context)
   })

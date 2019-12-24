@@ -1,4 +1,4 @@
-var customize = require('customize')
+const customize = require('customize')
 
 // Load files from one directory and merge with second
 customize()

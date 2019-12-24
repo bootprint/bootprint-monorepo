@@ -8,12 +8,12 @@
 /* global describe */
 /* global it */
 /* global before */
-var expect = require('chai').expect
-var core = require('bootprint-unit-testing')(require('../..'), __dirname)
+const expect = require('chai').expect
+const core = require('bootprint-unit-testing')(require('../..'), __dirname)
 
 describe('The fstab-fixture', function() {
   this.timeout(10000)
-  var context = {}
+  const context = {}
   before(function() {
     return core.run(require('./schema.json'), context)
   })

@@ -25,7 +25,7 @@ function mapValues(obj, fnOrProperty) {
   if (obj == null) {
     return obj
   }
-  var fn = null
+  let fn = null
   if (fnOrProperty == null) {
     fn = identity
   } else if (fnOrProperty instanceof Function) {

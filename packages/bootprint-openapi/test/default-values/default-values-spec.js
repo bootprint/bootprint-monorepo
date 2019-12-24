@@ -8,17 +8,17 @@
 /* global describe */
 /* global it */
 /* global before */
-var expect = require('chai').expect
-var core = require('../core')
+const expect = require('chai').expect
+const core = require('../core')
 
 describe('The default-values fixture', function() {
   this.timeout(10000)
-  var context = {}
+  const context = {}
   before(function() {
     return core.run(require('./swagger.json'), __dirname, context)
   })
 
-  var contentTypes = ['application/json', 'application/xml']
+  const contentTypes = ['application/json', 'application/xml']
   contentTypes.forEach(function(contentType) {
     it('should contain a default value "' + contentType + '" for request content-types', function() {
       expect(context.$('#sw-default-consumes').html()).to.contain('application/xml')

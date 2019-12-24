@@ -1,9 +1,9 @@
-var _ = require('lodash')
+const _ = require('lodash')
 
-var files = require('../helpers-io').files
-var deep = require('deep-aplus')(require('q').Promise)
-var overrider = require('../').overrider
-var expect = require('chai').expect
+const files = require('../helpers-io').files
+const deep = require('deep-aplus')(require('q').Promise)
+const overrider = require('../').overrider
+const expect = require('chai').expect
 
 /* global describe */
 /* global it */
@@ -11,7 +11,7 @@ var expect = require('chai').expect
 
 describe('the files-function', function() {
   it('should resolve to the contents of all contained files', function() {
-    var x = files('test/fixtures/testPartials1')
+    const x = files('test/fixtures/testPartials1')
     return deep(_.merge({ dir: x }, { dir: files('test/fixtures/testPartials2') }, overrider)).then(function(result) {
       expect(result).to.eql({
         dir: {
@@ -38,7 +38,7 @@ describe('the files-function', function() {
   })
 
   it('should work correctly with globs', function() {
-    var x = files('test/fixtures/testPartials1', { glob: '*ei.hbs' })
+    const x = files('test/fixtures/testPartials1', { glob: '*ei.hbs' })
     return deep(
       _.merge({ dir: x }, { dir: files('test/fixtures/testPartials2', { glob: '*ei.hbs' }) }, overrider)
     ).then(function(result) {

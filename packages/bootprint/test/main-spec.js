@@ -7,25 +7,25 @@
 
 /* eslint-env mocha */
 
-var path = require('path')
-var fs = require('fs')
-var cp = require('child_process')
-var Q = require('q')
+const path = require('path')
+const fs = require('fs')
+const cp = require('child_process')
+const Q = require('q')
 process.on('exit', function() {
-  var unhandledReasons = require('q').getUnhandledReasons()
+  const unhandledReasons = require('q').getUnhandledReasons()
   if (unhandledReasons.length > 0) {
     console.log(unhandledReasons)
   }
 })
 
-var chai = require('chai')
+const chai = require('chai')
 chai.use(require('dirty-chai'))
-var expect = chai.expect
-var bootprint = require('../')
-var tmpDir = path.join(__dirname, 'tmp')
-var targetDir = path.join(tmpDir, 'target')
-var swaggerJsonFile = path.join(tmpDir, 'changing.json')
-var qfs = require('m-io/fs')
+const expect = chai.expect
+const bootprint = require('../')
+const tmpDir = path.join(__dirname, 'tmp')
+const targetDir = path.join(tmpDir, 'target')
+const swaggerJsonFile = path.join(tmpDir, 'changing.json')
+const qfs = require('m-io/fs')
 
 beforeEach(function() {
   return qfs.removeTree(tmpDir).then(function() {
@@ -60,7 +60,7 @@ describe('The programmatic interface', function() {
 
     return run()
       .then(function() {
-        var content = fs.readFileSync(path.join(targetDir, 'index.html'), { encoding: 'utf-8' })
+        const content = fs.readFileSync(path.join(targetDir, 'index.html'), { encoding: 'utf-8' })
         expect(content.trim()).to.equal('eins=one zwei=two drei=three')
         fs.writeFileSync(
           swaggerJsonFile,
@@ -73,7 +73,7 @@ describe('The programmatic interface', function() {
         return run()
       })
       .then(function() {
-        var content = fs.readFileSync(path.join(targetDir, 'index.html'), { encoding: 'utf-8' })
+        const content = fs.readFileSync(path.join(targetDir, 'index.html'), { encoding: 'utf-8' })
         expect(content.trim()).to.equal('eins=un zwei=deux drei=trois')
       })
   })
@@ -91,17 +91,17 @@ describe('The programmatic interface', function() {
       .build(require.resolve('./fixtures/input.yaml'), targetDir)
       .generate()
       .then(function() {
-        var content = fs.readFileSync(path.join(targetDir, 'index.html'), { encoding: 'utf-8' })
+        const content = fs.readFileSync(path.join(targetDir, 'index.html'), { encoding: 'utf-8' })
         return expect(content.trim()).to.equal('eins=ichi zwei=ni drei=san')
       })
   })
 })
 
 describe('The CLI interface', function() {
-  var targetDir = path.join(tmpDir, 'cli-target')
+  const targetDir = path.join(tmpDir, 'cli-target')
 
   function exec(command) {
-    var deferred = Q.defer()
+    const deferred = Q.defer()
     cp.exec(command, { encoding: 'utf-8' }, function(err, stdout, stderr) {
       return deferred.resolve({
         err: err,

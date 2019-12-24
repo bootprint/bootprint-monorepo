@@ -1,9 +1,9 @@
-var util = require('../lib/util')
+const util = require('../lib/util')
 
-var chai = require('chai')
+const chai = require('chai')
 chai.use(require('dirty-chai'))
 chai.use(require('chai-as-promised'))
-var expect = chai.expect
+const expect = chai.expect
 
 /* eslint-env mocha */
 
@@ -21,8 +21,8 @@ describe('the mapValues-function', function() {
   })
 
   it('should clone an object, if no iteratee is set', function() {
-    var original = { a: { x: 1 }, b: { x: 2 }, c: { x: 3 } }
-    var clone = util.mapValues(original)
+    const original = { a: { x: 1 }, b: { x: 2 }, c: { x: 3 } }
+    const clone = util.mapValues(original)
     expect(clone, 'should be deep equal').to.deep.equal(original)
     expect(clone, 'should not be identical').not.to.equal(original)
   })

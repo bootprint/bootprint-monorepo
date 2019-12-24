@@ -1,4 +1,4 @@
-var files = require('customize/helpers-io').files
+const files = require('customize/helpers-io').files
 
 module.exports = {
   // Initial configuration when registering the engine.
@@ -25,7 +25,7 @@ module.exports = {
   // Runs the engine with a resolved configuration.
   // The config contains no Promises anymore.
   run: function(config) {
-    var result = ''
+    let result = ''
     Object.keys(config).forEach(filename => {
       result += config[filename].contents + '\n'
     })

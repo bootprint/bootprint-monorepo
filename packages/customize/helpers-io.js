@@ -7,12 +7,12 @@
 
 'use strict'
 
-var lazy = require('./lib/lazy')
-var path = require('path')
-var leaf = require('./lib/leaf')
-var fs = require('fs')
-var util = require('./lib/util')
-var glob = require('glob')
+const lazy = require('./lib/lazy')
+const path = require('path')
+const leaf = require('./lib/leaf')
+const fs = require('fs')
+const util = require('./lib/util')
+const glob = require('glob')
 
 module.exports = {
   files: files,
@@ -37,12 +37,12 @@ function readFiles(directoryPath, options) {
   if (directoryPath == null) {
     return undefined
   }
-  var _options = options || {}
+  const _options = options || {}
   // Collect all files
-  var result = util
+  const result = util
     .asPromise(cb => glob(_options.glob || '**', { cwd: directoryPath, mark: true }, cb))
     .then(function(relativePaths) {
-      var set = relativePaths
+      const set = relativePaths
         // Ignore directories
         .filter(relativePath => !relativePath.match(/\/$/))
         // Convert to a set based on relative paths
@@ -55,7 +55,7 @@ function readFiles(directoryPath, options) {
       // Create lazy promises (only resolve when .then() is called) acting
       // as leafs (do not dive inside when merging)
       return util.mapValues(set, relativePath => {
-        var fullPath = path.resolve(directoryPath, relativePath)
+        const fullPath = path.resolve(directoryPath, relativePath)
         return leaf(
           lazy(() => {
             return {

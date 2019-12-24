@@ -8,17 +8,17 @@
 /* eslint-env mocha */
 'use strict'
 
-var customize = require('customize')
-var _ = require('../lib/utils')
-var chai = require('chai')
-var chaiAsPromised = require('chai-as-promised')
+const customize = require('customize')
+const _ = require('../lib/utils')
+const chai = require('chai')
+const chaiAsPromised = require('chai-as-promised')
 chai.use(chaiAsPromised)
 
-var expect = chai.expect
+const expect = chai.expect
 
 describe('the docEngine', function() {
-  var emptyEngine = null
-  var hb = null
+  let emptyEngine = null
+  let hb = null
   before(function() {
     emptyEngine = customize().registerEngine('handlebars', require('../').docEngine)
     hb = emptyEngine.merge({
@@ -188,7 +188,7 @@ describe('the docEngine', function() {
   })
 
   it('should use "null" as placeholder for helpers that are defined in a function', function() {
-    var hb2 = hb.merge({
+    const hb2 = hb.merge({
       handlebars: {
         helpers: function() {
           return {
@@ -215,7 +215,7 @@ describe('the docEngine', function() {
   })
 
   it('should include the source-code of the partial wrapper', function() {
-    var hb2 = emptyEngine.merge({
+    const hb2 = emptyEngine.merge({
       handlebars: {
         partialWrapper: function(contents, name) {
           return '[' + name + '] ' + contents + ' [/' + name + ']'
@@ -229,7 +229,7 @@ describe('the docEngine', function() {
   })
 
   it('should include multiple partial wrappers', function() {
-    var hb2 = emptyEngine
+    const hb2 = emptyEngine
       .merge({
         handlebars: {
           partialWrapper: function(contents, name) {
@@ -251,7 +251,7 @@ describe('the docEngine', function() {
   })
 
   it('should not break on (i.e. ignore) calls to @partial-block', function() {
-    var hb2 = emptyEngine.merge({
+    const hb2 = emptyEngine.merge({
       handlebars: {
         partials: 'test/fixtures/withPartialBlock',
         templates: 'test/fixtures/templates'
@@ -266,7 +266,7 @@ describe('the docEngine', function() {
   })
 
   it('should include the source-locators property', function() {
-    var hb2 = hb.merge({
+    const hb2 = hb.merge({
       handlebars: {
         addSourceLocators: true
       }

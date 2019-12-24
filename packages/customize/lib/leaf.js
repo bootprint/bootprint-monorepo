@@ -12,7 +12,7 @@
  * @returns {Promise}
  */
 module.exports = function leaf(promiseOrValue) {
-  var result = Promise.resolve(promiseOrValue)
+  const result = Promise.resolve(promiseOrValue)
   result._customize_custom_overrider = function(a, b) {
     // Leafs are overridden completely by the newer version
     return b

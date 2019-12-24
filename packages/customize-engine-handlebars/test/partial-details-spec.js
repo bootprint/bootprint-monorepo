@@ -8,10 +8,10 @@
 /* eslint-env mocha */
 'use strict'
 
-var chai = require('chai')
+const chai = require('chai')
 
-var expect = chai.expect
-var { augmentSingleFile, augment, hierarchy } = require('../lib/partial-details')
+const expect = chai.expect
+const { augmentSingleFile, augment, hierarchy } = require('../lib/partial-details')
 
 describe('partial-details:', function() {
   describe('the augmentSingleFile-function', function() {

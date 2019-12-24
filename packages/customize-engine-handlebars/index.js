@@ -7,16 +7,16 @@
 
 'use strict'
 
-var Handlebars = require('handlebars')
-var _ = require('./lib/utils')
-var files = require('customize/helpers-io').files
-var customize = require('customize')
-var deep = require('deep-aplus')(Promise)
-var debug = require('debug')('customize-engine-handlebars:index')
-var path = require('path')
-var promisedHandlebars = require('promised-handlebars')
+const Handlebars = require('handlebars')
+const _ = require('./lib/utils')
+const files = require('customize/helpers-io').files
+const customize = require('customize')
+const deep = require('deep-aplus')(Promise)
+const debug = require('debug')('customize-engine-handlebars:index')
+const path = require('path')
+const promisedHandlebars = require('promised-handlebars')
 
-var contents = function(partials) {
+const contents = function(partials) {
   return _.mapObject(partials, _.stripHandlebarsExt, value => value.contents)
 }
 
@@ -91,16 +91,16 @@ module.exports = {
    *    later expected as parameter to the main function of the engine
    */
   preprocessConfig(config) {
-    var helpers = moduleIfString(config.helpers, 'helpers')
+    let helpers = moduleIfString(config.helpers, 'helpers')
     // The helpers file may export an object or a promise for an object.
     // Or a function returning an object or a promise for an object.
     // If it's a function, use the result instead.
     helpers = _.isFunction(helpers) ? helpers() : helpers
 
-    var preprocessor = moduleIfString(config.preprocessor, 'preprocessor')
+    const preprocessor = moduleIfString(config.preprocessor, 'preprocessor')
 
     // The `data` is handled just like the helpers.
-    var data = moduleIfString(config.data, 'data')
+    let data = moduleIfString(config.data, 'data')
     data = _.isFunction(data) ? data() : data
 
     return {
@@ -164,14 +164,14 @@ module.exports = {
     let result = await deep(
       _.mapValues(templates, function(template, key) {
         // Prepare input data with non-enumerable target-file-property
-        var rootObject = {}
+        const rootObject = {}
         Object.defineProperty(rootObject, '__customize_target_file__', {
           enumerable: false,
           value: key
         })
 
-        var compiledTemplate = hbs.compile(template, config.hbsOptions)
-        var templateResult = compiledTemplate(Object.assign(rootObject, data))
+        const compiledTemplate = hbs.compile(template, config.hbsOptions)
+        const templateResult = compiledTemplate(Object.assign(rootObject, data))
         debug(`${key}(data) = ${templateResult}`)
         return templateResult
       })
@@ -180,8 +180,8 @@ module.exports = {
     if (config.addSourceLocators) {
       // Lookup-tables for partial-/template-name to the source-file
       // (which contains the original path to the actual file)
-      var partialToSourceFile = _.mapKeys(config.partials, _.stripHandlebarsExt)
-      var templateToSourceFile = _.mapKeys(config.templates, _.stripHandlebarsExt)
+      const partialToSourceFile = _.mapKeys(config.partials, _.stripHandlebarsExt)
+      const templateToSourceFile = _.mapKeys(config.templates, _.stripHandlebarsExt)
       result = _.mapValues(result, async function(contents, filename) {
         // Post-process locator-tags to include file-paths
         return (await contents).replace(/(<sl line="\d+" col="\d+")( partial="(.+?)")?(><\/sl>)/g, function(
@@ -234,7 +234,7 @@ function moduleIfString(pathOrObject, type) {
 
   // Require module if needed
   if (_.isString(pathOrObject)) {
-    var absPath = path.resolve(pathOrObject)
+    const absPath = path.resolve(pathOrObject)
     delete require.cache[absPath]
     pathOrObject = require(absPath)
   }
@@ -258,7 +258,7 @@ function addEngine(helpers, hbs, hbsOptions) {
     helpers,
     helper =>
       function wrappedHelper() {
-        var options = arguments[arguments.length - 1]
+        const options = arguments[arguments.length - 1]
         options.customize = {
           engine: hbs,
           config: hbsOptions,

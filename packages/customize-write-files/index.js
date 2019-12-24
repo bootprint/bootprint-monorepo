@@ -7,9 +7,9 @@
 
 'use strict'
 
-var path = require('path')
-var util = require('util')
-var deep = require('deep-aplus')(Promise)
+const path = require('path')
+const util = require('util')
+const deep = require('deep-aplus')(Promise)
 
 module.exports = write
 module.exports.changed = changed
@@ -112,13 +112,13 @@ function values(obj) {
  * @private
  */
 function mergeEngineResults(customizeResult) {
-  var result = {}
+  const result = {}
   Object.keys(customizeResult).forEach(function(engineName) {
-    var files = customizeResult[engineName]
+    const files = customizeResult[engineName]
     if (files) {
       Object.keys(files).forEach(function(filename) {
         // Existing file in different engine
-        var existingFile = result[filename]
+        const existingFile = result[filename]
         if (existingFile) {
           throw new Error(
             util.format('File "%s" occurs in two engines: "%s" and "%s"', filename, existingFile.engine, engineName)

@@ -1,12 +1,12 @@
-var mergeWith = require('lodash.mergewith')
+const mergeWith = require('lodash.mergewith')
 
-var files = require('../helpers-io').files
-var readFiles = require('../helpers-io').readFiles
-var deep = require('deep-aplus')(Promise)
-var overrider = require('../').overrider
-var expect = require('chai').expect
-var stream = require('stream')
-var toString = require('stream-to-string')
+const files = require('../helpers-io').files
+const readFiles = require('../helpers-io').readFiles
+const deep = require('deep-aplus')(Promise)
+const overrider = require('../').overrider
+const expect = require('chai').expect
+const stream = require('stream')
+const toString = require('stream-to-string')
 const TestPromise = require('./testPromise')
 
 /* eslint-env mocha */
@@ -79,7 +79,7 @@ describe('the files-function', function() {
   })
 
   it('should work correctly with globs', function() {
-    var x = files('test/fixtures/testPartials1', { glob: '*ei.hbs' })
+    const x = files('test/fixtures/testPartials1', { glob: '*ei.hbs' })
     return deep(
       mergeWith({ dir: x }, { dir: files('test/fixtures/testPartials2', { glob: '*ei.hbs' }) }, overrider)
     ).then(function(result) {
@@ -108,7 +108,7 @@ describe('the readFiles-function', function() {
   after(() => TestPromise.restore())
 
   it('should resolve to the contents of all contained files', function() {
-    var x = readFiles('test/fixtures/testPartials1', { encoding: 'utf-8' })
+    const x = readFiles('test/fixtures/testPartials1', { encoding: 'utf-8' })
     return Promise.all([x, deep(mergeWith({ dir: x }, { dir: files('test/fixtures/testPartials2') }, overrider))]).then(
       function([_x, result]) {
         // Do this before the promise is resolved

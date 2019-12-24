@@ -9,17 +9,17 @@
 /* global it */
 // /* global before */
 
-var chai = require('chai')
-var chaiAsPromised = require('chai-as-promised')
+const chai = require('chai')
+const chaiAsPromised = require('chai-as-promised')
 chai.use(chaiAsPromised)
 
-var expect = chai.expect
+const expect = chai.expect
 
-var core = require('../core')
+const core = require('../core')
 
 describe('The undefined-response-ref fixture', function() {
   this.timeout(10000)
-  var context = {}
+  const context = {}
 
   it('should fail to be built with bootprint-swagger', function() {
     return expect(core.run(require('./swagger.json'), __dirname, context)).to.be.rejected

@@ -1,4 +1,4 @@
-var customize = require('../../')
+const customize = require('../../')
 
 // Load files from one directory
 customize()

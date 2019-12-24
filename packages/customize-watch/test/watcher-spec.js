@@ -1,6 +1,6 @@
-var customize = require('../')
-var expect = require('chai').expect
-var qfs = require('m-io/fs')
+const customize = require('../')
+const expect = require('chai').expect
+const qfs = require('m-io/fs')
 
 /* global describe */
 /* global before */
@@ -9,7 +9,7 @@ var qfs = require('m-io/fs')
 
 describe('the watcher', function() {
   this.timeout(5000)
-  var cu = null
+  let cu = null
   before(function() {
     return qfs
       .removeTree('test-tmp')
@@ -59,8 +59,8 @@ describe('the watcher', function() {
   })
 
   it('should watch files for changes and run customize every time', function(done) {
-    var results = []
-    var actions = [
+    const results = []
+    const actions = [
       function modifyFileFromPartials1() {
         qfs.write('test-tmp/testPartials1/eins.hbs', 'abc')
       },

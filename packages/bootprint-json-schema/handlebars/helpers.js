@@ -1,4 +1,4 @@
-var util = require('util')
+const util = require('util')
 
 module.exports = {
   'json-schema--datatype': dataType,
@@ -21,12 +21,12 @@ module.exports = {
       console.warn('Remote references not supported yet. Reference must start with "#" (but was ' + reference + ')')
       return {}
     }
-    var components = reference.split('#')
+    const components = reference.split('#')
     // var url = components[0]
-    var hash = components[1]
-    var hashParts = hash.split('/')
+    const hash = components[1]
+    const hashParts = hash.split('/')
     // TODO : Download remote json from url if url not empty
-    var current = options.data.root
+    let current = options.data.root
     hashParts.forEach(function(hashPart) {
       // Traverse schema from root along the path
       if (hashPart.trim().length > 0) {
@@ -48,15 +48,15 @@ module.exports = {
    * @param {boolean} [range.maximumExclusive]
    */
   'json-schema--range': function(range) {
-    var hasMinimum = range.minimum || range.minimum === 0
-    var hasMaximum = range.maximum || range.maximum === 0
+    const hasMinimum = range.minimum || range.minimum === 0
+    const hasMaximum = range.maximum || range.maximum === 0
 
     if (!hasMinimum && !hasMaximum) {
       // There is no range
       return ''
     }
 
-    var numberSet = ''
+    let numberSet = ''
     if (range.type === 'integer') {
       numberSet = '\u2208 \u2124' // ELEMENT OF - DOUBLE-STRUCK CAPITAL Z
     } else if (range.type === 'number') {

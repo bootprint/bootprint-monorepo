@@ -10,13 +10,13 @@
 /*
  * Use the `debug`-module to provide debug output if needed
  */
-var debug = require('debug')('customize-watch:watcher')
-var qfs = require('m-io/fs')
-var deep = require('deep-aplus')(require('q').Promise)
-var _ = require('lodash')
-var events = require('events')
-var chokidar = require('chokidar')
-var path = require('path')
+const debug = require('debug')('customize-watch:watcher')
+const qfs = require('m-io/fs')
+const deep = require('deep-aplus')(require('q').Promise)
+const _ = require('lodash')
+const events = require('events')
+const chokidar = require('chokidar')
+const path = require('path')
 
 /**
  * Creates a new watcher that invokes customize whenever a watched file
@@ -26,8 +26,8 @@ var path = require('path')
  * the output has been recomputed
  */
 module.exports = function(recustomize) {
-  var emitter = new events.EventEmitter()
-  var result = null
+  const emitter = new events.EventEmitter()
+  let result = null
   // Determine watched files from configuration
   recustomize.watched().done(function(watched) {
     // Compute and register watched files and dirs:
@@ -46,8 +46,8 @@ module.exports = function(recustomize) {
         })
       ).then(function(pathsWithType) {
         // Sort dirs and files in different buckets
-        var dirs = []
-        var files = []
+        const dirs = []
+        const files = []
         pathsWithType.forEach(function(pathWithType) {
           if (pathWithType.isDir) {
             dirs.push(pathWithType.path)
@@ -68,8 +68,8 @@ module.exports = function(recustomize) {
           )
         }
         // Register watchers with chokidar
-        var dirWatcher = watch(dirs, false, runEngine)
-        var fileWatcher = watch(files, true, runEngine)
+        const dirWatcher = watch(dirs, false, runEngine)
+        const fileWatcher = watch(files, true, runEngine)
 
         emitter.stopWatching = function() {
           unwatch(dirWatcher)
@@ -92,15 +92,15 @@ module.exports = function(recustomize) {
   return emitter
 }
 
-var watch = function(paths, usePolling, callback) {
-  var watcher = chokidar.watch(paths, {
+function watch(paths, usePolling, callback) {
+  const watcher = chokidar.watch(paths, {
     ignoreInitial: true,
     usePolling: usePolling
   })
   watcher.on('ready', function() {
     debug('Watchers for ', paths, ' ready')
   })
-  var fn = _.debounce(callback, 250)
+  const fn = _.debounce(callback, 250)
   watcher
     .on('change', fn)
     .on('add', fn)
@@ -108,6 +108,6 @@ var watch = function(paths, usePolling, callback) {
   return watcher
 }
 
-var unwatch = function(watcher) {
+function unwatch(watcher) {
   watcher.close()
 }

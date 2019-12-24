@@ -1,10 +1,10 @@
 /* global describe */
 /* global it */
 
-var expect = require('chai').expect
+const expect = require('chai').expect
 
-var helpers = require('../handlebars/helpers.js')
-var Handlebars = require('handlebars').create()
+const helpers = require('../handlebars/helpers.js')
+const Handlebars = require('handlebars').create()
 Handlebars.registerHelper(helpers)
 
 describe('The Handlebars-helpers:', function() {
@@ -74,13 +74,13 @@ describe('The Handlebars-helpers:', function() {
     })
 
     it('render tables with borders in bootstrap styles', function() {
-      var table =
+      const table =
         '| First Header  | Second Header |\n' +
         '| ------------- | ------------- |\n' +
         '| Content Cell  | Content Cell  |\n' +
         '| Content Cell  | Content Cell  |\n'
 
-      var expected =
+      const expected =
         '<table class="table table-bordered">\n' +
         '<thead>\n' +
         '<tr>\n' +
@@ -103,8 +103,8 @@ describe('The Handlebars-helpers:', function() {
     })
 
     it('should highlight code', function() {
-      var code = '```json\n' + '{ "abc": "abc" }\n' + '```'
-      var expected =
+      const code = '```json\n' + '{ "abc": "abc" }\n' + '```'
+      const expected =
         '<pre><code class="lang-json">{ "<span class="hljs-attribute">abc</span>": <span class="hljs-value"><span class="hljs-string">"abc"</span> </span>}\n' +
         '</code></pre>'
       expect(md('{{md line}}', code)).to.equal(expected)
@@ -113,7 +113,7 @@ describe('The Handlebars-helpers:', function() {
 
   describe('The "json"-helper', function() {
     it('should highlight stringified json', function() {
-      var expected =
+      const expected =
         '<pre><code class="lang-json">{<br>    &quot;<span class="hljs-attribute">a</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;b&quot;</span><br></span>}\n' +
         '</code></pre>'
 

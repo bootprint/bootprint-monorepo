@@ -14,14 +14,14 @@
 
 'use strict'
 
-var chai = require('chai')
-var expect = chai.expect
-var chaiAsPromised = require('chai-as-promised')
+const chai = require('chai')
+const expect = chai.expect
+const chaiAsPromised = require('chai-as-promised')
 chai.use(chaiAsPromised)
 
-var overrider = require('../').overrider
-var mergeWith = require('lodash.mergewith')
-var deep = require('deep-aplus')(Promise)
+const overrider = require('../').overrider
+const mergeWith = require('lodash.mergewith')
+const deep = require('deep-aplus')(Promise)
 
 describe('The custom overrider', function() {
   it('should concatenate arrays', function() {

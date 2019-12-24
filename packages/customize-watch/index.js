@@ -7,7 +7,7 @@
 
 'use strict'
 
-var customize = require('customize')
+const customize = require('customize')
 
 module.exports = function watcher() {
   return new Recustomize(customize)
@@ -42,9 +42,9 @@ function Recustomize(builder) {
   function wrap(fnName) {
     /* dynamic arguments */
     return function() {
-      var args = arguments
+      const args = arguments
       return new Recustomize(function() {
-        var customize = builder()
+        const customize = builder()
         return customize[fnName].apply(customize, args)
       })
     }
@@ -113,7 +113,7 @@ function Recustomize(builder) {
    */
   /* dynamic args */
   this.run = function() {
-    var custObj = builder()
+    const custObj = builder()
     return custObj.run.apply(custObj, arguments)
   }
 }

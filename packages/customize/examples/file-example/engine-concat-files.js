@@ -1,4 +1,4 @@
-var files = require('../../helpers-io').files
+const files = require('../../helpers-io').files
 
 module.exports = {
   // Optional input schema for engine-configurations
@@ -38,7 +38,7 @@ module.exports = {
   // }
   //
   run: function(config) {
-    var result = ''
+    let result = ''
     Object.keys(config).forEach(filename => {
       result += config[filename].contents + '\n'
     })

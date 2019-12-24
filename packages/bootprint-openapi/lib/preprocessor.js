@@ -1,14 +1,14 @@
-var _ = require('lodash')
+const _ = require('lodash')
 
-var httpMethods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch']
+const httpMethods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch']
 
 // Preprocessor for the swagger-json, so that some of the logic can be taken out of the
 // template
 
 module.exports = function(swaggerJson) {
-  var copy = _.cloneDeep(swaggerJson)
+  const copy = _.cloneDeep(swaggerJson)
 
-  var tagsByName = _.indexBy(copy.tags, 'name')
+  const tagsByName = _.indexBy(copy.tags, 'name')
 
   copy.tags = copy.tags || []
 
@@ -16,23 +16,23 @@ module.exports = function(swaggerJson) {
   // separate field "_request_body".
   if (copy.paths) {
     Object.keys(copy.paths).forEach(function(pathName) {
-      var path = copy.paths[pathName]
-      var pathParameters = path.parameters || []
+      const path = copy.paths[pathName]
+      const pathParameters = path.parameters || []
       Object.keys(path).forEach(function(method) {
         if (httpMethods.indexOf(method) < 0) {
           delete path[method]
           return
         }
-        var operation = path[method]
+        const operation = path[method]
         operation.path = pathName
         operation.method = method
         // Draw links from tags to operations referencing them
-        var operationTags = operation.tags || ['default']
+        const operationTags = operation.tags || ['default']
         operationTags.forEach(function(tag) {
           if (!tagsByName[tag]) {
             // New implicit declaration of tag not defined in global "tags"-object
             // https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#user-content-swaggerTags
-            var tagDefinition = {
+            const tagDefinition = {
               name: tag,
               operations: []
             }

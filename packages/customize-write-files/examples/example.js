@@ -1,5 +1,5 @@
-var customize = require('customize')
-var write = require('../')
+const customize = require('customize')
+const write = require('../')
 
 // Load files from one directory and merge with second
 customize()

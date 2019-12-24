@@ -1,13 +1,13 @@
-var Handlebars = require('handlebars')
-var marked = require('marked')
-var cheerio = require('cheerio')
-var highlight = require('highlight.js')
+const Handlebars = require('handlebars')
+const marked = require('marked')
+const cheerio = require('cheerio')
+const highlight = require('highlight.js')
 
 highlight.configure({
   useBR: true
 })
 
-var renderer = new marked.Renderer()
+const renderer = new marked.Renderer()
 
 // Renderer for HTML-tables with Bootstrap-classes
 renderer.table = function(header, body) {
@@ -25,7 +25,7 @@ renderer.table = function(header, body) {
 
 marked.setOptions({
   highlight: function(code, name) {
-    var highlighted
+    let highlighted
     if (name) {
       highlighted = highlight.highlight(name, code).value
     } else {
@@ -74,12 +74,12 @@ module.exports = {
    * @api public
    */
   eachSorted: function(context, options) {
-    var ret = ''
-    var data
+    let ret = ''
+    let data
     if (typeof context !== 'object') {
       return ret
     }
-    var keys = Object.keys(context)
+    const keys = Object.keys(context)
     keys
       .sort(function(a, b) {
         // http://stackoverflow.com/questions/8996963/how-to-perform-case-insensitive-sorting-in-javascript
@@ -124,10 +124,10 @@ module.exports = {
     if (!value) {
       return value
     }
-    var html = marked(value)
+    let html = marked(value)
     // We strip the surrounding <p>-tag, if
     if (options.hash && options.hash.stripParagraph) {
-      var $ = cheerio('<root>' + html + '</root>')
+      const $ = cheerio('<root>' + html + '</root>')
       // Only strip <p>-tags and only if there is just one of them.
       if ($.children().length === 1 && $.children('p').length === 1) {
         html = $.children('p').html()
@@ -162,12 +162,12 @@ module.exports = {
     if (!value) {
       return ''
     }
-    var schemaString = require('json-stable-stringify')(value, { space: 4 })
+    const schemaString = require('json-stable-stringify')(value, { space: 4 })
 
-    var $ = cheerio.load(marked('```json\r\n' + schemaString + '\n```'))
-    var definitions = $('span:not(:has(span)):contains("#/definitions/")')
+    const $ = cheerio.load(marked('```json\r\n' + schemaString + '\n```'))
+    const definitions = $('span:not(:has(span)):contains("#/definitions/")')
     definitions.each(function(index, item) {
-      var ref = $(item).html()
+      const ref = $(item).html()
       // TODO: This should be done in a template
       $(item).html('<a href=' + ref.replace(/&quot;/g, '') + '>' + ref + '</a>')
     })

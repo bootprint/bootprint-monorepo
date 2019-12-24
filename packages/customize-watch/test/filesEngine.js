@@ -1,5 +1,5 @@
-var files = require('../helpers-io').files
-var Q = require('q')
+const files = require('../helpers-io').files
+const Q = require('q')
 
 module.exports = {
   defaultConfig: {

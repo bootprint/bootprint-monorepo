@@ -1,8 +1,8 @@
-var path = require('path')
+const path = require('path')
 
 // Export function to create new config (builder is passed in from outside)
 module.exports = function(builder) {
-  var bootstrapLess = require.resolve('bootstrap/less/bootstrap.less')
+  const bootstrapLess = require.resolve('bootstrap/less/bootstrap.less')
 
   return builder.merge({
     handlebars: {

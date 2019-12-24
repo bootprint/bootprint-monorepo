@@ -15,7 +15,7 @@ chai.use(require('chai-as-promised'))
 const expect = chai.expect
 const customizeWriteFiles = require('../')
 
-var tmpDir = 'test-output'
+const tmpDir = 'test-output'
 
 beforeEach(async function() {
   await fs.remove(tmpDir)
@@ -28,7 +28,7 @@ beforeEach(async function() {
  * so that mocha waits until all files have been written
  */
 function createStream(contents) {
-  var s = new stream.Readable()
+  const s = new stream.Readable()
   s._read = function noop() {
     // no operation
   }
@@ -46,7 +46,7 @@ function createBuffer(contents) {
  * @param filename
  */
 function read(filename) {
-  var fullPath = path.join(tmpDir, filename)
+  const fullPath = path.join(tmpDir, filename)
   return fs.readFileSync(fullPath, { encoding: 'utf-8' })
 }
 
@@ -54,7 +54,7 @@ function read(filename) {
  * Run the module with a single file
  */
 function run(filename, contents) {
-  var files = {}
+  const files = {}
   files[filename] = contents
   return customizeWriteFiles(tmpDir)({
     engine1: files

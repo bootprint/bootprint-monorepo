@@ -16,24 +16,24 @@ describe('the lazy-function', function() {
   })
 
   it('should not call fn, if the then-function is not called', function() {
-    var a = 0
+    let a = 0
     // use function with side-effect to determine whether is has been called
     lazy(() => a++)
     return new Promise((resolve, reject) => setTimeout(resolve, 100)).then(() => expect(a).to.equal(0))
   })
 
   it('should call fn, if the then-function is called', function() {
-    var a = 0
+    let a = 0
     // use function with side-effect to determine whether is has been called
-    var cond1 = lazy(() => a++).then(x => expect(x).to.equal(0))
-    var cond2 = new Promise((resolve, reject) => setTimeout(resolve, 100)).then(() => expect(a).to.equal(1))
+    const cond1 = lazy(() => a++).then(x => expect(x).to.equal(0))
+    const cond2 = new Promise((resolve, reject) => setTimeout(resolve, 100)).then(() => expect(a).to.equal(1))
     return Promise.all([cond1, cond2])
   })
 
   it('should call not fn more than once', function() {
-    var a = 0
+    let a = 0
     // use function with side-effect to determine whether is has been called
-    var promise = lazy(() => a++)
+    const promise = lazy(() => a++)
     promise.then(x => expect(x).to.equal(0))
     promise.then(x => expect(x).to.equal(0))
     promise.then(x => expect(x).to.equal(0))

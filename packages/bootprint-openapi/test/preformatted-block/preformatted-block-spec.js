@@ -8,12 +8,12 @@
 /* global describe */
 /* global it */
 /* global before */
-var expect = require('chai').expect
-var core = require('../core')
+const expect = require('chai').expect
+const core = require('../core')
 
 describe('The preformatted-block fixture', function() {
   this.timeout(10000)
-  var context = {}
+  const context = {}
   before(function() {
     return core.run(require('./swagger.json'), __dirname, context)
   })

@@ -1,7 +1,7 @@
-var _ = require('lodash')
-var files = require('../helpers-io').files
-var leaf = require('../').leaf
-var Q = require('q')
+const _ = require('lodash')
+const files = require('../helpers-io').files
+const leaf = require('../').leaf
+const Q = require('q')
 
 module.exports = {
   defaultConfig: {

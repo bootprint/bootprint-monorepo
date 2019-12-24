@@ -5,9 +5,9 @@
  * Released under the MIT license.
  */
 
-var qfs = require('m-io/fs')
-var cheerio = require('cheerio')
-var path = require('path')
+const qfs = require('m-io/fs')
+const cheerio = require('cheerio')
+const path = require('path')
 
 /**
  * Create a new tester-object for a given bootprint-module
@@ -23,7 +23,7 @@ module.exports = function(bootprintModule, dir) {
    * @returns {*}
    */
   function runBootprint(inputFile, context) {
-    var targetDir = path.join('test-output', path.basename(dir))
+    const targetDir = path.join('test-output', path.basename(dir))
     return require('bootprint')
       .load(bootprintModule)
       .build(inputFile, targetDir)

@@ -8,30 +8,30 @@
 /* global describe */
 /* global it */
 /* global before */
-var expect = require('chai').expect
-var core = require('../core')
+const expect = require('chai').expect
+const core = require('../core')
 
 describe('externalDocs', function() {
   this.timeout(10000)
-  var context = {}
+  const context = {}
   before(function() {
     return core.run(require('./swagger.json'), __dirname, context)
   })
 
   it('schema should contain an external document link to swagger.io', function() {
-    var $a = context.$('.sw-info a.sw-external-doc')
+    const $a = context.$('.sw-info a.sw-external-doc')
 
     expect($a.text()).to.equal('Find out more about Swagger')
     expect($a.attr('href')).to.equal('http://swagger.io')
   })
   it('operation should contain an external document link to swagger.io', function() {
-    var $a = context.$('#operation--pet-post .panel-body section.sw-operation-external-docs a.sw-external-doc')
+    const $a = context.$('#operation--pet-post .panel-body section.sw-operation-external-docs a.sw-external-doc')
 
     expect($a.text()).to.equal('Find out more')
     expect($a.attr('href')).to.equal('http://swagger.io')
   })
   it('tag should contain an external document link to swagger.io', function() {
-    var $a = context
+    const $a = context
       .$('#tag-pet')
       .next()
       .next('p.sw-tag-external-doc')
@@ -41,7 +41,7 @@ describe('externalDocs', function() {
     expect($a.attr('href')).to.equal('http://swagger.io')
   })
   it('external document w/o description must use url as description', function() {
-    var $a = context
+    const $a = context
       .$('#tag-withoutDescription')
       .next()
       .next('p.sw-tag-external-doc')

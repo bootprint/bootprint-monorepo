@@ -6,8 +6,8 @@
  */
 'use strict'
 
-var less = require('less')
-var path = require('path')
+const less = require('less')
+const path = require('path')
 
 /**
  * @typedef {object} CustomizeLessConfig
@@ -42,7 +42,7 @@ module.exports = {
    * @param config
    */
   run: function(config) {
-    var lessSource = config.main
+    const lessSource = config.main
       .map(function(file) {
         if (path.extname(file) === '.css') {
           return '@import (inline) "' + file + '";'

@@ -15,16 +15,16 @@
 
 'use strict'
 
-var expect = require('chai').expect
-var customize = require('../')
+const expect = require('chai').expect
+const customize = require('../')
 
-var minimalEngine = {
+const minimalEngine = {
   run: function(obj) {
     return obj
   }
 }
 
-var testee = customize()
+const testee = customize()
   .registerEngine('test', require('./testEngine.js'))
   .merge({
     test: {
@@ -48,7 +48,7 @@ var testee = customize()
 describe('After loading a config', function() {
   this.timeout(10000)
 
-  var testResult = null
+  let testResult = null
   before(function() {
     return testee.run().then(function(result) {
       testResult = result
@@ -88,7 +88,7 @@ describe('After loading a config', function() {
 })
 
 describe('After merging another config', function() {
-  var testResult = null
+  let testResult = null
   before(function() {
     return testee
       .merge({
@@ -153,7 +153,7 @@ describe('After merging another config', function() {
 })
 
 describe('after loading a module', function() {
-  var testResult = null
+  let testResult = null
   before(function() {
     // Load a configuration-module
     return testee
@@ -318,7 +318,7 @@ describe('The "registerEngine"-method', function() {
 
 describe('The "configSchema"-method', function() {
   it('should return a combined configuration schema for the all engines', function() {
-    var co = customize()
+    const co = customize()
       .registerEngine('test', require('./testEngine.js'))
       .registerEngine('test2', minimalEngine)
 
@@ -361,7 +361,7 @@ describe('The "configSchema"-method', function() {
 
 describe('The "load"-method', function() {
   it('should handle a missing "package" gracefully', function() {
-    var result = customize()
+    const result = customize()
       .registerEngine('test', minimalEngine)
       .load(require('./fixtures/module/nopackage.js'))
       .run()
@@ -372,7 +372,7 @@ describe('The "load"-method', function() {
 })
 
 describe('the "run"-method', function() {
-  var twoEngines = customize()
+  const twoEngines = customize()
     .registerEngine('test1', minimalEngine)
     .registerEngine('test2', minimalEngine)
     .merge({
@@ -397,7 +397,7 @@ describe('the "run"-method', function() {
 
 describe('the "watched"-method', function() {
   it('should return an array for all watch directories and files (promised)', function() {
-    var watched = testee
+    const watched = testee
       .registerEngine('test2', require('./testEngine'))
       .merge({
         test: {

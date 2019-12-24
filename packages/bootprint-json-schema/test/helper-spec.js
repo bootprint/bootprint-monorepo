@@ -1,10 +1,10 @@
 /* global describe */
 /* global it */
 
-var expect = require('chai').expect
+const expect = require('chai').expect
 
-var helpers = require('../handlebars/helpers.js')
-var Handlebars = require('handlebars').create()
+const helpers = require('../handlebars/helpers.js')
+const Handlebars = require('handlebars').create()
 Handlebars.registerHelper(helpers)
 
 function run(template, json) {

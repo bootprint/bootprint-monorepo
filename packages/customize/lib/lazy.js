@@ -5,12 +5,12 @@
  * @param fn
  */
 module.exports = function(fn) {
-  var _resolve, _reject, innerPromise
-  var promise = new Promise((resolve, reject) => {
+  let _resolve, _reject, innerPromise
+  const promise = new Promise((resolve, reject) => {
     _resolve = resolve
     _reject = reject
   })
-  var oldThen = promise.then
+  const oldThen = promise.then
   promise.then = function() {
     if (!innerPromise) {
       innerPromise = Promise.resolve().then(fn)

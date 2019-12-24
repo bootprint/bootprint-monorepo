@@ -9,7 +9,10 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2018
   },
-  rules: {},
+  rules: {
+    "no-var": "error",
+    "prefer-const": "warn"
+  },
   overrides: [
     {
       files: ['**/test/*-spec.js'],

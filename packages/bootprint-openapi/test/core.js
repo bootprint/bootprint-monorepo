@@ -4,9 +4,9 @@
  * Copyright (c) 2015 Nils Knappmeier.
  * Released under the MIT license.
  */
-var qfs = require('m-io/fs')
-var cheerio = require('cheerio')
-var path = require('path')
+const qfs = require('m-io/fs')
+const cheerio = require('cheerio')
+const path = require('path')
 
 /**
  * Run bootprint with a fixture and return a cheerio wrapper for the index.html
@@ -15,7 +15,7 @@ var path = require('path')
  * @returns {*}
  */
 function runBootprint(swaggerDefinition, dir, context) {
-  var targetDir = path.join('test-output', path.basename(dir))
+  const targetDir = path.join('test-output', path.basename(dir))
   return require('bootprint')
     .load(require('../'))
     .build(swaggerDefinition, targetDir)

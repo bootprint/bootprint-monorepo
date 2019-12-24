@@ -14,10 +14,10 @@
 
 'use strict'
 
-var expect = require('chai').expect
-var customize = require('../')
+const expect = require('chai').expect
+const customize = require('../')
 
-var ro1 = customize()
+const ro1 = customize()
   .registerEngine('test', require('./testEngine.js'))
   .merge({
     test: {
@@ -38,7 +38,7 @@ var ro1 = customize()
 describe('After loading a config', function() {
   this.timeout(10000)
 
-  var testResult = null
+  let testResult = null
   before(function() {
     return ro1.run().then(function(result) {
       testResult = result
@@ -75,7 +75,7 @@ describe('After loading a config', function() {
 })
 
 describe('After merging another config', function() {
-  var testResult = null
+  let testResult = null
   before(function() {
     return ro1
       .merge({
@@ -134,7 +134,7 @@ describe('After merging another config', function() {
 })
 
 describe('after loading a module', function() {
-  var testResult = null
+  let testResult = null
   before(function() {
     // Load a configuration-module
     return ro1

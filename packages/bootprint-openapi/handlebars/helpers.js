@@ -1,5 +1,5 @@
-var _ = require('lodash')
-var highlight = require('highlight.js')
+const _ = require('lodash')
+const highlight = require('highlight.js')
 
 highlight.configure({
   useBR: true
@@ -105,8 +105,8 @@ module.exports = {
           break
       }
     }
-    var highlighted = highlight.highlightAuto(String(example)).value
-    var fixMarkup = highlight.fixMarkup(highlighted)
+    const highlighted = highlight.highlightAuto(String(example)).value
+    const fixMarkup = highlight.fixMarkup(highlighted)
     return new customize.engine.SafeString('<pre>' + fixMarkup + '</pre>')
   }
 }

@@ -1,4 +1,4 @@
-var path = require('path')
+const path = require('path')
 
 /**
  * Create a bootprint template-module that can be loaded via `Bootprint#load`:

@@ -8,17 +8,17 @@
 /* eslint-env mocha */
 'use strict'
 
-var customize = require('customize')
-var _ = require('../lib/utils')
-var chai = require('chai')
-var chaiAsPromised = require('chai-as-promised')
+const customize = require('customize')
+const _ = require('../lib/utils')
+const chai = require('chai')
+const chaiAsPromised = require('chai-as-promised')
 chai.use(chaiAsPromised)
 
-var expect = chai.expect
+const expect = chai.expect
 
 describe('customize-engine-handlebars', function() {
-  var emptyEngine = null
-  var hb = null
+  let emptyEngine = null
+  let hb = null
   before(function() {
     emptyEngine = customize().registerEngine('handlebars', require('../'))
     hb = emptyEngine.merge({
@@ -59,7 +59,7 @@ describe('customize-engine-handlebars', function() {
   })
 
   it('should watch merged directories as well', function() {
-    var hb2 = hb.merge({
+    const hb2 = hb.merge({
       handlebars: {
         partials: 'test/fixtures/testPartials2'
       }
@@ -73,7 +73,7 @@ describe('customize-engine-handlebars', function() {
   })
 
   it('should load helpers and data from a function', function() {
-    var hb2 = hb.merge({
+    const hb2 = hb.merge({
       handlebars: {
         helpers: function() {
           return {
@@ -127,7 +127,7 @@ describe('customize-engine-handlebars', function() {
   })
 
   it('should maintain the this-context of helper calls', function() {
-    var hb2 = emptyEngine.merge({
+    const hb2 = emptyEngine.merge({
       handlebars: {
         templates: 'test/fixtures/helperTemplate',
         helpers: {
@@ -145,7 +145,7 @@ describe('customize-engine-handlebars', function() {
   })
 
   it('should pass the the customize-configuration as "customize"-property to the options', function() {
-    var hb2 = emptyEngine.merge({
+    const hb2 = emptyEngine.merge({
       handlebars: {
         templates: 'test/fixtures/helperTemplate',
         helpers: {
@@ -158,7 +158,7 @@ describe('customize-engine-handlebars', function() {
   })
 
   it('should pass the the HandlebarsEnvironment as "customize.engine"-property to the options', function() {
-    var hb2 = emptyEngine.merge({
+    const hb2 = emptyEngine.merge({
       handlebars: {
         templates: 'test/fixtures/helperTemplate',
         helpers: {
@@ -171,7 +171,7 @@ describe('customize-engine-handlebars', function() {
   })
 
   it('should apply the partial wrapper', function() {
-    var hb2 = hb.merge({
+    const hb2 = hb.merge({
       handlebars: {
         partialWrapper: function(contents, name) {
           return '[' + name + '] ' + contents + ' [/' + name + ']'
@@ -188,7 +188,7 @@ describe('customize-engine-handlebars', function() {
   })
 
   it('the parent partial wrapper should be available through `this.parent()`', function() {
-    var hb2 = hb
+    const hb2 = hb
       .merge({
         handlebars: {
           partialWrapper: function(contents, name) {
@@ -212,7 +212,7 @@ describe('customize-engine-handlebars', function() {
   })
 
   it('should add source-locators if the "addSourceLocator"-option is enabled"', function() {
-    var hb2 = hb.merge({
+    const hb2 = hb.merge({
       handlebars: {
         addSourceLocators: true
       }
@@ -228,7 +228,7 @@ describe('customize-engine-handlebars', function() {
   })
 
   it('should provide the name of the output-file as `options.targetFile` to helpers', function() {
-    var hb2 = emptyEngine.merge({
+    const hb2 = emptyEngine.merge({
       handlebars: {
         helpers: 'test/fixtures/helpers.js',
         templates: 'test/fixtures/templates-targetFile'
@@ -243,7 +243,7 @@ describe('customize-engine-handlebars', function() {
   })
 
   it('should not pollute the input object with enumerable properties', function() {
-    var hb2 = emptyEngine.merge({
+    const hb2 = emptyEngine.merge({
       handlebars: {
         templates: 'test/fixtures/templates-cleanInput',
         data: {

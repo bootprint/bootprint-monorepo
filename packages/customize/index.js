@@ -10,16 +10,16 @@
 /*
  * Use the `debug`-module to provide debug output if needed
  */
-var debug = require('debug')('customize:base')
-var debugState = require('debug')('customize:state')
-var debugVersions = require('debug')('customize:versions')
-var deep = require('deep-aplus')(Promise)
-var mergeWith = require('lodash.mergewith')
+const debug = require('debug')('customize:base')
+const debugState = require('debug')('customize:state')
+const debugVersions = require('debug')('customize:versions')
+const deep = require('deep-aplus')(Promise)
+const mergeWith = require('lodash.mergewith')
 
 const util = require('./lib/util')
-var mapValues = util.mapValues
-var isString = util.isString
-var constant = util.constant
+const mapValues = util.mapValues
+const isString = util.isString
+const constant = util.constant
 
 /**
  * The configuration file is defined (and validated) by a JSON-schema
@@ -30,8 +30,8 @@ var constant = util.constant
  *  from https://gitlab.com/jksdua/jsonschema-extra/blob/master/types.js#L16
  * @private
  */
-var jsonschema = require('jsonschema')
-var validator = new jsonschema.Validator()
+const jsonschema = require('jsonschema')
+const validator = new jsonschema.Validator()
 validator.types = Object.create(validator.types)
 validator.types.function = function testFunction(fn) {
   return typeof fn === 'function'
@@ -89,7 +89,7 @@ function customize() {
  * @constructor
  */
 function Customize(config, parentConfig, engines) {
-  var _config = mergeWith({}, parentConfig, config, customOverrider)
+  const _config = mergeWith({}, parentConfig, config, customOverrider)
 
   // Debug logging
   if (debugState.enabled) {
@@ -131,15 +131,15 @@ function Customize(config, parentConfig, engines) {
 
     // This is only allowed if no engine with the same id exists.
     if (engines[id] != null || _config[id] != null) {
-      var error = new Error("Engine '" + id + "' already registered.", 'ERR_ENGINE_EXISTS')
+      const error = new Error("Engine '" + id + "' already registered.", 'ERR_ENGINE_EXISTS')
       error.engine = engines[id]
       error.config = _config[id]
       throw error
     }
 
-    var _engines = mapValues(engines) // clone
+    const _engines = mapValues(engines) // clone
     _engines[id] = engine
-    var _defaultConfig = {}
+    const _defaultConfig = {}
     _defaultConfig[id] = {
       config: engine.defaultConfig || {},
       watched: engine.defaultWatched || []
@@ -183,19 +183,19 @@ function Customize(config, parentConfig, engines) {
 
     // Assert that for each key in the other configuration, there is an engine present
     // Apply engine preprocessor to each config
-    var preprocessedConfig = mapValues(config, function(engineConf, engineName) {
-      var engine = engines[engineName]
+    const preprocessedConfig = mapValues(config, function(engineConf, engineName) {
+      const engine = engines[engineName]
       if (engine == null) {
         throw new Error("Engine '" + engineName + "' not found. Refusing to store configuration")
       }
       // Load preprocessor with identity as default
-      var preprocessor =
+      const preprocessor =
         engine.preprocessConfig ||
         function(a) {
           return a
         }
       // Watch no files by default (constant [])
-      var watched = engine.watched || constant([])
+      const watched = engine.watched || constant([])
 
       return Promise.resolve(engineConf)
         .then(function(engineConf) {
@@ -205,11 +205,11 @@ function Customize(config, parentConfig, engines) {
              * The overriding configuration must validate against the [JSON-schema for configurations](./config-schema.html)
              * Otherwise we refuse to proceed.
              */
-            var validationErrors = validator.validate(engineConf, engine.schema).errors
+            const validationErrors = validator.validate(engineConf, engine.schema).errors
             if (validationErrors.length > 0) {
               debug("Error while validating config for engine '" + engineName + "': ", engineConf)
               debug('Errors: ', validationErrors.map(String).join('\n'))
-              var error = new Error('Error while validating Customize configuration')
+              const error = new Error('Error while validating Customize configuration')
               error.validationErrors = validationErrors
               throw error
             }
@@ -244,7 +244,7 @@ function Customize(config, parentConfig, engines) {
    */
   this.load = function(customizeModule) {
     // Container for configuration metadata (e.g. versions of loaded modules)
-    var _metadata = {
+    const _metadata = {
       config: {
         modules: []
       }
@@ -304,9 +304,9 @@ function Customize(config, parentConfig, engines) {
    * @public
    */
   this.run = function(options) {
-    var onlyEngine = options && options.onlyEngine
+    const onlyEngine = options && options.onlyEngine
     return this.buildConfig().then(function(resolvedConfig) {
-      var result = mapValues(engines, function(engine, key) {
+      const result = mapValues(engines, function(engine, key) {
         // if "onlyEngine" is set to a value, execute on the engine with the same name
         if (!onlyEngine || onlyEngine === key) {
           return engine.run(resolvedConfig[key])

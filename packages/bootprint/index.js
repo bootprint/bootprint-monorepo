@@ -1,9 +1,9 @@
-var customize = require('customize-watch')
-var Q = require('q')
-var write = require('customize-write-files')
-var fs = require('fs')
-var httpGet = require('get-promise')
-var yaml = require('js-yaml')
+const customize = require('customize-watch')
+const Q = require('q')
+const write = require('customize-write-files')
+const fs = require('fs')
+const httpGet = require('get-promise')
+const yaml = require('js-yaml')
 
 // preconfigured Customize instance.
 module.exports = customize()
@@ -11,10 +11,10 @@ module.exports = customize()
   .registerEngine('less', require('customize-engine-less'))
 
 // Customize type for adding methods
-var Customize = customize.Customize
+const Customize = customize.Customize
 
 Customize.prototype.build = function(jsonFile, targetDir) {
-  var withData = this.merge({
+  const withData = this.merge({
     handlebars: {
       data: loadFromFileOrHttp(jsonFile).catch(function(err) {
         // Augment error for identification in the cli script
@@ -75,7 +75,7 @@ function loadFromFileOrHttp(fileOrUrlOrData) {
     }).then(
       function(result) {
         if (result.status !== 200) {
-          var error = new Error('HTTP request failed with code ' + result.status)
+          const error = new Error('HTTP request failed with code ' + result.status)
           error.result = result
           throw error
         }

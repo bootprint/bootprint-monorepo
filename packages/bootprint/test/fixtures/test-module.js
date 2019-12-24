@@ -1,4 +1,4 @@
-var path = require('path')
+const path = require('path')
 
 /**
  * This module is equivalent to what the test in main-spec.js does.
