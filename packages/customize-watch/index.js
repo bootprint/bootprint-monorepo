@@ -9,7 +9,7 @@
 
 var customize = require('customize')
 
-module.exports = function watcher () {
+module.exports = function watcher() {
   return new Recustomize(customize)
 }
 
@@ -29,7 +29,7 @@ module.exports.Customize = Recustomize
  *
  * @constructor
  */
-function Recustomize (builder) {
+function Recustomize(builder) {
   /**
    * Wrap the method of a Customize object such that
    * instead of the new Customize object, new Recustomize object
@@ -39,11 +39,11 @@ function Recustomize (builder) {
    * @returns {Function}
    * @api private
    */
-  function wrap (fnName) {
+  function wrap(fnName) {
     /* dynamic arguments */
-    return function () {
+    return function() {
       var args = arguments
-      return new Recustomize(function () {
+      return new Recustomize(function() {
         var customize = builder()
         return customize[fnName].apply(customize, args)
       })
@@ -65,8 +65,8 @@ function Recustomize (builder) {
   /**
    * Wrapped function. See [customize](https://github.com/nknapp/customize) for details
    * @type {Function}
-     */
-  this.configSchema = function () {
+   */
+  this.configSchema = function() {
     return builder().configSchema()
   }
 
@@ -81,7 +81,7 @@ function Recustomize (builder) {
    * @returns {Promise<object>}
    * @api private
    */
-  this.buildConfig = function () {
+  this.buildConfig = function() {
     return builder().buildConfig()
   }
 
@@ -91,7 +91,7 @@ function Recustomize (builder) {
    * @return {Promise<object<string[]>>} a list of paths to files or directories for each engine
    * @api private
    */
-  this.watched = function () {
+  this.watched = function() {
     return builder().watched()
   }
 
@@ -101,7 +101,7 @@ function Recustomize (builder) {
    * a file has changed.
    * @return {EventEmitter}
    */
-  this.watch = function () {
+  this.watch = function() {
     return require('./lib/watcher.js')(this)
   }
 
@@ -112,7 +112,7 @@ function Recustomize (builder) {
    * @api private
    */
   /* dynamic args */
-  this.run = function () {
+  this.run = function() {
     var custObj = builder()
     return custObj.run.apply(custObj, arguments)
   }

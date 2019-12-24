@@ -5,7 +5,7 @@ customize()
   .merge({
     handlebars: {
       partials: 'partials2',
-      partialWrapper: function (contents, name) {
+      partialWrapper: function(contents, name) {
         return '[BEGIN ' + name + ']\n' + contents + '[END ' + name + ']'
       }
     }

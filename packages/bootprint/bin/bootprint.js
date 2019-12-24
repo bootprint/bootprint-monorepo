@@ -5,7 +5,8 @@ var path = require('path')
 var debug = require('debug')('bootprint:cli')
 var _package = require('../package')
 
-program.version(_package.version)
+program
+  .version(_package.version)
   .usage('[options] <module> <jsonFile> <targetdir>')
   .description(_package.description)
   .option('-f, --config-file <file>', 'Specify a config file for custom configurations', loadConfig, {})
@@ -14,8 +15,13 @@ program.version(_package.version)
   .parse(process.argv)
 
 if (program.args.length !== 3) {
-  console.error('\n  Invalid number of command-line arguments. 3 arguments expected, ' +
-     program.args.length + ' found: ' + JSON.stringify(program.args) + '.')
+  console.error(
+    '\n  Invalid number of command-line arguments. 3 arguments expected, ' +
+      program.args.length +
+      ' found: ' +
+      JSON.stringify(program.args) +
+      '.'
+  )
   console.error('  Please run "' + program.name() + ' --help" for a command-line reference.\n')
   process.exit(1)
 }
@@ -43,7 +49,7 @@ if (program.developmentMode) {
   }
   liveServer.start(params)
 } else {
-  bootprint.generate().done(console.log, function (error) {
+  bootprint.generate().done(console.log, function(error) {
     if (error.cause === 'bootprint-load-data' && error.code === 'ENOENT') {
       // Provide a readable error message (without stack trace) if the source file is missing.
       console.error('\n  ' + error.message + '\n')
@@ -59,7 +65,7 @@ if (program.developmentMode) {
  * @param moduleName {string} the name of the module to load
  * @return {function} the builder-function of the loaded module
  */
-function requireTemplateModule (moduleName) {
+function requireTemplateModule(moduleName) {
   var templateModule = null
   try {
     templateModule = require('bootprint-' + moduleName)
@@ -79,7 +85,7 @@ function requireTemplateModule (moduleName) {
 /**
  * Enable long-stack-support
  */
-function enableLongStack () {
+function enableLongStack() {
   Error.stackTraceLimit = 100
   require('trace-and-clarify-if-possible')
 }
@@ -89,6 +95,6 @@ function enableLongStack () {
  * @param configFile
  * @returns {object} the configuration object
  */
-function loadConfig (configFile) {
+function loadConfig(configFile) {
   return require(path.resolve(configFile))
 }

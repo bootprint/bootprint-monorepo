@@ -9,13 +9,13 @@ module.exports = {
 
   // This function is called for any `.merge` input.
   // It converts the input into its mergable form
-  preprocessConfig: function (config) {
+  preprocessConfig: function(config) {
     return files(config)
   },
 
   // This function is called to determine the files and directories
   // to watch in developmentMode
-  watched: function (config) {
+  watched: function(config) {
     return [
       // The config itself is the directory-path
       config
@@ -24,7 +24,7 @@ module.exports = {
 
   // Runs the engine with a resolved configuration.
   // The config contains no Promises anymore.
-  run: function (config) {
+  run: function(config) {
     var result = ''
     Object.keys(config).forEach(filename => {
       result += config[filename].contents + '\n'

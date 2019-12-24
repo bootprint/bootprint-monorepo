@@ -14,16 +14,16 @@ var path = require('path')
  * @param context the test context to store cheerio in
  * @returns {*}
  */
-function runBootprint (swaggerDefinition, dir, context) {
+function runBootprint(swaggerDefinition, dir, context) {
   var targetDir = path.join('test-output', path.basename(dir))
   return require('bootprint')
     .load(require('../'))
     .build(swaggerDefinition, targetDir)
     .generate()
-    .then(function () {
+    .then(function() {
       return qfs.read(path.join(targetDir, 'index.html'))
     })
-    .then(function (indexHtml) {
+    .then(function(indexHtml) {
       context.$ = cheerio.load(indexHtml)
     })
 }

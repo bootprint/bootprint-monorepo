@@ -15,14 +15,14 @@
 var expect = require('chai').expect
 var core = require('../')(require('./module.js'), __dirname)
 
-describe('The bootprint-unit-testing module', function () {
+describe('The bootprint-unit-testing module', function() {
   this.timeout(10000)
   var context = {}
-  before(function () {
+  before(function() {
     return core.run({ name: 'Nils' }, context)
   })
 
-  it('The output should contain the name in a <p>-tag', function () {
+  it('The output should contain the name in a <p>-tag', function() {
     expect(context.$('p').html()).to.contain('Nils')
   })
 })

@@ -1,10 +1,7 @@
 module.exports = {
-    "extends": "standard",
-    "plugins": [
-        "standard",
-        "promise"
-    ],
-    rules: {
-      "no-console": "warn"
-    }
-};
+  extends: 'standard',
+  plugins: ['standard', 'promise'],
+  rules: {
+    'no-console': 'warn'
+  }
+}

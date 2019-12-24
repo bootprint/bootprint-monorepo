@@ -10,12 +10,12 @@
  * be available as `this.parent`
  * @param fn
  */
-module.exports = function withParent (fn) {
+module.exports = function withParent(fn) {
   if (fn == null) {
     return fn
   }
   var result = cloneFunction(fn)
-  result._customize_custom_overrider = function (a, b) {
+  result._customize_custom_overrider = function(a, b) {
     return b.bind({
       parent: a
     })
@@ -24,8 +24,8 @@ module.exports = function withParent (fn) {
 }
 
 // https://gist.github.com/Sykkro/7490193#file-clone-js-L1
-function cloneFunction (fn) {
-  var temp = function temporary () {
+function cloneFunction(fn) {
+  var temp = function temporary() {
     return fn.apply(this, arguments)
   }
   for (var key in fn) {

@@ -11,15 +11,14 @@
 var expect = require('chai').expect
 var core = require('../core')
 
-describe('The definition-without-type fixture', function () {
+describe('The definition-without-type fixture', function() {
   this.timeout(10000)
   var context = {}
-  before(function () {
+  before(function() {
     return core.run(require('./swagger.json'), __dirname, context)
   })
 
-  it('should contain a reference the property "aPropertyName"', function () {
-    expect(context.$('#definition-no-type').html())
-      .to.contain('aPropertyName')
+  it('should contain a reference the property "aPropertyName"', function() {
+    expect(context.$('#definition-no-type').html()).to.contain('aPropertyName')
   })
 })

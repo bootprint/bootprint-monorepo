@@ -8,7 +8,7 @@ customize()
       partials: 'partials-targetFile',
       helpers: {
         // Helper that returns the targetFile
-        targetFile: function (options) {
+        targetFile: function(options) {
           return options.customize.targetFile
         }
       }

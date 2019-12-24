@@ -16,7 +16,7 @@ const path = require('path')
  * @param {Readable|Buffer|string=} contents the contents to write to the file
  * @return {Promise<string|undefined>} the name of the file that has been written or an undefined promise if no file is written
  */
-module.exports = async function writeAnyContentsToFile (fullPath, contents) {
+module.exports = async function writeAnyContentsToFile(fullPath, contents) {
   if (contents == null) {
     return undefined
   }
@@ -40,15 +40,19 @@ module.exports = async function writeAnyContentsToFile (fullPath, contents) {
  * @private
  * @returns {Promise<string>} a promise for the filename
  */
-async function writeStream (filename, contents) {
+async function writeStream(filename, contents) {
   await new Promise((resolve, reject) => {
-    contents.pipe(fs.createWriteStream(filename))
-      .on('finish', function () {
+    contents
+      .pipe(fs.createWriteStream(filename))
+      .on('finish', function() {
         resolve(filename)
       })
-      .on('error', /* istanbul ignore next */ function (err) {
-        reject(err)
-      })
+      .on(
+        'error',
+        /* istanbul ignore next */ function(err) {
+          reject(err)
+        }
+      )
   })
   return filename
 }

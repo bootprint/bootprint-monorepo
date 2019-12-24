@@ -1,4 +1,4 @@
-const lernaJson = require("../lerna");
+const lernaJson = require('../lerna')
 
 module.exports = {
   subProjects: function() {
@@ -6,7 +6,7 @@ module.exports = {
       return {
         directory: pkgDir,
         packageJson: require(`../${pkgDir}/package.json`)
-      };
-    });
+      }
+    })
   }
-};
+}

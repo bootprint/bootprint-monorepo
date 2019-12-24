@@ -4,7 +4,7 @@ module.exports = {
      * @param {object} obj the input JSON object.
      * @return {object|Promise<object>} an object of the promise for an object
      **/
-    preprocessor: function (obj) {
+    preprocessor: function(obj) {
       // Call parent preprocessor
       var result = this.parent(object)
       // Do something to the result

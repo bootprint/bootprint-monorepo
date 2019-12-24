@@ -11,9 +11,9 @@
  * @param {*} promiseOrValue a promise or a valude that represents the leaf
  * @returns {Promise}
  */
-module.exports = function leaf (promiseOrValue) {
+module.exports = function leaf(promiseOrValue) {
   var result = Promise.resolve(promiseOrValue)
-  result._customize_custom_overrider = function (a, b) {
+  result._customize_custom_overrider = function(a, b) {
     // Leafs are overridden completely by the newer version
     return b
   }

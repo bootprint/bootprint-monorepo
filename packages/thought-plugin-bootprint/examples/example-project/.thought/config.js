@@ -1,7 +1,5 @@
 module.exports = {
-  plugins: [
-    require('../../..')
-  ],
+  plugins: [require('../../..')],
   badges: {
     greenkeeper: false
   }

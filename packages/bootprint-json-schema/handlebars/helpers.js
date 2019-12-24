@@ -7,7 +7,7 @@ module.exports = {
    * @param url
    * @returns {*}
    */
-  'json-schema--subschema-name': function (url) {
+  'json-schema--subschema-name': function(url) {
     return url.replace('#/definitions/', '')
   },
 
@@ -15,7 +15,7 @@ module.exports = {
    * Resolve a (local) json-schema-
    * @param reference
    */
-  'json-schema--resolve-ref': function (reference, options) {
+  'json-schema--resolve-ref': function(reference, options) {
     reference = reference.trim()
     if (reference.lastIndexOf('#', 0) < 0) {
       console.warn('Remote references not supported yet. Reference must start with "#" (but was ' + reference + ')')
@@ -27,7 +27,7 @@ module.exports = {
     var hashParts = hash.split('/')
     // TODO : Download remote json from url if url not empty
     var current = options.data.root
-    hashParts.forEach(function (hashPart) {
+    hashParts.forEach(function(hashPart) {
       // Traverse schema from root along the path
       if (hashPart.trim().length > 0) {
         if (typeof current === 'undefined') {
@@ -47,7 +47,7 @@ module.exports = {
    * @param {boolean} [range.minimumExclusive]
    * @param {boolean} [range.maximumExclusive]
    */
-  'json-schema--range': function (range) {
+  'json-schema--range': function(range) {
     var hasMinimum = range.minimum || range.minimum === 0
     var hasMaximum = range.maximum || range.maximum === 0
 
@@ -64,23 +64,19 @@ module.exports = {
     }
 
     if (hasMinimum && !hasMaximum) {
-      return util.format(', { x %s | x %s %d }',
-        numberSet,
-        range.minimumExclusive ? '>' : '\u2265',
-        range.minimum)
+      return util.format(', { x %s | x %s %d }', numberSet, range.minimumExclusive ? '>' : '\u2265', range.minimum)
     } else if (hasMaximum && !hasMinimum) {
-      return util.format(', { x %s | x %s %d }',
-        numberSet,
-        range.maximumExclusive ? '<' : '\u2264',
-        range.maximum)
+      return util.format(', { x %s | x %s %d }', numberSet, range.maximumExclusive ? '<' : '\u2264', range.maximum)
     } else {
       // if (hasMaxmium && hasMinimum)
-      return util.format(', { x %s | %d %s x %s %d }',
+      return util.format(
+        ', { x %s | %d %s x %s %d }',
         numberSet,
         range.minimum,
         range.minimumExclusive ? '<' : '\u2264',
         range.maximumExclusive ? '<' : '\u2264',
-        range.maximum)
+        range.maximum
+      )
     }
   }
 }
@@ -90,7 +86,7 @@ module.exports = {
  * @param value
  * @returns {String} a string like <code>string[]</code> or <code>object[][]</code>
  */
-function dataType (value) {
+function dataType(value) {
   if (!value) return null
   if (value['anyOf'] || value['allOf'] || value['oneOf']) {
     return ''

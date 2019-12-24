@@ -11,8 +11,8 @@ const streamCompare = require('stream-compare')
  * Compares a file to the given contents. Return true, if the files differ
  * @param {string} fullPath the full path to the target file
  * @param {Readable|Buffer|string=} contents the contents to compare the file against
-  */
-module.exports = async function differsContent (fullPath, contents) {
+ */
+module.exports = async function differsContent(fullPath, contents) {
   if (contents == null) {
     // null contents is viewed as "non-differing" because the file would not be overwritten by "./write"
     return false
@@ -34,7 +34,7 @@ module.exports = async function differsContent (fullPath, contents) {
  * @param err
  * @returns {boolean}
  */
-function handleError (err) {
+function handleError(err) {
   if (err.code === 'ENOENT') {
     return true
   }
@@ -48,7 +48,7 @@ function handleError (err) {
  * @returns {Promise<boolean>|boolean}
  * @private
  */
-async function compareString (filename, expectedContents) {
+async function compareString(filename, expectedContents) {
   try {
     const actualContents = await fs.readFile(filename, { encoding: 'utf8' })
     return actualContents !== expectedContents
@@ -65,7 +65,7 @@ async function compareString (filename, expectedContents) {
  * @returns {Promise<boolean>|boolean}
  * @private
  */
-async function compareBuffer (filename, expectedContents) {
+async function compareBuffer(filename, expectedContents) {
   try {
     const actualContents = await fs.readFile(filename)
     return !expectedContents.equals(actualContents)
@@ -81,7 +81,7 @@ async function compareBuffer (filename, expectedContents) {
  * @returns {Promise<boolean>|boolean}
  * @private
  */
-async function compareStream (filename, expectedContents) {
+async function compareStream(filename, expectedContents) {
   try {
     const actualStream = fs.createReadStream(filename)
     const result = await streamCompare(expectedContents, actualStream, {

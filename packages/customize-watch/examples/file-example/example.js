@@ -10,6 +10,6 @@ customize()
     files: 'dir2'
   })
   .watch()
-  .on('update', function (result) {
+  .on('update', function(result) {
     console.log('result', result.files)
   })

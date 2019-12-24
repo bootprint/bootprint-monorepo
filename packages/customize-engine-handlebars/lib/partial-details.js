@@ -38,11 +38,11 @@ module.exports = { augmentSingleFile, augment, hierarchy }
  * @param {{templates: object, partials: object}} config
  * @return {object}
  */
-function hierarchy (config) {
+function hierarchy(config) {
   const templates = _.mapValues(config.templates, augmentSingleFile)
   const partials = _.mapValues(config.partials, augmentSingleFile)
   return {
-    children: Object.keys(templates).map((name) => {
+    children: Object.keys(templates).map(name => {
       let template = templates[name]
       return {
         name: name,
@@ -50,10 +50,10 @@ function hierarchy (config) {
         path: template.path,
         comments: template.comments,
         children: template.callsPartial
-          .map((callee) => callee.name)
+          .map(callee => callee.name)
           // Remove redundant names (only take the first one)
           .filter((name, index, array) => array.indexOf(name) === index)
-          .map((name) => partialForCallTree(name, partials, {}))
+          .map(name => partialForCallTree(name, partials, {}))
       }
     })
   }
@@ -67,7 +67,7 @@ function hierarchy (config) {
  * @param {object<boolean>=} visitedNodes names of the visited nodes for breaking cycles (values are alwasy "true")
  * @returns {{name: *, type: string, comment}}
  */
-function partialForCallTree (name, partials, visitedNodes) {
+function partialForCallTree(name, partials, visitedNodes) {
   const cycleFound = visitedNodes[name]
   try {
     visitedNodes[name] = true
@@ -78,10 +78,10 @@ function partialForCallTree (name, partials, visitedNodes) {
     let children
     if (!cycleFound) {
       children = partial.callsPartial
-        .map((callee) => callee.name)
+        .map(callee => callee.name)
         // Remove redundant names (only take the first one)
         .filter((name, index, array) => array.indexOf(name) === index)
-        .map((name) => partialForCallTree(name, partials, visitedNodes))
+        .map(name => partialForCallTree(name, partials, visitedNodes))
     }
     return {
       name,
@@ -103,14 +103,16 @@ function partialForCallTree (name, partials, visitedNodes) {
  * by adding comment, callers and callees
  * @param {{templates: object, partials: object}} config
  */
-function augment (config) {
+function augment(config) {
   let augmentedTemplates = _.mapValues(config.templates, augmentSingleFile)
   let augmentedPartials = _.mapValues(config.partials, augmentSingleFile)
   // Prepare caller array in each partial
-  _.forEachValue(augmentedPartials, (file) => { file.calledBy = [] })
-  ;[augmentedTemplates, augmentedPartials].forEach((obj) => {
+  _.forEachValue(augmentedPartials, file => {
+    file.calledBy = []
+  })
+  ;[augmentedTemplates, augmentedPartials].forEach(obj => {
     _.forEachValue(obj, (file, name) => {
-      file.callsPartial.forEach((callee) => {
+      file.callsPartial.forEach(callee => {
         // @partial-block calls need to be ignored, because when building the call-hierarchy,
         // the partial-blocks are "unknown" partials. Partial-blocks actually are part of the
         // parent partial, so they should not be shown in the hierarchy
@@ -149,11 +151,14 @@ function augment (config) {
  * @return {{path: string, contents: string, calls: string[], comment?:string}} the input object
  * augmented by the partialnames called from this template or partial
  */
-function augmentSingleFile (fileWithContents) {
-  const result = Object.assign({
-    callsPartial: [],
-    comments: []
-  }, fileWithContents)
+function augmentSingleFile(fileWithContents) {
+  const result = Object.assign(
+    {
+      callsPartial: [],
+      comments: []
+    },
+    fileWithContents
+  )
   const ast = Handlebars.parse(fileWithContents.contents)
   new PartialVisitor(partialCall => result.callsPartial.push(partialCall)).accept(ast)
   new ApiDocCommentVisitor(comment => result.comments.push(comment)).accept(ast)
@@ -169,12 +174,12 @@ class PartialVisitor extends Handlebars.Visitor {
    *
    * @param {function({name:string, line:number})} fn function that is called for each partial-call in the template
    */
-  constructor (fn) {
+  constructor(fn) {
     super()
     this.fn = fn
   }
 
-  PartialStatement (partialCall) {
+  PartialStatement(partialCall) {
     super.PartialStatement(partialCall)
     this.fn({
       name: partialCall.name.original,
@@ -184,7 +189,7 @@ class PartialVisitor extends Handlebars.Visitor {
 }
 
 class ApiDocCommentVisitor extends Handlebars.Visitor {
-  constructor (fn) {
+  constructor(fn) {
     super()
     this.fn = fn
   }
@@ -193,7 +198,7 @@ class ApiDocCommentVisitor extends Handlebars.Visitor {
    * Visit a comment statement
    * @param {string} comment
    */
-  CommentStatement (comment) {
+  CommentStatement(comment) {
     super.CommentStatement(comment)
     this.fn(comment.value.trim())
   }

@@ -25,8 +25,8 @@ module.exports.changed = changed
  *  (i.e. the files that were actually written)
  * @public
  */
-function write (targetDir) {
-  return async function writeResult (customizeResult) {
+function write(targetDir) {
+  return async function writeResult(customizeResult) {
     const result = await mapFiles(customizeResult, targetDir, require('./lib/write'))
     return values(result)
   }
@@ -43,8 +43,8 @@ function write (targetDir) {
  *  (i.e. the files that were checked)
  * @public
  */
-function changed (targetDir) {
-  return async function changeTester (customizeResult) {
+function changed(targetDir) {
+  return async function changeTester(customizeResult) {
     const result = await deep(mapFiles(customizeResult, targetDir, require('./lib/changed')))
     return {
       changed: values(result).indexOf(true) >= 0,
@@ -62,7 +62,7 @@ function changed (targetDir) {
  * @param {function(fullpath: string, contents: (string|Buffer|Readable|undefined)):Promise<T>} callback functions that is called for each file
  * @return {Promise<object<T>>}
  */
-async function mapFiles (customizeResult, targetDir, callback) {
+async function mapFiles(customizeResult, targetDir, callback) {
   const files = mergeEngineResults(customizeResult)
   const results = mapValues(files, (file, filename) => {
     // Write each file
@@ -79,8 +79,8 @@ async function mapFiles (customizeResult, targetDir, callback) {
  * @returns {object<any>}
  * @private
  */
-function mapValues (obj, fn) {
-  return Object.keys(obj).reduce(function (subresult, key) {
+function mapValues(obj, fn) {
+  return Object.keys(obj).reduce(function(subresult, key) {
     subresult[key] = fn(obj[key], key)
     return subresult
   }, {})
@@ -92,8 +92,8 @@ function mapValues (obj, fn) {
  * @returns {Array<any>}
  * @private
  */
-function values (obj) {
-  return Object.keys(obj).map(function (key) {
+function values(obj) {
+  return Object.keys(obj).map(function(key) {
     return obj[key]
   })
 }
@@ -101,7 +101,7 @@ function values (obj) {
 /**
  * Merge the per-engine structure (`{engine1: { file1: contents1 }, {engine2: { file2: contents2 } }`
  * into a single object
-  *
+ *
  * ```js
  * {
  *   file1: { engine: 'engine1', contents: contents1 },
@@ -111,12 +111,12 @@ function values (obj) {
  * @return {object<{engine: string, contents: (string|Buffer|Readable|undefined)}>}
  * @private
  */
-function mergeEngineResults (customizeResult) {
+function mergeEngineResults(customizeResult) {
   var result = {}
-  Object.keys(customizeResult).forEach(function (engineName) {
+  Object.keys(customizeResult).forEach(function(engineName) {
     var files = customizeResult[engineName]
     if (files) {
-      Object.keys(files).forEach(function (filename) {
+      Object.keys(files).forEach(function(filename) {
         // Existing file in different engine
         var existingFile = result[filename]
         if (existingFile) {

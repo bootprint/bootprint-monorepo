@@ -1,4 +1,4 @@
-module.exports = function (customize) {
+module.exports = function(customize) {
   return customize
 }
 

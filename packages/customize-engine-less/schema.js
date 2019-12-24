@@ -5,7 +5,7 @@ module.exports = {
   description: 'The configuration schema of the "customize-engine-less"',
   type: 'object',
   properties: {
-    'main': {
+    main: {
       description: 'A list of imported {less}-files',
       anyOf: [
         { type: 'string' },
@@ -17,7 +17,7 @@ module.exports = {
         }
       ]
     },
-    'paths': {
+    paths: {
       description: 'A list of directories to be used as {less}-include paths',
       anyOf: [
         { type: 'string' },

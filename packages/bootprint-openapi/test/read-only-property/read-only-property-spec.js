@@ -11,15 +11,14 @@
 var expect = require('chai').expect
 var core = require('../core')
 
-describe('The read-only-property fixture', function () {
+describe('The read-only-property fixture', function() {
   this.timeout(10000)
   var context = {}
-  before(function () {
+  before(function() {
     return core.run(require('./swagger.json'), __dirname, context)
   })
 
-  it('should contain a read-only badge in its request model', function () {
-    expect(context.$('#operation--things--post .json-property-read-only').length)
-      .to.equal(1)
+  it('should contain a read-only badge in its request model', function() {
+    expect(context.$('#operation--things--post .json-property-read-only').length).to.equal(1)
   })
 })

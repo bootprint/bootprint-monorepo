@@ -1,6 +1,6 @@
 var path = require('path')
 
-module.exports = function (customize) {
+module.exports = function(customize) {
   return customize.merge({
     test: {
       files: path.join(__dirname, 'files'),

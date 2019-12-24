@@ -1,4 +1,4 @@
-var {Bootprint} = require('bootprint')
+var { Bootprint } = require('bootprint')
 
 /**
  * Default Handlebars-helpers for Thought
@@ -28,22 +28,21 @@ module.exports = {
  * @access public
  * @memberOf helpers
  */
-function codeBlock (options) {
+function codeBlock(options) {
   var lang = (options.hash && options.hash.lang) || ''
-  return Promise.resolve(options.fn(this))
-    .then(contents => {
-      // Get all backticks (like ['```','`````','`'])
-      var backticks = contents.match(/`+/g) || []
-      var backtickLengths = backticks.map((ticks) => ticks.length)
-      var maxNrTicks = Math.max.apply(null, backtickLengths)
-      // Minimum of three ticks, but more than the ticks in contents
-      var maxTicks = '`'.repeat(Math.max(maxNrTicks + 1, 3))
+  return Promise.resolve(options.fn(this)).then(contents => {
+    // Get all backticks (like ['```','`````','`'])
+    var backticks = contents.match(/`+/g) || []
+    var backtickLengths = backticks.map(ticks => ticks.length)
+    var maxNrTicks = Math.max.apply(null, backtickLengths)
+    // Minimum of three ticks, but more than the ticks in contents
+    var maxTicks = '`'.repeat(Math.max(maxNrTicks + 1, 3))
 
-      // Prefix content with newline if nesseary
-      contents = contents.replace(/^\n?/, '\n')
+    // Prefix content with newline if nesseary
+    contents = contents.replace(/^\n?/, '\n')
 
-      return `${maxTicks}${lang}${contents}${maxTicks}`
-    })
+    return `${maxTicks}${lang}${contents}${maxTicks}`
+  })
 }
 
 /**
@@ -57,24 +56,21 @@ function codeBlock (options) {
  * @access public
  * @memberOf helpers
  */
-function moduleConfig (options) {
+function moduleConfig(options) {
   // Load from current working directsory. The cwd should be
   // the root-directory of the plugin
   var plugin = require(process.cwd())
-  let lessDocEngine = Object.assign(
-    {},
-    require('customize-engine-less'),
-    {
-      run: function (config) {
-        return config
-      }
-    })
+  let lessDocEngine = Object.assign({}, require('customize-engine-less'), {
+    run: function(config) {
+      return config
+    }
+  })
   return require('customize')()
     .registerEngine('handlebars', require('customize-engine-handlebars').docEngine)
     .registerEngine('less', lessDocEngine)
     .load(plugin)
     .run()
-    .then((config) => {
+    .then(config => {
       return options.fn(config)
     })
 }
@@ -86,7 +82,7 @@ function moduleConfig (options) {
  * @access public
  * @memberOf helpers
  */
-function abbrev (text, limit) {
+function abbrev(text, limit) {
   if (!text) {
     return ''
   }
@@ -105,16 +101,11 @@ function abbrev (text, limit) {
  * @access public
  * @memberOf helpers
  */
-function runBootprint (module, input, target) {
-  return new Bootprint(module, {})
-    .run(input, target)
-    .then((files) => {
-      let tree = require('tree-from-paths').render(
-        files,
-        '',
-        (parent, file, explicit) => `${file}`)
-      return `<pre><code>${tree}</code></pre>`
-    })
+function runBootprint(module, input, target) {
+  return new Bootprint(module, {}).run(input, target).then(files => {
+    let tree = require('tree-from-paths').render(files, '', (parent, file, explicit) => `${file}`)
+    return `<pre><code>${tree}</code></pre>`
+  })
 }
 
 /**
@@ -123,7 +114,7 @@ function runBootprint (module, input, target) {
  * @access public
  * @memberOf helpers
  */
-function shortModuleName (name) {
+function shortModuleName(name) {
   if (name.lastIndexOf('bootprint-', 0) === 0) {
     return name.substr('bootprint-'.length)
   }

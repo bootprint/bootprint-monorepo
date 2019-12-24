@@ -29,7 +29,7 @@ module.exports = {
     preprocessor: []
   },
 
-  preprocessConfig (config) {
+  preprocessConfig(config) {
     return {
       partials: files(config.partials),
       partialWrapper: config.partialWrapper && [config.partialWrapper.toString()],
@@ -42,7 +42,7 @@ module.exports = {
     }
   },
 
-  run (config) {
+  run(config) {
     // Remove .hbs from partial and template names
     config.templates = _.mapKeys(config.templates, _.stripHandlebarsExt)
     config.partials = _.mapKeys(config.partials, _.stripHandlebarsExt)
@@ -63,6 +63,6 @@ module.exports = {
  * @param {string|function} stringOrFunction the input parameter
  * @return {string|null} a string or null
  */
-function onlyIfString (stringOrFunction) {
+function onlyIfString(stringOrFunction) {
   return typeof stringOrFunction === 'string' ? stringOrFunction : null
 }

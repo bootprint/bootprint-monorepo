@@ -2,7 +2,7 @@ const got = require('got').extend({
   json: true
 })
 
-module.exports = function (data) {
+module.exports = function(data) {
   return {
     name: data.name,
     city: data.city,

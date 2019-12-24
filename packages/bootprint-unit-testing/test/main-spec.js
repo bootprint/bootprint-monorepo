@@ -15,14 +15,14 @@
 var expect = require('chai').expect
 var core = require('../')(require('./fixtures/module.js'), __dirname)
 
-describe('The bootprint-unit-testing module', function () {
+describe('The bootprint-unit-testing module', function() {
   this.timeout(10000)
   var context = {}
-  before(function () {
+  before(function() {
     return core.run({ name: 'Nils' }, context)
   })
 
-  it('should pass a cheerio-elements as `context.$`', function () {
+  it('should pass a cheerio-elements as `context.$`', function() {
     expect(context.$('p').html()).to.contain('Nils')
   })
 })

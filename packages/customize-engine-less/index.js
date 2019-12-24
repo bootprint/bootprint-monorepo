@@ -25,14 +25,14 @@ module.exports = {
     paths: []
   },
 
-  preprocessConfig: function (config) {
+  preprocessConfig: function(config) {
     return {
       main: coerceToArray(config.main),
       paths: coerceToArray(config.paths)
     }
   },
 
-  watched: function (config) {
+  watched: function(config) {
     return coerceToArray(config.main).concat(coerceToArray(config.paths))
   },
 
@@ -41,28 +41,32 @@ module.exports = {
    * as "main.css.map"
    * @param config
    */
-  run: function (config) {
-    var lessSource = config.main.map(function (file) {
-      if (path.extname(file) === '.css') {
-        return '@import (inline) "' + file + '";'
-      } else {
-        return '@import "' + file + '";'
-      }
-    }).join('\n')
-    return less.render(lessSource, {
-      paths: config.paths,
-      sourceMap: {
-        sourceMapURL: 'main.css.map',
-        outputSourceFiles: true
-      },
-      filename: 'customize-bundle.less',
-      compress: true
-    }).then(function (lessResult) {
-      return {
-        'main.css': lessResult.css,
-        'main.css.map': lessResult.map
-      }
-    })
+  run: function(config) {
+    var lessSource = config.main
+      .map(function(file) {
+        if (path.extname(file) === '.css') {
+          return '@import (inline) "' + file + '";'
+        } else {
+          return '@import "' + file + '";'
+        }
+      })
+      .join('\n')
+    return less
+      .render(lessSource, {
+        paths: config.paths,
+        sourceMap: {
+          sourceMapURL: 'main.css.map',
+          outputSourceFiles: true
+        },
+        filename: 'customize-bundle.less',
+        compress: true
+      })
+      .then(function(lessResult) {
+        return {
+          'main.css': lessResult.css,
+          'main.css.map': lessResult.map
+        }
+      })
   }
 }
 
@@ -72,9 +76,9 @@ module.exports = {
  * @param {object|object[]} objOrArray the object or an array
  * @return {object[]} objOrArray, if it is an array or an array containing `objOrArray` (if it is no array)
  */
-function coerceToArray (objOrArray) {
+function coerceToArray(objOrArray) {
   if (objOrArray !== undefined && !Array.isArray(objOrArray)) {
-    return [ objOrArray ]
+    return [objOrArray]
   }
   return objOrArray
 }

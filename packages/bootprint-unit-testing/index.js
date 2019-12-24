@@ -9,7 +9,7 @@ var qfs = require('m-io/fs')
 var cheerio = require('cheerio')
 var path = require('path')
 
-'use strict'
+;('use strict')
 
 /**
  * Create a new tester-object for a given bootprint-module
@@ -17,23 +17,23 @@ var path = require('path')
  * @param dir the directory(-name) from which this function is called
  * @returns {{run: runBootprint}}
  */
-module.exports = function (bootprintModule, dir) {
+module.exports = function(bootprintModule, dir) {
   /**
    * Run bootprint with a fixture and return a cheerio wrapper for the index.html
    * @param inputFile the input (json or yaml) passed into bootprint
    * @param context the test context to store cheerio in
    * @returns {*}
    */
-  function runBootprint (inputFile, context) {
+  function runBootprint(inputFile, context) {
     var targetDir = path.join('test-output', path.basename(dir))
     return require('bootprint')
       .load(bootprintModule)
       .build(inputFile, targetDir)
       .generate()
-      .then(function () {
+      .then(function() {
         return qfs.read(path.join(targetDir, 'index.html'))
       })
-      .then(function (indexHtml) {
+      .then(function(indexHtml) {
         context.$ = cheerio.load(indexHtml)
       })
   }
@@ -42,4 +42,3 @@ module.exports = function (bootprintModule, dir) {
     run: runBootprint
   }
 }
-

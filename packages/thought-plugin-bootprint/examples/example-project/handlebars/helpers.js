@@ -9,6 +9,6 @@ module.exports = {
  * @returns {string} the string in uppercase
  * @api public
  */
-function shout (text) {
+function shout(text) {
   return text && text.toUpperCase()
 }

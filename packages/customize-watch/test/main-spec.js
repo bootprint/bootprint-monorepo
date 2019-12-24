@@ -31,21 +31,21 @@ var ro1 = customize()
         b: { x: 'x1', y: 'y1' }
       },
       array: ['item1']
-    // TODO: Tests for promises and functions
+      // TODO: Tests for promises and functions
     }
   })
 
-describe('After loading a config', function () {
+describe('After loading a config', function() {
   this.timeout(10000)
 
   var testResult = null
-  before(function () {
-    return ro1.run().then(function (result) {
+  before(function() {
+    return ro1.run().then(function(result) {
       testResult = result
     })
   })
 
-  it('the `files`-function should load contents from files', function () {
+  it('the `files`-function should load contents from files', function() {
     expect(testResult.test.files).to.eql({
       'eins.hbs': {
         path: 'test/fixtures/testPartials1/eins.hbs',
@@ -57,26 +57,26 @@ describe('After loading a config', function () {
       }
     })
   })
-  it('object values should exist', function () {
+  it('object values should exist', function() {
     expect(testResult.test.objects).to.eql({
       a: { x: 'x1', y: 'y1' },
       b: { x: 'x1', y: 'y1' }
     })
   })
-  it('leaf values should exist', function () {
+  it('leaf values should exist', function() {
     expect(testResult.test.leafs).to.eql({
       a: { x: 'x1', y: 'y1' },
       b: { x: 'x1', y: 'y1' }
     })
   })
-  it('array values should exist', function () {
+  it('array values should exist', function() {
     expect(testResult.test.array).to.eql(['item1'])
   })
 })
 
-describe('After merging another config', function () {
+describe('After merging another config', function() {
   var testResult = null
-  before(function () {
+  before(function() {
     return ro1
       .merge({
         test: {
@@ -95,12 +95,12 @@ describe('After merging another config', function () {
         }
       })
       .run()
-      .then(function (result) {
+      .then(function(result) {
         testResult = result
       })
   })
 
-  it('the files should be overridden on a per-file basis', function () {
+  it('the files should be overridden on a per-file basis', function() {
     expect(testResult.test.files).to.eql({
       'eins.hbs': {
         path: 'test/fixtures/testPartials1/eins.hbs',
@@ -116,36 +116,36 @@ describe('After merging another config', function () {
       }
     })
   })
-  it('object values should be deep merged', function () {
+  it('object values should be deep merged', function() {
     expect(testResult.test.objects).to.eql({
       a: { x: 'x1', y: 'y1' },
       b: { x: 'x1', y: 'y2' }
     })
   })
-  it('leaf values should be replaced', function () {
+  it('leaf values should be replaced', function() {
     expect(testResult.test.leafs).to.eql({
       a: { x: 'x1', y: 'y1' },
       b: { y: 'y2' }
     })
   })
-  it('array values should exist', function () {
+  it('array values should exist', function() {
     expect(testResult.test.array).to.eql(['item1', 'item2'])
   })
 })
 
-describe('after loading a module', function () {
+describe('after loading a module', function() {
   var testResult = null
-  before(function () {
+  before(function() {
     // Load a configuration-module
     return ro1
       .load(require('./fixtures/module/index.js'))
       .run()
-      .then(function (result) {
+      .then(function(result) {
         testResult = result
       })
   })
 
-  it('the files should be overridden on a per-file basis', function () {
+  it('the files should be overridden on a per-file basis', function() {
     expect(testResult.test.files).to.eql({
       'eins.hbs': {
         path: 'test/fixtures/testPartials1/eins.hbs',
@@ -157,19 +157,19 @@ describe('after loading a module', function () {
       }
     })
   })
-  it('object values should be deep merged', function () {
+  it('object values should be deep merged', function() {
     expect(testResult.test.objects).to.eql({
       a: { x: 'x1', y: 'y1' },
       b: { x: 'x1', y: 'y2' }
     })
   })
-  it('leaf values should be replaced', function () {
+  it('leaf values should be replaced', function() {
     expect(testResult.test.leafs).to.eql({
       a: { x: 'x1', y: 'y1' },
       b: { y: 'y2' }
     })
   })
-  it('array values should exist', function () {
+  it('array values should exist', function() {
     expect(testResult.test.array).to.eql(['item1', 'item2'])
   })
 })

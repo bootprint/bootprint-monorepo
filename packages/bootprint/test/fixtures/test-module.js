@@ -5,7 +5,7 @@ var path = require('path')
  * @param builder
  * @returns {*}
  */
-module.exports = function (builder) {
+module.exports = function(builder) {
   return builder.merge({
     handlebars: {
       templates: path.join(__dirname, 'handlebars')

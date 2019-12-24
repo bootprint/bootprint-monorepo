@@ -17,7 +17,7 @@ module.exports = {
    * @return {Promise<object>} the configuration that is used passed into the merging process
    *    later expected as parameter to the main function of the engine
    */
-  preprocessConfig: function (config) {
+  preprocessConfig: function(config) {
     return {
       files: files(config.files),
       objects: config.objects,
@@ -51,7 +51,7 @@ module.exports = {
     }
   },
 
-  watched: function (config) {
+  watched: function(config) {
     return [
       // The config itself is the directory-path
       config.files
@@ -63,7 +63,7 @@ module.exports = {
    * @param config
    * @returns {*}
    */
-  run: function testEngine (config) {
+  run: function testEngine(config) {
     return Promise.resolve(config)
   }
 }

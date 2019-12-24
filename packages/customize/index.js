@@ -33,7 +33,7 @@ var constant = util.constant
 var jsonschema = require('jsonschema')
 var validator = new jsonschema.Validator()
 validator.types = Object.create(validator.types)
-validator.types.function = function testFunction (fn) {
+validator.types.function = function testFunction(fn) {
   return typeof fn === 'function'
 }
 
@@ -70,7 +70,7 @@ module.exports.overrider = customOverrider
  * @returns {Customize}
  * @api public
  */
-function customize () {
+function customize() {
   return new Customize({}, {}, {})
 }
 
@@ -88,17 +88,19 @@ function customize () {
  *
  * @constructor
  */
-function Customize (config, parentConfig, engines) {
+function Customize(config, parentConfig, engines) {
   var _config = mergeWith({}, parentConfig, config, customOverrider)
 
   // Debug logging
   if (debugState.enabled) {
-    deep(_config).then(function (config) {
-      debugState('New configuration', config)
-    }, /* istanbul ignore next */
-    function (e) {
-      console.error('Error while debug-logging the built configuration ' + e.stack) // eslint-disable-line no-console
-    })
+    deep(_config).then(
+      function(config) {
+        debugState('New configuration', config)
+      } /* istanbul ignore next */,
+      function(e) {
+        console.error('Error while debug-logging the built configuration ' + e.stack) // eslint-disable-line no-console
+      }
+    )
   }
 
   /**
@@ -115,8 +117,8 @@ function Customize (config, parentConfig, engines) {
    *
    * @public
    */
-  this.registerEngine = function (id, engine) {
-    debug('Registering engine \'' + id + '\'')
+  this.registerEngine = function(id, engine) {
+    debug("Registering engine '" + id + "'")
     if (typeof id !== 'string') {
       throw new Error('Engine-id must be a string, but is ' + id)
     }
@@ -129,7 +131,7 @@ function Customize (config, parentConfig, engines) {
 
     // This is only allowed if no engine with the same id exists.
     if (engines[id] != null || _config[id] != null) {
-      var error = new Error('Engine \'' + id + '\' already registered.', 'ERR_ENGINE_EXISTS')
+      var error = new Error("Engine '" + id + "' already registered.", 'ERR_ENGINE_EXISTS')
       error.engine = engines[id]
       error.config = _config[id]
       throw error
@@ -149,18 +151,19 @@ function Customize (config, parentConfig, engines) {
    * Returns the JSON-schema that configuration objects must match for this
    * configuration. The schema does not contain main description property
    */
-  this.configSchema = function () {
+  this.configSchema = function() {
     return {
       id: 'http://json-schema.org/draft-04/schema#',
       $schema: 'http://json-schema.org/draft-04/schema#',
       type: 'object',
-      properties: mapValues(engines, function (engine) {
-        return engine.schema || {
-          type: 'object',
-          description: 'No expicit schema has been provided for this engine'
-        }
+      properties: mapValues(engines, function(engine) {
+        return (
+          engine.schema || {
+            type: 'object',
+            description: 'No expicit schema has been provided for this engine'
+          }
+        )
       })
-
     }
   }
 
@@ -171,50 +174,56 @@ function Customize (config, parentConfig, engines) {
    * @return {Customize} the new Customize instance
    * @api public
    */
-  this.merge = function (config) {
+  this.merge = function(config) {
     if (config == null) {
-      throw new Error('Cannot merge undefined \'config\'')
+      throw new Error("Cannot merge undefined 'config'")
     }
 
     debug('Calling merge', config)
 
     // Assert that for each key in the other configuration, there is an engine present
     // Apply engine preprocessor to each config
-    var preprocessedConfig = mapValues(config, function (engineConf, engineName) {
+    var preprocessedConfig = mapValues(config, function(engineConf, engineName) {
       var engine = engines[engineName]
       if (engine == null) {
-        throw new Error('Engine \'' + engineName + '\' not found. Refusing to store configuration')
+        throw new Error("Engine '" + engineName + "' not found. Refusing to store configuration")
       }
       // Load preprocessor with identity as default
-      var preprocessor = engine.preprocessConfig || function (a) { return a }
+      var preprocessor =
+        engine.preprocessConfig ||
+        function(a) {
+          return a
+        }
       // Watch no files by default (constant [])
       var watched = engine.watched || constant([])
 
-      return Promise.resolve(engineConf).then(function (engineConf) {
-        if (engine.schema) {
-          debug('Validating schema for ', engineName)
-          /**
-           * The overriding configuration must validate against the [JSON-schema for configurations](./config-schema.html)
-           * Otherwise we refuse to proceed.
-           */
-          var validationErrors = validator.validate(engineConf, engine.schema).errors
-          if (validationErrors.length > 0) {
-            debug('Error while validating config for engine \'' + engineName + '\': ', engineConf)
-            debug('Errors: ', validationErrors.map(String).join('\n'))
-            var error = new Error('Error while validating Customize configuration')
-            error.validationErrors = validationErrors
-            throw error
+      return Promise.resolve(engineConf)
+        .then(function(engineConf) {
+          if (engine.schema) {
+            debug('Validating schema for ', engineName)
+            /**
+             * The overriding configuration must validate against the [JSON-schema for configurations](./config-schema.html)
+             * Otherwise we refuse to proceed.
+             */
+            var validationErrors = validator.validate(engineConf, engine.schema).errors
+            if (validationErrors.length > 0) {
+              debug("Error while validating config for engine '" + engineName + "': ", engineConf)
+              debug('Errors: ', validationErrors.map(String).join('\n'))
+              var error = new Error('Error while validating Customize configuration')
+              error.validationErrors = validationErrors
+              throw error
+            }
           }
-        }
 
-        return {
-          config: preprocessor(engineConf),
-          watched: watched(engineConf).filter(isString)
-        }
-      }).then(function (config) {
-        debug('Merging preprocessed config', config)
-        return config
-      })
+          return {
+            config: preprocessor(engineConf),
+            watched: watched(engineConf).filter(isString)
+          }
+        })
+        .then(function(config) {
+          debug('Merging preprocessed config', config)
+          return config
+        })
     })
 
     return new Customize(preprocessedConfig, _config, engines)
@@ -233,7 +242,7 @@ function Customize (config, parentConfig, engines) {
    * @return {Customize} the Customize instance returned by the module
    * @public
    */
-  this.load = function (customizeModule) {
+  this.load = function(customizeModule) {
     // Container for configuration metadata (e.g. versions of loaded modules)
     var _metadata = {
       config: {
@@ -255,13 +264,15 @@ function Customize (config, parentConfig, engines) {
    * @return {Promise<object>} a promise for the whole configuration
    * @public
    */
-  this.buildConfig = function () {
-    return deep(_config).then(function (config) {
-      return mapValues(config, 'config')
-    }).then(function (config) {
-      debug('Building', config)
-      return config
-    })
+  this.buildConfig = function() {
+    return deep(_config)
+      .then(function(config) {
+        return mapValues(config, 'config')
+      })
+      .then(function(config) {
+        debug('Building', config)
+        return config
+      })
   }
 
   /**
@@ -271,13 +282,15 @@ function Customize (config, parentConfig, engines) {
    *
    * @public
    */
-  this.watched = function () {
-    return deep(_config).then(function (config) {
-      return mapValues(config, 'watched')
-    }).then(function (watchedFiles) {
-      debug('Watched files', watchedFiles)
-      return watchedFiles
-    })
+  this.watched = function() {
+    return deep(_config)
+      .then(function(config) {
+        return mapValues(config, 'watched')
+      })
+      .then(function(watchedFiles) {
+        debug('Watched files', watchedFiles)
+        return watchedFiles
+      })
   }
 
   /**
@@ -290,10 +303,10 @@ function Customize (config, parentConfig, engines) {
    *  (the key is the engine-id) containing the result of each engine
    * @public
    */
-  this.run = function (options) {
+  this.run = function(options) {
     var onlyEngine = options && options.onlyEngine
-    return this.buildConfig().then(function (resolvedConfig) {
-      var result = mapValues(engines, function (engine, key) {
+    return this.buildConfig().then(function(resolvedConfig) {
+      var result = mapValues(engines, function(engine, key) {
         // if "onlyEngine" is set to a value, execute on the engine with the same name
         if (!onlyEngine || onlyEngine === key) {
           return engine.run(resolvedConfig[key])
@@ -340,7 +353,7 @@ module.exports.leaf = require('./lib/leaf')
  * @private
  * @readonly
  */
-function customOverrider (a, b, propertyName) {
+function customOverrider(a, b, propertyName) {
   if (b == null) {
     return a
   }
@@ -362,7 +375,7 @@ function customOverrider (a, b, propertyName) {
 
   // Merge values resolving promises, if they are not leaf-promises
   if (isPromiseAlike(a) || isPromiseAlike(b)) {
-    return Promise.all([a, b]).then(function ([_a, _b]) {
+    return Promise.all([a, b]).then(function([_a, _b]) {
       // Merge the promise results
       return mergeWith({}, { x: _a }, { x: _b }, customOverrider).x
     })
@@ -376,6 +389,6 @@ function customOverrider (a, b, propertyName) {
  * @returns {boolean} true, if the object is a promise
  * @private
  */
-function isPromiseAlike (obj) {
+function isPromiseAlike(obj) {
   return obj === Object(obj) && typeof obj.then === 'function'
 }

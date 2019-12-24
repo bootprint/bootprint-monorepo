@@ -6,22 +6,25 @@ var apidocs = require('multilang-apidocs')
 var findPackage = require('find-package')
 var path = require('path')
 
-module.exports = function (input) {
+module.exports = function(input) {
   // Prepare partial apidocs and include them into the data object
   return customize()
     .registerEngine('handlebars', require('customize-engine-handlebars'))
     .registerEngine('less', {
-      defaultConfig: {}, run: function () {}
+      defaultConfig: {},
+      run: function() {}
     })
     .registerEngine('uglify', {
-      defaultConfig: {}, run: function () {}
+      defaultConfig: {},
+      run: function() {}
     })
     .registerEngine('preprocessor', {
-      defaultConfig: {}, run: function () {}
+      defaultConfig: {},
+      run: function() {}
     })
     .load(require('../'))
     .buildConfig()
-    .then(function (bootprintConfig) {
+    .then(function(bootprintConfig) {
       var partials = hbDocs(bootprintConfig.handlebars.partials)
       var template = hbDocs(bootprintConfig.handlebars.templates)
 
@@ -34,8 +37,8 @@ module.exports = function (input) {
     })
 }
 
-var hbDocs = function (files) {
-  return _.pairs(files).map(function (file) {
+var hbDocs = function(files) {
+  return _.pairs(files).map(function(file) {
     var contents = file[1].contents
     var filePath = file[1].path
     var name = file[0].replace(/\.hbs$/, '')
@@ -49,17 +52,17 @@ var hbDocs = function (files) {
     }
 
     return {
-      'name': name,
-      'contents': contents,
-      'path': filePath,
-      'package': findPackage(path.resolve(filePath)),
-      'apidocs': apidocs(contents, {
+      name: name,
+      contents: contents,
+      path: filePath,
+      package: findPackage(path.resolve(filePath)),
+      apidocs: apidocs(contents, {
         filename: filePath,
         filter: {
           showWithoutApiTag: true
         }
       }),
-      'children': children
+      children: children
     }
   })
 }
@@ -69,7 +72,7 @@ var hbDocs = function (files) {
  * @param currentFile
  * @param partials
  */
-function createPartialTree (currentFile, partials, visitedFiles) {
+function createPartialTree(currentFile, partials, visitedFiles) {
   if (visitedFiles[currentFile.name]) {
     return {
       label: '*' + currentFile.name + '*',
@@ -88,7 +91,7 @@ function createPartialTree (currentFile, partials, visitedFiles) {
   }
   if (currentFile.children.length > 0) {
     _.merge(result, {
-      children: currentFile.children.map(function (child) {
+      children: currentFile.children.map(function(child) {
         return createPartialTree(partials[child], partials, visitedFiles)
       })
     })
@@ -102,7 +105,7 @@ function createPartialTree (currentFile, partials, visitedFiles) {
  * @param {(string|number)...} propertyChain a list of properties to resolve, as in `startobj.abc.0.cde`
  * @returns {*}
  */
-function chainOrUndefined (startObj, propertyChain) {
+function chainOrUndefined(startObj, propertyChain) {
   var result = startObj
   for (var i = 1; i < arguments.length; i++) {
     if (_.isUndefined(result)) {

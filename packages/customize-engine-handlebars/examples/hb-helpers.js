@@ -1,5 +1,5 @@
 module.exports = {
-  shout: function (text) {
+  shout: function(text) {
     return text.toUpperCase()
   }
 }

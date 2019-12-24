@@ -11,15 +11,14 @@
 var expect = require('chai').expect
 var core = require('../core')
 
-describe('The body-without-consume fixture', function () {
+describe('The body-without-consume fixture', function() {
   this.timeout(10000)
   var context = {}
-  before(function () {
+  before(function() {
     return core.run(require('./swagger.json'), __dirname, context)
   })
 
-  it('should contain a body (because a body-parameter is present, even though the consumes-property is missing', function () {
-    expect(context.$('#operation--thingy-post .panel-body section.sw-request-body').html())
-      .to.contain('Thingy')
+  it('should contain a body (because a body-parameter is present, even though the consumes-property is missing', function() {
+    expect(context.$('#operation--thingy-post .panel-body section.sw-request-body').html()).to.contain('Thingy')
   })
 })

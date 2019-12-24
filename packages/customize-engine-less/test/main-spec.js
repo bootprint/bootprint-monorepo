@@ -19,8 +19,8 @@ chai.use(chaiAsPromised)
 
 var expect = chai.expect
 
-describe('customize-engine-handlebars', function () {
-  it('should load less-files and specify inlude paths', function () {
+describe('customize-engine-handlebars', function() {
+  it('should load less-files and specify inlude paths', function() {
     var result = customize()
       .registerEngine('less', require('../'))
       .merge({
@@ -34,12 +34,13 @@ describe('customize-engine-handlebars', function () {
     return expect(result).to.eventually.deep.equal({
       less: {
         'main.css': 'body{color:#f00;font:sans}/*# sourceMappingURL=main.css.map */',
-        'main.css.map': '{"version":3,"sources":["test/fixtures/include/lib1.less"],"names":[],"mappings":"AAAA,KACE,UAAA,CACA","sourcesContent":["body {\\n  color: @bgcolor;\\n  font: @font;\\n}"]}'
+        'main.css.map':
+          '{"version":3,"sources":["test/fixtures/include/lib1.less"],"names":[],"mappings":"AAAA,KACE,UAAA,CACA","sourcesContent":["body {\\n  color: @bgcolor;\\n  font: @font;\\n}"]}'
       }
     })
   })
 
-  it('should load override definitions from merged less-files', function () {
+  it('should load override definitions from merged less-files', function() {
     var result = customize()
       .registerEngine('less', require('../'))
       .merge({
@@ -58,12 +59,13 @@ describe('customize-engine-handlebars', function () {
     return expect(result).to.eventually.deep.equal({
       less: {
         'main.css': 'body{color:#0a0;font:sans}/*# sourceMappingURL=main.css.map */',
-        'main.css.map': '{"version":3,"sources":["test/fixtures/include/lib1.less"],"names":[],"mappings":"AAAA,KACE,UAAA,CACA","sourcesContent":["body {\\n  color: @bgcolor;\\n  font: @font;\\n}"]}'
+        'main.css.map':
+          '{"version":3,"sources":["test/fixtures/include/lib1.less"],"names":[],"mappings":"AAAA,KACE,UAAA,CACA","sourcesContent":["body {\\n  color: @bgcolor;\\n  font: @font;\\n}"]}'
       }
     })
   })
 
-  it('should be able to load css-files', function () {
+  it('should be able to load css-files', function() {
     var result = customize()
       .registerEngine('less', require('../'))
       .merge({
@@ -74,9 +76,10 @@ describe('customize-engine-handlebars', function () {
       .run()
 
     return expect(result).to.eventually.deep.equal({
-      'less': {
+      less: {
         'main.css': 'body {\n  color: red;\n  background: black;\n}/*# sourceMappingURL=main.css.map */',
-        'main.css.map': '{"version":3,"sources":["./test/fixtures/main3.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA","sourcesContent":["body {\\n  color: red;\\n  background: black;\\n}"]}'
+        'main.css.map':
+          '{"version":3,"sources":["./test/fixtures/main3.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA","sourcesContent":["body {\\n  color: red;\\n  background: black;\\n}"]}'
       }
     })
   })

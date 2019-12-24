@@ -2,20 +2,20 @@ var _ = require('lodash')
 var highlight = require('highlight.js')
 
 highlight.configure({
-  'useBR': true
+  useBR: true
 })
 
 module.exports = {
-  'swagger--collection-format': function (value, paramName) {
+  'swagger--collection-format': function(value, paramName) {
     return {
-      'csv': 'comma separated (`' + paramName + '=aaa,bbb`)',
-      'ssv': 'space separated (`' + paramName + '=aaa bbb`)',
-      'tsv': 'tab separated (`' + paramName + '=aaa\\tbbb`)',
-      'pipes': 'pipe separated (`' + paramName + '=aaa|bbb`)',
-      'multi': 'multiple parameters (`' + paramName + '=aaa&' + paramName + '=bbb`)'
+      csv: 'comma separated (`' + paramName + '=aaa,bbb`)',
+      ssv: 'space separated (`' + paramName + '=aaa bbb`)',
+      tsv: 'tab separated (`' + paramName + '=aaa\\tbbb`)',
+      pipes: 'pipe separated (`' + paramName + '=aaa|bbb`)',
+      multi: 'multiple parameters (`' + paramName + '=aaa&' + paramName + '=bbb`)'
     }[value]
   },
-  'swagger--response-code': function (code) {
+  'swagger--response-code': function(code) {
     // Comments refer to the section number in rfc2616
     // If an rfc number is specified, the code is
     // documented in the specified rfc.
@@ -93,15 +93,15 @@ module.exports = {
    * @param {any} example the value of an [Example Object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#exampleObject)
    * @param {string} mimeType the mime-type of this example
    */
-  'swagger--example': function (example, mimeType, options, customize) {
+  'swagger--example': function(example, mimeType, options, customize) {
     if (_.isObject(example)) {
       switch (mimeType) {
         case 'application/json':
-          example = require('json-stable-stringify')(example, {space: 4})
+          example = require('json-stable-stringify')(example, { space: 4 })
           break
         case 'application/xml':
           // TODO: This should actually convert the example to XML but I don't know how yet. "help wanted"
-          example = require('json-stable-stringify')(example, {space: 4})
+          example = require('json-stable-stringify')(example, { space: 4 })
           break
       }
     }

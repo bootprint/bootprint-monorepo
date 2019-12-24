@@ -8,25 +8,27 @@ const OriginalPromise = Promise
  * Only for use in test-cases
  */
 class TestPromise extends Promise {
-  constructor (fn) {
-    super((resolve, reject) => fn(
-      (value) => {
-        this.state = 'resolved'
-        resolve(value)
-      },
-      (err) => {
-        this.state = 'rejected'
-        reject(err)
-      }
-    ))
+  constructor(fn) {
+    super((resolve, reject) =>
+      fn(
+        value => {
+          this.state = 'resolved'
+          resolve(value)
+        },
+        err => {
+          this.state = 'rejected'
+          reject(err)
+        }
+      )
+    )
     this.state = 'pending'
   }
 
-  static inject () {
+  static inject() {
     global.Promise = TestPromise
   }
 
-  static restore () {
+  static restore() {
     global.Promise = OriginalPromise
   }
 }

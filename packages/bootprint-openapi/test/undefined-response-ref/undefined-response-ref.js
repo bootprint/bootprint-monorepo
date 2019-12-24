@@ -17,11 +17,11 @@ var expect = chai.expect
 
 var core = require('../core')
 
-describe('The undefined-response-ref fixture', function () {
+describe('The undefined-response-ref fixture', function() {
   this.timeout(10000)
   var context = {}
 
-  it('should fail to be built with bootprint-swagger', function () {
+  it('should fail to be built with bootprint-swagger', function() {
     return expect(core.run(require('./swagger.json'), __dirname, context)).to.be.rejected
   })
 })

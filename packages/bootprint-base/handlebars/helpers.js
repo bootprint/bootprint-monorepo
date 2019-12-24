@@ -4,25 +4,27 @@ var cheerio = require('cheerio')
 var highlight = require('highlight.js')
 
 highlight.configure({
-  'useBR': true
+  useBR: true
 })
 
 var renderer = new marked.Renderer()
 
 // Renderer for HTML-tables with Bootstrap-classes
-renderer.table = function (header, body) {
-  return '<table class="table table-bordered">\n' +
-  '<thead>\n' +
-  header +
-  '</thead>\n' +
-  '<tbody>\n' +
-  body +
-  '</tbody>\n' +
-  '</table>\n'
+renderer.table = function(header, body) {
+  return (
+    '<table class="table table-bordered">\n' +
+    '<thead>\n' +
+    header +
+    '</thead>\n' +
+    '<tbody>\n' +
+    body +
+    '</tbody>\n' +
+    '</table>\n'
+  )
 }
 
 marked.setOptions({
-  highlight: function (code, name) {
+  highlight: function(code, name) {
     var highlighted
     if (name) {
       highlighted = highlight.highlight(name, code).value
@@ -42,7 +44,7 @@ module.exports = {
    * @returns {string} the uppercase string
    * @api public
    */
-  'toUpperCase': function (value) {
+  toUpperCase: function(value) {
     return value ? value.toUpperCase() : ''
   },
   /**
@@ -71,31 +73,33 @@ module.exports = {
    * @returns {string}
    * @api public
    */
-  'eachSorted': function (context, options) {
+  eachSorted: function(context, options) {
     var ret = ''
     var data
     if (typeof context !== 'object') {
       return ret
     }
     var keys = Object.keys(context)
-    keys.sort(function (a, b) {
-      // http://stackoverflow.com/questions/8996963/how-to-perform-case-insensitive-sorting-in-javascript
-      a = String(a).toLowerCase()
-      b = String(b).toLowerCase()
-      if (a === b) return 0
-      if (a > b) return 1
-      return -1
-    }).forEach(function (key, index) {
-      if (options.data) {
-        data = Handlebars.createFrame(options.data || {})
-        data.index = index
-        data.key = key
-        data.length = keys.length
-        data.first = index === 0
-        data.last = index === keys.length - 1
-      }
-      ret = ret + options.fn(context[key], {data: data})
-    })
+    keys
+      .sort(function(a, b) {
+        // http://stackoverflow.com/questions/8996963/how-to-perform-case-insensitive-sorting-in-javascript
+        a = String(a).toLowerCase()
+        b = String(b).toLowerCase()
+        if (a === b) return 0
+        if (a > b) return 1
+        return -1
+      })
+      .forEach(function(key, index) {
+        if (options.data) {
+          data = Handlebars.createFrame(options.data || {})
+          data.index = index
+          data.key = key
+          data.length = keys.length
+          data.first = index === 0
+          data.last = index === keys.length - 1
+        }
+        ret = ret + options.fn(context[key], { data: data })
+      })
     return ret
   },
 
@@ -105,7 +109,7 @@ module.exports = {
    * @param value2
    * @returns {boolean}
    */
-  'equal': function (value1, value2) {
+  equal: function(value1, value2) {
     return value1 == value2 // eslint-disable-line
   },
   /**
@@ -116,7 +120,7 @@ module.exports = {
    * @returns {Handlebars.SafeString} a Handlebars-SafeString containing the provieded
    *      markdown, rendered as HTML.
    */
-  'md': function (value, options) {
+  md: function(value, options) {
     if (!value) {
       return value
     }
@@ -147,22 +151,22 @@ module.exports = {
    * @param {object} `v1` the first value
    * @param {object} `v2` the second value
    */
-  'ifeq': function (v1, v2, options) {
+  ifeq: function(v1, v2, options) {
     // http://stackoverflow.com/questions/8853396/logical-operator-in-a-handlebars-js-if-conditional
     if (v1 === v2) {
       return options.fn(this)
     }
     return options.inverse(this)
   },
-  'json': function (value) {
+  json: function(value) {
     if (!value) {
       return ''
     }
-    var schemaString = require('json-stable-stringify')(value, {space: 4})
+    var schemaString = require('json-stable-stringify')(value, { space: 4 })
 
     var $ = cheerio.load(marked('```json\r\n' + schemaString + '\n```'))
     var definitions = $('span:not(:has(span)):contains("#/definitions/")')
-    definitions.each(function (index, item) {
+    definitions.each(function(index, item) {
       var ref = $(item).html()
       // TODO: This should be done in a template
       $(item).html('<a href=' + ref.replace(/&quot;/g, '') + '>' + ref + '</a>')
@@ -170,7 +174,7 @@ module.exports = {
 
     return new Handlebars.SafeString($.html())
   },
-  'ifcontains': function (array, object, options) {
+  ifcontains: function(array, object, options) {
     if (array && array.indexOf(object) >= 0) {
       return options.fn(this)
     }
@@ -182,7 +186,7 @@ module.exports = {
    * There is still the restriction that IDs may only start with letters, which
    * is not addressed by this helper.
    */
-  'htmlId': function (value) {
+  htmlId: function(value) {
     return value.replace(/[^A-Za-z0-9-_:.]/g, '-')
   }
 }

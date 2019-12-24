@@ -1,4 +1,6 @@
-function identity (a) { return a }
+function identity(a) {
+  return a
+}
 
 /**
  *
@@ -7,8 +9,8 @@ function identity (a) { return a }
  * @param {function(object,string):object} valueFn a function `(value,key) => newValue`
  * @returns the resulting object
  */
-function mapObject (obj, keyFn, valueFn) {
-  return Object.keys(obj).reduce(function (result, key) {
+function mapObject(obj, keyFn, valueFn) {
+  return Object.keys(obj).reduce(function(result, key) {
     const newKey = keyFn(obj[key], key)
     const newValue = valueFn(obj[key], key)
     result[newKey] = newValue
@@ -22,7 +24,7 @@ function mapObject (obj, keyFn, valueFn) {
  * @param {function} iteratee
  * @returns {object}
  */
-function mapValues (obj, iteratee) {
+function mapValues(obj, iteratee) {
   return mapObject(obj, (value, key) => key, iteratee)
 }
 
@@ -32,7 +34,7 @@ function mapValues (obj, iteratee) {
  * @param {function} iteratee
  * @returns {object}
  */
-function mapKeys (obj, iteratee) {
+function mapKeys(obj, iteratee) {
   return mapObject(obj, iteratee, identity)
 }
 
@@ -40,19 +42,19 @@ function mapKeys (obj, iteratee) {
  * Call the iteratee for all values of the object
  *
  */
-function forEachValue (obj, iteratee) {
-  Object.keys(obj).forEach((key) => iteratee(obj[key], key, obj))
+function forEachValue(obj, iteratee) {
+  Object.keys(obj).forEach(key => iteratee(obj[key], key, obj))
 }
 
-function isString (str) {
+function isString(str) {
   return typeof str === 'string'
 }
 
-function isFunction (fn) {
+function isFunction(fn) {
   return typeof fn === 'function'
 }
 
-function flatten (array) {
+function flatten(array) {
   return [].concat(array)
 }
 
@@ -63,7 +65,7 @@ function flatten (array) {
  * @returns {string} the filename without .hbs
  * @access private
  */
-function stripHandlebarsExt (value, key) {
+function stripHandlebarsExt(value, key) {
   return key.replace(/\.(handlebars|hbs)$/, '')
 }
 

@@ -1,3 +1,3 @@
-module.exports = function preprocessor (input) {
+module.exports = function preprocessor(input) {
   return input
 }

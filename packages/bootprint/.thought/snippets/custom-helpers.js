@@ -1,8 +1,8 @@
 module.exports = {
   handlebars: {
     helpers: {
-      "shout-loud": function (value) {
-        return value.toUpperCase();
+      'shout-loud': function(value) {
+        return value.toUpperCase()
       }
     }
   }

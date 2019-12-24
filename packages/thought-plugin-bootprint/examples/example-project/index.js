@@ -1,6 +1,6 @@
 const path = require('path')
 
-module.exports = function loader (customize) {
+module.exports = function loader(customize) {
   return customize
     .merge({
       handlebars: {
@@ -16,7 +16,7 @@ module.exports = function loader (customize) {
     .merge({
       handlebars: {
         helpers: {
-          inlineHelper: function inlineHelper () {
+          inlineHelper: function inlineHelper() {
             return 0
           }
         }

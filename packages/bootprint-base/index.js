@@ -1,7 +1,7 @@
 var path = require('path')
 
 // Export function to create new config (builder is passed in from outside)
-module.exports = function (builder) {
+module.exports = function(builder) {
   var bootstrapLess = require.resolve('bootstrap/less/bootstrap.less')
 
   return builder.merge({
@@ -15,19 +15,13 @@ module.exports = function (builder) {
        * @param obj the input object
        * @return a modified object or a promise for a modified object.
        */
-      preprocessor: function (obj) {
+      preprocessor: function(obj) {
         return obj
       }
     },
     less: {
-      main: [
-        bootstrapLess,
-        require.resolve('highlight.js/styles/default.css'),
-        require.resolve('./less/main.less')
-      ],
-      paths: [
-        path.dirname(bootstrapLess)
-      ]
+      main: [bootstrapLess, require.resolve('highlight.js/styles/default.css'), require.resolve('./less/main.less')],
+      paths: [path.dirname(bootstrapLess)]
     }
   })
 }

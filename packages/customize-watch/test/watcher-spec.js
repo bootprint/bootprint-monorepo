@@ -7,18 +7,19 @@ var qfs = require('m-io/fs')
 /* global it */
 // /* global xit */
 
-describe('the watcher', function () {
+describe('the watcher', function() {
   this.timeout(5000)
   var cu = null
-  before(function () {
-    return qfs.removeTree('test-tmp')
-      .then(function () {
+  before(function() {
+    return qfs
+      .removeTree('test-tmp')
+      .then(function() {
         return qfs.makeTree('test-tmp')
       })
-      .then(function () {
+      .then(function() {
         return qfs.copyTree('test/fixtures', 'test-tmp')
       })
-      .then(function () {
+      .then(function() {
         cu = customize()
           .registerEngine('test', require('./filesEngine.js'))
           .merge({
@@ -34,8 +35,8 @@ describe('the watcher', function () {
       })
   })
 
-  it('prerequisite check for expected result in normal run', function () {
-    return cu.run().then(function (result) {
+  it('prerequisite check for expected result in normal run', function() {
+    return cu.run().then(function(result) {
       expect(result).to.deep.equal({
         test: {
           files: {
@@ -57,25 +58,25 @@ describe('the watcher', function () {
     })
   })
 
-  it('should watch files for changes and run customize every time', function (done) {
+  it('should watch files for changes and run customize every time', function(done) {
     var results = []
     var actions = [
-      function modifyFileFromPartials1 () {
+      function modifyFileFromPartials1() {
         qfs.write('test-tmp/testPartials1/eins.hbs', 'abc')
       },
-      function modifyFileFromPartials2 () {
+      function modifyFileFromPartials2() {
         qfs.write('test-tmp/testPartials2/zwei.hbs', 'abc')
       },
-      function overrideFileInPartials2 () {
+      function overrideFileInPartials2() {
         qfs.write('test-tmp/testPartials2/eins.hbs', 'cde')
       }
     ]
 
     // Run first action
     actions.shift()()
-    let watcher = cu.watch();
-    setTimeout(() => watcher.stopWatching(), 2000);
-    watcher.on('update', function (result) {
+    let watcher = cu.watch()
+    setTimeout(() => watcher.stopWatching(), 2000)
+    watcher.on('update', function(result) {
       console.log('update received', result)
       results.push(JSON.parse(JSON.stringify(result)))
       if (actions.length > 0) {

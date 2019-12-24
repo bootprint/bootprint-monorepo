@@ -1,6 +1,6 @@
 // handlebars/helpers.js
 module.exports = {
-  'shout-loud': function (value) {
+  'shout-loud': function(value) {
     return value.toUpperCase()
   }
 }

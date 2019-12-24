@@ -33,17 +33,18 @@ module.exports = {
  * @return {Promise<object<string,Promise<{path:string,contents:string}>>>} an object containing
  *    the relative file-path from the directoryPath as key and the file-path and the file-contents as value
  */
-function readFiles (directoryPath, options) {
+function readFiles(directoryPath, options) {
   if (directoryPath == null) {
     return undefined
   }
   var _options = options || {}
   // Collect all files
-  var result = util.asPromise((cb) => glob(_options.glob || '**', { cwd: directoryPath, mark: true }, cb))
-    .then(function (relativePaths) {
+  var result = util
+    .asPromise(cb => glob(_options.glob || '**', { cwd: directoryPath, mark: true }, cb))
+    .then(function(relativePaths) {
       var set = relativePaths
         // Ignore directories
-        .filter((relativePath) => !relativePath.match(/\/$/))
+        .filter(relativePath => !relativePath.match(/\/$/))
         // Convert to a set based on relative paths
         // (i.e. {'dir/file.txt': 'dir/file.txt'}
         .reduce((set, relativePath) => {
@@ -53,16 +54,18 @@ function readFiles (directoryPath, options) {
 
       // Create lazy promises (only resolve when .then() is called) acting
       // as leafs (do not dive inside when merging)
-      return util.mapValues(set, (relativePath) => {
+      return util.mapValues(set, relativePath => {
         var fullPath = path.resolve(directoryPath, relativePath)
-        return leaf(lazy(() => {
-          return {
-            path: path.relative(process.cwd(), fullPath),
-            contents: _options.stream
-              ? fs.createReadStream(fullPath, { encoding: _options.encoding })
-              : util.asPromise((cb) => fs.readFile(fullPath, { encoding: _options.encoding }, cb))
-          }
-        }))
+        return leaf(
+          lazy(() => {
+            return {
+              path: path.relative(process.cwd(), fullPath),
+              contents: _options.stream
+                ? fs.createReadStream(fullPath, { encoding: _options.encoding })
+                : util.asPromise(cb => fs.readFile(fullPath, { encoding: _options.encoding }, cb))
+            }
+          })
+        )
       })
     })
   result.watch = directoryPath
@@ -80,7 +83,7 @@ function readFiles (directoryPath, options) {
  *    the relative file-path from the directoryPath as key and the file-path and the file-contents as value
  * @deprecated Use {@link #readFiles} instead
  */
-function files (directoryPath, options) {
+function files(directoryPath, options) {
   return readFiles(directoryPath, {
     glob: options && options.glob,
     stream: false,

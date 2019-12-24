@@ -13,6 +13,7 @@
     "mocha": "^6.2.2",
     "nyc": "^15.0.0",
     "prettier": "^1.19.1",
+    "prettier-config-standard": "^1.0.1",
     "thought": "^2.0.0",
     "thoughtful-release": "^1.0.0",
     "trace": "^3.1.1"
@@ -21,9 +22,13 @@
     "thought-plugin-jsdoc": "^1.1.0"
   },
   "scripts": {
-    "bootstrap": "lerna bootstrap",
+    "postinstall": "lerna bootstrap",
+    "format": "prettier --write **/*.js",
     "test": "lerna run test --stream",
     "thought": "thought run -a",
     "version": "npm run thought"
+  },
+  "lint-staged": {
+    "*.js": "prettier --write"
   }
 }

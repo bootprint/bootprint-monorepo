@@ -11,20 +11,18 @@
 var expect = require('chai').expect
 var core = require('../core')
 
-describe('The all-of fixture', function () {
+describe('The all-of fixture', function() {
   this.timeout(10000)
   var context = {}
-  before(function () {
+  before(function() {
     return core.run(require('./swagger.json'), __dirname, context)
   })
 
-  it('should have an inheritance block for definition AAA', function () {
-    expect(context.$('#definition-AAA').text())
-      .to.contain('BBB')
+  it('should have an inheritance block for definition AAA', function() {
+    expect(context.$('#definition-AAA').text()).to.contain('BBB')
   })
 
-  it('should have an inheritance block for definition BBB', function () {
-    expect(context.$('#definition-BBB').text())
-      .to.contain('CCC')
+  it('should have an inheritance block for definition BBB', function() {
+    expect(context.$('#definition-BBB').text()).to.contain('CCC')
   })
 })

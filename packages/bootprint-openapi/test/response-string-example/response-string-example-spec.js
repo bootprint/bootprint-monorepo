@@ -11,14 +11,16 @@
 var expect = require('chai').expect
 var core = require('../core')
 
-describe('The response string-examples fixture', function () {
+describe('The response string-examples fixture', function() {
   this.timeout(10000)
   var context = {}
-  before(function () {
+  before(function() {
     return core.run(require.resolve('./swagger.yaml'), __dirname, context)
   })
-  it('should render the response examples', function () {
-    expect(context.$('dd.sw-response-200 .sw-response-examples').text(),
-    'Examples consisting of only a string should not be JSON.stringified').not.to.match(/\\n/)
+  it('should render the response examples', function() {
+    expect(
+      context.$('dd.sw-response-200 .sw-response-examples').text(),
+      'Examples consisting of only a string should not be JSON.stringified'
+    ).not.to.match(/\\n/)
   })
 })

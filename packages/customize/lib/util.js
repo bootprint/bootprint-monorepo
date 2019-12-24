@@ -21,7 +21,7 @@ module.exports = {
  * @param obj
  * @param fnOrProperty
  */
-function mapValues (obj, fnOrProperty) {
+function mapValues(obj, fnOrProperty) {
   if (obj == null) {
     return obj
   }
@@ -31,18 +31,20 @@ function mapValues (obj, fnOrProperty) {
   } else if (fnOrProperty instanceof Function) {
     fn = fnOrProperty
   } else if (typeof fnOrProperty === 'string') {
-    fn = function (v) { return v[fnOrProperty] }
+    fn = function(v) {
+      return v[fnOrProperty]
+    }
   } else {
     throw new Error('fnOrProperty must either be undefined, a function or a string')
   }
 
-  return Object.keys(obj).reduce(function (result, key) {
+  return Object.keys(obj).reduce(function(result, key) {
     result[key] = fn(obj[key], key)
     return result
   }, {})
 }
 
-function identity (a) {
+function identity(a) {
   return a
 }
 
@@ -51,13 +53,13 @@ function identity (a) {
  * @param a
  * @returns {Function}
  */
-function constant (a) {
-  return function () {
+function constant(a) {
+  return function() {
     return a
   }
 }
 
-function isString (str) {
+function isString(str) {
   return typeof str === 'string'
 }
 
@@ -72,7 +74,7 @@ function isString (str) {
  * @param {function(callback:function(Error, any))} fn the function to generate the promise from
  * @returns {Promise<any>}
  */
-function asPromise (fn) {
+function asPromise(fn) {
   return new Promise((resolve, reject) => {
     fn((err, result) => {
       if (err) {

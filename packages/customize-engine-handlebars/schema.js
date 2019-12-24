@@ -4,7 +4,7 @@
 module.exports = {
   description: 'The configuration schema of the "customize-engine-handlebars"',
   definitions: {
-    'stringArray': {
+    stringArray: {
       type: 'array',
       items: {
         type: 'string'
@@ -12,15 +12,15 @@ module.exports = {
     }
   },
   properties: {
-    'templates': {
+    templates: {
       description: 'Path to a directory tree containing Handlebars-templates',
       type: 'string'
     },
-    'partials': {
+    partials: {
       description: 'Path to a directory tree containing Handlebars-partials',
       type: 'string'
     },
-    'helpers': {
+    helpers: {
       anyOf: [
         {
           description: 'JavaScript-object with helpers (key=name, value=function)',
@@ -33,12 +33,13 @@ module.exports = {
           type: 'function'
         },
         {
-          description: 'Path to a CommonJS-module exporting either a JavaScript-object with helpers or a function generating an object with helpers',
+          description:
+            'Path to a CommonJS-module exporting either a JavaScript-object with helpers or a function generating an object with helpers',
           type: 'string'
         }
       ]
     },
-    'preprocessor': {
+    preprocessor: {
       anyOf: [
         {
           type: 'function',
@@ -50,15 +51,16 @@ module.exports = {
         }
       ]
     },
-    'data': {
+    data: {
       description: 'The data passed into the Handlebars'
     },
-    'hbsOptions': {
+    hbsOptions: {
       description: 'Options passed to Handlebars#compile()'
     },
-    'addSourceLocator': {
+    addSourceLocator: {
       type: 'boolean',
-      description: 'If set to true, tags of the form `<sl line="1" col="0" file="test/fixtures/templates/a.md.hbs"></sl>` and `<sl line="1" col="0" partial="eins" file="test/fixtures/testPartials1/eins.hbs">` will be inserted into the output to provide source-coordinates.'
+      description:
+        'If set to true, tags of the form `<sl line="1" col="0" file="test/fixtures/templates/a.md.hbs"></sl>` and `<sl line="1" col="0" partial="eins" file="test/fixtures/testPartials1/eins.hbs">` will be inserted into the output to provide source-coordinates.'
     }
   }
 }
