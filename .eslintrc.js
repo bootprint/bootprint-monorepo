@@ -4,15 +4,12 @@ module.exports = {
     es6: true,
     node: true
   },
-  extends: ['eslint:recommended', 'prettier'],
+  extends: ['standard', 'prettier'],
   plugins: ['promise'],
   parserOptions: {
     ecmaVersion: 2018
   },
-  rules: {
-    'no-var': 'error',
-    'prefer-const': 'warn'
-  },
+  rules: {},
   overrides: [
     {
       files: ['**/test/*-spec.js'],

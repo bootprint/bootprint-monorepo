@@ -43,7 +43,7 @@ function hierarchy(config) {
   const partials = _.mapValues(config.partials, augmentSingleFile)
   return {
     children: Object.keys(templates).map(name => {
-      let template = templates[name]
+      const template = templates[name]
       return {
         name: name,
         type: 'template',
@@ -104,8 +104,8 @@ function partialForCallTree(name, partials, visitedNodes) {
  * @param {{templates: object, partials: object}} config
  */
 function augment(config) {
-  let augmentedTemplates = _.mapValues(config.templates, augmentSingleFile)
-  let augmentedPartials = _.mapValues(config.partials, augmentSingleFile)
+  const augmentedTemplates = _.mapValues(config.templates, augmentSingleFile)
+  const augmentedPartials = _.mapValues(config.partials, augmentSingleFile)
   // Prepare caller array in each partial
   _.forEachValue(augmentedPartials, file => {
     file.calledBy = []
@@ -119,7 +119,7 @@ function augment(config) {
         if (callee.name === '@partial-block') {
           return
         }
-        let partial = augmentedPartials[callee.name]
+        const partial = augmentedPartials[callee.name]
         if (!partial) {
           throw new Error(`Missing partial "${callee.name}"`)
         }

@@ -9,8 +9,6 @@ var qfs = require('m-io/fs')
 var cheerio = require('cheerio')
 var path = require('path')
 
-;('use strict')
-
 /**
  * Create a new tester-object for a given bootprint-module
  * @param bootprintModule

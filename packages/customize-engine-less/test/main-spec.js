@@ -5,11 +5,6 @@
  * Released under the MIT license.
  */
 
-/* global describe */
-/* global it */
-// /* global xdescribe */
-/* global it */
-
 'use strict'
 
 var customize = require('customize')

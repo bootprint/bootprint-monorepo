@@ -88,7 +88,7 @@ module.exports = {
  */
 function dataType(value) {
   if (!value) return null
-  if (value['anyOf'] || value['allOf'] || value['oneOf']) {
+  if (value.anyOf || value.allOf || value.oneOf) {
     return ''
   }
   if (!value.type) {

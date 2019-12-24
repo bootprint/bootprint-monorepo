@@ -30,7 +30,7 @@ if (program.args.length !== 3) {
 var templateModule = program.args[0]
 var jsonFile = program.args[1]
 var targetDir = program.args[2]
-var options = program['configFile'] // Coerced by commander via fn-parameter
+var options = program.configFile // Coerced by commander via fn-parameter
 
 // Load and configure bootprint
 var bootprint = require('../index.js')

@@ -74,7 +74,7 @@ describe('the watcher', function() {
 
     // Run first action
     actions.shift()()
-    let watcher = cu.watch()
+    const watcher = cu.watch()
     setTimeout(() => watcher.stopWatching(), 2000)
     watcher.on('update', function(result) {
       console.log('update received', result)

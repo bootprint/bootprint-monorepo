@@ -60,7 +60,7 @@ function moduleConfig(options) {
   // Load from current working directsory. The cwd should be
   // the root-directory of the plugin
   var plugin = require(process.cwd())
-  let lessDocEngine = Object.assign({}, require('customize-engine-less'), {
+  const lessDocEngine = Object.assign({}, require('customize-engine-less'), {
     run: function(config) {
       return config
     }
@@ -103,7 +103,7 @@ function abbrev(text, limit) {
  */
 function runBootprint(module, input, target) {
   return new Bootprint(module, {}).run(input, target).then(files => {
-    let tree = require('tree-from-paths').render(files, '', (parent, file, explicit) => `${file}`)
+    const tree = require('tree-from-paths').render(files, '', (parent, file, explicit) => `${file}`)
     return `<pre><code>${tree}</code></pre>`
   })
 }
