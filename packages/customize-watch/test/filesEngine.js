@@ -1,5 +1,4 @@
 const files = require('../helpers-io').files
-const Q = require('q')
 
 module.exports = {
   defaultConfig: {
@@ -32,6 +31,6 @@ module.exports = {
    * @returns {*}
    */
   run: function filesEngine(config) {
-    return Q(config)
+    return Promise.resolve(config)
   }
 }

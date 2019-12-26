@@ -1,6 +1,7 @@
 const customize = require('../')
 const expect = require('chai').expect
 const qfs = require('m-io/fs')
+const debug = require('debug')('customize-watch:test')
 
 /* global describe */
 /* global before */
@@ -58,91 +59,127 @@ describe('the watcher', function() {
     })
   })
 
-  it('should watch files for changes and run customize every time', function(done) {
-    const results = []
-    const actions = [
-      function modifyFileFromPartials1() {
-        qfs.write('test-tmp/testPartials1/eins.hbs', 'abc')
-      },
-      function modifyFileFromPartials2() {
-        qfs.write('test-tmp/testPartials2/zwei.hbs', 'abc')
-      },
-      function overrideFileInPartials2() {
-        qfs.write('test-tmp/testPartials2/eins.hbs', 'cde')
-      }
-    ]
+  it('should watch files for changes and run customize every time', async function() {
+    const customizeWatcher = cu.watch()
+    try {
+      await verifyInitialUpdate(customizeWatcher)
+      await verifyUpdateAfterFirstChange(customizeWatcher)
+      await verifyUpdateAfterSecondChange(customizeWatcher)
+      await verifyUpdateAfterThirdChange(customizeWatcher)
+    } finally {
+      await customizeWatcher.stopWatching()
+    }
+  })
 
-    // Run first action
-    actions.shift()()
-    const watcher = cu.watch()
-    setTimeout(() => watcher.stopWatching(), 2000)
-    watcher.on('update', function(result) {
-      console.log('update received', result)
-      results.push(JSON.parse(JSON.stringify(result)))
-      if (actions.length > 0) {
-        // Run next action
-        setTimeout(actions.shift(), 100)
-      } else {
-        // Checking the result of all actions
-        expect(results).to.deep.equal([
-          {
-            test: {
-              files: {
-                'drei.hbs': {
-                  contents: 'testPartials2/drei {{drei}}',
-                  path: 'test-tmp/testPartials2/drei.hbs'
-                },
-                'eins.hbs': {
-                  contents: 'abc',
-                  path: 'test-tmp/testPartials1/eins.hbs'
-                },
-                'zwei.hbs': {
-                  contents: 'testPartials2/zwei {{zwei}}',
-                  path: 'test-tmp/testPartials2/zwei.hbs'
-                }
-              }
-            }
+  async function verifyInitialUpdate(customizeWatcher) {
+    debug('verifyInitialUpdate')
+    const resultAfterInitialUpdate = await waitForUpdateWhile(customizeWatcher, () => Promise.resolve())
+    expect(resultAfterInitialUpdate).to.deep.equal({
+      test: {
+        files: {
+          'eins.hbs': {
+            contents: 'testPartials1/eins {{eins}}',
+            path: 'test-tmp/testPartials1/eins.hbs'
           },
-          {
-            test: {
-              files: {
-                'drei.hbs': {
-                  contents: 'testPartials2/drei {{drei}}',
-                  path: 'test-tmp/testPartials2/drei.hbs'
-                },
-                'eins.hbs': {
-                  contents: 'abc',
-                  path: 'test-tmp/testPartials1/eins.hbs'
-                },
-                'zwei.hbs': {
-                  contents: 'abc',
-                  path: 'test-tmp/testPartials2/zwei.hbs'
-                }
-              }
-            }
+          'zwei.hbs': {
+            contents: 'testPartials2/zwei {{zwei}}',
+            path: 'test-tmp/testPartials2/zwei.hbs'
           },
-          {
-            test: {
-              files: {
-                'drei.hbs': {
-                  contents: 'testPartials2/drei {{drei}}',
-                  path: 'test-tmp/testPartials2/drei.hbs'
-                },
-                'eins.hbs': {
-                  contents: 'cde',
-                  path: 'test-tmp/testPartials2/eins.hbs'
-                },
-                'zwei.hbs': {
-                  contents: 'abc',
-                  path: 'test-tmp/testPartials2/zwei.hbs'
-                }
-              }
-            }
+          'drei.hbs': {
+            contents: 'testPartials2/drei {{drei}}',
+            path: 'test-tmp/testPartials2/drei.hbs'
           }
-        ])
-        watcher.stopWatching()
-        done()
+        }
       }
     })
-  })
+  }
+
+  async function verifyUpdateAfterFirstChange(customizeWatcher) {
+    debug('verifyUpdateAfterFirstChange')
+    const resultAfterFirstUpdate = await waitForUpdateWhile(customizeWatcher,
+      () => qfs.write('test-tmp/testPartials1/eins.hbs', 'overwritten value eins')
+    )
+    expect(resultAfterFirstUpdate).to.deep.equal({
+      test: {
+        files: {
+          'eins.hbs': {
+            contents: 'overwritten value eins',
+            path: 'test-tmp/testPartials1/eins.hbs'
+          },
+          'zwei.hbs': {
+            contents: 'testPartials2/zwei {{zwei}}',
+            path: 'test-tmp/testPartials2/zwei.hbs'
+          },
+          'drei.hbs': {
+            contents: 'testPartials2/drei {{drei}}',
+            path: 'test-tmp/testPartials2/drei.hbs'
+          }
+        }
+      }
+    })
+  }
+
+  async function verifyUpdateAfterSecondChange(customizeWatcher) {
+    debug('verifyUpdateAfterSecondChange')
+    const resultAfterSecondUpdate = await waitForUpdateWhile(customizeWatcher, () =>
+      qfs.write('test-tmp/testPartials2/zwei.hbs', 'overwritten value zwei')
+    )
+    expect(resultAfterSecondUpdate).to.deep.equal({
+      test: {
+        files: {
+          'eins.hbs': {
+            contents: 'overwritten value eins',
+            path: 'test-tmp/testPartials1/eins.hbs'
+          },
+          'zwei.hbs': {
+            contents: 'overwritten value zwei',
+            path: 'test-tmp/testPartials2/zwei.hbs'
+          },
+          'drei.hbs': {
+            contents: 'testPartials2/drei {{drei}}',
+            path: 'test-tmp/testPartials2/drei.hbs'
+          }
+        }
+      }
+    })
+  }
+
+  async function verifyUpdateAfterThirdChange(customizeWatcher) {
+    debug('verifyUpdateAfterThirdChange')
+    const resultAfterThirdUpdate = await waitForUpdateWhile(customizeWatcher, () =>
+      qfs.write('test-tmp/testPartials2/eins.hbs', 'newly created file in overriding directory')
+    )
+
+    expect(resultAfterThirdUpdate).to.deep.equal({
+      test: {
+        files: {
+          'eins.hbs': {
+            contents: 'newly created file in overriding directory',
+            path: 'test-tmp/testPartials2/eins.hbs'
+          },
+          'zwei.hbs': {
+            contents: 'overwritten value zwei',
+            path: 'test-tmp/testPartials2/zwei.hbs'
+          },
+          'drei.hbs': {
+            contents: 'testPartials2/drei {{drei}}',
+            path: 'test-tmp/testPartials2/drei.hbs'
+          }
+        }
+      }
+    })
+  }
+
+  async function waitForUpdateWhile(customizeWatcher, action) {
+    return new Promise((resolve, reject) => {
+      debug("waitForUpdateWhile:add-listener")
+      customizeWatcher.once('update', result => {
+        const jsonResult = JSON.stringify(result)
+        debug('waitForUpdateWhile:result=', jsonResult)
+        resolve(JSON.parse(jsonResult))
+      })
+      debug("run-action", action.toString())
+      action().catch(reject)
+    })
+  }
 })

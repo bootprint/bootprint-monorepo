@@ -4,15 +4,22 @@ const files = require('../helpers-io').files
 const deep = require('deep-aplus')(require('q').Promise)
 const overrider = require('../').overrider
 const expect = require('chai').expect
-
-/* global describe */
-/* global it */
-// /* global xit */
+const sinon = require('sinon')
+const fs = require('fs')
+const path = require('path')
 
 describe('the files-function', function() {
+  afterEach(function() {
+    sinon.restore()
+  })
+
   it('should resolve to the contents of all contained files', function() {
-    const x = files('test/fixtures/testPartials1')
-    return deep(_.merge({ dir: x }, { dir: files('test/fixtures/testPartials2') }, overrider)).then(function(result) {
+    const readFileSpy = sinon.spy(fs, 'readFile')
+
+    const filesPromise = files('test/fixtures/testPartials1')
+    return deep(_.merge({ dir: filesPromise }, { dir: files('test/fixtures/testPartials2') }, overrider)).then(function(
+      result
+    ) {
       expect(result).to.eql({
         dir: {
           'eins.hbs': {
@@ -30,11 +37,21 @@ describe('the files-function', function() {
         }
       })
 
+      const filesRead = readFileSpy.args.map(args => args[0]).map(asRelativePosixPath)
+
       // Do this before the promise is resolved
-      expect(x.valueOf()['eins.hbs'].inspect().state).to.equal('fulfilled')
+      expect(filesRead).to.contain('test/fixtures/testPartials1/eins.hbs')
       // zwei.hbs is taken from 'testPartials2' and should not be loaded from 'testPartials1'
-      expect(x.valueOf()['zwei.hbs'].inspect().state).to.equal('pending')
+      expect(filesRead).not.to.contain('test/fixtures/testPartials1/zwei.hbs')
     })
+
+    function asRelativePosixPath(filePath) {
+      if (filePath == null) {
+        throw new Error('FilePath must be non-null')
+      }
+      let relativePath = path.relative(process.cwd(), filePath);
+      return relativePath.replace(/\\/g, '/')
+    }
   })
 
   it('should work correctly with globs', function() {
