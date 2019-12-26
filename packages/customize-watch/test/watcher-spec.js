@@ -1,6 +1,6 @@
 const customize = require('../')
 const expect = require('chai').expect
-const qfs = require('m-io/fs')
+const fs = require('fs-extra')
 const debug = require('debug')('customize-watch:test')
 
 /* global describe */
@@ -10,34 +10,27 @@ const debug = require('debug')('customize-watch:test')
 
 describe('the watcher', function() {
   this.timeout(5000)
-  let cu = null
-  before(function() {
-    return qfs
-      .removeTree('test-tmp')
-      .then(function() {
-        return qfs.makeTree('test-tmp')
+  let customizeInstance = null
+  before(async function() {
+    await fs.remove('test-tmp')
+    await fs.mkdirp('test-tmp')
+    await fs.copy('test/fixtures', 'test-tmp')
+    customizeInstance = customize()
+      .registerEngine('test', require('./filesEngine.js'))
+      .merge({
+        test: {
+          files: 'test-tmp/testPartials1'
+        }
       })
-      .then(function() {
-        return qfs.copyTree('test/fixtures', 'test-tmp')
-      })
-      .then(function() {
-        cu = customize()
-          .registerEngine('test', require('./filesEngine.js'))
-          .merge({
-            test: {
-              files: 'test-tmp/testPartials1'
-            }
-          })
-          .merge({
-            test: {
-              files: 'test-tmp/testPartials2'
-            }
-          })
+      .merge({
+        test: {
+          files: 'test-tmp/testPartials2'
+        }
       })
   })
 
   it('prerequisite check for expected result in normal run', function() {
-    return cu.run().then(function(result) {
+    return customizeInstance.run().then(function(result) {
       expect(result).to.deep.equal({
         test: {
           files: {
@@ -60,7 +53,7 @@ describe('the watcher', function() {
   })
 
   it('should watch files for changes and run customize every time', async function() {
-    const customizeWatcher = cu.watch()
+    const customizeWatcher = customizeInstance.watch()
     try {
       await verifyInitialUpdate(customizeWatcher)
       await verifyUpdateAfterFirstChange(customizeWatcher)
@@ -97,7 +90,7 @@ describe('the watcher', function() {
   async function verifyUpdateAfterFirstChange(customizeWatcher) {
     debug('verifyUpdateAfterFirstChange')
     const resultAfterFirstUpdate = await waitForUpdateWhile(customizeWatcher,
-      () => qfs.write('test-tmp/testPartials1/eins.hbs', 'overwritten value eins')
+      () => fs.writeFile('test-tmp/testPartials1/eins.hbs', 'overwritten value eins')
     )
     expect(resultAfterFirstUpdate).to.deep.equal({
       test: {
@@ -122,7 +115,7 @@ describe('the watcher', function() {
   async function verifyUpdateAfterSecondChange(customizeWatcher) {
     debug('verifyUpdateAfterSecondChange')
     const resultAfterSecondUpdate = await waitForUpdateWhile(customizeWatcher, () =>
-      qfs.write('test-tmp/testPartials2/zwei.hbs', 'overwritten value zwei')
+      fs.writeFile('test-tmp/testPartials2/zwei.hbs', 'overwritten value zwei')
     )
     expect(resultAfterSecondUpdate).to.deep.equal({
       test: {
@@ -147,7 +140,7 @@ describe('the watcher', function() {
   async function verifyUpdateAfterThirdChange(customizeWatcher) {
     debug('verifyUpdateAfterThirdChange')
     const resultAfterThirdUpdate = await waitForUpdateWhile(customizeWatcher, () =>
-      qfs.write('test-tmp/testPartials2/eins.hbs', 'newly created file in overriding directory')
+      fs.writeFile('test-tmp/testPartials2/eins.hbs', 'newly created file in overriding directory')
     )
 
     expect(resultAfterThirdUpdate).to.deep.equal({

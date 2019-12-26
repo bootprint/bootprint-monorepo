@@ -1,7 +1,5 @@
-const _ = require('lodash')
 const files = require('../helpers-io').files
 const leaf = require('../').leaf
-const Q = require('q')
 
 module.exports = {
   defaultConfig: {
@@ -29,7 +27,7 @@ module.exports = {
     return {
       files: files(config.files),
       objects: config.objects,
-      leafs: _.mapValues(config.leafs, leaf),
+      leafs: mapValues(config.leafs, leaf),
       array: config.array
     }
   },
@@ -40,6 +38,15 @@ module.exports = {
    * @returns {*}
    */
   run: function testEngine(config) {
-    return Q(config)
+    return Promise.resolve(config)
   }
+}
+
+
+function mapValues(object, mapFunction) {
+  const result = {}
+  Object.keys(object).forEach(key => {
+    result[key] = mapFunction(object[key], key)
+  })
+  return result
 }

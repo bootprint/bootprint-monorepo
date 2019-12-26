@@ -1,7 +1,7 @@
-const _ = require('lodash')
+const mergeWith = require('lodash.mergewith')
 
 const files = require('../helpers-io').files
-const deep = require('deep-aplus')(require('q').Promise)
+const deep = require('deep-aplus')(Promise)
 const overrider = require('../').overrider
 const expect = require('chai').expect
 const sinon = require('sinon')
@@ -17,7 +17,7 @@ describe('the files-function', function() {
     const readFileSpy = sinon.spy(fs, 'readFile')
 
     const filesPromise = files('test/fixtures/testPartials1')
-    return deep(_.merge({ dir: filesPromise }, { dir: files('test/fixtures/testPartials2') }, overrider)).then(function(
+    return deep(mergeWith({ dir: filesPromise }, { dir: files('test/fixtures/testPartials2') }, overrider)).then(function(
       result
     ) {
       expect(result).to.eql({
@@ -57,7 +57,7 @@ describe('the files-function', function() {
   it('should work correctly with globs', function() {
     const x = files('test/fixtures/testPartials1', { glob: '*ei.hbs' })
     return deep(
-      _.merge({ dir: x }, { dir: files('test/fixtures/testPartials2', { glob: '*ei.hbs' }) }, overrider)
+      mergeWith({ dir: x }, { dir: files('test/fixtures/testPartials2', { glob: '*ei.hbs' }) }, overrider)
     ).then(function(result) {
       expect(result).to.eql({
         dir: {

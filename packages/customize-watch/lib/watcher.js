@@ -1,18 +1,9 @@
-/*!
- * customize <https://github.com/nknapp/ride-over>
- *
- * Copyright (c) 2015 Nils Knappmeier.
- * Released under the MIT license.
- */
-
-'use strict'
-
 /*
  * Use the `debug`-module to provide debug output if needed
  */
 const debug = require('debug')('customize-watch:watcher')
-const qfs = require('m-io/fs')
-const _ = require('lodash')
+const fs = require('fs-extra')
+const debounce = require('lodash.debounce')
 const events = require('events')
 const chokidar = require('chokidar')
 const path = require('path')
@@ -104,7 +95,7 @@ async function splitDirsAndFiles(listOfDirsOrFiles) {
   await Promise.all(
     listOfDirsOrFiles.map(async directoryOrFile => {
       const resolvedPath = path.resolve(directoryOrFile)
-      if (await qfs.isDirectory(resolvedPath)) {
+      if (await isDirectory(resolvedPath)) {
         dirs.push(resolvedPath)
       } else {
         files.push(resolvedPath)
@@ -112,6 +103,11 @@ async function splitDirsAndFiles(listOfDirsOrFiles) {
     })
   )
   return { dirs, files }
+}
+
+async function isDirectory(resolvedPath) {
+  const stats = await fs.stat(resolvedPath);
+  return stats.isDirectory();
 }
 
 async function forEachValueWithKeyParallel(object, valueKeyIterator) {
@@ -132,7 +128,7 @@ async function createWatcherIfNeeded(paths, usePolling, callback) {
     ignoreInitial: true,
     usePolling: usePolling
   })
-  const debouncedCallback = _.debounce(callback, 250)
+  const debouncedCallback = debounce(callback, 250)
   watcher
     .on('change', debouncedCallback)
     .on('add', debouncedCallback)
