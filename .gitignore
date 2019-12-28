@@ -2,3 +2,4 @@ bootprint-monorepo.iml
 /lerna-debug.log
 /node_modules/
 .nyc_output
+/coverage
