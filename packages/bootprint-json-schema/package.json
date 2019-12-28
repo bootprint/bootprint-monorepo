@@ -25,11 +25,7 @@
   ],
   "devDependencies": {
     "bootprint-unit-testing": "^1.0.0",
-    "chai": "^3.5.0",
-    "ghooks": "^2.0.0",
     "handlebars": "^4.0.6",
-    "mocha": "^3.2.0",
-    "thoughtful-release": "^0.3.0",
-    "trace-and-clarify-if-possible": "^1.0.0"
+    "bootprint": "^1.0.0"
   }
 }
