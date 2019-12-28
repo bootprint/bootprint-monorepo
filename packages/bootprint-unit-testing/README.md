@@ -65,7 +65,7 @@ The bootprint-unit-testing module
     ✓ The output should contain the name in a <p>-tag
 
 
-  1 passing (274ms)
+  1 passing (254ms)
 ```
 
 
