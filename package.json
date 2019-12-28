@@ -35,6 +35,7 @@
     "lint": "eslint .",
     "lintfix": "eslint . --fix",
     "test": "lerna run test --stream",
+    "coverage": "nyc --reporter=lcov --reporter=text-summary lerna run test --stream",
     "thought": "thought run -a",
     "version": "npm run thought"
   },
