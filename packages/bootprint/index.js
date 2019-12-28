@@ -1,7 +1,7 @@
 const customize = require('customize-watch')
 const write = require('customize-write-files')
 const fs = require('fs-extra')
-const httpGet = require('get-promise')
+const got = require('got')
 const yaml = require('js-yaml')
 
 // preconfigured Customize instance.
@@ -51,6 +51,12 @@ function Bootprint(withData, targetDir) {
   }
 }
 
+function loadFromFile(fileOrUrlOrData) {
+  return fs.readFile(fileOrUrlOrData, 'utf8').then(function(data) {
+    return yaml.safeLoad(data, { json: true })
+  })
+}
+
 /**
  * Helper method for loading the bootprint-data
  * @param fileOrUrlOrData
@@ -65,32 +71,18 @@ function loadFromFileOrHttp(fileOrUrlOrData) {
   }
   // otherwise load data from url or file
   if (fileOrUrlOrData.match(/^https?:\/\//)) {
-    // Use the "request" package to download data
-    return httpGet(fileOrUrlOrData, {
-      redirect: true,
-      headers: {
-        'User-Agent': 'Bootprint/' + require('./package').version
-      }
-    }).then(
-      function(result) {
-        if (result.status !== 200) {
-          const error = new Error('HTTP request failed with code ' + result.status)
-          error.result = result
-          throw error
-        }
-        return yaml.safeLoad(result.data, { json: true })
-      },
-      function(error) {
-        if (error.status) {
-          throw new Error(`Got ${error.status} ${error.data} when requesting ${error.url}`, 'E_HTTP')
-        } else {
-          throw error
-        }
-      }
-    )
+    return loadFromHttp(fileOrUrlOrData)
   } else {
-    return fs.readFile(fileOrUrlOrData, 'utf8').then(function(data) {
-      return yaml.safeLoad(data, { json: true })
-    })
+    return loadFromFile(fileOrUrlOrData)
   }
+}
+
+async function loadFromHttp(fileOrUrlOrData) {
+  const result = await got(fileOrUrlOrData, {
+    followRedirect: true,
+    headers: {
+      'User-Agent': 'Bootprint/' + require('./package').version
+    }
+  })
+  return yaml.safeLoad(result.body, { json: true })
 }
