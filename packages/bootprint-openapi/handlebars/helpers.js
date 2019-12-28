@@ -93,7 +93,7 @@ module.exports = {
    * @param {any} example the value of an [Example Object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#exampleObject)
    * @param {string} mimeType the mime-type of this example
    */
-  'swagger--example': function(example, mimeType, options, customize) {
+  'swagger--example': function(example, mimeType, options) {
     if (_.isObject(example)) {
       switch (mimeType) {
         case 'application/json':
@@ -107,6 +107,6 @@ module.exports = {
     }
     const highlighted = highlight.highlightAuto(String(example)).value
     const fixMarkup = highlight.fixMarkup(highlighted)
-    return new customize.engine.SafeString('<pre>' + fixMarkup + '</pre>')
+    return new options.customize.engine.SafeString('<pre>' + fixMarkup + '</pre>')
   }
 }
