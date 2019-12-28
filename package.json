@@ -23,7 +23,6 @@
     "prettier-config-standard": "^1.0.1",
     "sinon": "^8.0.1",
     "thought": "^2.0.0",
-    "thoughtful-release": "^1.0.0",
     "trace": "^3.1.1"
   },
   "dependencies": {
