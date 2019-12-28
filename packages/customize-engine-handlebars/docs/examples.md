@@ -7,7 +7,7 @@ We do this by specifying a new partial directory. Partials with the same name as
 the previous directory will overwrite the old one.
 
 ```js
-var customize = require('customize')
+const customize = require('customize')
 customize()
   .registerEngine('handlebars', require('customize-engine-handlebars'))
   .load(require('./config-module.js'))
@@ -55,7 +55,7 @@ The parameter `options.customize.targetFile` that is passed to each helper, cont
 The following configuration registers a helper that return the targetFile:
 
 ```js
-var customize = require('customize')
+const customize = require('customize')
 customize()
   .registerEngine('handlebars', require('customize-engine-handlebars'))
   .load(require('./config-module.js'))
@@ -65,7 +65,7 @@ customize()
       partials: 'partials-targetFile',
       helpers: {
         // Helper that returns the targetFile
-        targetFile: function (options) {
+        targetFile: function(options) {
           return options.customize.targetFile
         }
       }
@@ -119,14 +119,14 @@ to override in order to modify a given part of the output.
 
 
 ```js
-var customize = require('customize')
+const customize = require('customize')
 customize()
   .registerEngine('handlebars', require('customize-engine-handlebars'))
   .load(require('./config-module.js'))
   .merge({
     handlebars: {
       partials: 'partials2',
-      partialWrapper: function (contents, name) {
+      partialWrapper: function(contents, name) {
         return '[BEGIN ' + name + ']\n' + contents + '[END ' + name + ']'
       }
     }
@@ -153,7 +153,7 @@ The engine incoorporates the library [handlebars-source-locators](https://npmjs.
 `addSourceLocators` to `true`:
 
 ```js
-var customize = require('customize')
+const customize = require('customize')
 customize()
   .registerEngine('handlebars', require('customize-engine-handlebars'))
   .load(require('./config-module.js'))
@@ -196,7 +196,7 @@ It is not possible to generate docs directly with ``. But using the `docEngine`,
 you can generate a JSON that you can render to HTML or Markdown (for example using Handlebars).
 
 ```js
-var customize = require('customize')
+const customize = require('customize')
 customize()
   .registerEngine('handlebars', require('customize-engine-handlebars').docEngine)
   .load(require('./config-module.js'))

@@ -1,9 +1,8 @@
 # bootprint-unit-testing 
 
-[![NPM version](https://badge.fury.io/js/bootprint-unit-testing.svg)](http://badge.fury.io/js/bootprint-unit-testing)
-[![Travis Build Status](https://travis-ci.org/bootprint/bootprint-unit-testing.svg?branch=master)](https://travis-ci.org/bootprint/bootprint-unit-testing)
-[![Coverage Status](https://img.shields.io/coveralls/bootprint/bootprint-unit-testing.svg)](https://coveralls.io/r/bootprint/bootprint-unit-testing)
-
+[![NPM version](https://img.shields.io/npm/v/bootprint-unit-testing.svg)](https://npmjs.com/package/bootprint-unit-testing)
+[![Travis Build Status](https://travis-ci.org/.svg?branch=master)](https://travis-ci.org/)
+[![Coverage Status](https://img.shields.io/coveralls/.svg)](https://coveralls.io/r/)
 
 > Unit-testing-tools for bootprint-projects
 
@@ -42,17 +41,17 @@ A test can be written like this:
 
 'use strict'
 
-var expect = require('chai').expect
-var core = require('bootprint-unit-testing')(require('./module.js'), __dirname)
+const expect = require('chai').expect
+const core = require('bootprint-unit-testing')(require('./module.js'), __dirname)
 
-describe('The bootprint-unit-testing module', function () {
+describe('The bootprint-unit-testing module', function() {
   this.timeout(10000)
-  var context = {}
-  before(function () {
+  const context = {}
+  before(function() {
     return core.run({ name: 'Nils' }, context)
   })
 
-  it('The output should contain the name in a <p>-tag', function () {
+  it('The output should contain the name in a <p>-tag', function() {
     expect(context.$('p').html()).to.contain('Nils')
   })
 })
@@ -66,20 +65,22 @@ The bootprint-unit-testing module
     ✓ The output should contain the name in a <p>-tag
 
 
-  1 passing (376ms)
+  1 passing (274ms)
 ```
 
 
 
-## License
+# License
 
-`bootprint-unit-testing` is published under the MIT-license. 
+`bootprint-unit-testing` is published under the MIT-license.
+
 See [LICENSE.md](LICENSE.md) for details.
 
-## Release-Notes
+
+# Release-Notes
  
 For release notes, see [CHANGELOG.md](CHANGELOG.md)
  
-## Contributing guidelines
+# Contributing guidelines
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).

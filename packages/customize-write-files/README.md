@@ -1,8 +1,8 @@
 # customize-write-files 
 
 [![NPM version](https://img.shields.io/npm/v/customize-write-files.svg)](https://npmjs.com/package/customize-write-files)
-[![Travis Build Status](https://travis-ci.org/bootprint/customize-write-files.svg?branch=master)](https://travis-ci.org/bootprint/customize-write-files)
-[![Coverage Status](https://img.shields.io/coveralls/bootprint/customize-write-files.svg)](https://coveralls.io/r/bootprint/customize-write-files)
+[![Travis Build Status](https://travis-ci.org/.svg?branch=master)](https://travis-ci.org/)
+[![Coverage Status](https://img.shields.io/coveralls/.svg)](https://coveralls.io/r/)
 
 > Post-processor that stores the result of a customize-run in a local directory
 
@@ -44,8 +44,8 @@ npm install customize-write-files
 The following example demonstrates how to use this module:
 
 ```js
-var customize = require('customize')
-var write = require('customize-write-files')
+const customize = require('customize')
+const write = require('customize-write-files')
 
 // Load files from one directory and merge with second
 customize()

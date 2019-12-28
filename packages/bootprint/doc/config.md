@@ -105,8 +105,8 @@ provide custom helpers to the configuration:
 module.exports = {
   handlebars: {
     helpers: {
-      "shout-loud": function (value) {
-        return value.toUpperCase();
+      'shout-loud': function(value) {
+        return value.toUpperCase()
       }
     }
   }
@@ -120,7 +120,7 @@ Or you can set the path to a JavaScript-module exporting an object of functions
 ```js
 // handlebars/helpers.js
 module.exports = {
-  'shout-loud': function (value) {
+  'shout-loud': function(value) {
     return value.toUpperCase()
   }
 }
@@ -178,7 +178,7 @@ module.exports = {
      * @param {object} obj the input JSON object.
      * @return {object|Promise<object>} an object of the promise for an object
      **/
-    preprocessor: function (obj) {
+    preprocessor: function(obj) {
       // Call parent preprocessor
       var result = this.parent(object)
       // Do something to the result
@@ -199,20 +199,17 @@ You can also put the preprocessor into its own javascript-file and reference the
  * @param {object} obj the input JSON object.
  * @return {object|Promise<object>} an object or the promise for an object
  **/
-module.exports = function (obj) {
+module.exports = function(obj) {
   // Call parent preprocessor
-  var result = this.parent(object);
+  var result = this.parent(object)
   // Do something to the result
   // Return either the result or a promise for the result.
-  return result;
+  return result
 }
-
-
 
 // configuration file
 module.exports = {
   handlebars: {
-
     preprocessor: require.resolve('./preprocessor.js')
   }
 }

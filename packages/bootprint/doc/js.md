@@ -75,16 +75,13 @@ require('bootprint')
   })
   .build('content.yaml', 'target')
   .generate()
-  .done(console.log)
+  .then(console.log, console.error)
 ```
 
 This will generate the output:
 
 ```
-[ 'target/index.html',
-  'target/main.css',
-  'target/main.css.map',
-  'target/bundle.js' ]
+[ 'target/index.html', 'target/main.css', 'target/main.css.map' ]
 ```
 
 The output shows the list of generated files. This is useful for post-processors. 

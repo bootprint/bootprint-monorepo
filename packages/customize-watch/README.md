@@ -24,7 +24,7 @@ The following example is almost identical to the
 ["merging another configuration"-example of the `customize`-module](https://github.com/nknapp/customize#merging-another-configuration).
 
 ```js
-var customize = require('customize-watch')
+const customize = require('customize-watch')
 
 // Load files from one directory and merge with second
 customize()
@@ -36,7 +36,7 @@ customize()
     files: 'dir2'
   })
   .watch()
-  .on('update', function (result) {
+  .on('update', function(result) {
     console.log('result', result.files)
   })
 ```

@@ -1,8 +1,6 @@
 # customize 
 
 [![NPM version](https://img.shields.io/npm/v/customize.svg)](https://npmjs.com/package/customize)
-[![Travis Build Status](https://travis-ci.org/bootprint/customize.svg?branch=master)](https://travis-ci.org/bootprint/customize)
-[![Coverage Status](https://img.shields.io/coveralls/bootprint/customize.svg)](https://coveralls.io/r/bootprint/customize)
 
 > A simple framework to create customizable engines
 
@@ -56,7 +54,7 @@ concatenates the contents of all files in a directory. We put this engine into
 the file `engine-concat-files.js`
 
 ```js
-var files = require('customize/helpers-io').files
+const files = require('customize/helpers-io').files
 
 module.exports = {
   // Optional input schema for engine-configurations
@@ -74,13 +72,13 @@ module.exports = {
 
   // This function is called for any `.merge` input.
   // It converts the input into its mergable form
-  preprocessConfig: function (config) {
+  preprocessConfig: function(config) {
     return files(config)
   },
 
   // This function is called to determine the files and directories
   // to watch in developmentMode
-  watched: function (config) {
+  watched: function(config) {
     return [
       // The config itself is the directory-path
       config
@@ -95,8 +93,8 @@ module.exports = {
   //    "filename.txt": "file-contents"
   // }
   //
-  run: function (config) {
-    var result = ''
+  run: function(config) {
+    let result = ''
     Object.keys(config).forEach(filename => {
       result += config[filename].contents + '\n'
     })
@@ -131,7 +129,7 @@ In order to see, how the preprocessor and the `files`-helper works, we can displ
 the configuration after a merge:
 
 ```js
-var customize = require('customize')
+const customize = require('customize')
 
 // Load files from one directory and merge with second
 customize()
@@ -140,7 +138,7 @@ customize()
     files: 'dir1'
   })
   .buildConfig()
-  .then((result) => console.log(result.files))
+  .then(result => console.log(result.files))
 ```
 
 The example creates a new Customize-instances, registers our engine under the name 
@@ -163,7 +161,7 @@ So far, we have loaded and displayed the preprocessed configuration. Now replace
 `.buildConfig()`-call by `.run()`
 
 ```js
-var customize = require('customize')
+const customize = require('customize')
 
 // Load files from one directory
 customize()
@@ -172,7 +170,7 @@ customize()
     files: 'dir1'
   })
   .run()
-  .then((result) => console.log(result.files))
+  .then(result => console.log(result.files))
 ```
 
 The engines `run()`-method will now be executed with the resolved configuration,
@@ -211,7 +209,7 @@ You can see that the second directory contains a file `a.md`. We will use this f
 replace the file of the first directory.
 
 ```js
-var customize = require('customize')
+const customize = require('customize')
 
 // Load files from one directory and merge with second
 customize()
@@ -223,7 +221,7 @@ customize()
     files: 'dir2'
   })
   .run()
-  .then((result) => console.log(result.files))
+  .then(result => console.log(result.files))
 ```
 
 There is an additional call to `.merge` in this code. Its input is also passed to the 

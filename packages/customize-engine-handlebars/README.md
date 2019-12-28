@@ -1,8 +1,6 @@
 # customize-engine-handlebars 
 
 [![NPM version](https://img.shields.io/npm/v/customize-engine-handlebars.svg)](https://npmjs.com/package/customize-engine-handlebars)
-[![Travis Build Status](https://travis-ci.org/bootprint/customize-engine-handlebars.svg?branch=master)](https://travis-ci.org/bootprint/customize-engine-handlebars)
-[![Coverage Status](https://img.shields.io/coveralls/bootprint/customize-engine-handlebars.svg)](https://coveralls.io/r/bootprint/customize-engine-handlebars)
 [![Greenkeeper badge](https://badges.greenkeeper.io/bootprint/customize-engine-handlebars.svg)](https://greenkeeper.io/)
 
 > Use handlebars as engine for customize
@@ -24,7 +22,7 @@ The following usage example has a configuration for all possible properties
 of the Handlebars-engine:
 
 ```js
-var customize = require('customize')
+const customize = require('customize')
 customize()
   .registerEngine('handlebars', require('customize-engine-handlebars'))
   .load(require('./config-module.js'))
@@ -35,7 +33,7 @@ customize()
 This example loads its configuration from the module `config-module.js`:
 
 ```js
-module.exports = function (customize) {
+module.exports = function(customize) {
   return customize.merge({
     handlebars: {
       // Directory containing templates
@@ -85,7 +83,7 @@ const got = require('got').extend({
   json: true
 })
 
-module.exports = function (data) {
+module.exports = function(data) {
   return {
     name: data.name,
     city: data.city,

@@ -1,8 +1,6 @@
 # bootprint-openapi 
 
 [![NPM version](https://img.shields.io/npm/v/bootprint-openapi.svg)](https://npmjs.com/package/bootprint-openapi)
-[![Travis Build Status](https://travis-ci.org/bootprint/bootprint-openapi.svg?branch=master)](https://travis-ci.org/bootprint/bootprint-openapi)
-[![Coverage Status](https://img.shields.io/coveralls/bootprint/bootprint-openapi.svg)](https://coveralls.io/r/bootprint/bootprint-openapi)
 
 > Converts a openapi-definition into a static html page
 
@@ -84,7 +82,9 @@ require('bootprint')
   // Load bootprint-swagger
   .load(require('bootprint-openapi'))
   // Customize configuration, override any options
-  .merge({ /* Any other configuration */})
+  .merge({
+    /* Any other configuration */
+  })
   // Specify build source and target
   .build('http://petstore.swagger.io/v2/swagger.json', 'target')
   // Generate swagger-documentation into "target" directory

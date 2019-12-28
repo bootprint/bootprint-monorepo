@@ -1,8 +1,6 @@
 # customize-engine-less 
 
 [![NPM version](https://img.shields.io/npm/v/customize-engine-less.svg)](https://npmjs.com/package/customize-engine-less)
-[![Travis Build Status](https://travis-ci.org/bootprint/customize-engine-less.svg?branch=master)](https://travis-ci.org/bootprint/customize-engine-less)
-[![Coverage Status](https://img.shields.io/coveralls/bootprint/customize-engine-less.svg)](https://coveralls.io/r/bootprint/customize-engine-less)
 
 > A less-engine for customize
 
@@ -19,7 +17,7 @@ npm install customize-engine-less
 The following example demonstrates how to use this module:
 
 ```js
-var customize = require('customize')
+const customize = require('customize')
 
 // Load files from one directory and merge with second
 customize()
@@ -47,7 +45,7 @@ This will generate the following output
    { 'main.css':
       'div{color:red;background-color:green}/*# sourceMappingURL=main.css.map */',
      'main.css.map':
-      '{"version":3,"sources":["/home/nknappmeier/projects/bootprint/customize-engine-less/examples/main.less"],"names":[],"mappings":"AAGA,IACE,SAAA,CACA","sourcesContent":["@textcolor: blue;\\n@bgcolor: green;\\n\\ndiv {\\n  color: @textcolor;\\n  background-color: @bgcolor;  \\n}\\n\\n\\n\\n"]}' } }
+      '{"version":3,"sources":["/home/nknappmeier/projects/bootprint/bootprint-monorepo/packages/customize-engine-less/examples/main.less"],"names":[],"mappings":"AAGA,IACE,SAAA,CACA","sourcesContent":["@textcolor: blue;\\n@bgcolor: green;\\n\\ndiv {\\n  color: @textcolor;\\n  background-color: @bgcolor;  \\n}\\n\\n\\n\\n"]}' } }
 ```
 
 ## NodeJS compatibility notes 
