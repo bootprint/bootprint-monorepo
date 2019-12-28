@@ -49,14 +49,16 @@ if (program.developmentMode) {
   }
   liveServer.start(params)
 } else {
-  bootprint.generate().done(console.log, function(error) {
-    if (error.cause === 'bootprint-load-data' && error.code === 'ENOENT') {
-      // Provide a readable error message (without stack trace) if the source file is missing.
-      console.error('\n  ' + error.message + '\n')
-    } else {
-      throw error
-    }
-  })
+  bootprint.generate().then(console.log, handleErrors)
+}
+
+function handleErrors(error) {
+  if (error.cause === 'bootprint-load-data' && error.code === 'ENOENT') {
+    // Provide a readable error message (without stack trace) if the source file is missing.
+    console.error(`\n  ${error.message}\n`)
+  } else {
+    console.error(`\n  ${error.message}\n${error.stack}`)
+  }
 }
 
 /**
