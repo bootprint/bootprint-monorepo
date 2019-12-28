@@ -1,6 +1,6 @@
 {
   "name": "bootprint-json-schema",
-  "version": "1.1.0",
+  "version": "3.1.0",
   "description": "Converts a json-schema into a static html page",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
   "author": "Nils Knappmeier",
   "license": "MIT",
   "dependencies": {
-    "bootprint-base": "^1.0.0",
+    "bootprint-base": "^3.1.0",
     "lodash": "^4.17.2"
   },
   "peerDependencies": {
@@ -24,7 +24,7 @@
     "index.js"
   ],
   "devDependencies": {
-    "bootprint-unit-testing": "^1.0.0",
+    "bootprint-unit-testing": "^3.1.0",
     "chai": "^3.5.0",
     "ghooks": "^2.0.0",
     "handlebars": "^4.0.6",

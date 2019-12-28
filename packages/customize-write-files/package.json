@@ -1,6 +1,6 @@
 {
   "name": "customize-write-files",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "description": "Post-processor that stores the result of a customize-run in a local directory",
   "author": {
     "name": "Nils Knappmeier",
@@ -25,8 +25,8 @@
     "stream-compare": "^2.0.0"
   },
   "devDependencies": {
-    "customize": "^3.0.0",
-    "customize-engine-less": "^3.0.0"
+    "customize": "^3.1.0",
+    "customize-engine-less": "^3.1.0"
   },
   "keywords": []
 }

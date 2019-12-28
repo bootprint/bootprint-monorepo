@@ -56,6 +56,10 @@ Consider th following file-hierarchy:
 ├─┬ partials/
 │ ├── body.html.hbs
 │ └── footer.html.hbs
+├─┬ target/
+│ ├── index.html
+│ ├── main.css
+│ └── main.css.map
 └─┬ templates/
   └── index.html.hbs
 </code></pre>

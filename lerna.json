@@ -1,16 +1,16 @@
 {
   "packages": [
+    "packages/bootprint",
+    "packages/bootprint-base",
+    "packages/bootprint-json-schema",
+    "packages/bootprint-openapi",
+    "packages/bootprint-unit-testing",
     "packages/customize",
     "packages/customize-engine-handlebars",
     "packages/customize-engine-less",
     "packages/customize-watch",
     "packages/customize-write-files",
-    "packages/bootprint",
-    "packages/thought-plugin-bootprint",
-    "packages/bootprint-unit-testing",
-    "packages/bootprint-base",
-    "packages/bootprint-json-schema",
-    "packages/bootprint-openapi"
+    "packages/thought-plugin-bootprint"
   ],
-  "version": "0.0.0"
+  "version": "3.1.0"
 }

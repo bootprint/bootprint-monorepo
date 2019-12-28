@@ -1,6 +1,6 @@
 {
   "name": "bootprint-base",
-  "version": "1.0.0",
+  "version": "3.1.0",
   "description": "The base configuration used by other Bootprint modules",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "marked": "^0.3.3"
   },
   "devDependencies": {
-    "bootprint": "^1.0.0",
+    "bootprint": "^3.1.0",
     "chai": "^3.5.0",
     "dirty-chai": "^2.0.1",
     "ghooks": "^2.0.0",

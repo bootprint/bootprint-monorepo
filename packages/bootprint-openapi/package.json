@@ -1,6 +1,6 @@
 {
   "name": "bootprint-openapi",
-  "version": "1.1.1",
+  "version": "3.1.0",
   "description": "Converts a openapi-definition into a static html page",
   "main": "index.js",
   "preferGlobal": true,
@@ -16,7 +16,7 @@
     "url": "https://github.com/bootprint/bootprint-monorepo.git"
   },
   "dependencies": {
-    "bootprint-json-schema": "^1.0.0",
+    "bootprint-json-schema": "^3.1.0",
     "highlight.js": "^8.9.1",
     "json-stable-stringify": "^1.0.1",
     "lodash": "^3.9.3",
@@ -29,7 +29,7 @@
     "bootprint": "^1.0.0"
   },
   "devDependencies": {
-    "bootprint": "^1.0.0",
+    "bootprint": "^3.1.0",
     "chai": "^3.3.0",
     "chai-as-promised": "^5.1.0",
     "cheerio": "^0.19.0",

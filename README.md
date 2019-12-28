@@ -5,6 +5,26 @@ to update its contents*
 
 This is a mono-repo for all packages relevant to bootprint
 
+# [bootprint](packages/bootprint)
+
+Converts json and yaml into a static html page using Handlebars and Bootstrap
+
+# [bootprint-base](packages/bootprint-base)
+
+The base configuration used by other Bootprint modules
+
+# [bootprint-json-schema](packages/bootprint-json-schema)
+
+Converts a json-schema into a static html page
+
+# [bootprint-openapi](packages/bootprint-openapi)
+
+Converts a openapi-definition into a static html page
+
+# [bootprint-unit-testing](packages/bootprint-unit-testing)
+
+Unit-testing-tools for bootprint-projects
+
 # [customize](packages/customize)
 
 A simple framework to create customizable engines
@@ -25,27 +45,7 @@ A file watcher for customize
 
 Post-processor that stores the result of a customize-run in a local directory
 
-# [bootprint](packages/bootprint)
-
-Converts json and yaml into a static html page using Handlebars and Bootstrap
-
 # [thought-plugin-bootprint](packages/thought-plugin-bootprint)
 
 A thought-plugin for Bootprint modules
-
-# [bootprint-unit-testing](packages/bootprint-unit-testing)
-
-Unit-testing-tools for bootprint-projects
-
-# [bootprint-base](packages/bootprint-base)
-
-The base configuration used by other Bootprint modules
-
-# [bootprint-json-schema](packages/bootprint-json-schema)
-
-Converts a json-schema into a static html page
-
-# [bootprint-openapi](packages/bootprint-openapi)
-
-Converts a openapi-definition into a static html page
 
