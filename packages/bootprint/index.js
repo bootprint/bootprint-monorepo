@@ -1,7 +1,6 @@
 const customize = require('customize-watch')
-const Q = require('q')
 const write = require('customize-write-files')
-const fs = require('fs')
+const fs = require('fs-extra')
 const httpGet = require('get-promise')
 const yaml = require('js-yaml')
 
@@ -62,7 +61,7 @@ function loadFromFileOrHttp(fileOrUrlOrData) {
   // If this is not a string,
   // it is probably already the raw data.
   if (typeof fileOrUrlOrData !== 'string') {
-    return Q(fileOrUrlOrData)
+    return Promise.resolve(fileOrUrlOrData)
   }
   // otherwise load data from url or file
   if (fileOrUrlOrData.match(/^https?:\/\//)) {
@@ -83,14 +82,14 @@ function loadFromFileOrHttp(fileOrUrlOrData) {
       },
       function(error) {
         if (error.status) {
-          throw new Error('Got ' + error.status + ' ' + error.data + ' when requesting ' + error.url, 'E_HTTP')
+          throw new Error(`Got ${error.status} ${error.data} when requesting ${error.url}`, 'E_HTTP')
         } else {
           throw error
         }
       }
     )
   } else {
-    return Q.nfcall(fs.readFile, fileOrUrlOrData, 'utf8').then(function(data) {
+    return fs.readFile(fileOrUrlOrData, 'utf8').then(function(data) {
       return yaml.safeLoad(data, { json: true })
     })
   }

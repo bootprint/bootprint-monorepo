@@ -8,7 +8,6 @@
 /* eslint-env mocha */
 
 const path = require('path')
-const fs = require('fs')
 const cp = require('child_process')
 const debug = require('debug')('bootprint:main-spec')
 
@@ -19,12 +18,11 @@ const bootprint = require('../')
 const tmpDir = path.join(__dirname, 'tmp')
 const targetDir = path.join(tmpDir, 'target')
 const swaggerJsonFile = path.join(tmpDir, 'changing.json')
-const qfs = require('m-io/fs')
+const fs = require('fs-extra')
 
-beforeEach(function() {
-  return qfs.removeTree(tmpDir).then(function() {
-    return qfs.makeTree(tmpDir)
-  })
+beforeEach(async function() {
+  await fs.remove(tmpDir)
+  await fs.mkdirp(tmpDir)
 })
 
 function run() {
@@ -160,7 +158,7 @@ async function getOutputAndErrorOfExecution(command, args) {
       if (err != null) {
         debug(`execAndCatchErrors:err=${err.stack}`)
       }
-      resolve({stdout, stderr, err})
+      resolve({ stdout, stderr, err })
     })
   })
 }
