@@ -105,7 +105,7 @@ describe('The Handlebars-helpers:', function() {
     it('should highlight code', function() {
       const code = '```json\n' + '{ "abc": "abc" }\n' + '```'
       const expected =
-        '<pre><code class="lang-json">{ "<span class="hljs-attribute">abc</span>": <span class="hljs-value"><span class="hljs-string">"abc"</span> </span>}\n' +
+        '<pre><code class="lang-json">{ "<span class="hljs-attribute">abc</span>": <span class="hljs-value"><span class="hljs-string">"abc"</span> </span>}' +
         '</code></pre>'
       expect(md('{{md line}}', code)).to.equal(expected)
     })
@@ -114,7 +114,7 @@ describe('The Handlebars-helpers:', function() {
   describe('The "json"-helper', function() {
     it('should highlight stringified json', function() {
       const expected =
-        '<pre><code class="lang-json">{<br>    &quot;<span class="hljs-attribute">a</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;b&quot;</span><br></span>}\n' +
+        '<pre><code class="lang-json">{<br>    &quot;<span class="hljs-attribute">a</span>&quot;: <span class="hljs-value"><span class="hljs-string">&quot;b&quot;</span><br></span>}' +
         '</code></pre>'
 
       expect(Handlebars.compile('{{json .}}')({ a: 'b' }).trim()).to.equal(expected)
