@@ -19,7 +19,7 @@
     "bootprint-json-schema": "^3.1.0",
     "highlight.js": "^8.9.1",
     "json-stable-stringify": "^1.0.1",
-    "lodash": "^3.9.3",
+    "lodash": "^4.17.15",
     "m-io": "^0.3.1"
   },
   "bugs": {
