@@ -28,7 +28,7 @@ module.exports = function(input) {
       var partials = hbDocs(bootprintConfig.handlebars.partials)
       var template = hbDocs(bootprintConfig.handlebars.templates)
 
-      var partialTree = createPartialTree(template[0], _.indexBy(partials, 'name'), [])
+      var partialTree = createPartialTree(template[0], _.keyBy(partials, 'name'), [])
       return _.merge({}, input, {
         partials: partials,
         template: template,
@@ -38,7 +38,7 @@ module.exports = function(input) {
 }
 
 var hbDocs = function(files) {
-  return _.pairs(files).map(function(file) {
+  return _.toPairs(files).map(function(file) {
     var contents = file[1].contents
     var filePath = file[1].path
     var name = file[0].replace(/\.hbs$/, '')
@@ -84,7 +84,7 @@ function createPartialTree(currentFile, partials, visitedFiles) {
   var result = {
     label: currentFile.name,
     name: currentFile.name,
-    summary: _.trunc(chainOrUndefined(currentFile, 'apidocs', 0, 'parsed', 'description'), {
+    summary: _.truncate(chainOrUndefined(currentFile, 'apidocs', 0, 'parsed', 'description'), {
       separator: ' ',
       length: 50
     })
