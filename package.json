@@ -16,6 +16,7 @@
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "husky": "^3.1.0",
     "lerna": "^3.19.0",
     "lint-staged": "^9.5.0",
     "loud-rejection": "^2.2.0",
@@ -42,6 +43,15 @@
     "version": "npm run thought && npm run fix-peer-dependencies"
   },
   "lint-staged": {
-    "*.js": "prettier --write && eslint --fix"
+    "*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
