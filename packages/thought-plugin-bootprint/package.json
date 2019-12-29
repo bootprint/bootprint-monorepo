@@ -15,17 +15,14 @@
   },
   "dependencies": {
     "bootprint": "^2.0.0",
-    "customize": "^2.0.1",
-    "customize-engine-handlebars": "^2.2.2",
-    "customize-engine-less": "^2.0.0",
-    "thought-plugin-jsdoc": "^1.0.1",
+    "customize": "^3.0.2",
+    "customize-engine-handlebars": "^3.0.1",
+    "customize-engine-less": "^3.0.0",
+    "thought-plugin-jsdoc": "^2.0.0",
     "tree-from-paths": "^1.0.0"
   },
   "devDependencies": {
     "deep-aplus": "^1.0.4"
-  },
-  "peerDependencies": {
-    "thought": "^1.4.0"
   },
   "files": [
     "src"

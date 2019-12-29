@@ -29,7 +29,7 @@
     "trace": "^3.1.1"
   },
   "dependencies": {
-    "thought-plugin-jsdoc": "^1.1.0"
+    "thought-plugin-jsdoc": "2"
   },
   "scripts": {
     "postinstall": "lerna bootstrap",
