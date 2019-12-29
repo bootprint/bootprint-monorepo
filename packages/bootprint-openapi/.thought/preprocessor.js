@@ -6,15 +6,12 @@ var apidocs = require('multilang-apidocs')
 var findPackage = require('find-package')
 var path = require('path')
 
-module.exports = function(input) {
+module.exports = async function(input) {
+  const preprocessedInput = await this.parent(input)
   // Prepare partial apidocs and include them into the data object
-  return customize()
+  const bootprintConfig = await customize()
     .registerEngine('handlebars', require('customize-engine-handlebars'))
     .registerEngine('less', {
-      defaultConfig: {},
-      run: function() {}
-    })
-    .registerEngine('uglify', {
       defaultConfig: {},
       run: function() {}
     })
@@ -24,17 +21,16 @@ module.exports = function(input) {
     })
     .load(require('../'))
     .buildConfig()
-    .then(function(bootprintConfig) {
-      var partials = hbDocs(bootprintConfig.handlebars.partials)
-      var template = hbDocs(bootprintConfig.handlebars.templates)
 
-      var partialTree = createPartialTree(template[0], _.keyBy(partials, 'name'), [])
-      return _.merge({}, input, {
-        partials: partials,
-        template: template,
-        partialTree: partialTree
-      })
-    })
+  var partials = hbDocs(bootprintConfig.handlebars.partials)
+  var template = hbDocs(bootprintConfig.handlebars.templates)
+
+  var partialTree = createPartialTree(template[0], _.keyBy(partials, 'name'), [])
+  return Object.assign({}, preprocessedInput, {
+    partials: partials,
+    template: template,
+    partialTree: partialTree
+  })
 }
 
 var hbDocs = function(files) {

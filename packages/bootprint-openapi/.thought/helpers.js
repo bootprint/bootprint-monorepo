@@ -1,7 +1,7 @@
-var qfs = require('m-io/fs')
-var deep = require('deep-aplus')(require('q').Promise)
+var fs = require('fs-extra')
+var util = require('util')
+var glob = util.promisify(require('glob'))
 var path = require('path')
-var _ = require('lodash')
 
 module.exports = {
   /**
@@ -10,33 +10,21 @@ module.exports = {
    *
    * @returns {*}
    */
-  credits: function(options) {
-    return qfs
-      .listTree('.', function(filePath) {
-        var file = path.basename(filePath)
-        // Do not traverse into the node_modules directory
-        if (file === 'node_modules' || file === '.git') {
-          return null
-        }
-        // Collect all files "credits.md"
-        if (file === 'credits.md.hbs') {
-          return true
-        }
-        return false
-      })
-      .then(function(creditFiles) {
-        return deep(
-          creditFiles.map(function(creditFile) {
-            console.log('Using credit file', creditFile)
-            var input = _.merge({}, this, {
-              __dirname: path.dirname(creditFile),
-              __filename: creditFile
-            })
-            return qfs.read(creditFile).then(function(contents) {
-              return options.customize.engine.compile(contents)(input)
-            })
-          })
-        )
-      })
+  credits: async function(options) {
+    const creditFiles = await glob('**/credits.md.hbs', {
+      ignore: '**/(node_modules|.git)'
+    })
+    return await Promise.all(
+      creditFiles.map(async creditFilePath => compileCreditFile(creditFilePath, options.customize.engine))
+    )
   }
+}
+
+async function compileCreditFile(creditFilePath, handlebars) {
+  const creditFileContents = await fs.readFile(creditFilePath, 'utf8')
+  const creditFileTemplate = handlebars.compile(creditFileContents)
+  return creditFileTemplate({
+    __dirname: path.dirname(creditFilePath),
+    __filename: creditFilePath
+  })
 }

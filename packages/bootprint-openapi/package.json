@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "bootprint-json-schema": "^1.0.0",
-    "bootprint-unit-testing": "^1.0.0",
     "highlight.js": "^8.9.1",
     "json-stable-stringify": "^1.0.1",
     "lodash": "^4.17.15",
@@ -30,20 +29,12 @@
     "bootprint": "^2.0.1"
   },
   "devDependencies": {
-    "bootprint": "^2.0.1",
-    "chai": "^3.3.0",
-    "chai-as-promised": "^5.1.0",
-    "cheerio": "^0.19.0",
-    "customize": "^0.6.0",
-    "customize-engine-handlebars": "^0.5.2",
+    "bootprint-unit-testing": "^1.0.0",
     "deep-aplus": "^1.0.4",
     "find-package": "^1.0.0",
-    "mocha": "^2.3.3",
-    "multilang-apidocs": "^0.2.1",
-    "q": "^1.4.1",
-    "thought": "^1.5.2",
-    "thoughtful-release": "^0.3.1",
-    "trace-and-clarify-if-possible": "^1.0.0"
+    "fs-extra": "^8.1.0",
+    "glob": "^7.1.6",
+    "multilang-apidocs": "^0.2.1"
   },
   "keywords": [
     "openapi-to-html",

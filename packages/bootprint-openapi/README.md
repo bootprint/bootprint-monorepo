@@ -109,7 +109,7 @@ and the order in which they are called. You can override these partials in a
 ## License
 
 `bootprint-openapi` is published under the MIT-license.
-See []() for details.
+See [LICENSE](LICENSE) for details.
 
 Some of the example specs have been provided by contributors who opened issues on github,
 those files are in the `test/*`-directories.
