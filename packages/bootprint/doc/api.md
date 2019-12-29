@@ -20,10 +20,11 @@ The class is identified in the CLI-script and show without stack-trace</p>
 * [Bootprint](#Bootprint)
     * [new Bootprint(customizeModule, config)](#new_Bootprint_new)
     * _instance_
-        * [.run(input, options)](#Bootprint+run)
+        * [.run(input, targetDir, [options])](#Bootprint+run)
     * _static_
         * [.loadModule(moduleName)](#Bootprint.loadModule) ⇒ <code>function</code>
         * [.loadInput(fileOrUrlOrData)](#Bootprint.loadInput) ⇒ <code>\*</code>
+        * [.kindOfInput(fileOrUrlOrData)](#Bootprint.kindOfInput)
 
 <a name="new_Bootprint_new"></a>
 
@@ -38,15 +39,17 @@ Create a new Bootprint-instance
 
 <a name="Bootprint+run"></a>
 
-### bootprint.run(input, options)
+### bootprint.run(input, targetDir, [options])
 Run the current engine with a
 
-**Kind**: instance method of <code>[Bootprint](#Bootprint)</code>  
+**Kind**: instance method of [<code>Bootprint</code>](#Bootprint)  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | input | <code>object</code> \| <code>string</code> | the input data (either the raw data as object, a filename as string or a url (string  starting with http/https) |
-| options |  |  |
+| targetDir | <code>string</code> |  |
+| [options] | <code>object</code> |  |
+| options.onlyEngine | <code>string</code> | only run a single customize-engine by its name (handlebars or less) |
 
 <a name="Bootprint.loadModule"></a>
 
@@ -54,7 +57,7 @@ Run the current engine with a
 Load the template module. Try loading "bootprint-`moduleName`" first. If it does not exist
 treat "moduleName" as path to the module (relative to the current working dir).
 
-**Kind**: static method of <code>[Bootprint](#Bootprint)</code>  
+**Kind**: static method of [<code>Bootprint</code>](#Bootprint)  
 **Returns**: <code>function</code> - the builder-function of the loaded module  
 
 | Param | Type | Description |
@@ -66,7 +69,19 @@ treat "moduleName" as path to the module (relative to the current working dir).
 ### Bootprint.loadInput(fileOrUrlOrData) ⇒ <code>\*</code>
 Helper method for loading the bootprint-data
 
-**Kind**: static method of <code>[Bootprint](#Bootprint)</code>  
+**Kind**: static method of [<code>Bootprint</code>](#Bootprint)  
+
+| Param |
+| --- |
+| fileOrUrlOrData | 
+
+<a name="Bootprint.kindOfInput"></a>
+
+### Bootprint.kindOfInput(fileOrUrlOrData)
+Returns 'data', 'url' or 'file' dependending on what kind of input t
+the parameter is
+
+**Kind**: static method of [<code>Bootprint</code>](#Bootprint)  
 
 | Param |
 | --- |

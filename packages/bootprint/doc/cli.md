@@ -18,13 +18,13 @@ You can get help by typing `bootprint --help`:
 ```
 Usage: bootprint [options] <module> <inputFileOrUrl> <targetDir>
 
-  Converts json and yaml into a static html page using Handlebars and Bootstrap
+Converts json and yaml into a static html page using Handlebars and Bootstrap
 
-  Options:
-
-    -h, --help                output usage information
-    -V, --version             output the version number
-    -f, --config-file <file>  Specify a config file for custom configurations
+Options:
+  -V, --version             output the version number
+  -f, --config-file <file>  Specify a config file for custom configurations (default: {})
+  -d, --development-mode    Turn on file-watcher, less source-maps and http-server with live-reload
+  -h, --help                output usage information
 ``` 
 
 * **&lt;module>** consists of the name of a globally installed template-module optionally without the `bootprint-` prefix.

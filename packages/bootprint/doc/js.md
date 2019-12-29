@@ -57,7 +57,6 @@ Consider th following file-hierarchy:
 │ ├── body.html.hbs
 │ └── footer.html.hbs
 ├─┬ target/
-│ ├── bundle.js
 │ ├── index.html
 │ ├── main.css
 │ └── main.css.map
@@ -68,7 +67,7 @@ Consider th following file-hierarchy:
 The following code demonstrates the usage of the `.merge`-function without loading any module:
 
 ```js
-var {Bootprint} = require('bootprint')
+const { Bootprint } = require('bootprint')
 
 new Bootprint(a => a, {
   handlebars: {
@@ -86,7 +85,7 @@ new Bootprint(a => a, {
 This will generate the output:
 
 ```
-
+[ 'target/index.html', 'target/main.css', 'target/main.css.map' ]
 ```
 
 The output shows the list of generated files. This is useful for post-processors. 

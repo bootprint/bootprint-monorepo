@@ -33,9 +33,7 @@ class Bootprint extends EventEmitter {
    */
   run (input, targetDir, options) {
     // Prepare customize instance for this run
-    const customizeInstance = customize()
-      .registerEngine('handlebars', require('customize-engine-handlebars'))
-      .registerEngine('less', require('customize-engine-less'))
+    const customizeInstance = Bootprint.customizeWithEngines()
       .load(Bootprint.loadModule(this.customizeModule))
       .merge(this.config || {})
       .merge({
@@ -52,6 +50,12 @@ class Bootprint extends EventEmitter {
       customizeInstance.watched()
         .then((watchFiles) => this.emit('running', { input, targetDir, watchFiles }))
     ]).then((args) => args[0])
+  }
+
+  static customizeWithEngines() {
+    return customize()
+        .registerEngine('handlebars', require('customize-engine-handlebars'))
+        .registerEngine('less', require('customize-engine-less'));
   }
 
   /**

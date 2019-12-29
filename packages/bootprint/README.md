@@ -1,9 +1,6 @@
 # bootprint 
 
-[![NPM version](https://badge.fury.io/js/bootprint.svg)](http://badge.fury.io/js/bootprint)
-[![Travis Build Status](https://travis-ci.org/bootprint/bootprint.svg?branch=master)](https://travis-ci.org/bootprint/bootprint)
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/bootprint/bootprint.svg)](https://greenkeeper.io/)
+[![NPM version](https://img.shields.io/npm/v/bootprint.svg)](https://npmjs.com/package/bootprint)
 
 > Converts json and yaml into a static html page using Handlebars and Bootstrap
 
