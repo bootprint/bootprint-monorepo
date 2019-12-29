@@ -1,4 +1,4 @@
-name: npm-test
+name: unit-tests
 
 on:
   push:
@@ -16,8 +16,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: npm ci
-      - run: npm test
+      - run: yarn install
+      - run: yarn test
       - run: npx codecov
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
