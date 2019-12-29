@@ -1,1 +1,26 @@
-Following soon
+# Contributing Guide
+
+## Monorepo setup
+
+A relevant packages of `customize` and `bootprint` have been moved to this
+mono-repo, because it seems easier to maintain that way.
+
+The repo is now using `yarn` instead of `npm` and uses "yarn workspaces" and {{npm 'lerna'}}
+to manage dependencies between packages in the mono-repo.
+
+`devDependencies` should generally be added to the root package.
+
+## Commit Style / Changelogs
+
+We now use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) to automatically
+generate changelogs.
+
+## Code-Style / Linting
+
+The [StandardJS](https://standardjs.com/) code-style is enforced through {{npm 'eslint'}} and {{npm 'prettier'}}.
+If you are interested in the exact packages to achieve this, have a look at the `package.json` of the root-project.
+
+Files are formatted and lint-fixed on pre-commit using {{npm 'lint-stages'}}, so you usually do not have to
+worry about code-style very much. If a commit fails, please consult the git-output for details.
+
+

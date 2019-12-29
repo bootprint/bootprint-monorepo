@@ -12,5 +12,7 @@
     "packages/bootprint-json-schema",
     "packages/bootprint-openapi"
   ],
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "useWorkspaces": true,
+  "npmClient": "yarn"
 }
