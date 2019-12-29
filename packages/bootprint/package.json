@@ -1,7 +1,4 @@
 {
-  "publishConfig": {
-    "tag": "next"
-  },
   "name": "bootprint",
   "version": "2.0.1",
   "description": "Converts json and yaml into a static html page using Handlebars and Bootstrap",
