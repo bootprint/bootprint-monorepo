@@ -8,7 +8,7 @@ const httpMethods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch']
 module.exports = function(swaggerJson) {
   const copy = _.cloneDeep(swaggerJson)
 
-  const tagsByName = _.indexBy(copy.tags, 'name')
+  const tagsByName = _.keyBy(copy.tags, 'name')
 
   copy.tags = copy.tags || []
 

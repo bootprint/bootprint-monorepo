@@ -17,6 +17,7 @@
   "dependencies": {
     "bootprint": "^2.0.1",
     "cheerio": "^0.22.0",
+    "fs-extra": "^8.1.0",
     "m-io": "^0.3.1"
   },
   "devDependencies": {

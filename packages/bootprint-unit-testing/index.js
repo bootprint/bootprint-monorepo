@@ -5,9 +5,10 @@
  * Released under the MIT license.
  */
 
-const qfs = require('m-io/fs')
+const fs = require('fs-extra')
 const cheerio = require('cheerio')
 const path = require('path')
+const {Bootprint} = require('bootprint')
 
 /**
  * Create a new tester-object for a given bootprint-module
@@ -22,18 +23,12 @@ module.exports = function(bootprintModule, dir) {
    * @param context the test context to store cheerio in
    * @returns {*}
    */
-  function runBootprint(inputFile, context) {
+  async function runBootprint(inputFile, context) {
     const targetDir = path.join('test-output', path.basename(dir))
-    return require('bootprint')
-      .load(bootprintModule)
-      .build(inputFile, targetDir)
-      .generate()
-      .then(function() {
-        return qfs.read(path.join(targetDir, 'index.html'))
-      })
-      .then(function(indexHtml) {
-        context.$ = cheerio.load(indexHtml)
-      })
+    await new Bootprint(bootprintModule, null).run(inputFile, targetDir)
+
+    const indexHtml = await fs.readFile(path.join(targetDir, 'index.html'), 'utf8')
+    context.$ = cheerio.load(indexHtml)
   }
 
   return {
