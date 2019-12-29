@@ -8,23 +8,20 @@
 /* eslint-env mocha */
 
 const path = require('path')
-const fs = require('fs')
+const fs = require('fs-extra')
 const childProcess = require('./lib/child-process-for-testing')
 const chai = require('chai')
 chai.use(require('dirty-chai'))
 chai.use(require('chai-as-promised'))
 const expect = chai.expect
-const pify = require('pify')
-const makeTree = pify(require('mkdirp'))
-const removeTree = pify(require('rimraf'))
 
 describe('The CLI interface', function() {
   const tmpDir = path.join(__dirname, 'tmp')
   const targetDir = path.resolve(tmpDir, 'cli-target')
 
   beforeEach(function() {
-    return removeTree(tmpDir).then(function() {
-      return makeTree(tmpDir)
+    return fs.remove(tmpDir).then(function() {
+      return fs.mkdirp(tmpDir)
     })
   })
 

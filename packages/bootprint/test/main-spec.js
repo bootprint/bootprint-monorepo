@@ -8,7 +8,7 @@
 /* eslint-env mocha */
 
 const path = require('path')
-const fs = require('fs')
+const fs = require('fs-extra')
 
 const chai = require('chai')
 chai.use(require('dirty-chai'))
@@ -17,9 +17,6 @@ const expect = chai.expect
 const { Bootprint, CouldNotLoadInputError } = require('../')
 const tmpDir = path.join(__dirname, 'tmp')
 const targetDir = path.join(tmpDir, 'target')
-const pify = require('pify')
-const makeTree = pify(require('mkdirp'))
-const removeTree = pify(require('rimraf'))
 const nock = require('nock')
 
 /**
@@ -28,7 +25,7 @@ const nock = require('nock')
  * @param {string} file the path of the file relative to the target directory.
  * @returns {string} the file contents as string
  */
-function readResult (file) {
+function readResult(file) {
   return fs.readFileSync(path.join(targetDir, file), 'utf-8').trim()
 }
 
@@ -41,23 +38,26 @@ const defaultConfig = {
   }
 }
 
-function run (module, config, input) {
+function run(module, config, input) {
   return new Bootprint(module, config).run(input, targetDir)
 }
 
-describe('The JavaScript interface', function () {
-  beforeEach(function () {
-    return removeTree(tmpDir)
-      .then(function () {
-        return makeTree(tmpDir)
-      })
+describe('The JavaScript interface', function() {
+  beforeEach(function() {
+    return fs.remove(tmpDir).then(function() {
+      return fs.mkdirp(tmpDir)
+    })
   })
 
-  it('should load a module via its name without bootprint-prefix', function () {
+  it('should load a module via its name without bootprint-prefix', function() {
     return Promise.resolve()
-      .then(() => run('test-module', undefined, {
-        eins: 'one', zwei: 'two', drei: 'three'
-      }))
+      .then(() =>
+        run('test-module', undefined, {
+          eins: 'one',
+          zwei: 'two',
+          drei: 'three'
+        })
+      )
       .then(() => {
         expect(fs.readdirSync(targetDir)).to.deep.equal(['index.html', 'index.xml', 'main.css', 'main.css.map'])
         expect(readResult('index.html')).to.equal('bootprint-test-module eins=one zwei=two drei=three')
@@ -65,33 +65,45 @@ describe('The JavaScript interface', function () {
       })
   })
 
-  it('should load the input json each time it runs', function () {
+  it('should load the input json each time it runs', function() {
     const swaggerJsonFile = path.join(tmpDir, 'changing.json')
 
-    return Promise.resolve()
-      .then(() => {
-        fs.writeFileSync(swaggerJsonFile, JSON.stringify({
-          eins: 'one', zwei: 'two', drei: 'three'
-        }))
-        return run(a => a, defaultConfig, swaggerJsonFile)
-      })
-      .then(function () {
-        return expect(readResult('index.html')).to.equal('eins=one zwei=two drei=three')
-      })
+    return (
+      Promise.resolve()
+        .then(() => {
+          fs.writeFileSync(
+            swaggerJsonFile,
+            JSON.stringify({
+              eins: 'one',
+              zwei: 'two',
+              drei: 'three'
+            })
+          )
+          return run(a => a, defaultConfig, swaggerJsonFile)
+        })
+        .then(function() {
+          return expect(readResult('index.html')).to.equal('eins=one zwei=two drei=three')
+        })
 
-      // Change the file and read again. No caches may apply
-      .then(() => {
-        fs.writeFileSync(swaggerJsonFile, JSON.stringify({
-          eins: 'un', zwei: 'deux', drei: 'trois'
-        }))
-        return run(a => a, defaultConfig, swaggerJsonFile)
-      })
-      .then(function () {
-        return expect(readResult('index.html').trim()).to.equal('eins=un zwei=deux drei=trois')
-      })
+        // Change the file and read again. No caches may apply
+        .then(() => {
+          fs.writeFileSync(
+            swaggerJsonFile,
+            JSON.stringify({
+              eins: 'un',
+              zwei: 'deux',
+              drei: 'trois'
+            })
+          )
+          return run(a => a, defaultConfig, swaggerJsonFile)
+        })
+        .then(function() {
+          return expect(readResult('index.html').trim()).to.equal('eins=un zwei=deux drei=trois')
+        })
+    )
   })
 
-  it('should accept yaml as input', function () {
+  it('should accept yaml as input', function() {
     return new Bootprint(a => a, {
       handlebars: {
         templates: path.join(__dirname, 'fixtures', 'handlebars')
@@ -101,19 +113,24 @@ describe('The JavaScript interface', function () {
       }
     })
       .run(require.resolve('./fixtures/input.yaml'), targetDir)
-      .then(function () {
+      .then(function() {
         const content = fs.readFileSync(path.join(targetDir, 'index.html'), { encoding: 'utf-8' })
         return expect(content.trim()).to.equal('eins=ichi zwei=ni drei=san')
       })
   })
 
-  it('should run only a single engine if onlyEngine is specified', function () {
+  it('should run only a single engine if onlyEngine is specified', function() {
     return Promise.resolve()
-      .then(
-        () => new Bootprint('test-module', undefined)
-          .run({
-            eins: 'one', zwei: 'two', drei: 'three'
-          }, targetDir, { onlyEngine: 'handlebars' })
+      .then(() =>
+        new Bootprint('test-module', undefined).run(
+          {
+            eins: 'one',
+            zwei: 'two',
+            drei: 'three'
+          },
+          targetDir,
+          { onlyEngine: 'handlebars' }
+        )
       )
       .then(() => {
         expect(fs.readdirSync(targetDir)).to.deep.equal(['index.html', 'index.xml'])
@@ -122,7 +139,7 @@ describe('The JavaScript interface', function () {
       })
   })
 
-  it('should emit a "running"-event"', function () {
+  it('should emit a "running"-event"', function() {
     let event
     const bootprint = new Bootprint(a => a, {
       handlebars: {
@@ -133,28 +150,24 @@ describe('The JavaScript interface', function () {
       }
     })
 
-    bootprint.on('running', watched => { event = watched })
-    return bootprint
-      .run(require.resolve('./fixtures/input.yaml'), targetDir)
-      .then(function () {
-        expect(event.input, 'Checking input').to.deep.equal(require.resolve('./fixtures/input.yaml'))
-        expect(event.targetDir, 'Checking targetDir').to.equal(targetDir)
+    bootprint.on('running', watched => {
+      event = watched
+    })
+    return bootprint.run(require.resolve('./fixtures/input.yaml'), targetDir).then(function() {
+      expect(event.input, 'Checking input').to.deep.equal(require.resolve('./fixtures/input.yaml'))
+      expect(event.targetDir, 'Checking targetDir').to.equal(targetDir)
 
-        const watchHbs = event.watchFiles.handlebars.map((file) => path.relative('.', file))
-        expect(watchHbs, 'Checking handlebars files').to.deep.equal([
-          'test/fixtures/handlebars'
-        ])
+      const watchHbs = event.watchFiles.handlebars.map(file => path.relative('.', file))
+      expect(watchHbs, 'Checking handlebars files').to.deep.equal(['test/fixtures/handlebars'])
 
-        const watchLess = event.watchFiles.less.map((file) => path.relative('.', file))
-        expect(watchLess, 'Checking less files').to.deep.equal([
-          'test/fixtures/main.less'
-        ])
-      })
+      const watchLess = event.watchFiles.less.map(file => path.relative('.', file))
+      expect(watchLess, 'Checking less files').to.deep.equal(['test/fixtures/main.less'])
+    })
   })
 })
 
-describe('the loadInputFunction', function () {
-  it('should load input from files', function () {
+describe('the loadInputFunction', function() {
+  it('should load input from files', function() {
     return expect(Bootprint.loadInput('./test/fixtures/input.yaml')).to.eventually.deep.equal({
       drei: 'san',
       eins: 'ichi',
@@ -162,26 +175,26 @@ describe('the loadInputFunction', function () {
     })
   })
 
-  it('should reject with a custom execption if the input file could not be found', function () {
-    return expect(Bootprint.loadInput('./test/fixtures/non-existing-input.yaml'))
-      .to.be.rejectedWith(CouldNotLoadInputError)
+  it('should reject with a custom execption if the input file could not be found', function() {
+    return expect(Bootprint.loadInput('./test/fixtures/non-existing-input.yaml')).to.be.rejectedWith(
+      CouldNotLoadInputError
+    )
   })
 
-  it('should load input from http-urls', function () {
+  it('should load input from http-urls', function() {
     const mockInput = nock('http://example.com')
       .get('/swagger.json')
       .reply(200, { a: 'b' })
 
-    return Bootprint.loadInput('http://example.com/swagger.json')
-      .then(function (input) {
-        expect(mockInput.isDone()).to.be.true()
-        return expect(input).to.deep.equal({
-          a: 'b'
-        })
+    return Bootprint.loadInput('http://example.com/swagger.json').then(function(input) {
+      expect(mockInput.isDone()).to.be.true()
+      return expect(input).to.deep.equal({
+        a: 'b'
       })
+    })
   })
 
-  it('should reject with a custom-execption if the input url return 404', function () {
+  it('should reject with a custom-execption if the input url return 404', function() {
     const mockInput = nock('http://example.com')
       .get('/swagger.json')
       .reply(404, { a: 'b' })
@@ -191,7 +204,7 @@ describe('the loadInputFunction', function () {
       .then(() => mockInput.done())
   })
 
-  it('should reject with a custom-execption if the input url return 403', function () {
+  it('should reject with a custom-execption if the input url return 403', function() {
     const mockInput = nock('http://example.com')
       .get('/swagger.json')
       .reply(403, { a: 'b' })
@@ -201,7 +214,7 @@ describe('the loadInputFunction', function () {
       .then(() => mockInput.done())
   })
 
-  it('should reject with a custom-execption if another error occurs while ', function () {
+  it('should reject with a custom-execption if another error occurs while ', function() {
     const mockInput = nock('http://example.com')
       .get('/swagger.json')
       .replyWithError('something awful happened')
@@ -211,19 +224,21 @@ describe('the loadInputFunction', function () {
       .then(() => mockInput.done())
   })
 
-  describe('the "loadModule"-function', function () {
-    it('should load a module by prefix the name with "bootprint"', function () {
+  describe('the "loadModule"-function', function() {
+    it('should load a module by prefix the name with "bootprint"', function() {
       expect(Bootprint.loadModule('test-module').package.name).to.equal('bootprint-test-module')
     })
 
-    it('should load a module as fallback through the complete path', function () {
-      expect(Bootprint.loadModule('./test/fixtures/bootprint-test-module').package.name)
-        .to.equal('bootprint-test-module')
+    it('should load a module as fallback through the complete path', function() {
+      expect(Bootprint.loadModule('./test/fixtures/bootprint-test-module').package.name).to.equal(
+        'bootprint-test-module'
+      )
     })
 
-    it('should throw  a module as fallback through the complete path', function () {
-      expect(Bootprint.loadModule('./test/fixtures/bootprint-test-module').package.name)
-        .to.equal('bootprint-test-module')
+    it('should throw  a module as fallback through the complete path', function() {
+      expect(Bootprint.loadModule('./test/fixtures/bootprint-test-module').package.name).to.equal(
+        'bootprint-test-module'
+      )
     })
   })
 })
