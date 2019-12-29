@@ -82,7 +82,8 @@ describe('The CLI interface', function () {
       targetDir
     )
       .then(function (result) {
-        expect(result.err).to.match(/at.*runMain/)
+        console.log(result.err)
+        expect(result.err).to.match(/at.*Bootprint\.run/)
       })
   })
 

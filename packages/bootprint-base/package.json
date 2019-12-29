@@ -19,11 +19,11 @@
     "marked": "^0.8.0"
   },
   "devDependencies": {
-    "bootprint": "^1.0.0",
+    "bootprint": "^2.0.1",
     "trace-and-clarify-if-possible": "^1.0.0"
   },
   "peerDependencies": {
-    "bootprint": "^1.0.0"
+    "bootprint": "^2.0.1"
   },
   "files": [
     "handlebars",
