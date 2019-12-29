@@ -49,7 +49,7 @@ describe('the files-function', function() {
       if (filePath == null) {
         throw new Error('FilePath must be non-null')
       }
-      let relativePath = path.relative(process.cwd(), filePath);
+      const relativePath = path.relative(process.cwd(), filePath);
       return relativePath.replace(/\\/g, '/')
     }
   })

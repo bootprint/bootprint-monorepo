@@ -11,9 +11,9 @@ fs.readdirSync('packages').forEach(pkg => {
   const originalContents = fs.readFileSync(packageJsonPath, 'utf8')
   const packageJson = JSON.parse(originalContents)
   updatePeerDependenciesBasedOnDevDependencies(packageJson)
-  const newContents = JSON.stringify(packageJson, 0, 2) + "\n";
+  const newContents = JSON.stringify(packageJson, 0, 2) + '\n'
   fs.writeFileSync(packageJsonPath, newContents)
-  cp.spawnSync('git', ['add', packageJsonPath], {stdio:'inherit'})
+  cp.spawnSync('git', ['add', packageJsonPath], { stdio: 'inherit' })
 })
 
 function updatePeerDependenciesBasedOnDevDependencies(packageJson) {

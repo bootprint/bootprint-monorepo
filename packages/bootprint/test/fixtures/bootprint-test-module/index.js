@@ -8,10 +8,12 @@ const path = require('path')
 module.exports = function (builder) {
   return builder.merge({
     handlebars: {
-      templates: path.join(__dirname, 'handlebars')
+      templates: path.join(__dirname, 'templates')
     },
     less: {
       main: require.resolve('./main.less')
     }
   })
 }
+
+module.exports.package = require('./package')

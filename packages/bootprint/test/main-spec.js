@@ -1,25 +1,98 @@
+/*!
+ * bootprint <https://github.com/nknapp/bootprint>
+ *
+ * Copyright (c) 2015 Nils Knappmeier.
+ * Released under the MIT license.
+ */
+
+/* eslint-env mocha */
+
 const path = require('path')
-const cp = require('child_process')
-const debug = require('debug')('bootprint:main-spec')
+const fs = require('fs')
 
 const chai = require('chai')
 chai.use(require('dirty-chai'))
+chai.use(require('chai-as-promised'))
 const expect = chai.expect
-const bootprint = require('../')
+const { Bootprint, CouldNotLoadInputError } = require('../')
 const tmpDir = path.join(__dirname, 'tmp')
 const targetDir = path.join(tmpDir, 'target')
-const swaggerJsonFile = path.join(tmpDir, 'changing.json')
-const fs = require('fs-extra')
+const pify = require('pify')
+const makeTree = pify(require('mkdirp'))
+const removeTree = pify(require('rimraf'))
 const nock = require('nock')
 
-beforeEach(async function() {
-  await fs.remove(tmpDir)
-  await fs.mkdirp(tmpDir)
-})
+/**
+ * Function to sync-read files from the targetDir.
+ * @function
+ * @param {string} file the path of the file relative to the target directory.
+ * @returns {string} the file contents as string
+ */
+function readResult (file) {
+  return fs.readFileSync(path.join(targetDir, file), 'utf-8').trim()
+}
 
-function runBootprint(inputFileOrUrl) {
-  return bootprint
-    .merge({
+const defaultConfig = {
+  handlebars: {
+    templates: path.join(__dirname, 'fixtures', 'handlebars')
+  },
+  less: {
+    main: require.resolve('./fixtures/main.less')
+  }
+}
+
+function run (module, config, input) {
+  return new Bootprint(module, config).run(input, targetDir)
+}
+
+describe('The JavaScript interface', function () {
+  beforeEach(function () {
+    return removeTree(tmpDir)
+      .then(function () {
+        return makeTree(tmpDir)
+      })
+  })
+
+  it('should load a module via its name without bootprint-prefix', function () {
+    return Promise.resolve()
+      .then(() => run('test-module', undefined, {
+        eins: 'one', zwei: 'two', drei: 'three'
+      }))
+      .then(() => {
+        expect(fs.readdirSync(targetDir)).to.deep.equal(['index.html', 'index.xml', 'main.css', 'main.css.map'])
+        expect(readResult('index.html')).to.equal('bootprint-test-module eins=one zwei=two drei=three')
+        expect(readResult('index.xml')).to.equal('<body eins="one" zwei="two" drei="three"></body>')
+      })
+  })
+
+  it('should load the input json each time it runs', function () {
+    const swaggerJsonFile = path.join(tmpDir, 'changing.json')
+
+    return Promise.resolve()
+      .then(() => {
+        fs.writeFileSync(swaggerJsonFile, JSON.stringify({
+          eins: 'one', zwei: 'two', drei: 'three'
+        }))
+        return run(a => a, defaultConfig, swaggerJsonFile)
+      })
+      .then(function () {
+        return expect(readResult('index.html')).to.equal('eins=one zwei=two drei=three')
+      })
+
+      // Change the file and read again. No caches may apply
+      .then(() => {
+        fs.writeFileSync(swaggerJsonFile, JSON.stringify({
+          eins: 'un', zwei: 'deux', drei: 'trois'
+        }))
+        return run(a => a, defaultConfig, swaggerJsonFile)
+      })
+      .then(function () {
+        return expect(readResult('index.html').trim()).to.equal('eins=un zwei=deux drei=trois')
+      })
+  })
+
+  it('should accept yaml as input', function () {
+    return new Bootprint(a => a, {
       handlebars: {
         templates: path.join(__dirname, 'fixtures', 'handlebars')
       },
@@ -27,145 +100,130 @@ function runBootprint(inputFileOrUrl) {
         main: require.resolve('./fixtures/main.less')
       }
     })
-    .build(inputFileOrUrl, targetDir)
-    .generate()
-}
-
-describe('The programmatic interface', function() {
-  it('should load the input json each time it runs', function() {
-    fs.writeFileSync(
-      swaggerJsonFile,
-      JSON.stringify({
-        eins: 'one',
-        zwei: 'two',
-        drei: 'three'
-      })
-    )
-
-    return runBootprint(swaggerJsonFile)
-      .then(function() {
+      .run(require.resolve('./fixtures/input.yaml'), targetDir)
+      .then(function () {
         const content = fs.readFileSync(path.join(targetDir, 'index.html'), { encoding: 'utf-8' })
-        expect(content.trim()).to.equal('eins=one zwei=two drei=three')
-        fs.writeFileSync(
-          swaggerJsonFile,
-          JSON.stringify({
-            eins: 'un',
-            zwei: 'deux',
-            drei: 'trois'
-          })
-        )
-        return runBootprint(swaggerJsonFile)
-      })
-      .then(function() {
-        const content = fs.readFileSync(path.join(targetDir, 'index.html'), { encoding: 'utf-8' })
-        expect(content.trim()).to.equal('eins=un zwei=deux drei=trois')
+        return expect(content.trim()).to.equal('eins=ichi zwei=ni drei=san')
       })
   })
 
-  it('should accept yaml as input', function() {
-    return runBootprint(require.resolve('./fixtures/input.yaml')).then(function() {
-      const content = fs.readFileSync(path.join(targetDir, 'index.html'), { encoding: 'utf-8' })
-      return expect(content.trim()).to.equal('eins=ichi zwei=ni drei=san')
-    })
-  })
-
-  it('should load data from http', async function() {
-    nock('http://example.com')
-      .get('/one-two-three')
-      .reply(200, {
-        eins: 'ichi',
-        zwei: 'ni',
-        drei: 'san'
+  it('should run only a single engine if onlyEngine is specified', function () {
+    return Promise.resolve()
+      .then(
+        () => new Bootprint('test-module', undefined)
+          .run({
+            eins: 'one', zwei: 'two', drei: 'three'
+          }, targetDir, { onlyEngine: 'handlebars' })
+      )
+      .then(() => {
+        expect(fs.readdirSync(targetDir)).to.deep.equal(['index.html', 'index.xml'])
+        expect(readResult('index.html')).to.equal('bootprint-test-module eins=one zwei=two drei=three')
+        expect(readResult('index.xml')).to.equal('<body eins="one" zwei="two" drei="three"></body>')
       })
-    await runBootprint('http://example.com/one-two-three')
-
-    const content = fs.readFileSync(path.join(targetDir, 'index.html'), { encoding: 'utf-8' })
-    return expect(content.trim()).to.equal('eins=ichi zwei=ni drei=san')
   })
 
-  it('should take a javascript object as input ', async function() {
-    await runBootprint({
-      eins: 'ichi',
-      zwei: 'ni',
-      drei: 'san'
-    })
-
-    const content = fs.readFileSync(path.join(targetDir, 'index.html'), { encoding: 'utf-8' })
-    return expect(content.trim()).to.equal('eins=ichi zwei=ni drei=san')
-  })
-
-})
-
-describe('The CLI interface', function() {
-  const targetDir = path.join(tmpDir, 'cli-target')
-
-  function outputFile(filename) {
-    return fs.readFileSync(path.join(targetDir, filename), { encoding: 'utf-8' }).trim()
-  }
-
-  it('should run without errors if the correct number of parameters is provided', async function() {
-    const result = await getOutputAndErrorOfExecution('./bin/bootprint.js', [
-      './test/fixtures/test-module.js',
-      `./test/fixtures/input.yaml`,
-      targetDir
-    ])
-
-    expect(result.err).to.be.null()
-    expect(outputFile('index.html'), 'Checking index.html').to.equal('eins=ichi zwei=ni drei=san')
-
-    expect(outputFile('main.css'), 'Checking main.css').to.equal(
-      "body{background-color:'#abc'}/*# sourceMappingURL=main.css.map */"
-    )
-
-    expect(outputFile('main.css.map'), 'Source map main.css.map must exist').to.be.ok()
-  })
-
-  it('should return with a non-zero exit-code and an error message if too few parameters are given', async function() {
-    const result = await getOutputAndErrorOfExecution('./bin/bootprint.js', ['./test/fixtures/input.yaml', targetDir])
-    expect(result.err).not.to.be.null()
-    expect(result.stderr, 'Checking stderr-output').to.match(
-      /\s*Invalid number of command-line arguments. 3 arguments expected.*/
-    )
-    expect(result.status === 1, 'Checking exit-code')
-  })
-
-  it('should return with a non-zero exit-code and an error without stack-trace if the source file could not be found', async function() {
-    const result = await getOutputAndErrorOfExecution('./bin/bootprint.js', [
-      './test/fixtures/test-module.js',
-      './test/fixtures/non-existing-file.yaml',
-      targetDir
-    ])
-    expect(result.stderr, 'Checking stderr-output').to.match(/.*no such file or directory.*/)
-    expect(result.stderr, 'stderr should not contain a stack-trace').not.to.match(/throw/)
-    expect(result.error).not.to.be.null()
-  })
-
-  it('should return with a non-zero exit-code and an error with stack-trace for unexpected errors', async function() {
-    const result = await getOutputAndErrorOfExecution('./bin/bootprint.js', [
-      './test/fixtures/test-module-error.js',
-      './test/fixtures/non-existing-file.yaml',
-      targetDir
-    ])
-    expect(result.stderr, 'stderr should contain a stack-trace').to.match(/throw new Error/)
-    expect(result.error).not.to.be.null()
-  })
-})
-
-async function getOutputAndErrorOfExecution(command, args) {
-  const bootprintProjectDirectory = path.resolve(__dirname, '..')
-  const options = { encoding: 'utf8', cwd: bootprintProjectDirectory }
-
-  debug('execAndCatchErrors', { command, args, options })
-
-  const nodeJs = process.argv[0]
-  return new Promise(resolve => {
-    cp.execFile(nodeJs, [command].concat(args), options, function(err, stdout, stderr) {
-      debug(`execAndCatchErrors:stdout=${stderr}`)
-      debug(`execAndCatchErrors:stderr=${stderr}`)
-      if (err != null) {
-        debug(`execAndCatchErrors:err=${err.stack}`)
+  it('should emit a "running"-event"', function () {
+    let event
+    const bootprint = new Bootprint(a => a, {
+      handlebars: {
+        templates: path.join(__dirname, 'fixtures', 'handlebars')
+      },
+      less: {
+        main: require.resolve('./fixtures/main.less')
       }
-      resolve({ stdout, stderr, err })
+    })
+
+    bootprint.on('running', watched => { event = watched })
+    return bootprint
+      .run(require.resolve('./fixtures/input.yaml'), targetDir)
+      .then(function () {
+        expect(event.input, 'Checking input').to.deep.equal(require.resolve('./fixtures/input.yaml'))
+        expect(event.targetDir, 'Checking targetDir').to.equal(targetDir)
+
+        const watchHbs = event.watchFiles.handlebars.map((file) => path.relative('.', file))
+        expect(watchHbs, 'Checking handlebars files').to.deep.equal([
+          'test/fixtures/handlebars'
+        ])
+
+        const watchLess = event.watchFiles.less.map((file) => path.relative('.', file))
+        expect(watchLess, 'Checking less files').to.deep.equal([
+          'test/fixtures/main.less'
+        ])
+      })
+  })
+})
+
+describe('the loadInputFunction', function () {
+  it('should load input from files', function () {
+    return expect(Bootprint.loadInput('./test/fixtures/input.yaml')).to.eventually.deep.equal({
+      drei: 'san',
+      eins: 'ichi',
+      zwei: 'ni'
     })
   })
-}
+
+  it('should reject with a custom execption if the input file could not be found', function () {
+    return expect(Bootprint.loadInput('./test/fixtures/non-existing-input.yaml'))
+      .to.be.rejectedWith(CouldNotLoadInputError)
+  })
+
+  it('should load input from http-urls', function () {
+    const mockInput = nock('http://example.com')
+      .get('/swagger.json')
+      .reply(200, { a: 'b' })
+
+    return Bootprint.loadInput('http://example.com/swagger.json')
+      .then(function (input) {
+        expect(mockInput.isDone()).to.be.true()
+        return expect(input).to.deep.equal({
+          a: 'b'
+        })
+      })
+  })
+
+  it('should reject with a custom-execption if the input url return 404', function () {
+    const mockInput = nock('http://example.com')
+      .get('/swagger.json')
+      .reply(404, { a: 'b' })
+
+    return expect(Bootprint.loadInput('http://example.com/swagger.json'))
+      .to.be.rejectedWith(CouldNotLoadInputError, /404/)
+      .then(() => mockInput.done())
+  })
+
+  it('should reject with a custom-execption if the input url return 403', function () {
+    const mockInput = nock('http://example.com')
+      .get('/swagger.json')
+      .reply(403, { a: 'b' })
+
+    return expect(Bootprint.loadInput('http://example.com/swagger.json'))
+      .to.be.rejectedWith(CouldNotLoadInputError, /403/)
+      .then(() => mockInput.done())
+  })
+
+  it('should reject with a custom-execption if another error occurs while ', function () {
+    const mockInput = nock('http://example.com')
+      .get('/swagger.json')
+      .replyWithError('something awful happened')
+
+    return expect(Bootprint.loadInput('http://example.com/swagger.json'))
+      .to.be.rejectedWith(CouldNotLoadInputError, 'something awful happened')
+      .then(() => mockInput.done())
+  })
+
+  describe('the "loadModule"-function', function () {
+    it('should load a module by prefix the name with "bootprint"', function () {
+      expect(Bootprint.loadModule('test-module').package.name).to.equal('bootprint-test-module')
+    })
+
+    it('should load a module as fallback through the complete path', function () {
+      expect(Bootprint.loadModule('./test/fixtures/bootprint-test-module').package.name)
+        .to.equal('bootprint-test-module')
+    })
+
+    it('should throw  a module as fallback through the complete path', function () {
+      expect(Bootprint.loadModule('./test/fixtures/bootprint-test-module').package.name)
+        .to.equal('bootprint-test-module')
+    })
+  })
+})

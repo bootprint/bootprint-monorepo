@@ -1,88 +1,152 @@
-const customize = require('customize-watch')
+const customize = require('customize')
+const path = require('path')
+const debug = require('debug')('bootpring:index')
 const write = require('customize-write-files')
 const fs = require('fs-extra')
 const got = require('got')
 const yaml = require('js-yaml')
+const EventEmitter = require('events')
 
-// preconfigured Customize instance.
-module.exports = customize()
-  .registerEngine('handlebars', require('customize-engine-handlebars'))
-  .registerEngine('less', require('customize-engine-less'))
+/**
+ * @access public
+ */
+class Bootprint extends EventEmitter {
+  /**
+   * Create a new Bootprint-instance
+   *
+   * @param {function(Customize):Customize} customizeModule a customize module (like `require('bootprint-openapi)`)
+   * @param {object} config a customize-configuration to merge after loading the module
+   */
+  constructor (customizeModule, config) {
+    super()
+    this.customizeModule = customizeModule
+    this.config = config
+  }
 
-// Customize type for adding methods
-const Customize = customize.Customize
-
-Customize.prototype.build = function(jsonFile, targetDir) {
-  const withData = this.merge({
-    handlebars: {
-      data: loadFromFileOrHttp(jsonFile).catch(function(err) {
-        // Augment error for identification in the cli script
-        err.cause = 'bootprint-load-data'
-        throw err
+  /**
+   * Run the current engine with a
+   * @param {object|string} input the input data (either the raw data as object, a filename as string or a url (string
+   *  starting with http/https)
+   * @param {string} targetDir
+   * @param {object=} options
+   * @param {string} options.onlyEngine only run a single customize-engine by its name (handlebars or less)
+   */
+  run (input, targetDir, options) {
+    // Prepare customize instance for this run
+    const customizeInstance = customize()
+      .registerEngine('handlebars', require('customize-engine-handlebars'))
+      .registerEngine('less', require('customize-engine-less'))
+      .load(Bootprint.loadModule(this.customizeModule))
+      .merge(this.config || {})
+      .merge({
+        handlebars: {
+          data: Bootprint.loadInput(input)
+        }
       })
+    // Determine watched files and emit the event
+    // and run Customize in parallel
+    return Promise.all([
+      customizeInstance
+        .run({ onlyEngine: options && options.onlyEngine })
+        .then(write(targetDir)),
+      customizeInstance.watched()
+        .then((watchFiles) => this.emit('running', { input, targetDir, watchFiles }))
+    ]).then((args) => args[0])
+  }
+
+  /**
+   * Load the template module. Try loading "bootprint-`moduleName`" first. If it does not exist
+   * treat "moduleName" as path to the module (relative to the current working dir).
+   * @param moduleName {string} the name of the module to load
+   * @return {function} the builder-function of the loaded module
+   */
+  static loadModule (moduleName) {
+    if (typeof moduleName === 'function') {
+      // This is probably already the module function
+      return moduleName
     }
-  })
-  return new Bootprint(withData, targetDir)
-}
-
-/**
- * The old Bootprint interface
- * @constructor
- */
-function Bootprint(withData, targetDir) {
-  /**
-   * Run Bootprint and write the result to the specified target directory
-   * @param {object=} options passed to Customize#run()
-   * @returns {Promise} a promise for the completion of the build
-   */
-  this.generate = function generate(options) {
-    return withData.run(options).then(write(targetDir))
+    let modulePath
+    try {
+      modulePath = require.resolve('bootprint-' + moduleName)
+    } catch (e) {
+      // istanbul ignore if: Not reproducible, this statement is just for safety
+      if (e.code !== 'MODULE_NOT_FOUND') {
+        throw e
+      }
+      modulePath = path.resolve(moduleName)
+    }
+    debug('Loading module from ', modulePath)
+    return require(modulePath)
   }
 
   /**
-   * Run the file watcher to watch all files loaded into the
-   * current Bootprint-configuration.
-   * The watcher run Bootprint every time one the the input files, templates or helpers changes.
-   * @returns {EventEmitter} an EventEmitter that sends an `update`-event after each
-   *   build, but before the files are written to disc.
+   * Helper method for loading the bootprint-data
+   * @param fileOrUrlOrData
+   * @returns {*}
    */
-  this.watch = function() {
-    return withData.watch().on('update', write(targetDir))
+  static loadInput (fileOrUrlOrData) {
+    let dataAsString
+    switch (Bootprint.kindOfInput(fileOrUrlOrData)) {
+      case 'data':
+        // Return the raw data if it is data
+        return Promise.resolve(fileOrUrlOrData)
+      case 'url':
+        dataAsString = loadUrl(fileOrUrlOrData)
+        break
+      case 'file':
+        dataAsString = fs.readFile(fileOrUrlOrData, 'utf-8')
+        break
+    }
+    return dataAsString
+      .catch((error) => {
+        // Throw custom error if the input file could not be loaded, because this will
+        // be presented in the CLI without stack-trace
+        throw new CouldNotLoadInputError(error.toString())
+      })
+      .then((data) => yaml.safeLoad(data, { json: true }))
   }
-}
 
-function loadFromFile(fileOrUrlOrData) {
-  return fs.readFile(fileOrUrlOrData, 'utf8').then(function(data) {
-    return yaml.safeLoad(data, { json: true })
-  })
+  /**
+   * Returns 'data', 'url' or 'file' dependending on what kind of input t
+   * the parameter is
+   * @param fileOrUrlOrData
+   */
+  static kindOfInput (fileOrUrlOrData) {
+    // If this is not a string,
+    // it is probably already the raw data.
+    if (typeof fileOrUrlOrData !== 'string') {
+      return 'data'
+    }
+    if (fileOrUrlOrData.match(/^https?:\/\//)) {
+      return 'url'
+    }
+    return 'file'
+  }
 }
 
 /**
- * Helper method for loading the bootprint-data
- * @param fileOrUrlOrData
- * @returns {*}
- * @private
+ * Loads data from a URL with proper user agent.
+ * Returns a promise for the response content.
+ * The promise is rejected of the response code indicates an error (400+)
+ * @param {string} url the url to load data from
+ * @access private
  */
-function loadFromFileOrHttp(fileOrUrlOrData) {
-  // If this is not a string,
-  // it is probably already the raw data.
-  if (typeof fileOrUrlOrData !== 'string') {
-    return Promise.resolve(fileOrUrlOrData)
-  }
-  // otherwise load data from url or file
-  if (fileOrUrlOrData.match(/^https?:\/\//)) {
-    return loadFromHttp(fileOrUrlOrData)
-  } else {
-    return loadFromFile(fileOrUrlOrData)
-  }
-}
-
-async function loadFromHttp(fileOrUrlOrData) {
-  const result = await got(fileOrUrlOrData, {
+async function loadUrl (url) {
+  const result = await got(url, {
     followRedirect: true,
     headers: {
       'User-Agent': 'Bootprint/' + require('./package').version
     }
   })
-  return yaml.safeLoad(result.body, { json: true })
+  return result.body
 }
+
+/**
+ * Class for a custom error message for a non-existing input source.
+ * The class is identified in the CLI-script and show without stack-trace
+ */
+class CouldNotLoadInputError
+  extends Error {
+}
+
+module.exports = { Bootprint, CouldNotLoadInputError }

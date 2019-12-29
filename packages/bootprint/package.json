@@ -1,6 +1,9 @@
 {
+  "publishConfig": {
+    "tag": "next"
+  },
   "name": "bootprint",
-  "version": "1.0.2",
+  "version": "2.0.1",
   "description": "Converts json and yaml into a static html page using Handlebars and Bootstrap",
   "main": "index.js",
   "bin": {
@@ -15,22 +18,33 @@
   "author": "Nils Knappmeier",
   "license": "MIT",
   "dependencies": {
+    "chokidar": "3",
+    "commander": "^2.9.0",
+    "connect": "^3.6.0",
+    "customize": "^3.0.2",
     "customize-engine-handlebars": "^3.0.1",
     "customize-engine-less": "^3.0.0",
-    "customize-watch": "^3.0.0",
     "customize-write-files": "^3.0.1",
     "debug": "^4.1.1",
     "fs-extra": "^8.1.0",
     "got": "^10.2.0",
-    "js-yaml": "^3.8.2",
-    "live-server": "^1.2.0",
-    "trace-and-clarify-if-possible": "^1.0.3"
+    "instant": "^1.10.1",
+    "js-yaml": "^3.8.3",
+    "pify": "^2.3.0",
+    "trace-and-clarify-if-possible": "^1.0.0"
   },
   "files": [
     "index.js",
-    "bin/bootprint.js"
+    "bin",
+    "lib"
   ],
   "devDependencies": {
-    "commander": "^4.0.1"
-  }
+    "bootprint-test-module": "file:test/fixtures/bootprint-test-module"
+  },
+  "directories": {
+    "doc": "doc",
+    "example": "examples",
+    "test": "test"
+  },
+  "keywords": []
 }
