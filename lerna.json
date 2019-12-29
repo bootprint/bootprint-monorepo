@@ -3,7 +3,6 @@
     "packages/customize",
     "packages/customize-engine-handlebars",
     "packages/customize-engine-less",
-    "packages/customize-watch",
     "packages/customize-write-files",
     "packages/bootprint",
     "packages/thought-plugin-bootprint",
