@@ -1,8 +1,8 @@
 # customize-write-files 
 
 [![NPM version](https://img.shields.io/npm/v/customize-write-files.svg)](https://npmjs.com/package/customize-write-files)
-[![Travis Build Status](https://travis-ci.org/.svg?branch=master)](https://travis-ci.org/)
-[![Coverage Status](https://img.shields.io/coveralls/.svg)](https://coveralls.io/r/)
+[![Travis Build Status](https://travis-ci.org/bootprint/bootprint-monorepo.svg?branch=master)](https://travis-ci.org/bootprint/bootprint-monorepo)
+[![Coverage Status](https://img.shields.io/coveralls/bootprint/bootprint-monorepo.svg)](https://coveralls.io/r/bootprint/bootprint-monorepo)
 
 > Post-processor that stores the result of a customize-run in a local directory
 

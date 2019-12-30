@@ -1,3 +1,33 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 4.0.0 (2019-12-30)
+
+
+### Bug Fixes
+
+* fix bootprint-unit-testing and use it in bootprint-openapi ([3d00453](https://github.com/bootprint/bootprint-monorepo/commit/3d0045315a55aa129290dacc3ae4649e3af28377))
+* fix renamed functions in lodash ([7df9f81](https://github.com/bootprint/bootprint-monorepo/commit/7df9f81225a20a44c83d373eaa71c10c8ba09804))
+
+
+### chore
+
+* bump dependency versions ([bd1c245](https://github.com/bootprint/bootprint-monorepo/commit/bd1c2455dd16cfc5ee46cdcfb9ca8eebec25867c))
+
+
+### BREAKING CHANGES
+
+* - version 9 of highlight.js highlights JSON slightly differently.
+  - The class "hljs-attribute" has been replaced by "hljs-attr"
+  - The prefix "lang-" of the `code`-class is not `language-`
+  - Quotes are moved inside the "hljs-attr"-span.
+
+
+
+
+
 # Release notes
 
 <a name="current-release"></a>

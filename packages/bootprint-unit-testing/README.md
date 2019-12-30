@@ -1,8 +1,8 @@
 # bootprint-unit-testing 
 
 [![NPM version](https://img.shields.io/npm/v/bootprint-unit-testing.svg)](https://npmjs.com/package/bootprint-unit-testing)
-[![Travis Build Status](https://travis-ci.org/.svg?branch=master)](https://travis-ci.org/)
-[![Coverage Status](https://img.shields.io/coveralls/.svg)](https://coveralls.io/r/)
+[![Travis Build Status](https://travis-ci.org/bootprint/bootprint-monorepo.svg?branch=master)](https://travis-ci.org/bootprint/bootprint-monorepo)
+[![Coverage Status](https://img.shields.io/coveralls/bootprint/bootprint-monorepo.svg)](https://coveralls.io/r/bootprint/bootprint-monorepo)
 
 > Unit-testing-tools for bootprint-projects
 
@@ -62,7 +62,7 @@ The bootprint-unit-testing module
     ✓ The output should contain the name in a <p>-tag
 
 
-  1 passing (131ms)
+  1 passing (134ms)
 ```
 
 

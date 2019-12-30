@@ -1,3 +1,24 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 4.0.0 (2019-12-30)
+
+
+### Bug Fixes
+
+* remove "promise.done" function call ([6266cdb](https://github.com/bootprint/bootprint-monorepo/commit/6266cdb4134b0139df00477a1afc77e9180e4cb0))
+
+
+### Features
+
+* remove unused "customize-engine-uglify" from dependencies ([d27a0a1](https://github.com/bootprint/bootprint-monorepo/commit/d27a0a17e28ac0a95b13fad8f267036db93397d7))
+
+
+
+
+
 # Release notes
 
 <a name="current-release"></a>

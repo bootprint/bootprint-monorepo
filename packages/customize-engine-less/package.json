@@ -1,6 +1,6 @@
 {
   "name": "customize-engine-less",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "A less-engine for customize",
   "author": {
     "name": "Nils Knappmeier",
@@ -19,10 +19,10 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "customize": "^3.0.0"
+    "customize": "^4.0.0"
   },
   "peerDependencies": {
-    "customize": "^3.0.0"
+    "customize": "^4.0.0"
   },
   "files": [
     "index.js",

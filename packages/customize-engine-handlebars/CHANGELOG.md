@@ -1,5 +1,29 @@
 # Change Log
 
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 4.0.0 (2019-12-30)
+
+
+### chore
+
+* bump dependency versions ([bd1c245](https://github.com/bootprint/bootprint-monorepo/commit/bd1c2455dd16cfc5ee46cdcfb9ca8eebec25867c))
+
+
+### BREAKING CHANGES
+
+* - version 9 of highlight.js highlights JSON slightly differently.
+  - The class "hljs-attribute" has been replaced by "hljs-attr"
+  - The prefix "lang-" of the `code`-class is not `language-`
+  - Quotes are moved inside the "hljs-attr"-span.
+
+
+
+
+
+# Change Log
+
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 <a name="current-release"></a>
