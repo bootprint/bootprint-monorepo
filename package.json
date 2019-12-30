@@ -41,7 +41,7 @@
     "thought": "thought run -a",
     "thought:with-packages": "yarn thought && lerna run thought",
     "fix-packages-package-json": "node build/fix-packages-package-json.js",
-    "version": "yarn thought && yarn fix-packages-package-json.js"
+    "version": "yarn thought && yarn fix-packages-package-json"
   },
   "lint-staged": {
     "*.js": [
