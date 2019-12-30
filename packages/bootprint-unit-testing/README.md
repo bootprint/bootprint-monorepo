@@ -34,10 +34,7 @@ A test can be written like this:
  * Released under the MIT license.
  */
 
-/* global describe */
-/* global it */
-/* global before */
-// /* global xit */
+/* eslint-env mocha */
 
 'use strict'
 
@@ -62,10 +59,10 @@ using the [cheerio](https://npmjs.com/package/cheerio) library.
 
 ```
 The bootprint-unit-testing module
-    ✓ The output should contain the name in a <p>-tag
+    ✓ The output should contain the name in a <p>-tag
 
 
-  1 passing (149ms)
+  1 passing (131ms)
 ```
 
 
