@@ -22,8 +22,10 @@ Converts json and yaml into a static html page using Handlebars and Bootstrap
 
 Options:
   -V, --version             output the version number
-  -f, --config-file <file>  Specify a config file for custom configurations (default: {})
-  -d, --development-mode    Turn on file-watcher, less source-maps and http-server with live-reload
+  -f, --config-file <file>  Specify a config file for custom configurations 
+                            (default: {})
+  -d, --development-mode    Turn on file-watcher, less source-maps and 
+                            http-server with live-reload
   -h, --help                output usage information
 ``` 
 
