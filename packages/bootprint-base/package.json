@@ -14,7 +14,7 @@
     "bootstrap": "^3.3.2",
     "cheerio": "^0.22.0",
     "handlebars": "^4.0.6",
-    "highlight.js": "^8",
+    "highlight.js": "9",
     "json-stable-stringify": "^1.0.0",
     "marked": "^0.8.0"
   },

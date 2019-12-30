@@ -33,8 +33,7 @@ marked.setOptions({
     }
     return highlight.fixMarkup(highlighted)
   },
-  renderer: renderer,
-  langPrefix: 'lang-'
+  renderer: renderer
 })
 
 module.exports = {

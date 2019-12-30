@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "customize": "^3.0.0",
-    "got": "^9.6.0",
+    "got": "10",
     "json-stable-stringify": "^1.0.1"
   },
   "peerDependencies": {
