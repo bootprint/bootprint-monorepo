@@ -35,5 +35,13 @@
   "devDependencies": {
     "json-stable-stringify": "^1.0.1",
     "stream-to-string": "^1.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bootprint/bootprint-monorepo.git",
+    "directory": "packages/customize"
+  },
+  "bugs": {
+    "url": "https://github.com/bootprint/bootprint-monorepo/issues"
   }
 }

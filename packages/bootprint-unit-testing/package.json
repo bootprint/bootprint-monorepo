@@ -19,12 +19,19 @@
     "cheerio": "^0.22.0",
     "fs-extra": "^8.1.0"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "files": [
     "index.js",
     "lib",
     "bin"
   ],
-  "keywords": []
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bootprint/bootprint-monorepo.git",
+    "directory": "packages/bootprint-unit-testing"
+  },
+  "bugs": {
+    "url": "https://github.com/bootprint/bootprint-monorepo/issues"
+  }
 }

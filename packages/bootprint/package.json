@@ -12,7 +12,11 @@
     "thought": "thought run -a",
     "version": "yarn thought"
   },
-  "author": "Nils Knappmeier",
+  "author": {
+    "name": "Nils Knappmeier",
+    "email": "npm@knappi.org",
+    "url": "https://github.com/nknapp"
+  },
   "license": "MIT",
   "dependencies": {
     "chokidar": "3",
@@ -42,5 +46,13 @@
     "example": "examples",
     "test": "test"
   },
-  "keywords": []
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bootprint/bootprint-monorepo.git",
+    "directory": "packages/bootprint"
+  },
+  "bugs": {
+    "url": "https://github.com/bootprint/bootprint-monorepo/issues"
+  }
 }

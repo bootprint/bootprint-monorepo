@@ -1,5 +1,5 @@
 {
-  "name": "root",
+  "name": "bootprint-monorepo",
   "private": true,
   "workspaces": [
     "packages/*"
@@ -40,8 +40,8 @@
     "test": "nyc --reporter=lcov --reporter=html --reporter=text-summary lerna run test --stream",
     "thought": "thought run -a",
     "thought:with-packages": "yarn thought && lerna run thought",
-    "fix-peer-dependencies": "node build/fix-peer-dependencies.js",
-    "version": "yarn thought && yarn fix-peer-dependencies"
+    "fix-packages-package-json": "node build/fix-packages-package-json.js",
+    "version": "yarn thought && yarn fix-packages-package-json.js"
   },
   "lint-staged": {
     "*.js": [
@@ -54,5 +54,19 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  }
+  },
+  "description": "A monorepo to keep all bootprint-related packages",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bootprint/bootprint-monorepo.git"
+  },
+  "author": {
+    "name": "Nils Knappmeier",
+    "email": "npm@knappi.org",
+    "url": "https://github.com/nknapp"
+  },
+  "bugs": {
+    "url": "https://github.com/bootprint/bootprint-monorepo/issues"
+  },
+  "license": "MIT"
 }

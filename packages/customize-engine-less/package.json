@@ -28,5 +28,13 @@
     "index.js",
     "schema.js"
   ],
-  "keywords": []
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bootprint/bootprint-monorepo.git",
+    "directory": "packages/customize-engine-less"
+  },
+  "bugs": {
+    "url": "https://github.com/bootprint/bootprint-monorepo/issues"
+  }
 }

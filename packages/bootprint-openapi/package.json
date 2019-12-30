@@ -4,7 +4,11 @@
   "description": "Converts a openapi-definition into a static html page",
   "main": "index.js",
   "preferGlobal": true,
-  "author": "Nils Knappmeier",
+  "author": {
+    "name": "Nils Knappmeier",
+    "email": "npm@knappi.org",
+    "url": "https://github.com/nknapp"
+  },
   "license": "MIT",
   "scripts": {
     "test": "mocha --recursive",
@@ -13,16 +17,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bootprint/bootprint-monorepo.git"
+    "url": "https://github.com/bootprint/bootprint-monorepo.git",
+    "directory": "packages/bootprint-openapi"
   },
   "dependencies": {
     "bootprint-json-schema": "^1.0.0",
     "highlight.js": "9",
     "json-stable-stringify": "^1.0.1",
     "lodash": "^4.17.15"
-  },
-  "bugs": {
-    "url": "https://github.com/bootprint/bootprint-openapi/issues"
   },
   "peerDependencies": {
     "bootprint": "^2.0.1"
@@ -45,5 +47,8 @@
     "handlebars",
     "less",
     "lib"
-  ]
+  ],
+  "bugs": {
+    "url": "https://github.com/bootprint/bootprint-monorepo/issues"
+  }
 }

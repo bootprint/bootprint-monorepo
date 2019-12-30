@@ -28,5 +28,13 @@
     "customize": "^3.0.0",
     "customize-engine-less": "^3.0.0"
   },
-  "keywords": []
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bootprint/bootprint-monorepo.git",
+    "directory": "packages/customize-write-files"
+  },
+  "bugs": {
+    "url": "https://github.com/bootprint/bootprint-monorepo/issues"
+  }
 }
