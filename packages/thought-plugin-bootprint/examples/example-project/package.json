@@ -11,7 +11,7 @@
   },
   "scripts": {
     "thought": "thought run -a",
-    "version": "npm run thought"
+    "version": "yarn thought"
   },
   "directories": {
     "doc": "docs",

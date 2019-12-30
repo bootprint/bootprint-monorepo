@@ -12,7 +12,7 @@
   "scripts": {
     "test": "mocha",
     "thought": "thought run -a",
-    "version": "npm run thought"
+    "version": "yarn thought"
   },
   "dependencies": {
     "debug": "^4.1.1",

@@ -38,9 +38,10 @@
     "lint": "eslint .",
     "lintfix": "eslint . --fix",
     "test": "nyc --reporter=lcov --reporter=html --reporter=text-summary lerna run test --stream",
-    "thought": "thought run -a && lerna run thought",
+    "thought": "thought run -a",
+    "thought:with-packages": "yarn thought && lerna run thought",
     "fix-peer-dependencies": "node build/fix-peer-dependencies.js",
-    "version": "npm run thought && npm run fix-peer-dependencies"
+    "version": "yarn thought && yarn fix-peer-dependencies"
   },
   "lint-staged": {
     "*.js": [

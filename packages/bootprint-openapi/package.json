@@ -9,7 +9,7 @@
   "scripts": {
     "test": "mocha --recursive",
     "thought": "thought run -a",
-    "version": "npm run thought"
+    "version": "yarn thought"
   },
   "repository": {
     "type": "git",

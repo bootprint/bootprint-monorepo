@@ -19,7 +19,7 @@
   "scripts": {
     "test": "mocha --recursive test/**/*-spec.js",
     "thought": "thought run -a",
-    "version": "npm run thought"
+    "version": "yarn thought"
   },
   "dependencies": {
     "debug": "^4.1.1",

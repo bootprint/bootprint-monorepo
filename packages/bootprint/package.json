@@ -10,7 +10,7 @@
   "scripts": {
     "test": "mocha --recursive",
     "thought": "thought run -a",
-    "version": "npm run thought"
+    "version": "yarn thought"
   },
   "author": "Nils Knappmeier",
   "license": "MIT",
