@@ -3,18 +3,18 @@
 
 We can use the mechanism of {{npm 'customize'}} to adapt the configuration.
 In the following example, we replace the `footer.hbs`-partial by a different version.
-We do this by specifying a new partial directory. Partials with the same name as in 
+We do this by specifying a new partial directory. Partials with the same name as in
 the previous directory will overwrite the old one.
 
 {{{example 'examples/example-merge.js'}}}
 
-The new `footer.hbs` writes only the current temperature, instead of the weather description
+The new `footer.hbs` writes the blog url instead of the username.
 
 {{{include 'examples/partials2/footer.hbs'}}}
 
 The output of this example is
 
-{{{exec 'node -r "../.thought/stable-console" example-merge.js' cwd='examples/'}}}
+{{{execNode 'example-merge.js' cwd='examples/'}}}
 
 In a similar fashion, we could replace other parts of the configuration, like templates, helpers
 and the pre-processor. If we would provide a new preprocessor, it could call the old one,
@@ -38,7 +38,7 @@ to include the name of the current file.
 
 The output of this configuration is
 
-{{{exec 'node -r "../.thought/stable-console" example-targetFile.js' cwd='examples/'}}}
+{{{execNode 'example-targetFile.js' cwd='examples/'}}}
 
 ### Accessing engine and configuration helpers
 
@@ -55,7 +55,7 @@ module.exports = {
 
 ### Which partial generates what? (Method 1)
 
-When we want to overriding parts of the output, we are looking for the correct partial to do so. 
+When we want to overriding parts of the output, we are looking for the correct partial to do so.
 For this purpose, the engine allows to specify a "wrapper function" for partials. This function
 is called with the contents and the name of a partial and returns the new content. Programs like
 `Thought` can optionally include the partial names into the output to show the user which partial
@@ -64,12 +64,12 @@ to override in order to modify a given part of the output.
 
 {{{example 'examples/example-partial-names.js'}}}
 
-{{{exec 'node -r "../.thought/stable-console" example-partial-names.js' cwd='examples/'}}}
+{{{execNode 'example-partial-names.js' cwd='examples/'}}}
 
 ### Which partial generates what? (Method 2)
 
-Another method for gathering information about the source of parts of the output are source-locators. 
-The engine incoorporates the library {{npm 'handlebars-source-locators'}} to integrate a kind of 
+Another method for gathering information about the source of parts of the output are source-locators.
+The engine incoorporates the library {{npm 'handlebars-source-locators'}} to integrate a kind of
 "source-map for the poor" into the output. Source-locators are activated by setting the option
 `addSourceLocators` to `true`:
 
@@ -82,7 +82,7 @@ The output contain tags that contain location-information of the succeeding text
 
 Example output:
 
-{{{exec 'node -r "../.thought/stable-console" example-source-locators.js' cwd='examples/'}}}
+{{{execNode 'example-source-locators.js' cwd='examples/'}}}
 
 ### Asynchronous helpers
 
@@ -100,6 +100,6 @@ you can generate a JSON that you can render to HTML or Markdown (for example usi
 The `docEngine` performs different transformations on the input configuration. For example,
 helpers are not loaded, but the path to the file is collected into an array.
 
-{{{exec 'node -r "../.thought/stable-console" example-merge-doc-engine.js' cwd='examples/'}}}
+{{{execNode ' example-merge-doc-engine.js' cwd='examples/'}}}
 
 

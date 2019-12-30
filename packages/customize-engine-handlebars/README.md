@@ -14,7 +14,7 @@ npm install customize-engine-handlebars
 
 ## Usage
 
-The following examples demonstrate how to use this module. 
+The following examples demonstrate how to use this module.
 
 ### Configuration
 
@@ -60,10 +60,10 @@ module.exports = function(customize) {
 use `require.resolve` or `__dirname` to determine the correct path to referenced files.*
 
 All the templates in the `templates` directory are called with the provided `data` (name and city).
-Each one generates an entry in the result of the engine. The templates call a partial that is 
-inserted below the main content. Helper functions from the `hb-helpers.js`-file are registered 
-with Handlebars and `text2.txt.hbs` uses the `shout`-helper from `hb-helpers.js` to turn a 
-string into upper-case. 
+Each one generates an entry in the result of the engine. The templates call a partial that is
+inserted below the main content. Helper functions from the `hb-helpers.js`-file are registered
+with Handlebars and `text2.txt.hbs` uses the `shout`-helper from `hb-helpers.js` to turn a
+string into upper-case.
 
 ```hbs
 I'm {{name}}
@@ -74,27 +74,25 @@ I'm living in {{shout city}}.
 ```
 
 
-The example also includes a preprocessor (`hb-preprocessor.js`) that calls 
+The example also includes a preprocessor (`hb-preprocessor.js`) that calls
 [the github API](https://developer.github.com/v3/users/#get-a-single-user)
-to retrieve information about the user. 
+to retrieve information about the user.
 
 ```js
-const got = require('got').extend({
-  json: true
-})
+const got = require('got')
 
-module.exports = function(data) {
+module.exports = async function(data) {
   return {
     name: data.name,
     city: data.city,
-    github: got('https://api.github.com/users/nknapp').then(response => response.body)
+    github: got('https://api.github.com/users/nknapp').json()
   }
 }
 
 ```
 
 
-The result is injected into the data as `github` property and rendered by 
+The result is injected into the data as `github` property and rendered by
 the `footer.hbs` partial.
 
 ```hbs
@@ -108,9 +106,9 @@ The output of this example is:
 ```
 {
   "handlebars": {
-    "subdir/text3.txt": "------\nGithub-Name: Nils Knappmeier",
-    "text1.txt": "I'm nknapp\n\nI'm living in Darmstadt.\n\n------\nGithub-Name: Nils Knappmeier",
-    "text2.txt": "I'm nknapp\n\nI'm living in DARMSTADT.\n\n------\nGithub-Name: Nils Knappmeier"
+    "subdir/text3.txt": "------\nBlog: https://blog.knappi.org\n",
+    "text1.txt": "I'm nknapp\n\nI'm living in Darmstadt.\n\n------\nBlog: https://blog.knappi.org\n",
+    "text2.txt": "I'm nknapp\n\nI'm living in DARMSTADT.\n\n------\nBlog: https://blog.knappi.org\n"
   }
 }
 ```
@@ -118,6 +116,7 @@ The output of this example is:
 ### More examples
 
 see [docs/examples.md](docs/examples.md) for more examples
+
 ## API-documentation
 
 This package will always support the latest version of NodeJS and as well as the current LTS version.

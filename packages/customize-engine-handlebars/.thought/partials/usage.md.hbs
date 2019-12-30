@@ -1,6 +1,6 @@
 ## Usage
 
-The following examples demonstrate how to use this module. 
+The following examples demonstrate how to use this module.
 
 ### Configuration
 
@@ -17,27 +17,27 @@ This example loads its configuration from the module `config-module.js`:
 use `require.resolve` or `__dirname` to determine the correct path to referenced files.*
 
 All the templates in the `templates` directory are called with the provided `data` (name and city).
-Each one generates an entry in the result of the engine. The templates call a partial that is 
-inserted below the main content. Helper functions from the `hb-helpers.js`-file are registered 
-with Handlebars and `text2.txt.hbs` uses the `shout`-helper from `hb-helpers.js` to turn a 
-string into upper-case. 
+Each one generates an entry in the result of the engine. The templates call a partial that is
+inserted below the main content. Helper functions from the `hb-helpers.js`-file are registered
+with Handlebars and `text2.txt.hbs` uses the `shout`-helper from `hb-helpers.js` to turn a
+string into upper-case.
 
 {{{include 'examples/templates/text2.txt.hbs'}}}
 
-The example also includes a preprocessor (`hb-preprocessor.js`) that calls 
+The example also includes a preprocessor (`hb-preprocessor.js`) that calls
 [the github API](https://developer.github.com/v3/users/#get-a-single-user)
-to retrieve information about the user. 
+to retrieve information about the user.
 
 {{{include 'examples/hb-preprocessor.js'}}}
 
-The result is injected into the data as `github` property and rendered by 
+The result is injected into the data as `github` property and rendered by
 the `footer.hbs` partial.
 
 {{{include 'examples/partials/footer.hbs'}}}
 
 The output of this example is:
 
-{{{exec 'node -r "../.thought/stable-console" example.js' cwd='examples/'}}}
+{{{execNode 'example.js' cwd='examples/'}}}
 
 ### More examples
 

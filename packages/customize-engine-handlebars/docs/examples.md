@@ -3,7 +3,7 @@
 
 We can use the mechanism of [customize](https://npmjs.com/package/customize) to adapt the configuration.
 In the following example, we replace the `footer.hbs`-partial by a different version.
-We do this by specifying a new partial directory. Partials with the same name as in 
+We do this by specifying a new partial directory. Partials with the same name as in
 the previous directory will overwrite the old one.
 
 ```js
@@ -20,7 +20,7 @@ customize()
   .then(console.log)
 ```
 
-The new `footer.hbs` writes only the current temperature, instead of the weather description
+The new `footer.hbs` writes the blog url instead of the username.
 
 ```hbs
 ------
@@ -89,9 +89,9 @@ The output of this configuration is
 ```
 {
   "handlebars": {
-    "subdir/text3.txt": "------\nFile: subdir/text3.txt",
-    "text1.txt": "I'm nknapp\n\nI'm living in Darmstadt.\n\n------\nFile: text1.txt",
-    "text2.txt": "I'm nknapp\n\nI'm living in DARMSTADT.\n\n------\nFile: text2.txt"
+    "subdir/text3.txt": "------\nBlog: https://blog.knappi.org\n",
+    "text1.txt": "I'm nknapp\n\nI'm living in Darmstadt.\n\n------\nBlog: https://blog.knappi.org\n",
+    "text2.txt": "I'm nknapp\n\nI'm living in DARMSTADT.\n\n------\nBlog: https://blog.knappi.org\n"
   }
 }
 ```
@@ -111,7 +111,7 @@ module.exports = {
 
 ### Which partial generates what? (Method 1)
 
-When we want to overriding parts of the output, we are looking for the correct partial to do so. 
+When we want to overriding parts of the output, we are looking for the correct partial to do so.
 For this purpose, the engine allows to specify a "wrapper function" for partials. This function
 is called with the contents and the name of a partial and returns the new content. Programs like
 `Thought` can optionally include the partial names into the output to show the user which partial
@@ -138,17 +138,17 @@ customize()
 ```
 {
   "handlebars": {
-    "subdir/text3.txt": "[BEGIN footer]\n------\nBlog: https://blog.knappi.org\n[END footer]",
-    "text1.txt": "I'm nknapp\n\nI'm living in Darmstadt.\n\n[BEGIN footer]\n------\nBlog: https://blog.knappi.org\n[END footer]",
-    "text2.txt": "I'm nknapp\n\nI'm living in DARMSTADT.\n\n[BEGIN footer]\n------\nBlog: https://blog.knappi.org\n[END footer]"
+    "subdir/text3.txt": "------\nBlog: https://blog.knappi.org\n",
+    "text1.txt": "I'm nknapp\n\nI'm living in Darmstadt.\n\n------\nBlog: https://blog.knappi.org\n",
+    "text2.txt": "I'm nknapp\n\nI'm living in DARMSTADT.\n\n------\nBlog: https://blog.knappi.org\n"
   }
 }
 ```
 
 ### Which partial generates what? (Method 2)
 
-Another method for gathering information about the source of parts of the output are source-locators. 
-The engine incoorporates the library [handlebars-source-locators](https://npmjs.com/package/handlebars-source-locators) to integrate a kind of 
+Another method for gathering information about the source of parts of the output are source-locators.
+The engine incoorporates the library [handlebars-source-locators](https://npmjs.com/package/handlebars-source-locators) to integrate a kind of
 "source-map for the poor" into the output. Source-locators are activated by setting the option
 `addSourceLocators` to `true`:
 
@@ -177,9 +177,9 @@ Example output:
 ```
 {
   "handlebars": {
-    "subdir/text3.txt": "<sl line=\"1\" col=\"0\" partial=\"footer\" file=\"partials2/footer.hbs\"></sl>------\nBlog: <sl line=\"2\" col=\"6\" partial=\"footer\" file=\"partials2/footer.hbs\"></sl>https://blog.knappi.org<sl line=\"2\" col=\"23\" partial=\"footer\" file=\"partials2/footer.hbs\"></sl>\n<sl line=\"3\" col=\"0\" partial=\"footer\" file=\"partials2/footer.hbs\"></sl>",
-    "text1.txt": "<sl line=\"1\" col=\"0\" file=\"templates/text1.txt.hbs\"></sl>I'm <sl line=\"1\" col=\"4\" file=\"templates/text1.txt.hbs\"></sl>nknapp<sl line=\"1\" col=\"12\" file=\"templates/text1.txt.hbs\"></sl>\n\nI'm living in <sl line=\"3\" col=\"14\" file=\"templates/text1.txt.hbs\"></sl>Darmstadt<sl line=\"3\" col=\"22\" file=\"templates/text1.txt.hbs\"></sl>.\n\n<sl line=\"5\" col=\"0\" file=\"templates/text1.txt.hbs\"></sl><sl line=\"1\" col=\"0\" partial=\"footer\" file=\"partials2/footer.hbs\"></sl>------\nBlog: <sl line=\"2\" col=\"6\" partial=\"footer\" file=\"partials2/footer.hbs\"></sl>https://blog.knappi.org<sl line=\"2\" col=\"23\" partial=\"footer\" file=\"partials2/footer.hbs\"></sl>\n<sl line=\"3\" col=\"0\" partial=\"footer\" file=\"partials2/footer.hbs\"></sl>",
-    "text2.txt": "<sl line=\"1\" col=\"0\" file=\"templates/text2.txt.hbs\"></sl>I'm <sl line=\"1\" col=\"4\" file=\"templates/text2.txt.hbs\"></sl>nknapp<sl line=\"1\" col=\"12\" file=\"templates/text2.txt.hbs\"></sl>\n\nI'm living in <sl line=\"3\" col=\"14\" file=\"templates/text2.txt.hbs\"></sl>DARMSTADT<sl line=\"3\" col=\"28\" file=\"templates/text2.txt.hbs\"></sl>.\n\n<sl line=\"5\" col=\"0\" file=\"templates/text2.txt.hbs\"></sl><sl line=\"1\" col=\"0\" partial=\"footer\" file=\"partials2/footer.hbs\"></sl>------\nBlog: <sl line=\"2\" col=\"6\" partial=\"footer\" file=\"partials2/footer.hbs\"></sl>https://blog.knappi.org<sl line=\"2\" col=\"23\" partial=\"footer\" file=\"partials2/footer.hbs\"></sl>\n<sl line=\"3\" col=\"0\" partial=\"footer\" file=\"partials2/footer.hbs\"></sl>"
+    "subdir/text3.txt": "------\nBlog: https://blog.knappi.org\n",
+    "text1.txt": "I'm nknapp\n\nI'm living in Darmstadt.\n\n------\nBlog: https://blog.knappi.org\n",
+    "text2.txt": "I'm nknapp\n\nI'm living in DARMSTADT.\n\n------\nBlog: https://blog.knappi.org\n"
   }
 }
 ```
@@ -215,146 +215,9 @@ helpers are not loaded, but the path to the file is collected into an array.
 ```
 {
   "handlebars": {
-    "callHierarchy": {
-      "children": [
-        {
-          "children": [
-            {
-              "children": [
-              ],
-              "comments": [
-              ],
-              "name": "footer",
-              "path": "partials2/footer.hbs",
-              "type": "partial"
-            }
-          ],
-          "comments": [
-          ],
-          "name": "subdir/text3.txt",
-          "path": "templates/subdir/text3.txt.hbs",
-          "type": "template"
-        },
-        {
-          "children": [
-            {
-              "children": [
-              ],
-              "comments": [
-              ],
-              "name": "footer",
-              "path": "partials2/footer.hbs",
-              "type": "partial"
-            }
-          ],
-          "comments": [
-          ],
-          "name": "text1.txt",
-          "path": "templates/text1.txt.hbs",
-          "type": "template"
-        },
-        {
-          "children": [
-            {
-              "children": [
-              ],
-              "comments": [
-              ],
-              "name": "footer",
-              "path": "partials2/footer.hbs",
-              "type": "partial"
-            }
-          ],
-          "comments": [
-          ],
-          "name": "text2.txt",
-          "path": "templates/text2.txt.hbs",
-          "type": "template"
-        }
-      ]
-    },
-    "data": {
-      "city": "Darmstadt",
-      "name": "nknapp"
-    },
-    "hbsOptions": {
-    },
-    "helpers": [
-      "hb-helpers.js"
-    ],
-    "partialWrapper": [
-    ],
-    "partials": {
-      "footer": {
-        "calledBy": [
-          {
-            "line": 1,
-            "name": "subdir/text3.txt",
-            "path": "templates/subdir/text3.txt.hbs",
-            "type": "template"
-          },
-          {
-            "line": 5,
-            "name": "text1.txt",
-            "path": "templates/text1.txt.hbs",
-            "type": "template"
-          },
-          {
-            "line": 5,
-            "name": "text2.txt",
-            "path": "templates/text2.txt.hbs",
-            "type": "template"
-          }
-        ],
-        "callsPartial": [
-        ],
-        "comments": [
-        ],
-        "contents": "------\nBlog: {{{github.blog}}}\n",
-        "path": "partials2/footer.hbs"
-      }
-    },
-    "preprocessor": [
-      "hb-preprocessor.js"
-    ],
-    "templates": {
-      "subdir/text3.txt": {
-        "callsPartial": [
-          {
-            "line": 1,
-            "name": "footer"
-          }
-        ],
-        "comments": [
-        ],
-        "contents": "{{>footer}}",
-        "path": "templates/subdir/text3.txt.hbs"
-      },
-      "text1.txt": {
-        "callsPartial": [
-          {
-            "line": 5,
-            "name": "footer"
-          }
-        ],
-        "comments": [
-        ],
-        "contents": "I'm {{name}}\n\nI'm living in {{city}}.\n\n{{>footer}}",
-        "path": "templates/text1.txt.hbs"
-      },
-      "text2.txt": {
-        "callsPartial": [
-          {
-            "line": 5,
-            "name": "footer"
-          }
-        ],
-        "comments": [
-        ],
-        "contents": "I'm {{name}}\n\nI'm living in {{shout city}}.\n\n{{>footer}}",
-        "path": "templates/text2.txt.hbs"
-      }
-    }
+    "subdir/text3.txt": "------\nBlog: https://blog.knappi.org\n",
+    "text1.txt": "I'm nknapp\n\nI'm living in Darmstadt.\n\n------\nBlog: https://blog.knappi.org\n",
+    "text2.txt": "I'm nknapp\n\nI'm living in DARMSTADT.\n\n------\nBlog: https://blog.knappi.org\n"
   }
 }
 ```

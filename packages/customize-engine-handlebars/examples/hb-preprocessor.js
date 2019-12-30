@@ -1,11 +1,9 @@
-const got = require('got').extend({
-  json: true
-})
+const got = require('got')
 
-module.exports = function(data) {
+module.exports = async function(data) {
   return {
     name: data.name,
     city: data.city,
-    github: got('https://api.github.com/users/nknapp').then(response => response.body)
+    github: got('https://api.github.com/users/nknapp').json()
   }
 }
