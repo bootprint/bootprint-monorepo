@@ -54,5 +54,8 @@
   },
   "bugs": {
     "url": "https://github.com/bootprint/bootprint-monorepo/issues"
+  },
+  "funding": {
+    "url": "https://en.liberapay.com/bootprint.js"
   }
 }

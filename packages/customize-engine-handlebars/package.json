@@ -42,5 +42,8 @@
     "lib",
     "schema.js"
   ],
-  "keywords": []
+  "keywords": [],
+  "funding": {
+    "url": "https://en.liberapay.com/bootprint.js"
+  }
 }

@@ -41,6 +41,9 @@ function fixGithubUrls(packageJson, packagePath) {
     ...repository,
     directory: path.posix.relative(process.cwd(), packagePath)
   }
+  packageJson.funding = {
+    url: 'https://en.liberapay.com/bootprint.js'
+  }
   packageJson.bugs = bugs
   packageJson.author = author
 }
