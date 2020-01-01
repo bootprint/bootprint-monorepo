@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.2](https://github.com/bootprint/bootprint-monorepo/compare/v4.0.1...v4.0.2) (2020-01-01)
+
+
+### Bug Fixes
+
+* do not include javascript libs by default ([3b5247f](https://github.com/bootprint/bootprint-monorepo/commit/3b5247f8257f9066c558c90d13949d5966090eed))
+
+
+
+
+
 ## [4.0.1](https://github.com/bootprint/bootprint-monorepo/compare/v4.0.0...v4.0.1) (2020-01-01)
 
 **Note:** Version bump only for package bootprint-monorepo

@@ -1,6 +1,6 @@
 {
   "name": "bootprint-json-schema",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Converts a json-schema into a static html page",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "bootprint-base": "^4.0.1",
+    "bootprint-base": "^4.0.2",
     "lodash": "^4.17.2"
   },
   "peerDependencies": {

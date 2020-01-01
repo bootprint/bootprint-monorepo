@@ -11,7 +11,7 @@
     "packages/bootprint-json-schema",
     "packages/bootprint-openapi"
   ],
-  "version": "4.0.1",
+  "version": "4.0.2",
   "useWorkspaces": true,
   "npmClient": "yarn"
 }
