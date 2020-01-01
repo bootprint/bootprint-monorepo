@@ -1,6 +1,6 @@
 {
   "name": "bootprint-unit-testing",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Unit-testing-tools for bootprint-projects",
   "scripts": {
     "test": "mocha --recursive",
@@ -15,7 +15,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "bootprint": "^4.0.0",
+    "bootprint": "^4.0.1",
     "cheerio": "^0.22.0",
     "fs-extra": "^8.1.0"
   },

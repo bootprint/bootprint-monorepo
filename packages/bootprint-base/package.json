@@ -1,6 +1,6 @@
 {
   "name": "bootprint-base",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "The base configuration used by other Bootprint modules",
   "main": "index.js",
   "scripts": {
@@ -23,11 +23,11 @@
     "marked": "^0.8.0"
   },
   "devDependencies": {
-    "bootprint": "^4.0.0",
+    "bootprint": "^4.0.1",
     "trace-and-clarify-if-possible": "^1.0.0"
   },
   "peerDependencies": {
-    "bootprint": "^4.0.0"
+    "bootprint": "^4.0.1"
   },
   "files": [
     "handlebars",
