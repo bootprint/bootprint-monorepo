@@ -5,3 +5,4 @@ bootprint-monorepo.iml
 /.nyc_output
 /packages/*/.nyc_output
 /coverage
+/yarn-error.log
