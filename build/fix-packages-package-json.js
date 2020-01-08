@@ -1,36 +1,39 @@
 #!/usr/bin/env node
 
-const fs = require('fs')
 const path = require('path')
-const cp = require('child_process')
+const {
+  loadPackageJson,
+  pathToPackage,
+  savePackageJsonAndAddToGit,
+  getLocalPackageVersions
+} = require('./utils/packages')
 
 process.chdir(path.resolve(__dirname, '..'))
 
-fs.readdirSync('packages').forEach(pkg => {
-  const packagePath = path.resolve('packages', pkg)
-  const packageJsonPath = path.resolve(packagePath, 'package.json')
-  const originalContents = fs.readFileSync(packageJsonPath, 'utf8')
-  const packageJson = JSON.parse(originalContents)
-  fixPackageJson(packageJson, packagePath)
-  const newContents = JSON.stringify(packageJson, 0, 2) + '\n'
-  fs.writeFileSync(packageJsonPath, newContents)
-  cp.spawnSync('git', ['add', packageJsonPath], { stdio: 'inherit' })
+const localPackageVersions = getLocalPackageVersions()
+Object.keys(localPackageVersions).forEach(packageName => {
+  const packageJson = loadPackageJson(packageName)
+  fixPackageJson(packageJson, pathToPackage(packageName))
+  savePackageJsonAndAddToGit(packageJson)
 })
 
 function fixPackageJson(packageJson, packagePath) {
-  updatePeerDependenciesBasedOnDevDependencies(packageJson)
+  updateLocalPeerDependencies(packageJson)
   fixGithubUrls(packageJson, packagePath)
 }
 
-function updatePeerDependenciesBasedOnDevDependencies(packageJson) {
-  const devDependencies = packageJson.devDependencies
+function updateLocalPeerDependencies(packageJson) {
   const peerDependencies = packageJson.peerDependencies
   if (peerDependencies == null) {
     return
   }
+
+  const devDependencies = packageJson.devDependencies
   Object.keys(peerDependencies).forEach(dependencyName => {
     if (devDependencies[dependencyName] != null) {
       peerDependencies[dependencyName] = devDependencies[dependencyName]
+    } else if (localPackageVersions[dependencyName] != null) {
+      peerDependencies[dependencyName] = '^' + localPackageVersions[dependencyName]
     }
   })
 }
