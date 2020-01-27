@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.4](https://github.com/bootprint/bootprint-monorepo/compare/v4.0.3...v4.0.4) (2020-01-27)
+
+**Note:** Version bump only for package thought-plugin-bootprint
+
+
+
+
+
 ## [4.0.1](https://github.com/bootprint/bootprint-monorepo/compare/v4.0.0...v4.0.1) (2020-01-01)
 
 **Note:** Version bump only for package thought-plugin-bootprint

@@ -1,6 +1,6 @@
 {
   "name": "bootprint-openapi",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "description": "Converts a openapi-definition into a static html page",
   "main": "index.js",
   "preferGlobal": true,
@@ -21,16 +21,16 @@
     "directory": "packages/bootprint-openapi"
   },
   "dependencies": {
-    "bootprint-json-schema": "^4.0.2",
+    "bootprint-json-schema": "^4.0.4",
     "highlight.js": "9",
     "json-stable-stringify": "^1.0.1",
     "lodash": "^4.17.15"
   },
   "peerDependencies": {
-    "bootprint": "^4.0.1"
+    "bootprint": "^4.0.4"
   },
   "devDependencies": {
-    "bootprint-unit-testing": "^4.0.1",
+    "bootprint-unit-testing": "^4.0.4",
     "deep-aplus": "^1.0.4",
     "find-package": "^1.0.0",
     "fs-extra": "^8.1.0",

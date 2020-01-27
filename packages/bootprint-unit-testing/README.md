@@ -58,11 +58,14 @@ The test will run bootprint with the given module and verify the generated HTML
 using the [cheerio](https://npmjs.com/package/cheerio) library.
 
 ```
-The bootprint-unit-testing module
+Trace and clarify activated
+
+
+  The bootprint-unit-testing module
     ✓ The output should contain the name in a <p>-tag
 
 
-  1 passing (134ms)
+  1 passing (171ms)
 ```
 
 

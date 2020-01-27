@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.4](https://github.com/bootprint/bootprint-monorepo/compare/v4.0.3...v4.0.4) (2020-01-27)
+
+**Note:** Version bump only for package bootprint-openapi
+
+
+
+
+
 ## [4.0.3](https://github.com/bootprint/bootprint-monorepo/compare/v4.0.2...v4.0.3) (2020-01-08)
 
 **Note:** Version bump only for package bootprint-openapi

@@ -1,6 +1,6 @@
 {
   "name": "thought-plugin-bootprint",
-  "version": "4.0.1",
+  "version": "4.0.4",
   "description": "A thought-plugin for Bootprint modules",
   "author": {
     "name": "Nils Knappmeier",
@@ -15,10 +15,10 @@
     "directory": "packages/thought-plugin-bootprint"
   },
   "dependencies": {
-    "bootprint": "^4.0.1",
-    "customize": "^4.0.1",
-    "customize-engine-handlebars": "^4.0.1",
-    "customize-engine-less": "^4.0.1",
+    "bootprint": "^4.0.4",
+    "customize": "^4.0.4",
+    "customize-engine-handlebars": "^4.0.4",
+    "customize-engine-less": "^4.0.4",
     "thought-plugin-jsdoc": "^2.0.0",
     "tree-from-paths": "^1.0.0"
   },
