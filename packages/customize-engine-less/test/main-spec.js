@@ -15,6 +15,8 @@ chai.use(chaiAsPromised)
 const expect = chai.expect
 
 describe('customize-engine-handlebars', function() {
+  this.timeout(5000)
+
   it('should load less-files and specify inlude paths', function() {
     const result = customize()
       .registerEngine('less', require('../'))
