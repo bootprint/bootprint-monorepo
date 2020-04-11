@@ -15,7 +15,7 @@ class Bootprint extends EventEmitter {
    * Create a new Bootprint-instance
    *
    * @param {function(Customize):Customize} customizeModule a customize module (like `require('bootprint-openapi)`)
-   * @param {object} config a customize-configuration to merge after loading the module
+   * @param {object=} config a customize-configuration to merge after loading the module
    */
   constructor (customizeModule, config) {
     super()
@@ -61,7 +61,7 @@ class Bootprint extends EventEmitter {
   /**
    * Load the template module. Try loading "bootprint-`moduleName`" first. If it does not exist
    * treat "moduleName" as path to the module (relative to the current working dir).
-   * @param moduleName {string} the name of the module to load
+   * @param moduleName {string|function} the name of the module to load
    * @return {function} the builder-function of the loaded module
    */
   static loadModule (moduleName) {

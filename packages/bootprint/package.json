@@ -39,7 +39,8 @@
     "lib"
   ],
   "devDependencies": {
-    "bootprint-test-module": "file:test/fixtures/bootprint-test-module"
+    "bootprint-test-module": "file:test/fixtures/bootprint-test-module",
+    "bootprint-openapi": "^4.0.4"
   },
   "directories": {
     "doc": "doc",

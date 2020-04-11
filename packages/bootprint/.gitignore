@@ -1,2 +1,3 @@
-/examples/target/
+/examples/merging-configurations/target/
 /test/tmp/target/
+/examples/petstore/target/

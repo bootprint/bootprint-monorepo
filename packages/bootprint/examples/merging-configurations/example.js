@@ -1,4 +1,4 @@
-const { Bootprint } = require('../')
+const { Bootprint } = require('../../index')
 
 new Bootprint(a => a, {
   handlebars: {
