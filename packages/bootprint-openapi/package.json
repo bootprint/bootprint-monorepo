@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "bootprint-json-schema": "^4.0.4",
-    "highlight.js": "9",
+    "highlight.js": "10",
     "json-stable-stringify": "^1.0.1",
     "lodash": "^4.17.15"
   },
