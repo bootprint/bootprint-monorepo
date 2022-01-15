@@ -20,7 +20,7 @@
     "handlebars": "^4.0.6",
     "highlight.js": "9",
     "json-stable-stringify": "^1.0.0",
-    "marked": "^0.8.0"
+    "marked": "^4.0.10"
   },
   "devDependencies": {
     "bootprint": "^4.0.4",
