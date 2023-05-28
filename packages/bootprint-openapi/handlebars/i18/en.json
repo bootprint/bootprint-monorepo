@@ -1,0 +1,7 @@
+{
+  "baseURL": "Base URL",
+  "version": "Version",
+  "requestFormat": "Default request format",
+  "responseFormat": "Default response format",
+  "requestType": "Request Type:"
+}

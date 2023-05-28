@@ -30,6 +30,7 @@
     "trace": "^3.1.1"
   },
   "dependencies": {
+    "i18n": "^0.15.1",
     "thought-plugin-jsdoc": "2"
   },
   "scripts": {
