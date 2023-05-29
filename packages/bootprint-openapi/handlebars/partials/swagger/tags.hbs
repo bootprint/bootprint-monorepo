@@ -4,9 +4,9 @@
     @api public
 --}}
 
-<h2 id="swagger--summary-tags">Summary</h2>
+<h2 id="swagger--summary-tags">{{i18n "summary"}}</h2>
 {{#eachSorted tags}}
-    <h3 id="tag-{{htmlId name}}" class="swagger-summary-tag">Tag: {{name}}</h3>
+    <h3 id="tag-{{htmlId name}}" class="swagger-summary-tag">{{i18n "scenario"}}: {{name}}</h3>
     {{md description}}
     <p class="sw-tag-external-doc">
         {{>swagger/externalDocs}}
@@ -14,8 +14,8 @@
     <table class="table table-bordered table-condensed swagger--summary">
         <thead>
         <tr>
-            <th>Operation</th>
-            <th>Description</th>
+            <th>{{i18n "operation"}}</th>
+            <th>{{i18n "description"}}</th>
         </tr>
         </thead>
         <tbody>

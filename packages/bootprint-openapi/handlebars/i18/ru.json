@@ -1,8 +1,21 @@
 {
-  "baseURL": "Базовый URL",
-  "version": "Версия",
-  "requestFormat": "Формат запросов по умолчанию",
-  "responseFormat": "Формат ответов по умолчанию",
-  "requestType": "Тип запросов:"
+	"baseURL": "Базовый URL",
+	"version": "Версия",
+	"requestFormat": "Формат запросов по умолчанию",
+	"responseFormat": "Формат ответов по умолчанию",
+	"requestType": "Тип запросов:",
+	"protocolUsedObjects": "Используемые в протоколе объекты",
+	"scenarios": "Сценарии",
+	"descriptionOfParameters": "Описание параметров",
+	"messages": "Сообщения",
+	"defaultFormat": "Формат по умолчанию",
+	"descriptionOfResponse": "Описание ответа",
+	"defaultContentType": "Content-type по умолчанию",
+	"security": "Безопасность",
+	"path": "Путь",
+	"operations": "Сообщение",
+	"description": "Описание",
+	"summary": "Сводка",
+	"scenario": "Сценарий",
+	"operation": "operation"
 }
-

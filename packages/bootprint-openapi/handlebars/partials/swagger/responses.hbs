@@ -10,7 +10,7 @@
         {{#if produces}}
             <p>{{>swagger/list-of-labels values=produces}}</p>
         {{else if @root.produces}}
-            <p><a href="#sw-default-produces">Uses default content-types: </a>
+            <p><a href="#sw-default-produces">{{i18n "defaultContentType"}}: </a>
                 {{>swagger/list-of-labels values=@root.produces}}
             </p>
         {{/if}}
