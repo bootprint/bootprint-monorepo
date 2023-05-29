@@ -12,7 +12,7 @@ i18n.configure({
 })
 
 // Set the default language
-i18n.setLocale('ru') // todo: get from params
+i18n.setLocale('en') // todo: get from params
 
 highlight.configure({
   useBR: true
