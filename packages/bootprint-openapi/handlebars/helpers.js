@@ -1,11 +1,27 @@
 const _ = require('lodash')
 const highlight = require('highlight.js')
+const i18n = require('i18n')
+const handlebars = require('handlebars')
+const path = require('path')
+
+i18n.configure({
+  directory: path.join(__dirname, 'i18'), // Path to the directory containing language files
+  defaultLocale: 'ru', // Default language
+  queryParameter: 'lang', // Query parameter to specify the language (e.g., ?lang=ru)
+  cookie: 'language' // Cookie name to store the language preference
+})
+
+// Set the default language
+i18n.setLocale('en') // todo: get from params
 
 highlight.configure({
   useBR: true
 })
 
 module.exports = {
+  i18n: function(key) {
+    return new handlebars.SafeString(i18n.__(key))
+  },
   'swagger--collection-format': function(value, paramName) {
     return {
       csv: 'comma separated (`' + paramName + '=aaa,bbb`)',

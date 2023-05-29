@@ -1,0 +1,21 @@
+{
+	"baseURL": "Base URL",
+	"version": "Version",
+	"requestFormat": "Default request format",
+	"responseFormat": "Default response format",
+	"requestType": "Request Type:",
+	"protocolUsedObjects": "Schema definitions",
+	"scenarios": "Tags",
+	"descriptionOfParameters": "Parameter definitions",
+	"messages": "Paths",
+	"defaultFormat": "Uses default",
+	"descriptionOfResponse": "Response definitions",
+	"defaultContentType": "Uses default content-types",
+	"security": "Security",
+	"path": "Path",
+	"operations": "Operations",
+	"description": "Description",
+	"summary": "Summary",
+	"scenario": "Tag",
+	"operation": "operation"
+}

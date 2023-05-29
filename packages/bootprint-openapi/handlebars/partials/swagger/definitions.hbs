@@ -5,7 +5,7 @@
 --}}
                    
 {{#if definitions}}
-    <h2>Schema definitions</h2>
+    <h2>{{i18n "protocolUsedObjects"}}</h2>
 
     {{#eachSorted definitions}}
         {{>swagger/model model=. title=@key anchor="/definitions" }}
